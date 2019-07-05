@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/pkg-info.mk
+
+export V=1
+export DH_VERBOSE=1
+
+CFLAGS += -Wno-error=format-security
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+DEB_HOST_ARCH_BITS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
+VERSION_UPSTREAM = $(shell echo '$(DEB_VERSION_UPSTREAM)')
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_configure:
+	./configure --prefix=/opt/ltp --with-open-posix-testsuite --with-realtime-testsuite

@@ -1,0 +1,14 @@
+Source: ltp
+Section: misc
+Priority: optional
+Maintainer: Rafael David Tinoco <rafael.tinoco@linaro.org>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.1
+Homepage: https://github.com/linux-test-project/ltp
+
+Package: ltp
+Section: misc
+Architecture: amd64 arm64 armhf i386
+Multi-Arch: same
+Depends: libc6
+Description: ltp

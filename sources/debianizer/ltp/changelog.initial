@@ -1,0 +1,5 @@
+ltp (0.0) unstable; urgency=medium
+
+  * rolling upstream git tree.
+
+ -- Rafael David Tinoco <rafael.tinoco@linaro.org>  Mon, 13 Aug 2018 15:52:53 -0300

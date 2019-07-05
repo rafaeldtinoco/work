@@ -1,0 +1,12 @@
+Source: libc6-preload
+Section: libs
+Priority: optional
+Maintainer: Rafael David Tinoco <rafael.tinoco@linaro.org>
+Homepage: https://www.gnu.org/software/libc/libc.html
+
+Package: libc6-preload
+Section: libs
+Architecture: amd64 arm64 armhf i386
+Multi-Arch: same
+Depends: libgcc1
+Description: GNU C Library (PRELOAD usage for tests only)
