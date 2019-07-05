@@ -4,7 +4,6 @@ automake http://git.savannah.gnu.org/r/automake.git/
 gcc git://gcc.gnu.org/git/gcc.git
 glib git@github.com:GNOME/glib.git
 libtool http://git.savannah.gnu.org/r/libtool.git/
-pacemaker https://github.com/ClusterLabs/pacemaker
 crash git@github.com:crash-utility/crash.git
 libhugetlbfs git@github.com:libhugetlbfs/libhugetlbfs.git
 valgrind git://sourceware.org/git/valgrind.git
@@ -42,4 +41,11 @@ chrony https://git.tuxfamily.org/chrony/chrony.git
 spice git@gitlab.freedesktop.org:spice/spice.git
 spice-protocol git@github.com:freedesktop/spice-protocol.git
 spice-gtk git@gitlab.freedesktop.org:spice/spice-gtk.git
+libqb https://github.com/ClusterLabs/libqb.git
+kronosnet https://github.com/kronosnet/kronosnet
+cluster-glue https://github.com/ClusterLabs/cluster-glue
+pacemaker https://github.com/ClusterLabs/pacemaker
 resource-agents https://github.com/ClusterLabs/resource-agents.git
+dlm https://pagure.io/dlm.git
+drbd-utils https://github.com/LINBIT/drbd-utils.git
+ocfs2-tools https://github.com/markfasheh/ocfs2-tools.git

@@ -1,0 +1,15 @@
+dlm https://git.launchpad.net/~usd-import-team/ubuntu/+source/dlm
+drbd-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/drbd-utils
+ocfs2-tools  https://git.launchpad.net/~usd-import-team/ubuntu/+source/ocfs2-tools
+pacemaker  https://git.launchpad.net/~usd-import-team/ubuntu/+source/pacemaker
+libqb https://git.launchpad.net/~usd-import-team/ubuntu/+source/libqb
+bind9 https://git.launchpad.net/~usd-import-team/ubuntu/+source/bind9
+cluster-glue https://git.launchpad.net/~usd-import-team/ubuntu/+source/cluster-glue
+corosync https://git.launchpad.net/~usd-import-team/ubuntu/+source/corosync
+ubuntu-fan https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
+systemd https://git.launchpad.net/~usd-import-team/ubuntu/+source/systemd
+resource-agents https://git.launchpad.net/~usd-import-team/ubuntu/+source/resource-agents
+iproute2 https://git.launchpad.net/~usd-import-team/ubuntu/+source/iproute2
+chrony https://git.launchpad.net/~usd-import-team/ubuntu/+source/chrony
+samba https://git.launchpad.net/~usd-import-team/ubuntu/+source/samba
+qemu https://git.launchpad.net/~usd-import-team/ubuntu/+source/qemu
