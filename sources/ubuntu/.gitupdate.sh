@@ -25,24 +25,19 @@ for dir in $dirs; do
 
     log echo "---- $(basename $(pwd) | tr [:lower:] [:upper:]) ----"
 
-    remotehead=$(git branch -r | grep HEAD | awk '{print $1}')
-    remotebranch=$(git branch -r | grep HEAD | awk '{print $3}')
-    localbranch=$(basename $(git branch -r | grep HEAD | awk '{print $3}'))
-
     log git reset --hard
     log git clean -fd
+    log git fetch pkg -a --tags
 
-    log git fetch -a --tags
+    log git checkout ubuntu/devel && {
 
-    log git checkout $localbranch && {
-
-        log git reset --hard $remotebranch
+        git reset --hard pkg/ubuntu/devel
 
     } || {
 
-        log git checkout $remotebranch -b $localbranch
-    }
+        git checkout pkg/ubuntu/devel -b ubuntu/devel
 
+    }
 
     cd $now
 

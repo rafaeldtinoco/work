@@ -49,3 +49,6 @@ resource-agents https://github.com/ClusterLabs/resource-agents.git
 dlm https://pagure.io/dlm.git
 drbd-utils https://github.com/LINBIT/drbd-utils.git
 ocfs2-tools https://github.com/markfasheh/ocfs2-tools.git
+cloud-init https://git.launchpad.net/cloud-init
+cloud-utils https://git.launchpad.net/cloud-utils
+s390-tools https://github.com/ibm-s390-tools/s390-tools
