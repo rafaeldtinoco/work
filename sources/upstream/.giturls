@@ -12,6 +12,7 @@ multipath-tools https://git.opensvc.com/multipath-tools/.git/
 httpd git@github.com:apache/httpd.git
 sg3_utils https://github.com/hreinecke/sg3_utils
 dpdk git://dpdk.org/dpdk
+dpdk-stable git://dpdk.org/dpdk-stable
 corosync https://github.com/corosync/corosync
 libfuse git@github.com:libfuse/libfuse.git
 tgt git@github.com:fujita/tgt.git
@@ -52,3 +53,7 @@ ocfs2-tools https://github.com/markfasheh/ocfs2-tools.git
 cloud-init https://git.launchpad.net/cloud-init
 cloud-utils https://git.launchpad.net/cloud-utils
 s390-tools https://github.com/ibm-s390-tools/s390-tools
+ebtables git://git.netfilter.org/ebtables
+booth git@github.com:ClusterLabs/booth.git
+cacti git@github.com:Cacti/cacti.git
+git-remote-bzr git@github.com:felipec/git-remote-bzr.git

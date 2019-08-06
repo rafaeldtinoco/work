@@ -13,3 +13,7 @@ iproute2 https://git.launchpad.net/~usd-import-team/ubuntu/+source/iproute2
 chrony https://git.launchpad.net/~usd-import-team/ubuntu/+source/chrony
 samba https://git.launchpad.net/~usd-import-team/ubuntu/+source/samba
 qemu https://git.launchpad.net/~usd-import-team/ubuntu/+source/qemu
+cloud-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/cloud-utils
+dpdk https://git.launchpad.net/ubuntu/+source/dpdk
+ebtables https://git.launchpad.net/~usd-import-team/ubuntu/+source/ebtables
+gvfs https://git.launchpad.net/~usd-import-team/ubuntu/+source/gvfs

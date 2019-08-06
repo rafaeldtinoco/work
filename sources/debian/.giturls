@@ -5,10 +5,12 @@ nfs-utils git@salsa.debian.org:debian/nfs-utils.git
 pacemaker git@salsa.debian.org:ha-team/pacemaker
 libqb git@salsa.debian.org:ha-team/libqb
 samba git@salsa.debian.org:samba-team/samba.git
-samba-mine git@salsa.debian.org:rafaeldtinoco-guest/samba.git
 cluster-glue git@salsa.debian.org:ha-team/cluster-glue
 corosync git@salsa.debian.org:ha-team/corosync
 resource-agents git@salsa.debian.org:ha-team/resource-agents
 chrony git@salsa.debian.org:debian/chrony.git
 kronosnet git@salsa.debian.org:ha-team/kronosnet
 qemu git@salsa.debian.org:qemu-team/qemu.git
+cacti git@salsa.debian.org:cacti-team/cacti.git
+dbconfig-common git@salsa.debian.org:debian/dbconfig-common.git
+dpdk git@salsa.debian.org:debian/dpdk.git
