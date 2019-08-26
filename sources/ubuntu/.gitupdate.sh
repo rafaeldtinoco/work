@@ -27,15 +27,24 @@ for dir in $dirs; do
 
     log git reset --hard
     log git clean -fd
+
+    log git fetch applied -a --tags
+    log git fetch imported -a --tags
     log git fetch pkg -a --tags
+    log git fetch upstream -a --tags
+
+    log git fetch ahasenack -a --tags
+    log git fetch paelzer -a --tags
+    log git fetch bryce -a --tags
+    log git fetch lucaskanashiro -a --tags
 
     log git checkout ubuntu/devel && {
 
-        git reset --hard pkg/ubuntu/devel
+        log git reset --hard pkg/ubuntu/devel
 
     } || {
 
-        git checkout pkg/ubuntu/devel -b ubuntu/devel
+        log git checkout pkg/ubuntu/devel -b ubuntu/devel
 
     }
 

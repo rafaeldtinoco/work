@@ -1,3 +1,5 @@
+clickhouse git@github.com:yandex/ClickHouse.git
+mysql-server git@github.com:mysql/mysql-server.git
 apr https://github.com/apache/apr.git
 apr-util https://github.com/apache/apr-util.git
 autoconf http://git.sv.gnu.org/r/autoconf.git
@@ -56,3 +58,6 @@ systemtap git://sourceware.org/git/systemtap.git
 tgt git@github.com:fujita/tgt.git
 util-linux git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git
 valgrind git://sourceware.org/git/valgrind.git
+cpuinfo git@github.com:pytorch/cpuinfo.git
+bareos git@github.com:bareos/bareos.git
+SLOF git@github.com:qemu/SLOF.git

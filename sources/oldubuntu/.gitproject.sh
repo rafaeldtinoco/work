@@ -3,7 +3,7 @@
 for name in $(find . -maxdepth 1 -type d)
 do
 
-    [ "$name" == "." ] || [ "$name" == ".." ] || [ "$name" == "./old" ] || [ "$name" == "./garbage" ] && continue
+    [ "$name" == "." ] || [ "$name" == ".." ] || [ "$name" == "./old" ] || [ "$name" == "./.garbage" ] && continue
     [ ! -d $name ] && continue
 
 

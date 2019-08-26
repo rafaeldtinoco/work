@@ -15,7 +15,7 @@ for dir in $dirs; do
 
     dir=${dir/\.\//}
 
-    [ -f $dir/.mine ] && { echo "!! skipping $dir"; break; }
+    [ -f $dir/.mine ] && { echo "!! skipping $dir"; continue; }
 
     echo "-- updating $dir"
 
@@ -27,7 +27,9 @@ for dir in $dirs; do
 
     remotehead=$(git branch -r | grep HEAD | awk '{print $1}')
     remotebranch=$(git branch -r | grep HEAD | awk '{print $3}')
-    localbranch=$(basename $(git branch -r | grep HEAD | awk '{print $3}'))
+    headid=$(git branch -r | grep HEAD | awk '{print $3}')
+    [ "$headid" ] || headid="master"
+    localbranch=$(basename $headid)
 
     log git reset --hard
     log git clean -fd

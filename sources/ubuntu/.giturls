@@ -14,7 +14,10 @@ libqb https://git.launchpad.net/~usd-import-team/ubuntu/+source/libqb
 ocfs2-tools https://git.launchpad.net/~usd-import-team/ubuntu/+source/ocfs2-tools
 pacemaker https://git.launchpad.net/~usd-import-team/ubuntu/+source/pacemaker
 qemu https://git.launchpad.net/~usd-import-team/ubuntu/+source/qemu
+libvirt https://git.launchpad.net/~usd-import-team/ubuntu/+source/libvirt
 resource-agents https://git.launchpad.net/~usd-import-team/ubuntu/+source/resource-agents
 samba https://git.launchpad.net/~usd-import-team/ubuntu/+source/samba
 systemd https://git.launchpad.net/~usd-import-team/ubuntu/+source/systemd
 ubuntu-fan https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
+iptables https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
+dbconfig-common https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan

@@ -16,3 +16,4 @@ pacemaker git@salsa.debian.org:ha-team/pacemaker
 qemu git@salsa.debian.org:qemu-team/qemu.git
 resource-agents git@salsa.debian.org:ha-team/resource-agents
 samba git@salsa.debian.org:samba-team/samba.git
+bareos git@salsa.debian.org:pkg-bareos-team/bareos.git
