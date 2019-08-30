@@ -2,7 +2,7 @@
 4.9.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-4.9.y
 4.14.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-4.14.y
 4.19.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-4.19.y
-5.1.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-5.1.y
+5.2.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-5.2.y
 linux https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
 next https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
 stable https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git master

@@ -143,6 +143,9 @@ elif [ x$ARG0 == x"qcowvmlinuz.sh" ]; then
         INITRD=$(ls -1tr $TARGET/boot/initrd* | tail -1)
     fi
 
+    echo vmlinuz=$VMLINUZ
+    echo initrd=$INITRD
+
     if [ -d $MACHINEDIR ]; then
         echo "bringing lxc$$ ($MACHINE) kernel/ramdisk to host"
         sudo cp $VMLINUZ $MACHINEDIR/vmlinuz

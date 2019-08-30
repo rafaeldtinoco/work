@@ -27,7 +27,7 @@ for dir in $dirs; do
 
     log git reset --hard
     log git clean -fd
-    log git fetch -a --tags
+    log git fetch -f -a --tags
 
     branch=$(git branch --no-color | grep ^* | sed 's:^* ::g')
 
