@@ -1,7 +1,0 @@
-        modified:   ../../scripts/lxc-debian-guest.sh
-        modified:   ../../scripts/lxc-ubuntu-guest.sh
-        modified:   ../../scripts/qcowshell.sh
-        modified:   .giturls
-        modified:   ../ubuntu/.gitupdate.sh
-        modified:   ../ubuntu/.giturls
-        modified:   ../upstream/.giturls
