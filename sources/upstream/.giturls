@@ -61,3 +61,4 @@ valgrind git://sourceware.org/git/valgrind.git
 cpuinfo git@github.com:pytorch/cpuinfo.git
 bareos git@github.com:bareos/bareos.git
 SLOF git@github.com:qemu/SLOF.git
+open-vm-tools git@github.com:vmware/open-vm-tools.git
