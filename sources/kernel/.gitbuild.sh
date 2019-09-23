@@ -12,7 +12,7 @@ NCPU=$(($NUMCPU))
 #NCPU=1
 
 MYARCH="amd64"  # (amd64|x86|arm64|armhf|armel)
-TOARCH="arm64"  # (amd64|x86|arm64|armhf|armel)
+TOARCH="amd64"  # (amd64|x86|arm64|armhf|armel)
 
 KCROSS=0        # are you cross compiling ? (automatic)
 if [ "$MYARCH" != "$TOARCH" ]; then
@@ -21,14 +21,14 @@ fi
 
 GCLEAN=0        # want to run git reset ? (default: 1)
 KCLEAN=0        # want to run make clean ? (default: 1)
-KCONFIG=0       # want to copy and process conf file ? (default: 1)
+KCONFIG=1       # want to copy and process conf file ? (default: 1)
 KMCONFIG=0      # want a menu to add/remove stuff from .config ? (default: 0)
 KLCONFIG=0      # want to merge a lsmod file into .config ? (default: 0)
 KDCONFIG=0      # default config (testing)
-KPREPARE=0      # want to prepare ? (default: 1)
-KBUILD=1        # want to build ? :o) (default: 1)
-KDEBUG=1        # want your kernel to have debug symbols ? (default: 1)
-KVERBOSE=1      # want it to shut up ? (default: 1)
+KPREPARE=1      # want to prepare ? (default: 1)
+KBUILD=0        # want to build ? :o) (default: 1)
+KDEBUG=0        # want your kernel to have debug symbols ? (default: 1)
+KVERBOSE=0      # want it to shut up ? (default: 1)
 
 KRAMFS=0        # TARGET will be a KRAMFSSIZE GB tmpfs (default: 0)
 KRAMFSSIZE=13   # TARGET dir size in GB

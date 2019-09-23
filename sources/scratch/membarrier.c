@@ -192,65 +192,65 @@ struct test_case tc[] = {
 	 },
 };
 
-#define passed_ok(_test)						       \
-	do {								       \
-		fprintf(stdout, "membarrier(2): %s passed.\n", _test.testname);\
-		return;							       \
+#define passed_ok(_test)                                                       \
+	do {                                                                       \
+		fprintf(stdout, "membarrier(2): %s passed.\n", _test.testname);        \
+		return;                                                                \
 	} while (0)
 
-#define passed_unexpec(_test)						       \
-	do {								       \
-		fprintf(stdout, "membarrier(2): %s passed unexpectedly. "      \
-			"ret = %ld with errno %d were expected. (force: %d)\n",\
-			_test.testname, _test.exp_ret, _test.exp_errno,        \
-			_test.force);					       \
-		return;							       \
+#define passed_unexpec(_test)                                                  \
+	do {                                                                       \
+		fprintf(stdout, "membarrier(2): %s passed unexpectedly. "              \
+			"ret = %ld with errno %d were expected. (force: %d)\n",            \
+			_test.testname, _test.exp_ret, _test.exp_errno,                    \
+			_test.force);                                                      \
+		return;                                                                \
 	} while (0)
 
-#define failed_ok(_test)						       \
-	do {								       \
-		fprintf(stdout, "membarrier(2): %s failed as "		       \
-			"expected.\n", _test.testname);			       \
-		return;							       \
+#define failed_ok(_test)                                                       \
+	do {                                                                       \
+		fprintf(stdout, "membarrier(2): %s failed as "                         \
+			"expected.\n", _test.testname);                                    \
+		return;                                                                \
 	} while (0)
 
-#define failed_ok_unsupported(_test)					       \
-	do {								       \
-		fprintf(stdout, "membarrier(2): %s failed as expected.\n"      \
-			"(unsupported)", _test.testname);		       \
-		return;							       \
+#define failed_ok_unsupported(_test)                                           \
+	do {                                                                       \
+		fprintf(stdout, "membarrier(2): %s failed as expected.\n"              \
+			"(unsupported)", _test.testname);                                  \
+		return;                                                                \
 	} while (0)
 
-#define failed_not_ok(_test, _gotret, _goterr)				       \
-	do {								       \
-		fprintf(stdout, "membarrier(2): %s failed. "		       \
-			"ret = %ld when expected was %ld. "		       \
-			"errno = %d when expected was %d. (force: %d)\n",      \
-			_test.testname, _gotret, _test.exp_ret, _goterr,       \
-			_test.exp_errno, _test.force);			       \
-		return;							       \
+#define failed_not_ok(_test, _gotret, _goterr)                                 \
+	do {                                                                       \
+		fprintf(stdout, "membarrier(2): %s failed. "                           \
+			"ret = %d when expected was %ld. "                                 \
+			"errno = %d when expected was %d. (force: %d)\n",                  \
+			_test.testname, _gotret, _test.exp_ret, _goterr,                   \
+			_test.exp_errno, _test.force);                                     \
+		return;                                                                \
 	} while (0)
 
-#define failed_unexpec(_test, _gotret, _goterr) 			       \
-	do {								       \
-		fprintf(stdout, "membarrier(2): %s failed unexpectedly. "      \
-			"Got ret = %ld with errno %d. (force: %d)\n",	       \
-			_test.testname, _gotret, _goterr, _test.force);	       \
-		return;							       \
+#define failed_unexpec(_test, _gotret, _goterr)                                \
+	do {                                                                       \
+		fprintf(stdout, "membarrier(2): %s failed unexpectedly. "              \
+			"Got ret = %d with errno %d. (force: %d)\n",                       \
+			_test.testname, _gotret, _goterr, _test.force);                    \
+		return;                                                                \
 	} while (0)
 
-#define skipped(_test)							       \
-	do {								       \
-		fprintf(stdout, "membarrier(2): %s skipped (unsupp)\n",	       \
-			_test.testname);				       \
-		return;							       \
+#define skipped(_test)                                                         \
+	do {                                                                       \
+		fprintf(stdout, "membarrier(2): %s skipped (unsupp)\n",                \
+			_test.testname);                                                   \
+		return;                                                                \
 	} while (0)
 
-#define skipped_fail(_test)						       \
-	do {								       \
-		fprintf(stdout, "membarrier(2): %s reported as "	       \
-			"unsupported\n", _test.testname);		       \
-		return;							       \
+#define skipped_fail(_test)                                                    \
+	do {                                                                       \
+		fprintf(stdout, "membarrier(2): %s reported as "                       \
+			"unsupported\n", _test.testname);                                  \
+		return;                                                                \
 	} while (0)
 
 static int sys_membarrier(int cmd, int flags)

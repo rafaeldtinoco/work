@@ -1,19 +1,19 @@
-cacti git@salsa.debian.org:cacti-team/cacti.git
-chrony git@salsa.debian.org:debian/chrony.git
+# cacti git@salsa.debian.org:cacti-team/cacti.git
+# chrony git@salsa.debian.org:debian/chrony.git
 cluster-glue git@salsa.debian.org:ha-team/cluster-glue
 corosync git@salsa.debian.org:ha-team/corosync
 corosync-qdevice https://salsa.debian.org/ha-team/corosync-qdevice
 dbconfig-common git@salsa.debian.org:debian/dbconfig-common.git
-dlm git@salsa.debian.org:ha-team/dlm
-dpdk git@salsa.debian.org:debian/dpdk.git
-drbd-utils git@salsa.debian.org:ha-team/drbd-utils
+# dlm git@salsa.debian.org:ha-team/dlm
+# dpdk git@salsa.debian.org:debian/dpdk.git
+# drbd-utils git@salsa.debian.org:ha-team/drbd-utils
 kronosnet git@salsa.debian.org:ha-team/kronosnet
-libqb git@salsa.debian.org:ha-team/libqb
+# libqb git@salsa.debian.org:ha-team/libqb
 mysql git@salsa.debian.org:mariadb-team/mysql.git
-nfs-utils git@salsa.debian.org:debian/nfs-utils.git
+# nfs-utils git@salsa.debian.org:debian/nfs-utils.git
 ocfs2-tools git@salsa.debian.org:ha-team/ocfs2-tools
 pacemaker git@salsa.debian.org:ha-team/pacemaker
 qemu git@salsa.debian.org:qemu-team/qemu.git
 resource-agents git@salsa.debian.org:ha-team/resource-agents
-samba git@salsa.debian.org:samba-team/samba.git
-bareos git@salsa.debian.org:pkg-bareos-team/bareos.git
+# samba git@salsa.debian.org:samba-team/samba.git
+# bareos git@salsa.debian.org:pkg-bareos-team/bareos.git

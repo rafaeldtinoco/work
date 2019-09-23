@@ -1,16 +1,16 @@
 dpdk https://git.launchpad.net/ubuntu/+source/dpdk
 bind9 https://git.launchpad.net/~usd-import-team/ubuntu/+source/bind9
-chrony https://git.launchpad.net/~usd-import-team/ubuntu/+source/chrony
+# chrony https://git.launchpad.net/~usd-import-team/ubuntu/+source/chrony
 cloud-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/cloud-utils
 cluster-glue https://git.launchpad.net/~usd-import-team/ubuntu/+source/cluster-glue
 corosync https://git.launchpad.net/~usd-import-team/ubuntu/+source/corosync
 crmsh https://git.launchpad.net/~usd-import-team/ubuntu/+source/crmsh
-dlm https://git.launchpad.net/~usd-import-team/ubuntu/+source/dlm
+# dlm https://git.launchpad.net/~usd-import-team/ubuntu/+source/dlm
 drbd-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/drbd-utils
 ebtables https://git.launchpad.net/~usd-import-team/ubuntu/+source/ebtables
-gvfs https://git.launchpad.net/~usd-import-team/ubuntu/+source/gvfs
+# gvfs https://git.launchpad.net/~usd-import-team/ubuntu/+source/gvfs
 iproute2 https://git.launchpad.net/~usd-import-team/ubuntu/+source/iproute2
-libqb https://git.launchpad.net/~usd-import-team/ubuntu/+source/libqb
+# libqb https://git.launchpad.net/~usd-import-team/ubuntu/+source/libqb
 ocfs2-tools https://git.launchpad.net/~usd-import-team/ubuntu/+source/ocfs2-tools
 pacemaker https://git.launchpad.net/~usd-import-team/ubuntu/+source/pacemaker
 qemu https://git.launchpad.net/~usd-import-team/ubuntu/+source/qemu
@@ -21,3 +21,5 @@ systemd https://git.launchpad.net/~usd-import-team/ubuntu/+source/systemd
 ubuntu-fan https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
 iptables https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
 dbconfig-common https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
+cacti https://git.launchpad.net/~usd-import-team/ubuntu/+source/cacti
+simplestreams https://git.launchpad.net/~usd-import-team/ubuntu/+source/simplestreams

@@ -8,8 +8,8 @@
 void
 show1(char *n1, char *n2)
 {
-    printf("%lx", n1[0]);
-    printf("%lx", n1[1]);
+    printf("%x", n1[0]);
+    printf("%x", n1[1]);
 }
 
 int

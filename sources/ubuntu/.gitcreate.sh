@@ -4,8 +4,10 @@
 
 while read name url
 do
+    [ "$name" == "#" ] && continue
+
     [ -d $name ] && continue
 
-    git ubuntu clone $url $name
+    git ubuntu clone $name
 
 done < .giturls
