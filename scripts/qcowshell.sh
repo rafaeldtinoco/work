@@ -110,30 +110,6 @@ elif [ x$ARG0 == x"qcowcmd.sh"  ]; then
     sleep 3
     $SUDO -- lxc-stop -n lxc$$
 
-elif [ x$ARG0 == x"qcowhome.sh"  ]; then
-    # update home dir inside qcow2 image
-
-    if [ ! -d $TARGET/$HOME ]; then
-        mkdir $TARGET/$HOME
-    fi
-
-    cd $HOME
-
-    if [ -f .bashrc ]; then
-        cp -rf .bashrc .aliases .bash_profile .profile \
-            .vimrc .vim .gitconfig .github .gitignore .ssh  \
-            .gnupg .quiltrc .dput.cf .reportbugrc $TARGET/$HOME/
-    fi
-
-elif [ x$ARG0 == x"qcowhostname.sh" ]; then
-    # change hostname form qcow2 image
-
-    if [ $ARGUMENT ]; then
-        echo $ARGUMENT | sudo tee $TARGET/etc/hostname
-    else
-        echo $MACHINE | sudo tee $TARGET/etc/hostname
-    fi
-
 elif [ x$ARG0 == x"qcowvmlinuz.sh" ]; then
     # bring kernel image + ramdisk to host
 

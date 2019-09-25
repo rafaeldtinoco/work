@@ -1,131 +1,96 @@
 #!/bin/bash
 
-# this script creates a new VM based on an OLD template one (templates must be
-# updated only when no child VMs exist orelse you will break the cloned VMs by
-# changing the base QCOW disks)
-
-ARG0=$(basename $0)
-MACHINE=$1
-CLONE=$2
-OLDDIR=$PWD
-MAINDIR=$(dirname $0)
-LOGFILE=/tmp/virtxxx.log
-[ "$MAINDIR" == "." ] && MAINDIR=$(pwd)
-
-echo -n > $LOGFILE
+ARGS=$@
+ARG0=$0
+ARG1=$1
+ARG2=$2
 
 LIBVIRTDIR=/var/lib/libvirt/images
-MACHINEDIR=$LIBVIRTDIR/$MACHINE
-CLONEDIR=$LIBVIRTDIR/$CLONE
 
-TEMPLATES="mobkvmamd64 mobkvmi686 mobqemuamd64 mobqemuarm64 mobqemuarmhf mobqemui686"
+[ ! $(which sudo) ] && getout "sudo not found"
 
-getout() {
-    echo ERROR: $@
-    cd $OLDDIR
-    exit 1
-}
-
-QEMUIMG=$(which qemu-img)
-SUDO=$(which sudo)
-VIRTCLONE=$(which virt-clone)
-VIRSH=$(which virsh)
-
-[ ! $QEMUIMG ] && getout "no qemu-img found"
-[ ! $SUDO ] && getout "no sudo found"
-[ ! $VIRTCLONE ] && getout "no virt-clone found"
-[ ! $VIRSH ] && getout "no virsh found"
-
-[ ! $MACHINE ] && getout "machine not informed"
-
-if [ x$MACHINE == x"list" ]; then
+if [ "$ARG1" == "list" ]; then
     sudo ls -1 $LIBVIRTDIR
     exit 0
 fi
 
-[ ! -d $LIBVIRTDIR ] && getout "no libvirt dir found"
-[ ! -d $MACHINEDIR ] && getout "no machine dir found"
+if [ $UID -ne 0 ]; then
+    sudo $ARG0 $ARGS
+    exit 0
+fi
 
-[ ! -f $MACHINEDIR/vmlinuz ] && getout "machine's vmlinuz not found"
-[ ! -f $MACHINEDIR/initrd.img ] && getout "machine's initrd.img not found"
-[ ! -f $MACHINEDIR/disk01.ext4.qcow2 ] && getout "machine's disk not found"
+getout() {
+    echo ERROR: $@
+    exit 1
+}
 
-if [ x$ARG0 == x"virtclone.sh" ]; then
+ARG0=$(basename $ARG0)
+MACHINE=$ARG1
+CLONE=$ARG2
+OLDDIR=$PWD
 
-    [ ! $CLONE ] && getout "clone not informed"
-    [ -d $CLONEDIR ] && getout "clone already exists"
+MACHINEDIR=$LIBVIRTDIR/$MACHINE
+CLONEDIR=$LIBVIRTDIR/$CLONE
 
-    $SUDO mkdir $CLONEDIR
-    [ ! -d $CLONEDIR ] && getout "clone dir could not be created"
+[ ! $(which qemu-img) ] && getout "no qemu-img found"
+[ ! $(which virt-clone) ] && getout "no virt-clone found"
+[ ! $(which virsh) ] && getout "no virsh found"
 
-    $SUDO cp $MACHINEDIR/vmlinuz $CLONEDIR/vmlinuz
-    $SUDO cp $MACHINEDIR/initrd.img $CLONEDIR/initrd.img
-    $SUDO $QEMUIMG create -f qcow2 -b $MACHINEDIR/disk01.ext4.qcow2 \
-                $CLONEDIR/disk01.ext4.qcow2 2>&1 >> $LOGFILE 2>&1
+[ ! $MACHINE ] && getout "machine not informed"
 
-    $SUDO $VIRTCLONE --preserve-data \
-                --connect qemu:///system \
-                --original $MACHINE \
-                --name $CLONE \
-                --file $CLONEDIR/disk01.ext4.qcow2 2>&1 >> $LOGFILE 2>&1
+[ ! -d $LIBVIRTDIR ] && getout "libvirt dir not found"
+[ ! -d $MACHINEDIR ] && getout "vm dir not found"
 
-    $SUDO $VIRSH dumpxml $CLONE > /tmp/$$.xml
-    $SUDO sed -i "s:$MACHINE:$CLONE:g" /tmp/$$.xml 2>&1 >> $LOGFILE 2>&1
-    $SUDO $VIRSH define /tmp/$$.xml 2>&1 >> $LOGFILE 2>&1
-    $SUDO rm /tmp/$$.xml
+[ ! -f $MACHINEDIR/vmlinuz ] && getout "vmlinuz not found"
+[ ! -f $MACHINEDIR/initrd.img ] && getout "initrd.img not found"
+[ ! -f $MACHINEDIR/disk01.ext4.qcow2 ] && getout "disk not found"
 
-    echo "running:"
-    echo "- qcowhostname.sh $CLONE"
-    qcowhostname.sh $CLONE
-    echo "- qcowhome.sh $CLONE"
-    qcowhome.sh $CLONE
-
-elif [ x$ARG0 == x"virtcopy.sh" ] || [ x$ARG0 == x"virtexactcopy.sh" ]; then
+if [[ "$ARG0" == "virtcopy.sh" || "$ARG0" == "virtclone.sh" ]]; then
 
     [ ! $CLONE ] && getout "dest not informed"
     [ -d $CLONEDIR ] && getout "dest already exists"
 
-    $SUDO mkdir $CLONEDIR
+    mkdir $CLONEDIR
     [ ! -d $CLONEDIR ] && getout "dest dir could not be created"
 
-    $SUDO cp $MACHINEDIR/vmlinuz $CLONEDIR/vmlinuz
-    $SUDO cp $MACHINEDIR/initrd.img $CLONEDIR/initrd.img
-    $SUDO cp $MACHINEDIR/disk01.ext4.qcow2 $CLONEDIR/disk01.ext4.qcow2
+    cp $MACHINEDIR/vmlinuz $CLONEDIR/vmlinuz
+    cp $MACHINEDIR/initrd.img $CLONEDIR/initrd.img
 
-    $SUDO $VIRTCLONE --preserve-data \
-                --connect qemu:///system \
-                --original $MACHINE \
-                --name $CLONE \
-                --file $CLONEDIR/disk01.ext4.qcow2 2>&1 >> $LOGFILE 2>&1
+    if [ "$ARG0" == "virtcopy.sh" ]; then
+        cp $MACHINEDIR/disk01.ext4.qcow2 $CLONEDIR/disk01.ext4.qcow2
 
-    $SUDO $VIRSH dumpxml $CLONE > /tmp/$$.xml
-    $SUDO sed -i "s:$MACHINE:$CLONE:g" /tmp/$$.xml 2>&1 >> $LOGFILE 2>&1
-    $SUDO $VIRSH define /tmp/$$.xml 2>&1 >> $LOGFILE 2>&1
-    $SUDO rm /tmp/$$.xml
-
-    if [ x$ARG0 == x"virtcopy.sh" ]; then
-        echo "running:"
-        echo "- qcowhostname.sh $CLONE"
-        qcowhostname.sh $CLONE
-        echo "- qcowhome.sh $CLONE"
-        qcowhome.sh $CLONE
+        virt-clone --check path_in_use=off --preserve-data \
+            --connect qemu:///system --original $MACHINE --name $CLONE \
+            --file $CLONEDIR/disk01.ext4.qcow2
     fi
 
-elif [ x$ARG0 == x"virtdel.sh" ]; then
+    if [ "$ARG0" == "virtclone.sh" ]; then
+        sudo qemu-img create -f qcow2 -b $MACHINEDIR/disk01.ext4.qcow2 \
+            $CLONEDIR/disk01.ext4.qcow2
 
-    for temp in $TEMPLATES; do
-        if [ x$MACHINE == x"$temp" ]; then
-            getout "can't del a template, sorry"
-        fi
-    done
+        virt-clone --check path_in_use=off --preserve-data \
+            --connect qemu:///system --original $MACHINE --name $CLONE \
+            --file $CLONEDIR/disk01.ext4.qcow2
+    fi
+
+    # <kernel>/var/lib/libvirt/images/kguest/vmlinuz</kernel>
+    # <initrd>/var/lib/libvirt/images/kguest/initrd.img</initrd>
+
+    virsh dumpxml $CLONE > /tmp/$$.xml
+    sed -i "s:.*<kernel>.*:<kernel>$CLONEDIR/vmlinuz</kernel>:g" /tmp/$$.xml
+    sed -i "s:.*<initrd>.*:<initrd>$CLONEDIR/initrd.img</initrd>:g" /tmp/$$.xml
+    virsh define /tmp/$$.xml
+    rm /tmp/$$.xml
+
+elif [ "$ARG0" == "virtdel.sh" ]; then
 
     [ ! -d $MACHINEDIR ] && getout "clone dir could not be found"
 
-    $SUDO $VIRSH undefine $MACHINE 2>&1 >> $LOGFILE 2>&1
+    virsh undefine $MACHINE 2>&1
 
-    $SUDO rm -f $MACHINEDIR/vmlinuz
-    $SUDO rm -f $MACHINEDIR/initrd.img
-    $SUDO rm -f $MACHINEDIR/disk01.ext4.qcow2
-    $SUDO rmdir $MACHINEDIR
+    rm -f $MACHINEDIR/vmlinuz
+    rm -f $MACHINEDIR/initrd.img
+    rm -f $MACHINEDIR/disk01.ext4.qcow2
+    rmdir $MACHINEDIR
 
 fi
