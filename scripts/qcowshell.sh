@@ -113,6 +113,10 @@ elif [ x$ARG0 == x"qcowcmd.sh"  ]; then
 elif [ x$ARG0 == x"qcowhome.sh"  ]; then
     # update home dir inside qcow2 image
 
+    if [ ! -d $TARGET/$HOME ]; then
+        mkdir $TARGET/$HOME
+    fi
+
     cd $HOME
 
     if [ -f .bashrc ]; then
@@ -134,13 +138,13 @@ elif [ x$ARG0 == x"qcowvmlinuz.sh" ]; then
     # bring kernel image + ramdisk to host
 
     if [ $ARGUMENT ]; then
-        VMLINUZ=$(ls -1tr $TARGET/boot/vmlinuz* | grep -i $ARGUMENT | tail -1)
-        INITRD=$(ls -1tr $TARGET/boot/initrd* | grep -i $ARGUMENT | tail -1)
+        VMLINUZ=$(sudo ls -1tr $TARGET/boot/ | grep vmlinuz | grep -i $ARGUMENT | tail -1)
+        INITRD=$(sudo ls -1tr $TARGET/boot/ | grep initrd | grep -i $ARGUMENT | tail -1)
     fi
 
     if [ ! $VMLINUZ ] || [ ! $INITRD ]; then
-        VMLINUZ=$(ls -1tr $TARGET/boot/vmlinuz* | tail -1)
-        INITRD=$(ls -1tr $TARGET/boot/initrd* | tail -1)
+        VMLINUZ=$(sudo ls -1tr $TARGET/boot/ | grep vmlinuz | tail -1)
+        INITRD=$(sudo ls -1tr $TARGET/boot/ | grep initrd | tail -1)
     fi
 
     echo vmlinuz=$VMLINUZ
@@ -148,8 +152,8 @@ elif [ x$ARG0 == x"qcowvmlinuz.sh" ]; then
 
     if [ -d $MACHINEDIR ]; then
         echo "bringing lxc$$ ($MACHINE) kernel/ramdisk to host"
-        sudo cp $VMLINUZ $MACHINEDIR/vmlinuz
-        sudo cp $INITRD $MACHINEDIR/initrd.img
+        sudo cp $TARGET/boot/$VMLINUZ $MACHINEDIR/vmlinuz
+        sudo cp $TARGET/boot/$INITRD $MACHINEDIR/initrd.img
     fi
 
 elif [ x$ARG0 == x"qcowkerninst.sh" ]; then

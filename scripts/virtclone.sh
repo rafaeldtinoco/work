@@ -80,7 +80,7 @@ if [ x$ARG0 == x"virtclone.sh" ]; then
     echo "- qcowhome.sh $CLONE"
     qcowhome.sh $CLONE
 
-elif [ x$ARG0 == x"virtcopy.sh" ]; then
+elif [ x$ARG0 == x"virtcopy.sh" ] || [ x$ARG0 == x"virtexactcopy.sh" ]; then
 
     [ ! $CLONE ] && getout "dest not informed"
     [ -d $CLONEDIR ] && getout "dest already exists"
@@ -103,11 +103,13 @@ elif [ x$ARG0 == x"virtcopy.sh" ]; then
     $SUDO $VIRSH define /tmp/$$.xml 2>&1 >> $LOGFILE 2>&1
     $SUDO rm /tmp/$$.xml
 
-    echo "running:"
-    echo "- qcowhostname.sh $CLONE"
-    qcowhostname.sh $CLONE
-    echo "- qcowhome.sh $CLONE"
-    qcowhome.sh $CLONE
+    if [ x$ARG0 == x"virtcopy.sh" ]; then
+        echo "running:"
+        echo "- qcowhostname.sh $CLONE"
+        qcowhostname.sh $CLONE
+        echo "- qcowhome.sh $CLONE"
+        qcowhome.sh $CLONE
+    fi
 
 elif [ x$ARG0 == x"virtdel.sh" ]; then
 

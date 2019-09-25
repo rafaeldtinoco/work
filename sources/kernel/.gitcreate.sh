@@ -4,6 +4,9 @@
 
 while read name url branch
 do
+
+    [ "$name" == "#" ] && continue
+
     [ -d $name ] && continue
 
     now=$(pwd)
