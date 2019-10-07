@@ -70,8 +70,8 @@ apt dist-upgrade -y
 # locales
 
 apt-get install -y locales
-echo """LANG=\"en_GB.UTF-8\"
-LANGUAGE=\"en_GB:en\"""" | tee /etc/default/locale
+echo """LANG=\"en_US.UTF-8\"
+LANGUAGE=\"en_US:en\"""" | tee /etc/default/locale
 echo """en_US.UTF-8 UTF-8
 en_GB.UTF-8 UTF-8""" | tee /etc/locale.gen
 locale-gen
@@ -82,9 +82,9 @@ apt install -y gnupg
 apt install -y gnupg1
 apt install -y gnupg2
 
-# http_proxy="http://172.16.0.1:3142/" ; export http_proxy ;
-# https_proxy="https://172.16.0.1:3142/" ; export https_proxy ;
-# ftp_proxy="ftp://172.16.0.1:3142/" ; export ftp_proxy ;
+http_proxy="http://192.168.100.252:3128/" ; export http_proxy ;
+https_proxy="http://192.168.100.252:3128/" ; export https_proxy ;
+ftp_proxy="http://192.168.100.252:3128/" ; export ftp_proxy ;
 
 apt install -y locales less vim sudo openssh-server bash-completion
 apt install -y bridge-utils vlan ifupdown resolvconf net-tools
@@ -102,65 +102,68 @@ apt install -y haveged
 # users
 
 passwd -d root
-useradd -d /home/inaddy -m -s /bin/bash inaddy
-passwd -d inaddy
 echo root:root | chpasswd
-echo inaddy:inaddy | chpasswd
-usermod -a -G root inaddy
-usermod -a -G sudo inaddy
-usermod -a -G shadow inaddy
-usermod -a -G staff inaddy
-usermod -a -G users inaddy
-usermod -a -G nogroup inaddy
-usermod -a -G syslog inaddy
-usermod -a -G crontab inaddy
-usermod -a -G libvirt inaddy
-usermod -a -G libvirtd inaddy
-usermod -a -G libvirt-qemu inaddy
-usermod -a -G kvm inaddy
+
+id rafaeldtinoco || {
+        useradd -d /home/rafaeldtinoco -m -s /bin/bash rafaeldtinoco
+        passwd -d rafaeldtinoco
+        echo rafaeldtinoco:rafaeldtinoco | chpasswd
+        usermod -a -G root rafaeldtinoco
+        usermod -a -G sudo rafaeldtinoco
+        usermod -a -G shadow rafaeldtinoco
+        usermod -a -G staff rafaeldtinoco
+        usermod -a -G users rafaeldtinoco
+        usermod -a -G nogroup rafaeldtinoco
+        usermod -a -G syslog rafaeldtinoco
+        usermod -a -G crontab rafaeldtinoco
+        usermod -a -G libvirt rafaeldtinoco
+        usermod -a -G libvirtd rafaeldtinoco
+        usermod -a -G libvirt-qemu rafaeldtinoco
+        usermod -a -G kvm rafaeldtinoco
+}
 
 echo """## /etc/apt/apt.conf
 
-# Acquire::http::Proxy \"http://172.16.0.1:3142/\";
+Acquire::http::Proxy \"http://192.168.100.252:3128/\";
 
 ## end of file""" | tee /etc/apt/apt.conf
 
-echo """## /etc/network/interfaces
-
-auto lo
-iface lo inet loopback
-    dns-nameservers 8.8.8.8
-    dns-nameservers 8.8.4.4
-    post-up sysctl -w net.ipv4.conf.all.forwarding=0
-    post-up sysctl -w net.ipv4.conf.default.forwarding=0
-    post-up sysctl -w net.ipv6.conf.all.disable_ipv6=1
-    post-up sysctl -w net.ipv6.conf.default.disable_ipv6=1
-    pre-down sysctl -w net.ipv4.conf.all.forwarding=0
-    pre-down sysctl -w net.ipv4.conf.default.forwarding=0
-    pre-down sysctl -w net.ipv6.conf.all.disable_ipv6=0
-    pre-down sysctl -w net.ipv6.conf.default.disable_ipv6=0
-
-iface eth0 inet manual
-    mtu 1472
-    post-up sysctl -w net.ipv6.conf.eth0.disable_ipv6=1
-    post-up sysctl -w net.ipv4.conf.eth0.forwarding=0
-    pre-down sysctl -w net.ipv4.conf.eth0.forwarding=0
-    pre-down sysctl -w net.ipv6.conf.eth0.disable_ipv6=0
-
-auto bridge0
-iface bridge0 inet dhcp
-    bridge_ports eth0
-    bridge_waitport 0
-    bridge_fd 0
-    bridge_stp off
-    bridge_maxwait 0
-    mtu 1472
-    post-up sysctl -w net.ipv6.conf.bridge0.disable_ipv6=1
-    post-up sysctl -w net.ipv4.conf.bridge0.forwarding=0
-    pre-down sysctl -w net.ipv4.conf.bridge0.forwarding=0
-    pre-down sysctl -w net.ipv6.conf.bridge0.disable_ipv6=0
-
-## end of file""" | tee /etc/network/interfaces
+# echo """## /etc/network/interfaces
+# 
+# auto lo
+# iface lo inet loopback
+#     dns-nameservers 8.8.8.8
+#     dns-nameservers 8.8.4.4
+#     post-up sysctl -w net.ipv4.conf.all.forwarding=0
+#     post-up sysctl -w net.ipv4.conf.default.forwarding=0
+#     post-up sysctl -w net.ipv6.conf.all.disable_ipv6=1
+#     post-up sysctl -w net.ipv6.conf.default.disable_ipv6=1
+#     pre-down sysctl -w net.ipv4.conf.all.forwarding=0
+#     pre-down sysctl -w net.ipv4.conf.default.forwarding=0
+#     pre-down sysctl -w net.ipv6.conf.all.disable_ipv6=0
+#     pre-down sysctl -w net.ipv6.conf.default.disable_ipv6=0
+# 
+# iface eth0 inet manual
+#     mtu 1472
+#     post-up sysctl -w net.ipv6.conf.eth0.disable_ipv6=1
+#     post-up sysctl -w net.ipv4.conf.eth0.forwarding=0
+#     pre-down sysctl -w net.ipv4.conf.eth0.forwarding=0
+#     pre-down sysctl -w net.ipv6.conf.eth0.disable_ipv6=0
+# 
+# auto bridge0
+# iface bridge0 inet dhcp
+#     bridge_ports eth0
+#     bridge_waitport 0
+#     bridge_fd 0
+#     bridge_stp off
+#     bridge_maxwait 0
+#     mtu 1472
+#     post-up sysctl -w net.ipv6.conf.bridge0.disable_ipv6=1
+#     post-up sysctl -w net.ipv4.conf.bridge0.forwarding=0
+#     pre-down sysctl -w net.ipv4.conf.bridge0.forwarding=0
+#     pre-down sysctl -w net.ipv6.conf.bridge0.disable_ipv6=0
+# 
+# ## end of file""" | tee /etc/network/interfaces
 
 echo """## /etc/sudoers
 
@@ -176,7 +179,7 @@ Defaults !syslog, !pam_session
 root ALL=(ALL) NOPASSWD: ALL
 %wheel ALL=(ALL) NOPASSWD: ALL
 %sudo ALL=(ALL) NOPASSWD: ALL
-inaddy ALL=(ALL) NOPASSWD: ALL
+rafaeldtinoco ALL=(ALL) NOPASSWD: ALL
 
 ## end of file""" | tee /etc/sudoers
 
