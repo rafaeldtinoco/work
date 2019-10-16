@@ -63,3 +63,4 @@ cpuinfo git@github.com:pytorch/cpuinfo.git
 # SLOF git@github.com:qemu/SLOF.git
 # open-vm-tools git@github.com:vmware/open-vm-tools.git
 simplestreams git+ssh://rafaeldtinoco@git.launchpad.net/simplestreams
+subiquity git@github.com:CanonicalLtd/subiquity.git
