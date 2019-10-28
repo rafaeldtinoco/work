@@ -9,7 +9,7 @@ echo -n > .gitupdate.log
 
 log() { $@ 2>&1 >> ../.gitupdate.log 2>&1; }
 
-dirs=$(find . -maxdepth 2 -regex .*\.git -exec dirname {} \;)
+dirs=$(find . -mindepth 2 -maxdepth 2 -regex .*\.git -exec dirname {} \;)
 
 for dir in $dirs; do
 
