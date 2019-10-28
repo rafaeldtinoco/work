@@ -1,29 +1,29 @@
-# cacti git@salsa.debian.org:cacti-team/cacti.git
-# chrony git@salsa.debian.org:debian/chrony.git
-# bareos git@salsa.debian.org:pkg-bareos-team/bareos.git
+bareos git@salsa.debian.org:pkg-bareos-team/bareos.git
+cacti git@salsa.debian.org:cacti-team/cacti.git
+chrony git@salsa.debian.org:debian/chrony.git
 cluster-glue git@salsa.debian.org:ha-team/cluster-glue
 corosync git@salsa.debian.org:ha-team/corosync
 corosync-qdevice https://salsa.debian.org/ha-team/corosync-qdevice
+crmsh https://salsa.debian.org/ha-team/crmsh.git
 dbconfig-common git@salsa.debian.org:debian/dbconfig-common.git
+debian-installer-utils git@salsa.debian.org:installer-team/debian-installer-utils.git
 dlm git@salsa.debian.org:ha-team/dlm
 dpdk git@salsa.debian.org:debian/dpdk.git
 drbd-utils git@salsa.debian.org:ha-team/drbd-utils
+grub-installer git@salsa.debian.org:installer-team/grub-installer.git
+ipvsadm git@salsa.debian.org:ipvs-team/ipkg-ipvsadm.git
+keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git
 kronosnet git@salsa.debian.org:ha-team/kronosnet
+libdebian-installer git@salsa.debian.org:installer-team/libdebian-installer.git
 libqb git@salsa.debian.org:ha-team/libqb
 mysql git@salsa.debian.org:mariadb-team/mysql.git
 nfs-utils git@salsa.debian.org:debian/nfs-utils.git
 ocfs2-tools git@salsa.debian.org:ha-team/ocfs2-tools
 pacemaker git@salsa.debian.org:ha-team/pacemaker
+pcs https://salsa.debian.org/ha-team/pcs.git
 qemu git@salsa.debian.org:qemu-team/qemu.git
 resource-agents git@salsa.debian.org:ha-team/resource-agents
 samba git@salsa.debian.org:samba-team/samba.git
-systemd git@salsa.debian.org:systemd-team/systemd.git
-crmsh https://salsa.debian.org/ha-team/crmsh.git
-debian-installer-utils git@salsa.debian.org:installer-team/debian-installer-utils.git
-grub-installer git@salsa.debian.org:installer-team/grub-installer.git
-libdebian-installer git@salsa.debian.org:installer-team/libdebian-installer.git
-ipvsadm git@salsa.debian.org:ipvs-team/ipkg-ipvsadm.git
-keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git
-pcs https://salsa.debian.org/ha-team/pcs.git
 sbd https://salsa.debian.org/ha-team/sbd.git
 sg3-utils git@salsa.debian.org:linux-blocks-team/sg3-utils.git
+systemd git@salsa.debian.org:systemd-team/systemd.git

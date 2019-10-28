@@ -1,66 +1,66 @@
-# clickhouse git@github.com:yandex/ClickHouse.git
-mysql-server git@github.com:mysql/mysql-server.git
-# apr https://github.com/apache/apr.git
-# apr-util https://github.com/apache/apr-util.git
+apr https://github.com/apache/apr.git
+apr-util https://github.com/apache/apr-util.git
 autoconf http://git.sv.gnu.org/r/autoconf.git
 automake http://git.savannah.gnu.org/r/automake.git/
-# bionic https://android.googlesource.com/platform/bionic/
-# booth git@github.com:ClusterLabs/booth.git
-# cacti git@github.com:Cacti/cacti.git
-# chrony https://git.tuxfamily.org/chrony/chrony.git
-# cloud-init https://git.launchpad.net/cloud-init
+bareos git@github.com:bareos/bareos.git
+binutils-gdb git://sourceware.org/git/binutils-gdb.git
+bionic https://android.googlesource.com/platform/bionic/
+booth git@github.com:ClusterLabs/booth.git
+cacti git@github.com:Cacti/cacti.git
+chrony https://git.tuxfamily.org/chrony/chrony.git
+clickhouse git@github.com:yandex/ClickHouse.git
+cloud-init https://git.launchpad.net/cloud-init
 cloud-utils https://git.launchpad.net/cloud-utils
 cluster-glue https://github.com/ClusterLabs/cluster-glue.git
 corosync https://github.com/corosync/corosync
+cpuinfo git@github.com:pytorch/cpuinfo.git
+cpython https://github.com/python/cpython.git
 crash git@github.com:crash-utility/crash.git
-# dlm https://pagure.io/dlm.git
+dlm https://pagure.io/dlm.git
 dpdk git://dpdk.org/dpdk
-# dpdk-stable git://dpdk.org/dpdk-stable
+dpdk-stable git://dpdk.org/dpdk-stable
 drbd-utils https://github.com/LINBIT/drbd-utils.git
 ebtables git://git.netfilter.org/ebtables
 elfutils git://sourceware.org/git/elfutils.git
-# gcc git://gcc.gnu.org/git/gcc.git
-# binutils-gdb git://sourceware.org/git/binutils-gdb.git
-# git-remote-bzr git@github.com:felipec/git-remote-bzr.git
-# usd-importer git+ssh://rafaeldtinoco@git.launchpad.net/usd-importer
+gcc git://gcc.gnu.org/git/gcc.git
+git-remote-bzr git@github.com:felipec/git-remote-bzr.git
 glibc git://sourceware.org/git/glibc.git
-# glib git@github.com:GNOME/glib.git
+glib git@github.com:GNOME/glib.git
 httpd git@github.com:apache/httpd.git
 iproute2 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
 kexec-tools git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git
 kronosnet https://github.com/kronosnet/kronosnet
 libfuse git@github.com:libfuse/libfuse.git
-# libhugetlbfs git@github.com:libhugetlbfs/libhugetlbfs.git
-# libqb https://github.com/ClusterLabs/libqb.git
+libhugetlbfs git@github.com:libhugetlbfs/libhugetlbfs.git
+libqb https://github.com/ClusterLabs/libqb.git
 libtool http://git.savannah.gnu.org/r/libtool.git/
 libvirt git://libvirt.org/libvirt.git
-# llvm-project https://github.com/llvm/llvm-project.git
+llvm-project https://github.com/llvm/llvm-project.git
 ltp git@github.com:linux-test-project/ltp.git
 lvm2 git://sourceware.org/git/lvm2.git
 multipath http://git.opensvc.com/multipath-tools/.git
+mysql-server git@github.com:mysql/mysql-server.git
 ocfs2-tools https://github.com/markfasheh/ocfs2-tools.git
 open-iscsi git@github.com:open-iscsi/open-iscsi.git
-# open-isns git@github.com:open-iscsi/open-isns.git
-# ovs https://github.com/openvswitch/ovs.git
+open-isns git@github.com:open-iscsi/open-isns.git
+open-vm-tools git@github.com:vmware/open-vm-tools.git
+ovs https://github.com/openvswitch/ovs.git
 pacemaker https://github.com/ClusterLabs/pacemaker
 perf-utils https://github.com/bboymimi/perf-utils.git
-# cpython https://github.com/python/cpython.git
 qemu https://github.com/qemu/qemu.git
 resource-agents https://github.com/ClusterLabs/resource-agents.git
 s390-tools https://github.com/ibm-s390-tools/s390-tools
 samba https://git.samba.org/samba.git
 sg3_utils https://github.com/hreinecke/sg3_utils
-# spice git@gitlab.freedesktop.org:spice/spice.git
-# spice-gtk git@gitlab.freedesktop.org:spice/spice-gtk.git
-# spice-protocol git@github.com:freedesktop/spice-protocol.git
+simplestreams git+ssh://rafaeldtinoco@git.launchpad.net/simplestreams
+SLOF git@github.com:qemu/SLOF.git
+spice git@gitlab.freedesktop.org:spice/spice.git
+spice-gtk git@gitlab.freedesktop.org:spice/spice-gtk.git
+spice-protocol git@github.com:freedesktop/spice-protocol.git
+subiquity git@github.com:CanonicalLtd/subiquity.git
 systemd git@github.com:systemd/systemd.git
 systemtap git://sourceware.org/git/systemtap.git
 tgt git@github.com:fujita/tgt.git
+usd-importer git+ssh://rafaeldtinoco@git.launchpad.net/usd-importer
 util-linux git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git
 valgrind git://sourceware.org/git/valgrind.git
-cpuinfo git@github.com:pytorch/cpuinfo.git
-# bareos git@github.com:bareos/bareos.git
-# SLOF git@github.com:qemu/SLOF.git
-# open-vm-tools git@github.com:vmware/open-vm-tools.git
-simplestreams git+ssh://rafaeldtinoco@git.launchpad.net/simplestreams
-subiquity git@github.com:CanonicalLtd/subiquity.git
