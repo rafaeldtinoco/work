@@ -64,3 +64,7 @@ tgt git@github.com:fujita/tgt.git
 usd-importer git+ssh://rafaeldtinoco@git.launchpad.net/usd-importer
 util-linux git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git
 valgrind git://sourceware.org/git/valgrind.git
+corosync-qdevice git@github.com:corosync/corosync-qdevice.git
+crmsh git@github.com:ClusterLabs/crmsh.git
+sbd git@github.com:ClusterLabs/sbd.git
+pcs git@github.com:ClusterLabs/pcs.git

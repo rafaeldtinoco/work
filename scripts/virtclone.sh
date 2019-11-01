@@ -41,8 +41,11 @@ CLONEDIR=$LIBVIRTDIR/$CLONE
 [ ! -d $LIBVIRTDIR ] && getout "libvirt dir not found"
 [ ! -d $MACHINEDIR ] && getout "vm dir not found"
 
-[ ! -f $MACHINEDIR/vmlinuz ] && getout "vmlinuz not found"
-[ ! -f $MACHINEDIR/initrd.img ] && getout "initrd.img not found"
+[[ ! "$MACHINE" =~ win ]] && {
+    [ ! -f $MACHINEDIR/vmlinuz ] && getout "vmlinuz not found"
+    [ ! -f $MACHINEDIR/initrd.img ] && getout "initrd.img not found"
+}
+
 [ ! -f $MACHINEDIR/disk01.ext4.qcow2 ] && getout "disk not found"
 
 if [[ "$ARG0" == "virtcopy.sh" || "$ARG0" == "virtclone.sh" ]]; then
@@ -53,8 +56,10 @@ if [[ "$ARG0" == "virtcopy.sh" || "$ARG0" == "virtclone.sh" ]]; then
     mkdir $CLONEDIR
     [ ! -d $CLONEDIR ] && getout "dest dir could not be created"
 
-    cp $MACHINEDIR/vmlinuz $CLONEDIR/vmlinuz
-    cp $MACHINEDIR/initrd.img $CLONEDIR/initrd.img
+    [[ ! "$MACHINE" =~ win ]] && {
+        cp $MACHINEDIR/vmlinuz $CLONEDIR/vmlinuz
+        cp $MACHINEDIR/initrd.img $CLONEDIR/initrd.img
+    }
 
     if [ "$ARG0" == "virtcopy.sh" ]; then
         cp $MACHINEDIR/disk01.ext4.qcow2 $CLONEDIR/disk01.ext4.qcow2
@@ -73,12 +78,13 @@ if [[ "$ARG0" == "virtcopy.sh" || "$ARG0" == "virtclone.sh" ]]; then
             --file $CLONEDIR/disk01.ext4.qcow2
     fi
 
-    # <kernel>/var/lib/libvirt/images/kguest/vmlinuz</kernel>
-    # <initrd>/var/lib/libvirt/images/kguest/initrd.img</initrd>
-
     virsh dumpxml $CLONE > /tmp/$$.xml
-    sed -i "s:.*<kernel>.*:<kernel>$CLONEDIR/vmlinuz</kernel>:g" /tmp/$$.xml
-    sed -i "s:.*<initrd>.*:<initrd>$CLONEDIR/initrd.img</initrd>:g" /tmp/$$.xml
+
+    [[ ! "$MACHINE" =~ win ]] && {
+        sed -i "s:.*<kernel>.*:<kernel>$CLONEDIR/vmlinuz</kernel>:g" /tmp/$$.xml
+        sed -i "s:.*<initrd>.*:<initrd>$CLONEDIR/initrd.img</initrd>:g" /tmp/$$.xml
+    }
+
     virsh define /tmp/$$.xml
     rm /tmp/$$.xml
 
