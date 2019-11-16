@@ -19,7 +19,6 @@ crash git@github.com:crash-utility/crash.git
 dlm https://pagure.io/dlm.git
 dpdk git://dpdk.org/dpdk
 dpdk-stable git://dpdk.org/dpdk-stable
-drbd-utils https://github.com/LINBIT/drbd-utils.git
 ebtables git://git.netfilter.org/ebtables
 elfutils git://sourceware.org/git/elfutils.git
 gcc git://gcc.gnu.org/git/gcc.git
@@ -68,3 +67,12 @@ corosync-qdevice git@github.com:corosync/corosync-qdevice.git
 crmsh git@github.com:ClusterLabs/crmsh.git
 sbd git@github.com:ClusterLabs/sbd.git
 pcs git@github.com:ClusterLabs/pcs.git
+ubuntu-dev-tools git+ssh://rafaeldtinoco@git.launchpad.net/ubuntu-dev-tools
+net-tools https://git.code.sf.net/p/net-tools/code
+ubuntu-seeds https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/ubuntu
+ubuntu-seeds-platform https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/platform
+ubuntu-seeds-core https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/ubuntu-core
+drbd-kernel git@github.com:LINBIT/drbd.git
+drbd-utils git@github.com:LINBIT/drbd-utils.git
+drbd-top git@github.com:LINBIT/drbdtop.git
+irqbalance git@github.com:Irqbalance/irqbalance.git
