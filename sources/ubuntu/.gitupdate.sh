@@ -33,6 +33,7 @@ for dir in $dirs; do
     log git fetch pkg -a --tags
     log git fetch upstream -a --tags
 
+    log git fetch rafaeldtinoco -a --tags
     log git fetch ahasenack -a --tags
     log git fetch paelzer -a --tags
     log git fetch bryce -a --tags
