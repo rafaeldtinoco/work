@@ -76,3 +76,5 @@ drbd-kernel git@github.com:LINBIT/drbd.git
 drbd-utils git@github.com:LINBIT/drbd-utils.git
 drbd-top git@github.com:LINBIT/drbdtop.git
 irqbalance git@github.com:Irqbalance/irqbalance.git
+nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
+uvtool git@github.com:basak/uvtool.git

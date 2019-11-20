@@ -8,6 +8,7 @@ libqb https://git.launchpad.net/~usd-import-team/ubuntu/+source/libqb
 ocfs2-tools https://git.launchpad.net/~usd-import-team/ubuntu/+source/ocfs2-tools
 pacemaker https://git.launchpad.net/~usd-import-team/ubuntu/+source/pacemaker
 pcs https://git.launchpad.net/~usd-import-team/ubuntu/+source/pcs
+fence-agents https://git.launchpad.net/~usd-import-team/ubuntu/+source/fence-agents
 # NETWORKING
 dpdk https://git.launchpad.net/ubuntu/+source/dpdk
 ebtables https://git.launchpad.net/~usd-import-team/ubuntu/+source/ebtables
@@ -46,3 +47,5 @@ simplestreams https://git.launchpad.net/~usd-import-team/ubuntu/+source/simplest
 systemd https://git.launchpad.net/~usd-import-team/ubuntu/+source/systemd
 ubiquity https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubiquity
 ubuntu-fan https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
+device-tree-compiler https://git.launchpad.net/~usd-import-team/ubuntu/+source/device-tree-compiler
+strongswan https://git.launchpad.net/~usd-import-team/ubuntu/+source/strongswan
