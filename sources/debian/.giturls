@@ -24,6 +24,7 @@ nfs-utils git@salsa.debian.org:debian/nfs-utils.git
 samba git@salsa.debian.org:samba-team/samba.git
 sg3-utils git@salsa.debian.org:linux-blocks-team/sg3-utils.git
 tgt git@salsa.debian.org:debian/tgt.git
+fio https://salsa.debian.org/debian/fio.git
 # VIRTUALIZATION
 libvirt git@salsa.debian.org:libvirt-team/libvirt.git
 qemu git@salsa.debian.org:qemu-team/qemu.git
@@ -39,3 +40,5 @@ grub-installer git@salsa.debian.org:installer-team/grub-installer.git
 irqbalance git@salsa.debian.org:debian/irqbalance.git
 libdebian-installer git@salsa.debian.org:installer-team/libdebian-installer.git
 systemd git@salsa.debian.org:systemd-team/systemd.git
+ruby-ferret.git git@salsa.debian.org:ruby-team/ruby-ferret.git
+talloc git@salsa.debian.org:samba-team/talloc.git

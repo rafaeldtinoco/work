@@ -1,6 +1,2 @@
 *
 !.git*
-!.cproject
-!.project
-.gitupdate.log
-.gitupdate.cron.log
