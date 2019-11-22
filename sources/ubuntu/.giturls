@@ -49,3 +49,4 @@ ubiquity https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubiquity
 ubuntu-fan https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
 device-tree-compiler https://git.launchpad.net/~usd-import-team/ubuntu/+source/device-tree-compiler
 strongswan https://git.launchpad.net/~usd-import-team/ubuntu/+source/strongswan
+ndctl https://git.launchpad.net/~usd-import-team/ubuntu/+source/ndctl

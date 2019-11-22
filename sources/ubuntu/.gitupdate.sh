@@ -15,7 +15,7 @@ for dir in $dirs; do
 
     dir=${dir/\.\//}
 
-    [ -f $dir/.mine ] && { echo "!! skipping $dir"; break; }
+    [ -f $dir/.mine ] && { echo "!! skipping $dir"; continue; }
 
     echo "-- updating $dir"
 

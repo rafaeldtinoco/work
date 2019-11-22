@@ -78,3 +78,4 @@ drbd-top git@github.com:LINBIT/drbdtop.git
 irqbalance git@github.com:Irqbalance/irqbalance.git
 nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
 uvtool git@github.com:basak/uvtool.git
+ndctl git@github.com:pmem/ndctl.git
