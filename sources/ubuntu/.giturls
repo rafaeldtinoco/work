@@ -17,6 +17,7 @@ iptables https://git.launchpad.net/~usd-import-team/ubuntu/+source/iptables
 ipvsadm https://git.launchpad.net/~usd-import-team/ubuntu/+source/ipvsadm
 keepalived https://git.launchpad.net/~usd-import-team/ubuntu/+source/keepalived
 net-tools https://git.launchpad.net/~usd-import-team/ubuntu/+source/net-tools
+net-snmp https://git.launchpad.net/~usd-import-team/ubuntu/+source/net-snmp
 # STORAGE
 drbd-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/drbd-utils
 lvm2 https://git.launchpad.net/~usd-import-team/ubuntu/+source/lvm2

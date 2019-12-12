@@ -16,6 +16,7 @@ sbd git@salsa.debian.org:ha-team/sbd.git
 dpdk git@salsa.debian.org:debian/dpdk.git
 ipvsadm git@salsa.debian.org:ipvs-team/ipkg-ipvsadm.git
 keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git
+net-snmp git@salsa.debian.org:debian/net-snmp.git
 # STORAGE
 drbd-doc git@salsa.debian.org:ha-team/drbd-doc.git
 drbd-utils git@salsa.debian.org:ha-team/drbd-utils
@@ -28,6 +29,7 @@ fio https://salsa.debian.org/debian/fio.git
 # VIRTUALIZATION
 libvirt git@salsa.debian.org:libvirt-team/libvirt.git
 qemu git@salsa.debian.org:qemu-team/qemu.git
+open-vm-tools git@salsa.debian.org:vmware-packaging-team/pkg-open-vm-tools.git
 # DATABASES
 dbconfig-common git@salsa.debian.org:debian/dbconfig-common.git
 mysql git@salsa.debian.org:mariadb-team/mysql.git
