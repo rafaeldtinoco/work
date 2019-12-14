@@ -81,3 +81,4 @@ uvtool git@github.com:basak/uvtool.git
 ndctl git@github.com:pmem/ndctl.git
 libslirp git@gitlab.freedesktop.org:slirp/libslirp.git
 qa-regression-testing ssh://git.launchpad.net/qa-regression-testing
+net-snmp git://git.code.sf.net/p/net-snmp/code
