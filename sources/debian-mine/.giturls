@@ -1,10 +1,5 @@
-# CLUSTER
-heartbeat git@salsa.debian.org:rafaeldtinoco-guest/heartbeat.git
-# NETWORKING
-# STORAGE
 drbd-doc git@salsa.debian.org:rafaeldtinoco-guest/drbd-doc.git
-drbd-utils git@salsa.debian.org:rafaeldtinoco-guest/drbd-utils.git
 drbdmanage git@salsa.debian.org:rafaeldtinoco-guest/drbdmanage.git
-# VIRTUALIZATION
-# DATABASES
-# GENERAL
+drbd-utils git@salsa.debian.org:rafaeldtinoco-guest/drbd-utils.git
+heartbeat git@salsa.debian.org:rafaeldtinoco-guest/heartbeat.git
+pcs git@salsa.debian.org:rafaeldtinoco-guest/pcs.git

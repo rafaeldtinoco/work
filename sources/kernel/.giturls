@@ -11,5 +11,5 @@ eoan git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/eoan maste
 focal git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/focal master
 disco git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/disco master
 # cosmic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/cosmic master
-bionic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic master
-xenial git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/xenial master
+# bionic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic master
+# xenial git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/xenial master
