@@ -5,6 +5,7 @@ cloud-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/cloud-util
 cluster-glue https://git.launchpad.net/~usd-import-team/ubuntu/+source/cluster-glue
 corosync https://git.launchpad.net/~usd-import-team/ubuntu/+source/corosync
 crmsh https://git.launchpad.net/~usd-import-team/ubuntu/+source/crmsh
+cups https://git.launchpad.net/~usd-import-team/ubuntu/+source/cups
 dbconfig-common https://git.launchpad.net/~usd-import-team/ubuntu/+source/dbconfig-common
 debian-installer https://git.launchpad.net/~usd-import-team/ubuntu/+source/debian-installer
 debian-installer-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/debian-installer-utils
