@@ -1,4 +1,5 @@
 bareos git@salsa.debian.org:pkg-bareos-team/bareos.git
+booth git@salsa.debian.org:ha-team/booth.git
 cacti git@salsa.debian.org:cacti-team/cacti.git
 chrony git@salsa.debian.org:debian/chrony.git
 cluster-glue git@salsa.debian.org:ha-team/cluster-glue
@@ -12,10 +13,13 @@ dpdk git@salsa.debian.org:debian/dpdk.git
 drbd-doc git@salsa.debian.org:ha-team/drbd-doc.git
 drbdmanage git@salsa.debian.org:ha-team/drbdmanage.git
 drbd-utils git@salsa.debian.org:ha-team/drbd-utils
+fence-agents git@salsa.debian.org:ha-team/fence-agents.git
+fence-virt git@salsa.debian.org:ha-team/fence-virt.git
 fio https://salsa.debian.org/debian/fio.git
+gfs2-utils git@salsa.debian.org:ha-team/gfs2-utils.git
 grub-installer git@salsa.debian.org:installer-team/grub-installer.git
 heartbeat git@salsa.debian.org:ha-team/heartbeat
-ipvsadm git@salsa.debian.org:ipvs-team/ipkg-ipvsadm.git
+heartbeat git@salsa.debian.org:ha-team/heartbeat.git
 irqbalance git@salsa.debian.org:debian/irqbalance.git
 keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git
 kronosnet git@salsa.debian.org:ha-team/kronosnet

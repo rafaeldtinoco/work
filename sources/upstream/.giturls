@@ -18,6 +18,7 @@ cpuinfo git@github.com:pytorch/cpuinfo.git
 cpython https://github.com/python/cpython.git
 crash git@github.com:crash-utility/crash.git
 crmsh git@github.com:ClusterLabs/crmsh.git
+csync2 git@github.com:LINBIT/csync2.git
 cups git@github.com:apple/cups.git
 curtin git@github.com:CanonicalLtd/curtin.git
 dlm https://pagure.io/dlm.git
@@ -28,7 +29,9 @@ drbd-top git@github.com:LINBIT/drbdtop.git
 drbd-utils git@github.com:LINBIT/drbd-utils.git
 ebtables git://git.netfilter.org/ebtables
 elfutils git://sourceware.org/git/elfutils.git
+fence-agents git@github.com:ClusterLabs/fence-agents.git
 gcc git://gcc.gnu.org/git/gcc.git
+gfs2-utils https://pagure.io/gfs2-utils.git
 git-remote-bzr git@github.com:felipec/git-remote-bzr.git
 glibc git://sourceware.org/git/glibc.git
 glib git@github.com:GNOME/glib.git

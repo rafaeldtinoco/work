@@ -1,10 +1,13 @@
 bind9 https://git.launchpad.net/~usd-import-team/ubuntu/+source/bind9
+booth https://git.launchpad.net/~usd-import-team/ubuntu/+source/booth
 cacti https://git.launchpad.net/~usd-import-team/ubuntu/+source/cacti
 chrony https://git.launchpad.net/~usd-import-team/ubuntu/+source/chrony
 cloud-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/cloud-utils
 cluster-glue https://git.launchpad.net/~usd-import-team/ubuntu/+source/cluster-glue
 corosync https://git.launchpad.net/~usd-import-team/ubuntu/+source/corosync
+corosync-qdevice https://git.launchpad.net/~usd-import-team/ubuntu/+source/corosync-qdevice
 crmsh https://git.launchpad.net/~usd-import-team/ubuntu/+source/crmsh
+csync2 https://git.launchpad.net/~usd-import-team/ubuntu/+source/csync2
 cups https://git.launchpad.net/~usd-import-team/ubuntu/+source/cups
 dbconfig-common https://git.launchpad.net/~usd-import-team/ubuntu/+source/dbconfig-common
 debian-installer https://git.launchpad.net/~usd-import-team/ubuntu/+source/debian-installer
@@ -15,6 +18,7 @@ dpdk https://git.launchpad.net/ubuntu/+source/dpdk
 drbd-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/drbd-utils
 ebtables https://git.launchpad.net/~usd-import-team/ubuntu/+source/ebtables
 fence-agents https://git.launchpad.net/~usd-import-team/ubuntu/+source/fence-agents
+gfs2-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/gfs2-utils
 grub2 https://git.launchpad.net/~usd-import-team/ubuntu/+source/grub2
 grub https://git.launchpad.net/~usd-import-team/ubuntu/+source/grub
 grub-installer https://git.launchpad.net/~usd-import-team/ubuntu/+source/grub-installer
@@ -44,6 +48,7 @@ qemu https://git.launchpad.net/~usd-import-team/ubuntu/+source/qemu
 rdma-core https://git.launchpad.net/~usd-import-team/ubuntu/+source/rdma-core
 resource-agents https://git.launchpad.net/~usd-import-team/ubuntu/+source/resource-agents
 samba https://git.launchpad.net/~usd-import-team/ubuntu/+source/samba
+sbd https://git.launchpad.net/~usd-import-team/ubuntu/+source/sbd
 sg3-utils https://git.launchpad.net/~usd-import-team/ubuntu/+source/sg3-utils
 simplestreams https://git.launchpad.net/~usd-import-team/ubuntu/+source/simplestreams
 smartmontools https://git.launchpad.net/~usd-import-team/ubuntu/+source/smartmontools
