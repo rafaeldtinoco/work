@@ -20,12 +20,14 @@ gfs2-utils git@salsa.debian.org:ha-team/gfs2-utils.git
 grub-installer git@salsa.debian.org:installer-team/grub-installer.git
 heartbeat git@salsa.debian.org:ha-team/heartbeat
 heartbeat git@salsa.debian.org:ha-team/heartbeat.git
+initramfs-tools https://salsa.debian.org/kernel-team/initramfs-tools
 irqbalance git@salsa.debian.org:debian/irqbalance.git
 keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git
 kronosnet git@salsa.debian.org:ha-team/kronosnet
 libdebian-installer git@salsa.debian.org:installer-team/libdebian-installer.git
 libqb git@salsa.debian.org:ha-team/libqb
 libvirt git@salsa.debian.org:libvirt-team/libvirt.git
+multipath-tools git@salsa.debian.org:linux-blocks-team/multipath-tools.git
 mysql git@salsa.debian.org:mariadb-team/mysql.git
 net-snmp git@salsa.debian.org:debian/net-snmp.git
 nfs-utils git@salsa.debian.org:debian/nfs-utils.git

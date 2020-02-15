@@ -23,6 +23,7 @@ grub2 https://git.launchpad.net/~usd-import-team/ubuntu/+source/grub2
 grub https://git.launchpad.net/~usd-import-team/ubuntu/+source/grub
 grub-installer https://git.launchpad.net/~usd-import-team/ubuntu/+source/grub-installer
 heartbeat https://git.launchpad.net/~usd-import-team/ubuntu/+source/heartbeat
+initramfs-tools https://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
 iproute2 https://git.launchpad.net/~usd-import-team/ubuntu/+source/iproute2
 iptables https://git.launchpad.net/~usd-import-team/ubuntu/+source/iptables
 ipvsadm https://git.launchpad.net/~usd-import-team/ubuntu/+source/ipvsadm
@@ -44,6 +45,7 @@ ocfs2-tools https://git.launchpad.net/~usd-import-team/ubuntu/+source/ocfs2-tool
 open-vm-tools https://git.launchpad.net/~usd-import-team/ubuntu/+source/open-vm-tools
 pacemaker https://git.launchpad.net/~usd-import-team/ubuntu/+source/pacemaker
 pcs https://git.launchpad.net/~usd-import-team/ubuntu/+source/pcs
+python-crypto https://git.launchpad.net/~usd-import-team/ubuntu/+source/python-crypto
 qemu https://git.launchpad.net/~usd-import-team/ubuntu/+source/qemu
 rdma-core https://git.launchpad.net/~usd-import-team/ubuntu/+source/rdma-core
 resource-agents https://git.launchpad.net/~usd-import-team/ubuntu/+source/resource-agents
