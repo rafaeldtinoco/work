@@ -35,6 +35,7 @@ ocfs2-tools git@salsa.debian.org:ha-team/ocfs2-tools
 open-vm-tools git@salsa.debian.org:vmware-packaging-team/pkg-open-vm-tools.git
 pacemaker git@salsa.debian.org:ha-team/pacemaker
 pcs git@salsa.debian.org:ha-team/pcs.git
+procps git@salsa.debian.org:debian/procps.git
 qemu git@salsa.debian.org:qemu-team/qemu.git
 resource-agents git@salsa.debian.org:ha-team/resource-agents
 ruby-ferret.git git@salsa.debian.org:ruby-team/ruby-ferret.git
