@@ -44,4 +44,5 @@ sbd git@salsa.debian.org:ha-team/sbd.git
 sg3-utils git@salsa.debian.org:linux-blocks-team/sg3-utils.git
 systemd git@salsa.debian.org:systemd-team/systemd.git
 talloc git@salsa.debian.org:samba-team/talloc.git
+targetcli-fb git@salsa.debian.org:linux-blocks-team/targetcli-fb.git
 tgt git@salsa.debian.org:debian/tgt.git
