@@ -70,6 +70,7 @@ pcs git@github.com:ClusterLabs/pcs.git
 perf-utils https://github.com/bboymimi/perf-utils.git
 qa-regression-testing ssh://git.launchpad.net/qa-regression-testing
 qemu https://github.com/qemu/qemu.git
+rdma-core git@github.com:linux-rdma/rdma-core.git
 resource-agents https://github.com/ClusterLabs/resource-agents.git
 s390-tools https://github.com/ibm-s390-tools/s390-tools
 samba https://git.samba.org/samba.git
@@ -83,6 +84,7 @@ spice-protocol git@github.com:freedesktop/spice-protocol.git
 subiquity git@github.com:CanonicalLtd/subiquity.git
 systemd git@github.com:systemd/systemd.git
 systemtap git://sourceware.org/git/systemtap.git
+targetcli-fb git@github.com:open-iscsi/targetcli-fb.git
 tgt git@github.com:fujita/tgt.git
 ubuntu-dev-tools git+ssh://rafaeldtinoco@git.launchpad.net/ubuntu-dev-tools
 ubuntu-seeds-core https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/ubuntu-core
