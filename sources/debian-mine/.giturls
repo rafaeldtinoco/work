@@ -1,5 +1,0 @@
-drbd-doc git@salsa.debian.org:rafaeldtinoco-guest/drbd-doc.git
-drbdmanage git@salsa.debian.org:rafaeldtinoco-guest/drbdmanage.git
-drbd-utils git@salsa.debian.org:rafaeldtinoco-guest/drbd-utils.git
-heartbeat git@salsa.debian.org:rafaeldtinoco-guest/heartbeat.git
-pcs git@salsa.debian.org:rafaeldtinoco-guest/pcs.git

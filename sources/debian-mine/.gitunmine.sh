@@ -1,1 +1,0 @@
-../debian/.gitunmine.sh

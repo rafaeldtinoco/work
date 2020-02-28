@@ -1,1 +1,0 @@
-../debian/.gitupdate.sh
