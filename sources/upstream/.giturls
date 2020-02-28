@@ -81,6 +81,7 @@ SLOF git@github.com:qemu/SLOF.git
 spice git@gitlab.freedesktop.org:spice/spice.git
 spice-gtk git@gitlab.freedesktop.org:spice/spice-gtk.git
 spice-protocol git@github.com:freedesktop/spice-protocol.git
+squid https://github.com/squid-cache/squid
 subiquity git@github.com:CanonicalLtd/subiquity.git
 systemd git@github.com:systemd/systemd.git
 systemtap git://sourceware.org/git/systemtap.git

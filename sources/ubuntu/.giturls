@@ -47,6 +47,7 @@ pacemaker git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/pacemaker
 pcs git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/pcs
 procps git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/procps
 python-crypto git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/python-crypto
+python-rtslib-fb git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/python-crypto
 qemu git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/qemu
 rdma-core git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/rdma-core
 resource-agents git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/resource-agents
@@ -55,8 +56,10 @@ sbd git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/sbd
 sg3-utils git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/sg3-utils
 simplestreams git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/simplestreams
 smartmontools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/smartmontools
+squid git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/squid
 strongswan git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/strongswan
 systemd git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/systemd
+targetcli-fb git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/targetcli-fb
 tgt git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/tgt
 ubiquity git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ubiquity
 ubuntu-fan git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan

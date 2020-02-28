@@ -22,6 +22,7 @@ heartbeat git@salsa.debian.org:ha-team/heartbeat
 heartbeat git@salsa.debian.org:ha-team/heartbeat.git
 initramfs-tools https://salsa.debian.org/kernel-team/initramfs-tools
 irqbalance git@salsa.debian.org:debian/irqbalance.git
+jruby git@salsa.debian.org:java-team/jruby.git
 keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git
 kronosnet git@salsa.debian.org:ha-team/kronosnet
 libdebian-installer git@salsa.debian.org:installer-team/libdebian-installer.git
@@ -36,12 +37,15 @@ open-vm-tools git@salsa.debian.org:vmware-packaging-team/pkg-open-vm-tools.git
 pacemaker git@salsa.debian.org:ha-team/pacemaker
 pcs git@salsa.debian.org:ha-team/pcs.git
 procps git@salsa.debian.org:debian/procps.git
+python-configshell-fb git@salsa.debian.org:linux-blocks-team/python-configshell-fb.git
 qemu git@salsa.debian.org:qemu-team/qemu.git
 resource-agents git@salsa.debian.org:ha-team/resource-agents
 ruby-ferret.git git@salsa.debian.org:ruby-team/ruby-ferret.git
+ruby-psych git@salsa.debian.org:ruby-team/ruby-psych.git
 samba git@salsa.debian.org:samba-team/samba.git
 sbd git@salsa.debian.org:ha-team/sbd.git
 sg3-utils git@salsa.debian.org:linux-blocks-team/sg3-utils.git
+squid git@salsa.debian.org:squid-team/squid.git
 systemd git@salsa.debian.org:systemd-team/systemd.git
 talloc git@salsa.debian.org:samba-team/talloc.git
 targetcli-fb git@salsa.debian.org:linux-blocks-team/targetcli-fb.git
