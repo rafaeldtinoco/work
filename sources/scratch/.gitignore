@@ -1,4 +1,7 @@
 archsizes
-mknod
+islittle
+littlebig
 membarrier
+s390x-be
+temp
 !.gitignore
