@@ -30,6 +30,7 @@ drbd-utils git@github.com:LINBIT/drbd-utils.git
 ebtables git://git.netfilter.org/ebtables
 elfutils git://sourceware.org/git/elfutils.git
 fence-agents git@github.com:ClusterLabs/fence-agents.git
+fence-virt git@github.com:ClusterLabs/fence-virt.git
 gcc git://gcc.gnu.org/git/gcc.git
 gfs2-utils https://pagure.io/gfs2-utils.git
 git-remote-bzr git@github.com:felipec/git-remote-bzr.git

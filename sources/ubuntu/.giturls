@@ -18,6 +18,7 @@ dpdk git+ssh://git.launchpad.net/ubuntu/+source/dpdk
 drbd-utils git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/drbd-utils
 ebtables git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ebtables
 fence-agents git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/fence-agents
+fence-virt git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/fence-virt
 gfs2-utils git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/gfs2-utils
 grub2 git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/grub2
 grub git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/grub
