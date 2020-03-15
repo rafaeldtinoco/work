@@ -1,13 +1,11 @@
 #!/bin/bash
 
+# vi:syntax=sh:expandtab:smarttab:tabstop=4:shiftwidth=4:softtabstop=4
+
 prevdir=$(pwd)
 dirname=$(dirname $0)
 
 cd $dirname
-
-echo -n > .gitupdate.log
-
-log() { $@ 2>&1 >> ../.gitupdate.log 2>&1; }
 
 dirs=$(find . -maxdepth 2 -regex .*\.git -exec dirname {} \;)
 
@@ -17,40 +15,51 @@ for dir in $dirs; do
 
     [ -f $dir/.mine ] && { echo "!! skipping $dir"; continue; }
 
-    echo "-- updating $dir"
-
     now=$(pwd)
 
     cd $dir
 
-    log echo "---- $(basename $(pwd) | tr [:lower:] [:upper:]) ----"
+    echo "---- $(basename $(pwd) | tr [:lower:] [:upper:]) ----"
 
-    log git reset --hard
-    log git clean -fd
+    # clean and fetch remote "pkg"
 
-    log git fetch applied -a --tags
-    log git fetch imported -a --tags
-    log git fetch pkg -a --tags
-    log git fetch upstream -a --tags
+    git clean -fd ; git reset --hard
+    git fetch pkg -a --tags
 
-    log git fetch rafaeldtinoco -a --tags
-    log git fetch ahasenack -a --tags
-    log git fetch paelzer -a --tags
-    log git fetch bryce -a --tags
-    log git fetch lucaskanashiro -a --tags
+    # create a temp branch with with remote head
 
-    log git checkout ubuntu/devel && {
+    git checkout temporary 2>&1 > /dev/null 2>&1 || git checkout pkg/ubuntu/devel -b temporary
 
-        log git reset --hard pkg/ubuntu/devel
+    # delete all branches
 
-    } || {
+    branches=$(git branch --no-color -l | sed 's:\*::g' | \
+        grep -v "ubuntu/devel$" | grep -v "temporary" | \
+        awk '{print $1}' | xargs)
 
-        log git checkout pkg/ubuntu/devel -b ubuntu/devel
+    for branch in $branches; do
+        git branch -D $branch
+    done
 
-    }
+    # delete all remotes but pkg
+
+    remotes=$(git remote -v | grep fetch | grep -v "^pkg" | awk '{print $1}' | xargs)
+
+    for remote in $remotes; do
+        git remote remove $remote
+    done
+
+    # checkout pkg/ubuntu/devel by default
+
+    git branch -D ubuntu/devel
+    git checkout pkg/ubuntu/devel -b ubuntu/devel
+    git branch -D temporary
 
     cd $now
 
 done
 
 cd $prevdir
+
+
+
+

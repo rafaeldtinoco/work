@@ -1,68 +1,68 @@
-bind9 git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/bind9
-booth git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/booth
-cacti git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/cacti
-chrony git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/chrony
-cloud-utils git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/cloud-utils
-cluster-glue git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/cluster-glue
-corosync git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/corosync
-corosync-qdevice git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/corosync-qdevice
-crmsh git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/crmsh
-csync2 git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/csync2
-cups git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/cups
-dbconfig-common git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/dbconfig-common
-debian-installer git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/debian-installer
-debian-installer-utils git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/debian-installer-utils
-device-tree-compiler git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/device-tree-compiler
-dlm git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/dlm
-dpdk git+ssh://git.launchpad.net/ubuntu/+source/dpdk
-drbd-utils git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/drbd-utils
-ebtables git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ebtables
-fence-agents git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/fence-agents
-fence-virt git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/fence-virt
-gfs2-utils git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/gfs2-utils
-grub2 git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/grub2
-grub git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/grub
-grub-installer git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/grub-installer
-heartbeat git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/heartbeat
-initramfs-tools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
-iproute2 git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/iproute2
-iptables git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/iptables
-ipvsadm git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ipvsadm
-ipxe git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ipxe
-irqbalance git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/irqbalance
-keepalived git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/keepalived
-kmod git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/kmod
-krb5 git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/krb5
-kronosnet git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/kronosnet
-libdebian-installer git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/libdebian-installer
-libqb git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/libqb
-libslirp git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/libslirp
-libvirt git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/libvirt
-lvm2 git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/lvm2
-multipath-tools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/multipath-tools
-ndctl git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ndctl
-net-snmp git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/net-snmp
-net-tools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/net-tools
-ocfs2-tools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ocfs2-tools
-open-vm-tools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/open-vm-tools
-pacemaker git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/pacemaker
-pcs git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/pcs
-postfix git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/postfix
-procps git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/procps
-python-crypto git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/python-crypto
-python-rtslib-fb git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/python-crypto
-qemu git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/qemu
-rdma-core git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/rdma-core
-resource-agents git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/resource-agents
-samba git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/samba
-sbd git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/sbd
-sg3-utils git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/sg3-utils
-simplestreams git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/simplestreams
-smartmontools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/smartmontools
-squid git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/squid
-strongswan git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/strongswan
-systemd git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/systemd
-targetcli-fb git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/targetcli-fb
-tgt git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/tgt
-ubiquity git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ubiquity
-ubuntu-fan git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ubuntu-fan
+bind9
+booth
+cacti
+chrony
+cloud-utils
+cluster-glue
+corosync
+corosync-qdevice
+crmsh
+csync2
+cups
+dbconfig-common
+debian-installer
+debian-installer-utils
+device-tree-compiler
+dlm
+dpdk
+drbd-utils
+ebtables
+fence-agents
+fence-virt
+gfs2-utils
+grub2
+grub
+grub-installer
+heartbeat
+initramfs-tools
+iproute2
+iptables
+ipvsadm
+ipxe
+irqbalance
+keepalived
+kmod
+krb5
+kronosnet
+libdebian-installer
+libqb
+libslirp
+libvirt
+lvm2
+multipath-tools
+ndctl
+net-snmp
+net-tools
+ocfs2-tools
+open-vm-tools
+pacemaker
+pcs
+postfix
+procps
+python-crypto
+python-rtslib-fb
+qemu
+rdma-core
+resource-agents
+samba
+sbd
+sg3-utils
+simplestreams
+smartmontools
+squid
+strongswan
+systemd
+targetcli-fb
+tgt
+ubiquity
+ubuntu-fan
