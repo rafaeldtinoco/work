@@ -35,8 +35,7 @@ for dir in $dirs; do
     # delete all branches
 
     branches=$(git branch --no-color -l | sed 's:\*::g' | \
-        grep -v "ubuntu/devel$" | grep -v "temporary" | \
-        awk '{print $1}' | xargs)
+        grep -v "temporary" | awk '{print $1}' | xargs)
 
     for branch in $branches; do
         git branch -D $branch
