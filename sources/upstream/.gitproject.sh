@@ -21,7 +21,7 @@ for name in $(find . -maxdepth 1 -type d | grep -v "\.$" | grep -v "gitfiles"); 
 
     fi
 
-    sed -i "s:CHANGETHIS:$name-$mydir:g" $name/.project
-    sed -i "s:CHANGETHIS:$name-$mydir:g" $name/.cproject
+    sed -i "s:CHANGETHIS:${name/\.\//}-$mydir:g" $name/.project
+    sed -i "s:CHANGETHIS:${name/\.\//}-$mydir:g" $name/.cproject
 
 done
