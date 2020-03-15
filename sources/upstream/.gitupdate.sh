@@ -1,13 +1,11 @@
 #!/bin/bash
 
+# vi:syntax=sh:expandtab:smarttab:tabstop=4:shiftwidth=4:softtabstop=4
+
 prevdir=$(pwd)
 dirname=$(dirname $0)
 
 cd $dirname
-
-echo -n > .gitupdate.log
-
-log() { $@ 2>&1 >> ../.gitupdate.log 2>&1; }
 
 dirs=$(find . -mindepth 2 -maxdepth 2 -regex .*\.git -exec dirname {} \;)
 
@@ -17,34 +15,22 @@ for dir in $dirs; do
 
     [ -f $dir/.mine ] && { echo "!! skipping $dir"; continue; }
 
-    echo "-- updating $dir"
-
     now=$(pwd)
 
     cd $dir
 
-    log echo "---- $(basename $(pwd) | tr [:lower:] [:upper:]) ----"
+    echo "---- $(basename $(pwd) | tr [:lower:] [:upper:]) ----"
 
-    remotehead=$(git branch -r | grep HEAD | awk '{print $1}')
-    remotebranch=$(git branch -r | grep HEAD | awk '{print $3}')
-    headid=$(git branch -r | grep HEAD | awk '{print $3}')
-    [ "$headid" ] || headid="master"
-    localbranch=$(basename $headid)
+    origin=$(git remote -v | grep fetch | head -1 | awk '{print $1}')
 
-    log git reset --hard
-    log git clean -fd
+    git fetch $origin -a --tags
 
-    log git fetch -a --tags
+    branch=$(git branch --no-color -al | grep HEAD | awk '{print $3}')
 
-    log git checkout $localbranch && {
-
-        log git reset --hard $remotebranch
-
-    } || {
-
-        log git checkout $remotebranch -b $localbranch
-    }
-
+    git clean -fd ; git reset --hard ; git checkout $branch -b temporary
+    git branch -D $(basename $branch)
+    git checkout $branch -b $(basename $branch)
+    git branch -D temporary
 
     cd $now
 

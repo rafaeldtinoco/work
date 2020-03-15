@@ -24,6 +24,7 @@ initramfs-tools https://salsa.debian.org/kernel-team/initramfs-tools
 irqbalance git@salsa.debian.org:debian/irqbalance.git
 jruby git@salsa.debian.org:java-team/jruby.git
 keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git
+kmod git@salsa.debian.org:md/kmod.git
 kronosnet git@salsa.debian.org:ha-team/kronosnet
 libdebian-installer git@salsa.debian.org:installer-team/libdebian-installer.git
 libqb git@salsa.debian.org:ha-team/libqb
@@ -36,6 +37,7 @@ ocfs2-tools git@salsa.debian.org:ha-team/ocfs2-tools
 open-vm-tools git@salsa.debian.org:vmware-packaging-team/pkg-open-vm-tools.git
 pacemaker git@salsa.debian.org:ha-team/pacemaker
 pcs git@salsa.debian.org:ha-team/pcs.git
+postfix git@salsa.debian.org:postfix-team/postfix-dev.git
 procps git@salsa.debian.org:debian/procps.git
 python-configshell-fb git@salsa.debian.org:linux-blocks-team/python-configshell-fb.git
 qemu git@salsa.debian.org:qemu-team/qemu.git

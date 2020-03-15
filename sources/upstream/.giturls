@@ -45,6 +45,7 @@ ipvsadm git://git.kernel.org/pub/scm/utils/kernel/ipvsadm/ipvsadm.git
 irqbalance git@github.com:Irqbalance/irqbalance.git
 keepalived git@github.com:acassen/keepalived.git
 kexec-tools git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git
+kmod https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git
 kronosnet https://github.com/kronosnet/kronosnet
 libfuse git@github.com:libfuse/libfuse.git
 libhugetlbfs git@github.com:libhugetlbfs/libhugetlbfs.git

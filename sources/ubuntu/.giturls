@@ -31,6 +31,7 @@ ipvsadm git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ipvsadm
 ipxe git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ipxe
 irqbalance git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/irqbalance
 keepalived git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/keepalived
+kmod git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/kmod
 krb5 git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/krb5
 kronosnet git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/kronosnet
 libdebian-installer git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/libdebian-installer
@@ -46,6 +47,7 @@ ocfs2-tools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/ocfs2-to
 open-vm-tools git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/open-vm-tools
 pacemaker git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/pacemaker
 pcs git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/pcs
+postfix git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/postfix
 procps git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/procps
 python-crypto git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/python-crypto
 python-rtslib-fb git+ssh://git.launchpad.net/~usd-import-team/ubuntu/+source/python-crypto
