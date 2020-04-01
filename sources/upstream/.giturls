@@ -36,7 +36,6 @@ gfs2-utils https://pagure.io/gfs2-utils.git
 git-remote-bzr git@github.com:felipec/git-remote-bzr.git
 glibc git://sourceware.org/git/glibc.git
 glib git@github.com:GNOME/glib.git
-google-cloud-print-connector git@github.com:google/cloud-print-connector.git
 go-urfave-cli git@github.com:urfave/cli.git
 grub https://git.savannah.gnu.org/git/grub.git
 httpd git@github.com:apache/httpd.git
@@ -72,7 +71,6 @@ ovs git@github.com:openvswitch/ovs.git
 pacemaker git@github.com:ClusterLabs/pacemaker
 pcs git@github.com:ClusterLabs/pcs.git
 perf-utils git@github.com:bboymimi/perf-utils.git
-qa-regression-testing ssh://git.launchpad.net/qa-regression-testing
 qemu git@github.com:qemu/qemu.git
 rdma-core git@github.com:linux-rdma/rdma-core.git
 resource-agents git@github.com:ClusterLabs/resource-agents.git
