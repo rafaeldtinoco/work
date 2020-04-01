@@ -22,14 +22,14 @@ KCLEAN=0        # want to run make clean ? (default: 1)
 KCONFIG=1       # want to copy and process conf file ? (default: 1)
 KMCONFIG=0      # want a menu to add/remove stuff from .config ? (default: 0)
 KDCONFIG=0      # default config (testing)
-KPREPARE=0      # want to prepare ? (default: 1)
-KBUILD=1        # want to build ? :o) (default: 1)
+KPREPARE=1      # want to prepare ? (default: 1)
+KBUILD=0        # want to build ? :o) (default: 1)
 KDEBUG=0        # want your kernel to have debug symbols ? (default: 1)
-KVERBOSE=0      # want it to shut up ? (default: 1)
+KVERBOSE=1      # want it to shut up ? (default: 1)
 
-KRAMFS=1        # TARGET will be a KRAMFSSIZE GB tmpfs (default: 0)
+KRAMFS=0        # TARGET will be a KRAMFSSIZE GB tmpfs (default: 0)
 KRAMFSSIZE=10   # TARGET dir size in GB
-KRAMFSUMNT=1    # TARGET will be unmounted (default: 0)
+KRAMFSUMNT=0    # TARGET will be unmounted (default: 0)
 
 FILEDIR="$HOME/work/sources/kernel/.gitfiles"
 MAINDIR="$HOME/work/sources/kernel"
