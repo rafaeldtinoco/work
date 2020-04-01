@@ -41,6 +41,7 @@ libvirt
 lvm2
 multipath-tools
 ndctl
+ipmctl
 net-snmp
 net-tools
 ocfs2-tools
