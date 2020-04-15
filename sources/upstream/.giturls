@@ -57,6 +57,9 @@ libvirt git://libvirt.org/libvirt.git
 llvm-project git@github.com:llvm/llvm-project.git
 ltp git@github.com:linux-test-project/ltp.git
 lvm2 git://sourceware.org/git/lvm2.git
+lxcfs git@github.com:lxc/lxcfs.git
+lxc git@github.com:lxc/lxc.git
+lxd git@github.com:lxc/lxd.git
 multipath http://git.opensvc.com/multipath-tools/.git
 mysql-server git@github.com:mysql/mysql-server.git
 ndctl git@github.com:pmem/ndctl.git
