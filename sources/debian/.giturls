@@ -1,3 +1,4 @@
+autofs git@salsa.debian.org:debian/autofs.git
 bareos git@salsa.debian.org:pkg-bareos-team/bareos.git
 booth git@salsa.debian.org:ha-team/booth.git
 cacti git@salsa.debian.org:cacti-team/cacti.git

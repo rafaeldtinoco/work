@@ -2,6 +2,7 @@ apr git@github.com:apache/apr.git
 apr-util git@github.com:apache/apr-util.git
 autoconf http://git.sv.gnu.org/r/autoconf.git
 automake http://git.savannah.gnu.org/r/automake.git/
+autofs https://kernel.googlesource.com/pub/scm/linux/storage/autofs/autofs
 bareos git@github.com:bareos/bareos.git
 binutils-gdb git://sourceware.org/git/binutils-gdb.git
 bionic https://android.googlesource.com/platform/bionic/
@@ -59,7 +60,6 @@ ltp git@github.com:linux-test-project/ltp.git
 lvm2 git://sourceware.org/git/lvm2.git
 lxcfs git@github.com:lxc/lxcfs.git
 lxc git@github.com:lxc/lxc.git
-lxd git@github.com:lxc/lxd.git
 multipath http://git.opensvc.com/multipath-tools/.git
 mysql-server git@github.com:mysql/mysql-server.git
 ndctl git@github.com:pmem/ndctl.git
