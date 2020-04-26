@@ -21,12 +21,15 @@ ebtables
 fence-agents
 fence-virt
 gfs2-utils
-grub2
+glibc
 grub
+grub2
 grub-installer
 heartbeat
 initramfs-tools
+ipmctl
 iproute2
+ipset
 iptables
 ipvsadm
 ipxe
@@ -42,7 +45,6 @@ libvirt
 lvm2
 multipath-tools
 ndctl
-ipmctl
 net-snmp
 net-tools
 ocfs2-tools
@@ -68,4 +70,3 @@ targetcli-fb
 tgt
 ubiquity
 ubuntu-fan
-glibc

@@ -42,6 +42,7 @@ grub https://git.savannah.gnu.org/git/grub.git
 httpd git@github.com:apache/httpd.git
 ipmctl git@github.com:intel/ipmctl.git
 iproute2 git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
+ipset git://git.netfilter.org/ipset
 ipvsadm git://git.kernel.org/pub/scm/utils/kernel/ipvsadm/ipvsadm.git
 irqbalance git@github.com:Irqbalance/irqbalance.git
 keepalived git@github.com:acassen/keepalived.git

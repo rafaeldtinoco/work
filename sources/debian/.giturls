@@ -22,6 +22,7 @@ grub-installer git@salsa.debian.org:installer-team/grub-installer.git
 heartbeat git@salsa.debian.org:ha-team/heartbeat
 heartbeat git@salsa.debian.org:ha-team/heartbeat.git
 initramfs-tools https://salsa.debian.org/kernel-team/initramfs-tools
+ipset git@salsa.debian.org:pkg-netfilter-team/pkg-ipset.git
 irqbalance git@salsa.debian.org:debian/irqbalance.git
 jruby git@salsa.debian.org:java-team/jruby.git
 keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git

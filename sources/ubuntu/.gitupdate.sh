@@ -15,6 +15,8 @@ for dir in $dirs; do
 
     [ -f $dir/.mine ] && { echo "!! skipping $dir"; continue; }
 
+    [ "$1" != "" ] && [ "$dir" != "$1" ] && { echo "!! skipping $dir"; continue; }
+
     now=$(pwd)
 
     cd $dir
