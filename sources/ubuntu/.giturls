@@ -43,6 +43,7 @@ libqb
 libslirp
 libvirt
 lvm2
+monitoring-plugins
 multipath-tools
 ndctl
 net-snmp

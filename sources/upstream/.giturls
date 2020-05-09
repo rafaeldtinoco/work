@@ -1,8 +1,8 @@
 apr git@github.com:apache/apr.git
 apr-util git@github.com:apache/apr-util.git
 autoconf http://git.sv.gnu.org/r/autoconf.git
-automake http://git.savannah.gnu.org/r/automake.git/
 autofs https://kernel.googlesource.com/pub/scm/linux/storage/autofs/autofs
+automake http://git.savannah.gnu.org/r/automake.git/
 bareos git@github.com:bareos/bareos.git
 binutils-gdb git://sourceware.org/git/binutils-gdb.git
 bionic https://android.googlesource.com/platform/bionic/
@@ -61,12 +61,15 @@ ltp git@github.com:linux-test-project/ltp.git
 lvm2 git://sourceware.org/git/lvm2.git
 lxcfs git@github.com:lxc/lxcfs.git
 lxc git@github.com:lxc/lxc.git
+monitoring-plugins git@github.com:monitoring-plugins/monitoring-plugins.git
 multipath http://git.opensvc.com/multipath-tools/.git
 mysql-server git@github.com:mysql/mysql-server.git
+nagios-plugins git@github.com:nagios-plugins/nagios-plugins.git
 ndctl git@github.com:pmem/ndctl.git
 net-snmp git://git.code.sf.net/p/net-snmp/code
 net-tools https://git.code.sf.net/p/net-tools/code
 nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
+nginx git@github.com:nginx/nginx.git
 ocfs2-tools git@github.com:markfasheh/ocfs2-tools.git
 open-iscsi git@github.com:open-iscsi/open-iscsi.git
 open-isns git@github.com:open-iscsi/open-isns.git
@@ -98,7 +101,7 @@ ubuntu-seeds-core https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/u
 ubuntu-seeds https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/ubuntu
 ubuntu-seeds-platform https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/platform
 usd-importer git+ssh://rafaeldtinoco@git.launchpad.net/usd-importer
-us-triage git@github.com:powersj/ubuntu-server-triage.git
+ustriage git@github.com:powersj/ubuntu-server-triage.git
 util-linux git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git
 uvtool git@github.com:basak/uvtool.git
 valgrind git://sourceware.org/git/valgrind.git
