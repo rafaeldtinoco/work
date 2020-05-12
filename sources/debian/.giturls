@@ -1,56 +1,57 @@
-autofs git@salsa.debian.org:debian/autofs.git
-bareos git@salsa.debian.org:pkg-bareos-team/bareos.git
-booth git@salsa.debian.org:ha-team/booth.git
-cacti git@salsa.debian.org:cacti-team/cacti.git
-chrony git@salsa.debian.org:debian/chrony.git
-cluster-glue git@salsa.debian.org:ha-team/cluster-glue
-corosync git@salsa.debian.org:ha-team/corosync
-corosync-qdevice git@salsa.debian.org:ha-team/corosync-qdevice
-crmsh git@salsa.debian.org:ha-team/crmsh.git
-dbconfig-common git@salsa.debian.org:debian/dbconfig-common.git
-debian-installer-utils git@salsa.debian.org:installer-team/debian-installer-utils.git
-dlm git@salsa.debian.org:ha-team/dlm
-dpdk git@salsa.debian.org:debian/dpdk.git
-drbd-doc git@salsa.debian.org:ha-team/drbd-doc.git
-drbdmanage git@salsa.debian.org:ha-team/drbdmanage.git
-drbd-utils git@salsa.debian.org:ha-team/drbd-utils
-fence-agents git@salsa.debian.org:ha-team/fence-agents.git
-fence-virt git@salsa.debian.org:ha-team/fence-virt.git
-fio https://salsa.debian.org/debian/fio.git
-gfs2-utils git@salsa.debian.org:ha-team/gfs2-utils.git
-grub-installer git@salsa.debian.org:installer-team/grub-installer.git
-heartbeat git@salsa.debian.org:ha-team/heartbeat
-heartbeat git@salsa.debian.org:ha-team/heartbeat.git
-initramfs-tools https://salsa.debian.org/kernel-team/initramfs-tools
-ipset git@salsa.debian.org:pkg-netfilter-team/pkg-ipset.git
-irqbalance git@salsa.debian.org:debian/irqbalance.git
-jruby git@salsa.debian.org:java-team/jruby.git
-keepalived git@salsa.debian.org:ipvs-team/pkg-keepalived.git
-kmod git@salsa.debian.org:md/kmod.git
-kronosnet git@salsa.debian.org:ha-team/kronosnet
-libdebian-installer git@salsa.debian.org:installer-team/libdebian-installer.git
-libqb git@salsa.debian.org:ha-team/libqb
-libvirt git@salsa.debian.org:libvirt-team/libvirt.git
-multipath-tools git@salsa.debian.org:linux-blocks-team/multipath-tools.git
-mysql git@salsa.debian.org:mariadb-team/mysql.git
-net-snmp git@salsa.debian.org:debian/net-snmp.git
-nfs-utils git@salsa.debian.org:debian/nfs-utils.git
-ocfs2-tools git@salsa.debian.org:ha-team/ocfs2-tools
-open-vm-tools git@salsa.debian.org:vmware-packaging-team/pkg-open-vm-tools.git
-pacemaker git@salsa.debian.org:ha-team/pacemaker
-pcs git@salsa.debian.org:ha-team/pcs.git
-postfix git@salsa.debian.org:postfix-team/postfix-dev.git
-procps git@salsa.debian.org:debian/procps.git
-python-configshell-fb git@salsa.debian.org:linux-blocks-team/python-configshell-fb.git
-qemu git@salsa.debian.org:qemu-team/qemu.git
-resource-agents git@salsa.debian.org:ha-team/resource-agents
-ruby-ferret.git git@salsa.debian.org:ruby-team/ruby-ferret.git
-ruby-psych git@salsa.debian.org:ruby-team/ruby-psych.git
-samba git@salsa.debian.org:samba-team/samba.git
-sbd git@salsa.debian.org:ha-team/sbd.git
-sg3-utils git@salsa.debian.org:linux-blocks-team/sg3-utils.git
-squid git@salsa.debian.org:squid-team/squid.git
-systemd git@salsa.debian.org:systemd-team/systemd.git
-talloc git@salsa.debian.org:samba-team/talloc.git
-targetcli-fb git@salsa.debian.org:linux-blocks-team/targetcli-fb.git
-tgt git@salsa.debian.org:debian/tgt.git
+# autofs https://salsa.debian.org/debian/autofs.git
+# bareos https://salsa.debian.org/pkg-bareos-team/bareos.git
+# booth https://salsa.debian.org/ha-team/booth.git
+# cacti https://salsa.debian.org/cacti-team/cacti.git
+# chrony https://salsa.debian.org/debian/chrony.git
+# cluster-glue https://salsa.debian.org/ha-team/cluster-glue
+# corosync https://salsa.debian.org/ha-team/corosync
+# corosync-qdevice https://salsa.debian.org/ha-team/corosync-qdevice
+# crmsh https://salsa.debian.org/ha-team/crmsh.git
+# dbconfig-common https://salsa.debian.org/debian/dbconfig-common.git
+# debian-installer-utils https://salsa.debian.org/installer-team/debian-installer-utils.git
+# dlm https://salsa.debian.org/ha-team/dlm
+# dpdk https://salsa.debian.org/debian/dpdk.git
+# drbd-doc https://salsa.debian.org/ha-team/drbd-doc.git
+# drbdmanage https://salsa.debian.org/ha-team/drbdmanage.git
+# drbd-utils https://salsa.debian.org/ha-team/drbd-utils
+# fence-agents https://salsa.debian.org/ha-team/fence-agents.git
+# fence-virt https://salsa.debian.org/ha-team/fence-virt.git
+# fio https://salsa.debian.org/debian/fio.git
+# gfs2-utils https://salsa.debian.org/ha-team/gfs2-utils.git
+# grub-installer https://salsa.debian.org/installer-team/grub-installer.git
+# heartbeat https://salsa.debian.org/ha-team/heartbeat
+# heartbeat https://salsa.debian.org/ha-team/heartbeat.git
+# initramfs-tools https://salsa.debian.org/kernel-team/initramfs-tools
+# ipset https://salsa.debian.org/pkg-netfilter-team/pkg-ipset.git
+# irqbalance https://salsa.debian.org/debian/irqbalance.git
+# jruby https://salsa.debian.org/java-team/jruby.git
+# keepalived https://salsa.debian.org/ipvs-team/pkg-keepalived.git
+# kmod https://salsa.debian.org/md/kmod.git
+# kronosnet https://salsa.debian.org/ha-team/kronosnet
+# libdebian-installer https://salsa.debian.org/installer-team/libdebian-installer.git
+# libqb https://salsa.debian.org/ha-team/libqb
+libvirt https://salsa.debian.org/libvirt-team/libvirt.git
+# multipath-tools https://salsa.debian.org/linux-blocks-team/multipath-tools.git
+# mysql https://salsa.debian.org/mariadb-team/mysql.git
+# net-snmp https://salsa.debian.org/debian/net-snmp.git
+# nfs-utils https://salsa.debian.org/debian/nfs-utils.git
+# ocfs2-tools https://salsa.debian.org/ha-team/ocfs2-tools
+open-iscsi https://salsa.debian.org/linux-blocks-team/open-iscsi.git
+# open-vm-tools https://salsa.debian.org/vmware-packaging-team/pkg-open-vm-tools.git
+# pacemaker https://salsa.debian.org/ha-team/pacemaker
+# pcs https://salsa.debian.org/ha-team/pcs.git
+# postfix https://salsa.debian.org/postfix-team/postfix-dev.git
+# procps https://salsa.debian.org/debian/procps.git
+# python-configshell-fb https://salsa.debian.org/linux-blocks-team/python-configshell-fb.git
+qemu https://salsa.debian.org/qemu-team/qemu.git
+# resource-agents https://salsa.debian.org/ha-team/resource-agents
+# ruby-ferret.git https://salsa.debian.org/ruby-team/ruby-ferret.git
+# ruby-psych https://salsa.debian.org/ruby-team/ruby-psych.git
+# samba https://salsa.debian.org/samba-team/samba.git
+# sbd https://salsa.debian.org/ha-team/sbd.git
+sg3-utils https://salsa.debian.org/linux-blocks-team/sg3-utils.git
+# squid https://salsa.debian.org/squid-team/squid.git
+# systemd https://salsa.debian.org/systemd-team/systemd.git
+# talloc https://salsa.debian.org/samba-team/talloc.git
+# targetcli-fb https://salsa.debian.org/linux-blocks-team/targetcli-fb.git
+tgt https://salsa.debian.org/debian/tgt.git
