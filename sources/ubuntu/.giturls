@@ -1,75 +1,75 @@
-# autofs
-# bind9
-# booth
-# cacti
-# chrony
-# cloud-utils
-# cluster-glue
-# corosync
-# corosync-qdevice
-# crmsh
-# csync2
-# cups
-# dbconfig-common
-# debian-installer
-# debian-installer-utils
-# device-tree-compiler
-# dlm
-# dpdk
-# drbd-utils
-# ebtables
-# fence-agents
-# fence-virt
-# gfs2-utils
-# glibc
-# grub
-# grub2
-# grub-installer
-# heartbeat
-# initramfs-tools
-# ipmctl
+autofs
+bind9
+booth
+cacti
+chrony
+cloud-utils
+cluster-glue
+corosync
+corosync-qdevice
+crmsh
+csync2
+cups
+dbconfig-common
+debian-installer
+debian-installer-utils
+device-tree-compiler
+dlm
+dpdk
+drbd-utils
+ebtables
+fence-agents
+fence-virt
+gfs2-utils
+glibc
+grub
+grub2
+grub-installer
+heartbeat
+initramfs-tools
+ipmctl
 iproute2
-# ipset
-# iptables
-# ipvsadm
-# ipxe
-# irqbalance
-# keepalived
-# kmod
-# krb5
-# kronosnet
-# libdebian-installer
-# libqb
-# libslirp
+ipset
+iptables
+ipvsadm
+ipxe
+irqbalance
+keepalived
+kmod
+krb5
+kronosnet
+libdebian-installer
+libqb
+libslirp
 libvirt
-# lvm2
-# monitoring-plugins
-# multipath-tools
-# ndctl
-# net-snmp
-# net-tools
-# ocfs2-tools
+lvm2
+monitoring-plugins
+multipath-tools
+ndctl
+net-snmp
+net-tools
+ocfs2-tools
 open-iscsi
-# open-vm-tools
-# pacemaker
-# pcs
-# postfix
-# procps
-# python-crypto
-# python-rtslib-fb
+open-vm-tools
+pacemaker
+pcs
+postfix
+procps
+python-crypto
+python-rtslib-fb
 qemu
-# rdma-core
-# resource-agents
-# samba
-# sbd
+rdma-core
+resource-agents
+samba
+sbd
 sg3-utils
-# simplestreams
-# smartmontools
-# squid
-# strongswan
-# systemd
+simplestreams
+smartmontools
+squid
+strongswan
+systemd
 talloc
-# targetcli-fb
+targetcli-fb
 tgt
-# ubiquity
-# ubuntu-fan
+ubiquity
+ubuntu-fan

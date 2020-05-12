@@ -1,99 +1,100 @@
-# apr git@github.com:apache/apr.git
-# apr-util git@github.com:apache/apr-util.git
-# autoconf http://git.sv.gnu.org/r/autoconf.git
-# autofs https://kernel.googlesource.com/pub/scm/linux/storage/autofs/autofs
-# automake http://git.savannah.gnu.org/r/automake.git/
-# bareos git@github.com:bareos/bareos.git
-# binutils-gdb https://sourceware.org/git/binutils-gdb.git
-# bionic https://android.googlesource.com/platform/bionic/
-# booth git@github.com:ClusterLabs/booth.git
-# cacti git@github.com:Cacti/cacti.git
-# chrony https://git.tuxfamily.org/chrony/chrony.git
-# clickhouse git@github.com:yandex/ClickHouse.git
+apr git@github.com:apache/apr.git
+apr-util git@github.com:apache/apr-util.git
+autoconf http://git.sv.gnu.org/r/autoconf.git
+autofs https://kernel.googlesource.com/pub/scm/linux/storage/autofs/autofs
+automake http://git.savannah.gnu.org/r/automake.git/
+bareos git@github.com:bareos/bareos.git
+binutils-gdb https://sourceware.org/git/binutils-gdb.git
+bionic https://android.googlesource.com/platform/bionic/
+booth git@github.com:ClusterLabs/booth.git
+cacti git@github.com:Cacti/cacti.git
+chrony https://git.tuxfamily.org/chrony/chrony.git
+clickhouse git@github.com:yandex/ClickHouse.git
 cloud-init https://git.launchpad.net/cloud-init
 cloud-utils https://git.launchpad.net/cloud-utils
-# cluster-glue git@github.com:ClusterLabs/cluster-glue.git
-# corosync git@github.com:corosync/corosync
-# corosync-qdevice git@github.com:corosync/corosync-qdevice.git
-# cpuinfo git@github.com:pytorch/cpuinfo.git
-# cpython git@github.com:python/cpython.git
-# crash git@github.com:crash-utility/crash.git
-# crmsh git@github.com:ClusterLabs/crmsh.git
-# csync2 git@github.com:LINBIT/csync2.git
-# cups git@github.com:apple/cups.git
+cluster-glue git@github.com:ClusterLabs/cluster-glue.git
+corosync git@github.com:corosync/corosync
+corosync-qdevice git@github.com:corosync/corosync-qdevice.git
+cpuinfo git@github.com:pytorch/cpuinfo.git
+cpython git@github.com:python/cpython.git
+crash git@github.com:crash-utility/crash.git
+crmsh git@github.com:ClusterLabs/crmsh.git
+csync2 git@github.com:LINBIT/csync2.git
+cups git@github.com:apple/cups.git
 curtin git@github.com:CanonicalLtd/curtin.git
-# dlm https://pagure.io/dlm.git
-# dpdk http://dpdk.org/dpdk
-# dpdk-stable http://dpdk.org/dpdk-stable
-# drbd-kernel git@github.com:LINBIT/drbd.git
-# drbd-top git@github.com:LINBIT/drbdtop.git
-# drbd-utils git@github.com:LINBIT/drbd-utils.git
-# ebtables http://git.netfilter.org/ebtables
-# elfutils http://sourceware.org/git/elfutils.git
-# fence-agents git@github.com:ClusterLabs/fence-agents.git
-# fence-virt git@github.com:ClusterLabs/fence-virt.git
-# gcc http://gcc.gnu.org/git/gcc.git
-# gfs2-utils https://pagure.io/gfs2-utils.git
-# git-remote-bzr git@github.com:felipec/git-remote-bzr.git
-# glibc http://sourceware.org/git/glibc.git
-# glib git@github.com:GNOME/glib.git
-# go-urfave-cli git@github.com:urfave/cli.git
-# grub https://git.savannah.gnu.org/git/grub.git
-# httpd git@github.com:apache/httpd.git
-# ipmctl git@github.com:intel/ipmctl.git
+dlm https://pagure.io/dlm.git
+dpdk http://dpdk.org/dpdk
+dpdk-stable http://dpdk.org/dpdk-stable
+drbd-kernel git@github.com:LINBIT/drbd.git
+drbd-top git@github.com:LINBIT/drbdtop.git
+drbd-utils git@github.com:LINBIT/drbd-utils.git
+ebtables http://git.netfilter.org/ebtables
+elfutils http://sourceware.org/git/elfutils.git
+fence-agents git@github.com:ClusterLabs/fence-agents.git
+fence-virt git@github.com:ClusterLabs/fence-virt.git
+gcc http://gcc.gnu.org/git/gcc.git
+gfs2-utils https://pagure.io/gfs2-utils.git
+git-remote-bzr git@github.com:felipec/git-remote-bzr.git
+glibc http://sourceware.org/git/glibc.git
+glib git@github.com:GNOME/glib.git
+go-urfave-cli git@github.com:urfave/cli.git
+grub https://git.savannah.gnu.org/git/grub.git
+httpd git@github.com:apache/httpd.git
+ipmctl git@github.com:intel/ipmctl.git
 iproute2 http://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
-# ipset http://git.netfilter.org/ipset
-# ipvsadm http://git.kernel.org/pub/scm/utils/kernel/ipvsadm/ipvsadm.git
-# irqbalance git@github.com:Irqbalance/irqbalance.git
-# keepalived git@github.com:acassen/keepalived.git
-# kexec-tools http://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git
-# kmod https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git
-# kronosnet git@github.com:kronosnet/kronosnet
-# libfuse git@github.com:libfuse/libfuse.git
-# libhugetlbfs git@github.com:libhugetlbfs/libhugetlbfs.git
-# libqb git@github.com:ClusterLabs/libqb.git
-# libseccomp git@github.com:seccomp/libseccomp.git
-# libslirp git@gitlab.freedesktop.org:slirp/libslirp.git
-# libtool http://git.savannah.gnu.org/r/libtool.git/
-# libvirt http://libvirt.org/libvirt.git
-# llvm-project git@github.com:llvm/llvm-project.git
-# ltp git@github.com:linux-test-project/ltp.git
-# lvm2 http://sourceware.org/git/lvm2.git
-# lxcfs git@github.com:lxc/lxcfs.git
-# lxc git@github.com:lxc/lxc.git
-# monitoring-plugins git@github.com:monitoring-plugins/monitoring-plugins.git
-# multipath http://git.opensvc.com/multipath-tools/.git
-# mysql-server git@github.com:mysql/mysql-server.git
-# nagios-plugins git@github.com:nagios-plugins/nagios-plugins.git
-# ndctl git@github.com:pmem/ndctl.git
-# net-snmp http://git.code.sf.net/p/net-snmp/code
+ipset http://git.netfilter.org/ipset
+ipvsadm http://git.kernel.org/pub/scm/utils/kernel/ipvsadm/ipvsadm.git
+irqbalance git@github.com:Irqbalance/irqbalance.git
+keepalived git@github.com:acassen/keepalived.git
+kexec-tools http://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git
+kmod https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git
+kronosnet git@github.com:kronosnet/kronosnet
+libfuse git@github.com:libfuse/libfuse.git
+libhugetlbfs git@github.com:libhugetlbfs/libhugetlbfs.git
+libqb git@github.com:ClusterLabs/libqb.git
+libseccomp git@github.com:seccomp/libseccomp.git
+libslirp git@gitlab.freedesktop.org:slirp/libslirp.git
+libtool http://git.savannah.gnu.org/r/libtool.git/
+libvirt http://libvirt.org/libvirt.git
+llvm-project git@github.com:llvm/llvm-project.git
+ltp git@github.com:linux-test-project/ltp.git
+lvm2 http://sourceware.org/git/lvm2.git
+lxcfs git@github.com:lxc/lxcfs.git
+lxc git@github.com:lxc/lxc.git
+monitoring-plugins git@github.com:monitoring-plugins/monitoring-plugins.git
+multipath http://git.opensvc.com/multipath-tools/.git
+mysql-server git@github.com:mysql/mysql-server.git
+nagios-plugins git@github.com:nagios-plugins/nagios-plugins.git
+ndctl git@github.com:pmem/ndctl.git
+net-snmp http://git.code.sf.net/p/net-snmp/code
 net-tools https://git.code.sf.net/p/net-tools/code
-# nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
-# nginx git@github.com:nginx/nginx.git
-# ocfs2-tools git@github.com:markfasheh/ocfs2-tools.git
+nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
+nginx git@github.com:nginx/nginx.git
+ocfs2-tools git@github.com:markfasheh/ocfs2-tools.git
 open-iscsi git@github.com:open-iscsi/open-iscsi.git
-# open-isns git@github.com:open-iscsi/open-isns.git
-# open-vm-tools git@github.com:vmware/open-vm-tools.git
-# ovs git@github.com:openvswitch/ovs.git
-# pacemaker git@github.com:ClusterLabs/pacemaker
-# pcs git@github.com:ClusterLabs/pcs.git
-# perf-utils git@github.com:bboymimi/perf-utils.git
+open-isns git@github.com:open-iscsi/open-isns.git
+open-vm-tools git@github.com:vmware/open-vm-tools.git
+ovs git@github.com:openvswitch/ovs.git
+pacemaker git@github.com:ClusterLabs/pacemaker
+pcs git@github.com:ClusterLabs/pcs.git
+perf-utils git@github.com:bboymimi/perf-utils.git
 qemu git@github.com:qemu/qemu.git
-# rdma-core git@github.com:linux-rdma/rdma-core.git
-# resource-agents git@github.com:ClusterLabs/resource-agents.git
+rdma-core git@github.com:linux-rdma/rdma-core.git
+resource-agents git@github.com:ClusterLabs/resource-agents.git
 s390-tools git@github.com:ibm-s390-tools/s390-tools
-# samba https://git.samba.org/samba.git
-# sbd git@github.com:ClusterLabs/sbd.git
+samba https://git.samba.org/samba.git
+sbd git@github.com:ClusterLabs/sbd.git
 sg3_utils git@github.com:hreinecke/sg3_utils
-# simplestreams git+ssh://rafaeldtinoco@git.launchpad.net/simplestreams
-# SLOF git@github.com:qemu/SLOF.git
-# spice git@gitlab.freedesktop.org:spice/spice.git
-# spice-gtk git@gitlab.freedesktop.org:spice/spice-gtk.git
-# spice-protocol git@github.com:freedesktop/spice-protocol.git
-# squid git@github.com:squid-cache/squid
-# subiquity git@github.com:CanonicalLtd/subiquity.git
-# systemd git@github.com:systemd/systemd.git
-# systemtap http://sourceware.org/git/systemtap.git
+simplestreams git+ssh://rafaeldtinoco@git.launchpad.net/simplestreams
+SLOF git@github.com:qemu/SLOF.git
+spice git@gitlab.freedesktop.org:spice/spice.git
+spice-gtk git@gitlab.freedesktop.org:spice/spice-gtk.git
+spice-protocol git@github.com:freedesktop/spice-protocol.git
+sqlite git@github.com:sqlite/sqlite.git
+squid git@github.com:squid-cache/squid
+subiquity git@github.com:CanonicalLtd/subiquity.git
+systemd git@github.com:systemd/systemd.git
+systemtap http://sourceware.org/git/systemtap.git
 targetcli-fb git@github.com:open-iscsi/targetcli-fb.git
 tgt git@github.com:fujita/tgt.git
 ubuntu-dev-tools git+ssh://rafaeldtinoco@git.launchpad.net/ubuntu-dev-tools
@@ -103,6 +104,6 @@ ubuntu-seeds-platform https://git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+g
 usd-importer git+ssh://rafaeldtinoco@git.launchpad.net/usd-importer
 ustriage git@github.com:powersj/ubuntu-server-triage.git
 util-linux http://git.kernel.org/pub/scm/utils/util-linux/util-linux.git
-# uvtool git@github.com:basak/uvtool.git
-# valgrind http://sourceware.org/git/valgrind.git
-# wmnd https://gitlab.com/wavexx/wmnd
+uvtool git@github.com:basak/uvtool.git
+valgrind http://sourceware.org/git/valgrind.git
+wmnd https://gitlab.com/wavexx/wmnd
