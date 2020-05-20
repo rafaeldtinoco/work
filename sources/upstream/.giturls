@@ -61,6 +61,7 @@ ltp git@github.com:linux-test-project/ltp.git
 lvm2 http://sourceware.org/git/lvm2.git
 lxcfs git@github.com:lxc/lxcfs.git
 lxc git@github.com:lxc/lxc.git
+memcached git@github.com:memcached/memcached.git
 monitoring-plugins git@github.com:monitoring-plugins/monitoring-plugins.git
 multipath http://git.opensvc.com/multipath-tools/.git
 mysql-server git@github.com:mysql/mysql-server.git

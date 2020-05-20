@@ -50,6 +50,7 @@ net-snmp
 net-tools
 ocfs2-tools
 open-iscsi
+openssh
 open-vm-tools
 pacemaker
 pcs

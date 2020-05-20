@@ -18,6 +18,7 @@ fence-agents https://salsa.debian.org/ha-team/fence-agents.git
 fence-virt https://salsa.debian.org/ha-team/fence-virt.git
 fio https://salsa.debian.org/debian/fio.git
 gfs2-utils https://salsa.debian.org/ha-team/gfs2-utils.git
+git@salsa.debian.org:apt-team/apt.git
 grub-installer https://salsa.debian.org/installer-team/grub-installer.git
 heartbeat https://salsa.debian.org/ha-team/heartbeat
 heartbeat https://salsa.debian.org/ha-team/heartbeat.git
@@ -37,6 +38,7 @@ net-snmp https://salsa.debian.org/debian/net-snmp.git
 nfs-utils https://salsa.debian.org/debian/nfs-utils.git
 ocfs2-tools https://salsa.debian.org/ha-team/ocfs2-tools
 open-iscsi https://salsa.debian.org/linux-blocks-team/open-iscsi.git
+open-iscsi-orig https://salsa.debian.org/linux-blocks-team/open-iscsi.git
 open-vm-tools https://salsa.debian.org/vmware-packaging-team/pkg-open-vm-tools.git
 pacemaker https://salsa.debian.org/ha-team/pacemaker
 pcs https://salsa.debian.org/ha-team/pcs.git
