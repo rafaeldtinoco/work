@@ -1,7 +1,11 @@
+apache2 git@salsa.debian.org:apache-team/apache2.git
+apt git@salsa.debian.org:apt-team/apt.git
 autofs https://salsa.debian.org/debian/autofs.git
 bareos https://salsa.debian.org/pkg-bareos-team/bareos.git
+bind9 git@salsa.debian.org:dns-team/bind9.git
 booth https://salsa.debian.org/ha-team/booth.git
 cacti https://salsa.debian.org/cacti-team/cacti.git
+ceph-iscsi git@salsa.debian.org:debian/ceph-iscsi.git
 chrony https://salsa.debian.org/debian/chrony.git
 cluster-glue https://salsa.debian.org/ha-team/cluster-glue
 corosync https://salsa.debian.org/ha-team/corosync
@@ -18,7 +22,6 @@ fence-agents https://salsa.debian.org/ha-team/fence-agents.git
 fence-virt https://salsa.debian.org/ha-team/fence-virt.git
 fio https://salsa.debian.org/debian/fio.git
 gfs2-utils https://salsa.debian.org/ha-team/gfs2-utils.git
-git@salsa.debian.org:apt-team/apt.git
 grub-installer https://salsa.debian.org/installer-team/grub-installer.git
 heartbeat https://salsa.debian.org/ha-team/heartbeat
 heartbeat https://salsa.debian.org/ha-team/heartbeat.git
@@ -44,7 +47,8 @@ pacemaker https://salsa.debian.org/ha-team/pacemaker
 pcs https://salsa.debian.org/ha-team/pcs.git
 postfix https://salsa.debian.org/postfix-team/postfix-dev.git
 procps https://salsa.debian.org/debian/procps.git
-python-configshell-fb https://salsa.debian.org/linux-blocks-team/python-configshell-fb.git
+python-configshell-fb git@salsa.debian.org:linux-blocks-team/python-configshell-fb.git
+python-rtslib-fb git@salsa.debian.org:openstack-team/python/python-rtslib-fb.git
 qemu https://salsa.debian.org/qemu-team/qemu.git
 resource-agents https://salsa.debian.org/ha-team/resource-agents
 ruby-ferret.git https://salsa.debian.org/ruby-team/ruby-ferret.git
@@ -55,5 +59,8 @@ sg3-utils https://salsa.debian.org/linux-blocks-team/sg3-utils.git
 squid https://salsa.debian.org/squid-team/squid.git
 systemd https://salsa.debian.org/systemd-team/systemd.git
 talloc https://salsa.debian.org/samba-team/talloc.git
-targetcli-fb https://salsa.debian.org/linux-blocks-team/targetcli-fb.git
+targetcli-fb git@salsa.debian.org:linux-blocks-team/targetcli-fb.git
+tcmu git@salsa.debian.org:debian/tcmu.git
 tgt https://salsa.debian.org/debian/tgt.git
+urwid git@salsa.debian.org:python-team/modules/urwid.git
+vlan git@salsa.debian.org:debian/vlan.git

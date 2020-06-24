@@ -2,14 +2,15 @@
 # 4.9.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-4.9.y
 # 4.14.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-4.14.y
 # 4.19.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-4.19.y
-# 5.2.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-5.2.y
-# 5.3.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-5.2.y
+5.4.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-5.4.y
+5.6.y http://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux-5.6.y
 linux https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
-# next https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+next https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
 # stable https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git master
-eoan git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/eoan master
-focal git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/focal master
-# disco git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/disco master
-# cosmic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/cosmic master
-bionic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic master
 # xenial git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/xenial master
+# bionic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic master
+# cosmic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/cosmic master
+# disco git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/disco master
+# eoan git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/eoan master
+focal git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/focal master
+groovy git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/groovy master

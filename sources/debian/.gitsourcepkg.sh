@@ -1,25 +1,25 @@
 #!/bin/bash
 
-dir=$1
-version=sid
+pkgname=$1
+debianver=$2
 
-[ "$dir" == "" ] && exit 1
+if [[ $pkgname == "" ]]
+then
+    echo missing pkgname
+    exit 1
+fi
 
-[ ! -f .giturls ] && exit 1
+if [[ $debianver == "" ]]
+then
+    echo missing debian version
+    exit 1
+fi
 
-while read name url
-do
-    [ ! -d $name ] && continue
+mydir=$(pwd)
 
-    [ "$name" != "$dir" ] && continue
+echo "getting source package for $pkgname ($debianver)"
 
-    mydir=$(pwd)
-
-    echo "getting source package for $name ($version)"
-
-    mkdir /tmp/pulldebian$$ ; cd /tmp/pulldebian$$
-    pull-debian-source $name $version
-    find . -mindepth 1 -maxdepth 1 -type f -exec mv {} $mydir \;
-    rm -rf /tmp/pulldebian$$ ; cd $mydir
-
-done < .giturls
+mkdir /tmp/pulllp$$ ; cd /tmp/pulllp$$
+pull-debian-source $pkgname $debianver
+find . -mindepth 1 -maxdepth 1 -type f -exec mv {} $mydir \;
+rm -rf /tmp/pulllp$$ ; cd $mydir

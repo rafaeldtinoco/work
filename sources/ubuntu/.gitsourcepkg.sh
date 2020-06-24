@@ -1,26 +1,26 @@
 #!/bin/bash
 
-dir=$1
-version=$2
+pkgname=$1
+ubuntuver=$2
 
-[ "$dir" == "" ] && exit 1
-[ "$version" == "" ] && exit 1
+if [[ $pkgname == "" ]]
+then
+    echo missing pkgname
+    exit 1
+fi
 
-[ ! -f .giturls ] && exit 1
+if [[ $ubuntuver == "" ]]
+then
+    echo missing ubuntu version
+    exit 1
+fi
 
-while read name url
-do
-    [ ! -d $name ] && continue
+mydir=$(pwd)
 
-    [ "$name" != "$dir" ] && continue
+echo "getting source package for $pkgname ($ubuntuver)"
 
-    mydir=$(pwd)
+mkdir /tmp/pulllp$$ ; cd /tmp/pulllp$$
+pull-lp-source $pkgname $ubuntuver
+find . -mindepth 1 -maxdepth 1 -type f -exec mv {} $mydir \;
+rm -rf /tmp/pulllp$$ ; cd $mydir
 
-    echo "getting source package for $name ($version)"
-
-    mkdir /tmp/pulllp$$ ; cd /tmp/pulllp$$
-    pull-lp-source $name $version
-    find . -mindepth 1 -maxdepth 1 -type f -exec mv {} $mydir \;
-    rm -rf /tmp/pulllp$$ ; cd $mydir
-
-done < .giturls

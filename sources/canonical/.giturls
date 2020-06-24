@@ -1,1 +1,12 @@
-qa-regression-testing ssh://git.launchpad.net/qa-regression-testing
+cloud-init https://git.launchpad.net/cloud-init
+cloud-utils https://git.launchpad.net/cloud-utils
+simplestreams git+ssh://rafaeldtinoco@git.launchpad.net/simplestreams
+ubuntu-dev-tools git+ssh://rafaeldtinoco@git.launchpad.net/ubuntu-dev-tools
+usd-importer git+ssh://rafaeldtinoco@git.launchpad.net/usd-importer
+packageset https://git.launchpad.net/~developer-membership-board/+git/packageset
+curtin https://git.launchpad.net/~ubuntu-core-dev/curtin
+netplan https://git.launchpad.net/~ubuntu-core-dev/netplan/+git/ubuntu
+ubuntu-seeds-ubuntu git+ssh://rafaeldtinoco@git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/ubuntu
+ubuntu-seeds-platform git+ssh://rafaeldtinoco@git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/platform
+ubuntu-seeds-core git+ssh://rafaeldtinoco@git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/ubuntu-core
+ustriage git@github.com:powersj/ubuntu-server-triage.git

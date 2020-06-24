@@ -1,3 +1,4 @@
+apache2
 autofs
 bind9
 booth
@@ -54,9 +55,12 @@ openssh
 open-vm-tools
 pacemaker
 pcs
+php7.4
 postfix
 procps
+python-configshell-fb
 python-crypto
+python-rtslib-fb
 python-rtslib-fb
 qemu
 rdma-core
@@ -71,6 +75,11 @@ strongswan
 systemd
 talloc
 targetcli-fb
+targetcli-fb
+tcmu
 tgt
 ubiquity
 ubuntu-fan
+urwid
+vlan
+haproxy
