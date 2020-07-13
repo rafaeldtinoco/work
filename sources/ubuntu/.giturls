@@ -83,3 +83,5 @@ ubuntu-fan
 urwid
 vlan
 haproxy
+jtreg
+uftrace
