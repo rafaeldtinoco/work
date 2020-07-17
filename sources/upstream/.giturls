@@ -6,11 +6,11 @@ automake http://git.savannah.gnu.org/r/automake.git/
 bareos git@github.com:bareos/bareos.git
 bind9 git@github.com:isc-projects/bind9.git
 binutils-gdb https://sourceware.org/git/binutils-gdb.git
-bionic https://android.googlesource.com/platform/bionic/
+# bionic https://android.googlesource.com/platform/bionic/
 booth git@github.com:ClusterLabs/booth.git
-cacti git@github.com:Cacti/cacti.git
+# cacti git@github.com:Cacti/cacti.git
 chrony https://git.tuxfamily.org/chrony/chrony.git
-clickhouse git@github.com:yandex/ClickHouse.git
+# clickhouse git@github.com:yandex/ClickHouse.git
 cluster-glue git@github.com:ClusterLabs/cluster-glue.git
 corosync git@github.com:corosync/corosync
 corosync-qdevice git@github.com:corosync/corosync-qdevice.git
@@ -67,9 +67,9 @@ multipath http://git.opensvc.com/multipath-tools/.git
 mysql-server git@github.com:mysql/mysql-server.git
 nagios-plugins git@github.com:nagios-plugins/nagios-plugins.git
 ndctl git@github.com:pmem/ndctl.git
-net-snmp http://git.code.sf.net/p/net-snmp/code
+# net-snmp http://git.code.sf.net/p/net-snmp/code
 net-tools https://git.code.sf.net/p/net-tools/code
-nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
+# nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
 nginx git@github.com:nginx/nginx.git
 ocfs2-tools git@github.com:markfasheh/ocfs2-tools.git
 open-iscsi git@github.com:open-iscsi/open-iscsi.git
