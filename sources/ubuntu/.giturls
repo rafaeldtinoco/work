@@ -1,87 +1,92 @@
-apache2
-autofs
-bind9
+# apache2
+# autofs
+# bcache-tools
+# bind9
 booth
-cacti
-chrony
-cloud-utils
-cluster-glue
+# cacti
+# chrony
+# cloud-utils
+# cluster-glue
 corosync
 corosync-qdevice
 crmsh
-csync2
-cups
-dbconfig-common
-debian-installer
-debian-installer-utils
-device-tree-compiler
+# csync2
+# cups
+# dbconfig-common
+# debian-installer
+# debian-installer-utils
+# device-tree-compiler
 dlm
-dpdk
+# dpdk
 drbd-utils
-ebtables
+# ebtables
 fence-agents
 fence-virt
 gfs2-utils
 glibc
-grub
-grub2
-grub-installer
+# grub
+# grub2
+# grub-installer
+# haproxy
 heartbeat
-initramfs-tools
-ipmctl
+# initramfs-tools
+# ipmctl
 iproute2
 ipset
 iptables
-ipvsadm
-ipxe
-irqbalance
+# ipvsadm
+# ipxe
+# irqbalance
+# jtreg
 keepalived
-kmod
-krb5
+# kmod
+# krb5
 kronosnet
-libdebian-installer
+# libdebian-installer
+# libgpg-error
+# libio-async-loop-epoll-perl
 libqb
-libslirp
+# libslirp
 libvirt
+# lintian
 lvm2
 monitoring-plugins
 multipath-tools
-ndctl
-net-snmp
+# ndctl
+# net-snmp
 net-tools
 ocfs2-tools
 open-iscsi
-openssh
-open-vm-tools
+# openssh
+# open-vm-tools
 pacemaker
 pcs
-php7.4
-postfix
+# php7.4
+# postfix
 procps
 python-configshell-fb
-python-crypto
-python-rtslib-fb
+# python-crypto
 python-rtslib-fb
 qemu
 rdma-core
 resource-agents
-samba
-sbd
+rsync
+# samba
+# sbd
 sg3-utils
-simplestreams
-smartmontools
-squid
-strongswan
+# simplestreams
+# smartmontools
+# sqlite3
+# squid
+# strongswan
 systemd
-talloc
-targetcli-fb
+# talloc
 targetcli-fb
 tcmu
 tgt
-ubiquity
-ubuntu-fan
-urwid
-vlan
-haproxy
-jtreg
+# ubiquity
+# ubuntu-fan
 uftrace
+urwid
+# vlan
+# zsys
