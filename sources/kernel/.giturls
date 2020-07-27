@@ -8,7 +8,7 @@ linux https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
 next https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
 # stable https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git master
 # xenial git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/xenial master
-# bionic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic master
+bionic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic master
 # cosmic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/cosmic master
 # disco git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/disco master
 # eoan git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/eoan master

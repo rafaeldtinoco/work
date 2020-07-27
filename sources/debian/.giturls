@@ -2,6 +2,7 @@
 # apt git@salsa.debian.org:apt-team/apt.git
 # autofs https://salsa.debian.org/debian/autofs.git
 # bareos https://salsa.debian.org/pkg-bareos-team/bareos.git
+bcache-tools git@salsa.debian.org:debian/bcache-tools.git
 # bind9 git@salsa.debian.org:dns-team/bind9.git
 booth https://salsa.debian.org/ha-team/booth.git
 # cacti https://salsa.debian.org/cacti-team/cacti.git
@@ -29,7 +30,7 @@ ipset https://salsa.debian.org/pkg-netfilter-team/pkg-ipset.git
 # irqbalance https://salsa.debian.org/debian/irqbalance.git
 # jruby https://salsa.debian.org/java-team/jruby.git
 keepalived https://salsa.debian.org/ipvs-team/pkg-keepalived.git
-# kmod https://salsa.debian.org/md/kmod.git
+kmod https://salsa.debian.org/md/kmod.git
 kronosnet https://salsa.debian.org/ha-team/kronosnet
 # libdebian-installer https://salsa.debian.org/installer-team/libdebian-installer.git
 libqb https://salsa.debian.org/ha-team/libqb
@@ -45,6 +46,7 @@ pacemaker https://salsa.debian.org/ha-team/pacemaker
 pcs https://salsa.debian.org/ha-team/pcs.git
 # postfix https://salsa.debian.org/postfix-team/postfix-dev.git
 # procps https://salsa.debian.org/debian/procps.git
+# python3 git@salsa.debian.org:cpython-team/python3.git
 python-configshell-fb git@salsa.debian.org:linux-blocks-team/python-configshell-fb.git
 python-rtslib-fb git@salsa.debian.org:openstack-team/python/python-rtslib-fb.git
 qemu https://salsa.debian.org/qemu-team/qemu.git
@@ -55,7 +57,7 @@ resource-agents https://salsa.debian.org/ha-team/resource-agents
 # sbd https://salsa.debian.org/ha-team/sbd.git
 sg3-utils https://salsa.debian.org/linux-blocks-team/sg3-utils.git
 # squid https://salsa.debian.org/squid-team/squid.git
-# systemd https://salsa.debian.org/systemd-team/systemd.git
+systemd https://salsa.debian.org/systemd-team/systemd.git
 # talloc https://salsa.debian.org/samba-team/talloc.git
 targetcli-fb git@salsa.debian.org:linux-blocks-team/targetcli-fb.git
 tcmu git@salsa.debian.org:debian/tcmu.git

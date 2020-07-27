@@ -1,6 +1,6 @@
 # apache2
 # autofs
-# bcache-tools
+bcache-tools
 # bind9
 booth
 # cacti
@@ -64,6 +64,7 @@ pcs
 # php7.4
 # postfix
 procps
+# python3.8
 python-configshell-fb
 # python-crypto
 python-rtslib-fb
