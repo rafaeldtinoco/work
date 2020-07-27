@@ -2,7 +2,7 @@
 
 [ ! -f .giturls ] && exit 1
 
-while read name url
+while read name
 do
     [[ "$name" == "#" ]] && continue
     [[ -d $name ]] && continue
