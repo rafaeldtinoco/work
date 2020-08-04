@@ -14,3 +14,4 @@ bionic git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic m
 # eoan git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/eoan master
 focal git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/focal master
 groovy git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/groovy master
+mine ./linux v5.7

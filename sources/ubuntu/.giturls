@@ -52,7 +52,7 @@ libvirt
 lvm2
 monitoring-plugins
 multipath-tools
-# ndctl
+ndctl
 # net-snmp
 net-tools
 ocfs2-tools
