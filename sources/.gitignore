@@ -1,2 +1,9 @@
+*
 !.gitignore
+!canonical
+!debian
+!general
+!kernel
+!ubuntu
+!upstream
 .gitupdate.log
