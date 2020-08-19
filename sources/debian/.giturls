@@ -35,6 +35,7 @@ kronosnet https://salsa.debian.org/ha-team/kronosnet
 # libdebian-installer https://salsa.debian.org/installer-team/libdebian-installer.git
 libqb https://salsa.debian.org/ha-team/libqb
 libvirt https://salsa.debian.org/libvirt-team/libvirt.git
+lighttpd git@salsa.debian.org:debian/lighttpd.git
 multipath-tools https://salsa.debian.org/linux-blocks-team/multipath-tools.git
 # mysql https://salsa.debian.org/mariadb-team/mysql.git
 # net-snmp https://salsa.debian.org/debian/net-snmp.git

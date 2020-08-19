@@ -48,6 +48,7 @@ kronosnet
 libqb
 # libslirp
 libvirt
+lighttpd
 # lintian
 lvm2
 monitoring-plugins
@@ -65,7 +66,7 @@ pcs
 # postfix
 procps
 # python3.8
-python-configshell-fb
+# python-configshell-fb
 # python-crypto
 python-rtslib-fb
 qemu
@@ -87,7 +88,7 @@ tcmu
 tgt
 # ubiquity
 # ubuntu-fan
-uftrace
+# uftrace
 urwid
 # vlan
 # zsys

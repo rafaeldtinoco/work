@@ -57,6 +57,7 @@ libseccomp git@github.com:seccomp/libseccomp.git
 libslirp git@gitlab.freedesktop.org:slirp/libslirp.git
 libtool http://git.savannah.gnu.org/r/libtool.git/
 libvirt http://libvirt.org/libvirt.git
+lighttpd1.4 git@github.com:lighttpd/lighttpd1.4.git
 llvm-project git@github.com:llvm/llvm-project.git
 lm-sensors git@github.com:lm-sensors/lm-sensors.git
 ltp git@github.com:linux-test-project/ltp.git
