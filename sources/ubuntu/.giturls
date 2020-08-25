@@ -60,6 +60,8 @@ ocfs2-tools
 open-iscsi
 # openssh
 # open-vm-tools
+openjdk-8
+openjdk-lts
 pacemaker
 pcs
 # php7.4

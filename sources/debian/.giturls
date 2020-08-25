@@ -19,11 +19,13 @@ dlm https://salsa.debian.org/ha-team/dlm
 drbd-doc https://salsa.debian.org/ha-team/drbd-doc.git
 drbdmanage https://salsa.debian.org/ha-team/drbdmanage.git
 drbd-utils https://salsa.debian.org/ha-team/drbd-utils
+exim4 git@salsa.debian.org:exim-team/exim4.git
 fence-agents https://salsa.debian.org/ha-team/fence-agents.git
 fence-virt https://salsa.debian.org/ha-team/fence-virt.git
 # fio https://salsa.debian.org/debian/fio.git
 gfs2-utils https://salsa.debian.org/ha-team/gfs2-utils.git
 # grub-installer https://salsa.debian.org/installer-team/grub-installer.git
+# haproxy git@salsa.debian.org:haproxy-team/haproxy.git
 heartbeat https://salsa.debian.org/ha-team/heartbeat
 # initramfs-tools https://salsa.debian.org/kernel-team/initramfs-tools
 ipset https://salsa.debian.org/pkg-netfilter-team/pkg-ipset.git
