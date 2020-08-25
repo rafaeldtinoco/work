@@ -1,0 +1,7 @@
+*
+!.git*
+!.cproject
+!.project
+!.debian
+.gitupdate.log
+.gitupdate.cron.log

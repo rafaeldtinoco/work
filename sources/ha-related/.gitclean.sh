@@ -1,0 +1,1 @@
+../upstream/.gitclean.sh

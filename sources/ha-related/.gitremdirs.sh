@@ -1,0 +1,1 @@
+../upstream/.gitremdirs.sh
