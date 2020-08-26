@@ -1,0 +1,31 @@
+Test-Command: crm --help
+Depends: crmsh
+Restrictions: needs-root
+
+Test-Command: crm help
+Depends: crmsh
+Restrictions: needs-root
+
+Test-Command: crm --version
+Depends: crmsh
+Restrictions: needs-root
+
+Tests: utils.sh
+Depends: crmsh
+Restrictions: needs-root, allow-stderr
+
+Tests: testsuite.sh
+Depends: crmsh, openssh-server, python3-nose
+Restrictions: needs-root
+
+Tests: pacemaker-basic-resource.sh
+Depends: crmsh
+Restrictions: needs-root, allow-stderr, isolation-container, skippable
+
+Tests: pacemaker-node-status.sh
+Depends: crmsh
+Restrictions: needs-root, allow-stderr, isolation-container, skippable
+
+Tests: pacemaker-cluster-init.sh
+Depends: crmsh, csync2, ntp, ufw, openssh-server, dmidecode [any-amd64 arm64 armhf any-i386], booth, booth-pacemaker
+Restrictions: needs-root, allow-stderr, isolation-machine, skippable

@@ -1,0 +1,2 @@
+manpage-has-errors-from-man usr/share/man/man8/sbd.8.gz 189: warning [p 1, 8.7i]: can't break line
+executable-in-usr-lib usr/lib/stonith/plugins/external/sbd

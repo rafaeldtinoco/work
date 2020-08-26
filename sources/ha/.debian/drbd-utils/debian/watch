@@ -1,0 +1,3 @@
+version=3
+opts="uversionmangle=s/(rc\d+)/~$1/" \
+  https://www.linbit.com/linbit-software-download-page-for-linstor-and-drbd-linux-driver/ .*/utils/drbd-utils-([0-9.]+).tar.gz

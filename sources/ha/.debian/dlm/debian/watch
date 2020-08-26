@@ -1,0 +1,5 @@
+# Upstream does not provide tarballs since 4.0.8, only tags, which
+# we merge into the debian/master packaging branch directly.
+# Thus this watch file is for the Debian QA dashboard only.
+version=4
+opts="mode=git" https://pagure.io/dlm.git refs/tags/dlm-([\d.]+)

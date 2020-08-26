@@ -1,0 +1,7 @@
+pacemaker (1.1.15-2) unstable; urgency=medium
+
+  This version ships the systemd service file for crm_mon as an example only.
+  The native alerts of Pacemaker 1.1.15 are now the supported method of sending
+  out notifications about cluster events.
+
+ -- Ferenc Wágner <wferi@debian.org>  Tue, 17 Aug 2016 22:38:53 +0200

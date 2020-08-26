@@ -1,0 +1,123 @@
+Description: Fix cluster init on Debian
+ Update file paths and service names to work better on Debian.
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Last-Update: 2019-01-12
+--- a/crmsh/bootstrap.py
++++ b/crmsh/bootstrap.py
+@@ -31,10 +31,10 @@
+ 
+ 
+ LOG_FILE = "/var/log/ha-cluster-bootstrap.log"
+-CSYNC2_KEY = "/etc/csync2/key_hagroup"
+-CSYNC2_CFG = "/etc/csync2/csync2.cfg"
++CSYNC2_KEY = "/etc/csync2.key_hagroup"
++CSYNC2_CFG = "/etc/csync2.cfg"
+ COROSYNC_AUTH = "/etc/corosync/authkey"
+-SYSCONFIG_SBD = "/etc/sysconfig/sbd"
++SYSCONFIG_SBD = "/etc/default/sbd"
+ SYSCONFIG_FW = "/etc/sysconfig/SuSEfirewall2"
+ SYSCONFIG_FW_CLUSTER = "/etc/sysconfig/SuSEfirewall2.d/services/cluster"
+ PCMK_REMOTE_AUTH = "/etc/pacemaker/authkey"
+@@ -288,7 +288,7 @@
+     """
+     Check if package is installed
+     """
+-    return invoke("rpm -q --quiet {}".format(pkg))
++    return invoke("dpkg-query --status {}".format(pkg))
+ 
+ 
+ def sleep(t):
+@@ -446,7 +446,7 @@
+     """
+     # Reload rsyslog to make sure it logs with the correct hostname
+     if service_is_active("rsyslog.service"):
+-        invoke("systemctl reload rsyslog.service")
++        invoke("systemctl restart rsyslog.service")
+     datestr = utils.get_stdout("date --rfc-3339=seconds")[1]
+     log('================================================================')
+     log("%s %s" % (datestr, " ".join(sys.argv)))
+@@ -671,7 +671,7 @@
+     """
+     Configure passwordless SSH.
+     """
+-    start_service("sshd.service")
++    start_service("ssh.service")
+     invoke("mkdir -m 700 -p /root/.ssh")
+     if os.path.exists("/root/.ssh/id_rsa"):
+         if _context.yes_to_all and _context.no_overwrite_sshkey or \
+@@ -715,13 +715,13 @@
+ 
+     utils.str2file("""group ha_group
+ {
+-key /etc/csync2/key_hagroup;
++key /etc/csync2.key_hagroup;
+ host %s;
+ include /etc/booth;
+ include /etc/corosync/corosync.conf;
+ include /etc/corosync/authkey;
+-include /etc/csync2/csync2.cfg;
+-include /etc/csync2/key_hagroup;
++include /etc/csync2.cfg;
++include /etc/csync2.key_hagroup;
+ include /etc/ctdb/nodes;
+ include /etc/drbd.conf;
+ include /etc/drbd.d;
+@@ -729,8 +729,8 @@
+ include /etc/lvm/lvm.conf;
+ include /etc/multipath.conf;
+ include /etc/samba/smb.conf;
+-include /etc/sysconfig/pacemaker;
+-include /etc/sysconfig/sbd;
++include /etc/default/pacemaker;
++include /etc/default/sbd;
+ include /etc/pacemaker/authkey;
+ }
+     """ % (utils.this_node()), CSYNC2_CFG)
+@@ -978,7 +978,7 @@
+         clustername=_context.cluster_name,
+         ringXaddr=ringXaddr_res,
+         mcastport=mcastport_res,
+-        transport="udpu",
++        transport="knet",
+         ipv6=_context.ipv6,
+         two_rings=two_rings)
+     csync2_update(corosync.conf())
+@@ -1600,7 +1600,7 @@
+     if not seed_host:
+         error("No existing IP/hostname specified (use -c option)")
+ 
+-    start_service("sshd.service")
++    start_service("ssh.service")
+     invoke("mkdir -m 700 -p /root/.ssh")
+ 
+     tmpdir = tmpfiles.create_dir()
+@@ -1666,7 +1666,7 @@
+     #   || error "Can't retrieve /etc/hosts from seed_host"
+     # install_tmp $tmp_conf /etc/hosts
+ 
+-    if not invoke("scp root@%s:'/etc/csync2/{csync2.cfg,key_hagroup}' /etc/csync2" % (seed_host)):
++    if not invoke("scp root@%s:'/etc/csync2.{cfg,key_hagroup}' /etc" % (seed_host)):
+         error("Can't retrieve csync2 config from %s" % (seed_host))
+ 
+     start_service("csync2.socket")
+--- a/crmsh/corosync.py
++++ b/crmsh/corosync.py
+@@ -1003,7 +1003,7 @@
+                          two_rings=False,
+                          qdevice=None):
+ 
+-    if transport == "udpu":
++    if transport == "knet":
+         ring_tmpl = ""
+         for i in 0, 1:
+             ring_tmpl += "        ring{}_addr: {}\n".format(i, ringXaddr[i])
+@@ -1042,6 +1042,9 @@
+     expected_votes: 1
+     two_node: 0
+ }
++resources {
++    watchdog_device: off
++}
+ """
+     if qdevice is not None:
+         quorum_tmpl = """quorum {

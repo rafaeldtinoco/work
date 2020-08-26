@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -ex
+
+# clean up
+rm -f /tmp/fence_dummy.status
+trap "rm -f /tmp/fence_dummy.status" 0 2 3 15
+
+/usr/sbin/fence_dummy -V
+
+/usr/sbin/fence_dummy -v
+
+# show status from /tmp/fence_dummy.status
+/usr/sbin/fence_dummy -o status

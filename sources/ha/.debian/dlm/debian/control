@@ -1,0 +1,92 @@
+Source: dlm
+Section: admin
+Priority: optional
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Uploaders: Ferenc Wágner <wferi@debian.org>,
+ Valentin Vidic <vvidic@debian.org>
+Standards-Version: 4.4.0
+Build-Depends: debhelper (>= 12),
+ libcfg-dev (>= 1.99),
+ libcpg-dev (>= 1.99),
+ libcmap-dev (>= 1.99),
+ libquorum-dev (>= 1.99),
+ libsystemd-dev,
+ libxml2-dev,
+ pacemaker-dev,
+ uuid-dev,
+ pkg-config
+Homepage: https://pagure.io/dlm
+Vcs-Browser: https://salsa.debian.org/ha-team/dlm
+Vcs-Git: https://salsa.debian.org/ha-team/dlm.git
+
+Package: dlm-controld
+Architecture: linux-any
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ corosync,
+ kmod,
+ ${misc:Depends},
+ ${shlibs:Depends},
+# we're taking over /usr/sbin/dlm_{controld,tool}
+Breaks:
+ cman,
+Replaces:
+ cman,
+Description: Distributed Lock Manager control daemon
+ DLM is a symmetric general-purpose distributed lock manager.
+ The lock manager itself is a kernel module.
+ .
+ This package contains the control daemon and utility.
+
+Package: libdlm3
+Section: libs
+Architecture: linux-any
+Multi-Arch: same
+Depends: ${shlibs:Depends},
+ ${misc:Depends}
+Description: Distributed Lock Manager library
+ DLM is a symmetric general-purpose distributed lock manager.
+ The lock manager itself is a kernel module.
+ .
+ This is the client library for applications using the lock manager.
+
+Package: libdlm-dev
+Section: libdevel
+Architecture: linux-any
+Multi-Arch: same
+Depends: ${misc:Depends},
+ libdlm3 (= ${binary:Version})
+Description: Distributed Lock Manager library development
+ DLM is a symmetric general-purpose distributed lock manager.
+ The lock manager itself is a kernel module.
+ .
+ This package contains the headers and other necessary files to build
+ applications or libraries that use the DLM library.
+
+Package: libdlmcontrol3
+Section: libs
+Architecture: linux-any
+Multi-Arch: same
+Depends: ${shlibs:Depends},
+ ${misc:Depends}
+Description: Distributed Lock Manager control library
+ DLM is a symmetric general-purpose distributed lock manager.
+ The lock manager itself is a kernel module.
+ .
+ This is the client library for applications using the lock manager daemon?
+
+Package: libdlmcontrol-dev
+Section: libdevel
+Architecture: linux-any
+Multi-Arch: same
+Depends: ${misc:Depends},
+ libdlmcontrol3 (= ${binary:Version})
+Breaks: libdlm-dev (<<4.0.9-1)
+Replaces: libdlm-dev (<<4.0.9-1)
+Description: Distributed Lock Manager control library development
+ DLM is a symmetric general-purpose distributed lock manager.
+ The lock manager itself is a kernel module.
+ .
+ This package contains the headers and other necessary files to build
+ applications or libraries that use the DLM control library.

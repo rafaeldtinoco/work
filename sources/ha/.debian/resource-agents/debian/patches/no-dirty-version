@@ -1,0 +1,27 @@
+Description: Never use a -dirty version in git builds
+Author: Christoph Berg <christoph.berg@credativ.de>
+Last-Update: 2016-02-02
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/make/git-version-gen
++++ b/make/git-version-gen
+@@ -136,19 +136,6 @@
+ 
+ v=`echo "$v" |sed 's/^v//'`
+ 
+-# Don't declare a version "dirty" merely because a time stamp has changed.
+-git update-index --refresh > /dev/null 2>&1
+-
+-dirty=`sh -c 'git diff-index --name-only HEAD' 2>/dev/null` || dirty=
+-case "$dirty" in
+-    '') ;;
+-    *) # Append the suffix only if there isn't one already.
+-	case $v in
+-	  *-dirty) ;;
+-	  *) v="$v-dirty" ;;
+-	esac ;;
+-esac
+-
+ # Omit the trailing newline, so that m4_esyscmd can use the result directly.
+ echo "$v" | tr -d "$nl"
+ 

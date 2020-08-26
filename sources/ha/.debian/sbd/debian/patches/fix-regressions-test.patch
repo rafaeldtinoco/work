@@ -1,0 +1,28 @@
+Description: Try to fix failing tests on some ports
+ Message test (reset)
+ Initializing device /tmp/sbd.device.1.SfW9vT
+ Creating version 2.1 header on device 4 (uuid: c52ddbee-8b65-4d4e-b3b8-63560254a058)
+ Initializing 255 slots on device 4
+ Device /tmp/sbd.device.1.SfW9vT is initialized.
+ didn't find 'sysrq-trigger ('b')' in log:
+
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2020-04-19
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/tests/regressions.sh
++++ b/tests/regressions.sh
+@@ -124,6 +124,13 @@
+ }
+ 
+ _in_log() {
++	for i in 1 2 3 4 5; do
++		grep "$@" ${SBD_PRELOAD_LOG} >/dev/null
++		[ $? -eq 0 ] && break
++		echo "waiting for '$@' in log: $i"
++		sleep 1
++	done
++
+ 	grep "$@" ${SBD_PRELOAD_LOG} >/dev/null
+ 	if [ $? -ne 0 ]; then
+ 		echo "didn't find '$@' in log:"

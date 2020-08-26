@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = purge ]; then
+    # keep this list in sync with that in the postinst
+    for dir in \
+        /var/lib/pacemaker/pengine \
+        /var/lib/pacemaker/cib \
+        /var/lib/pacemaker/cores \
+        /var/lib/pacemaker/blackbox \
+        /var/log/pacemaker/bundles \
+        /var/log/pacemaker \
+	; do
+        if dpkg-statoverride --list "$dir" >/dev/null 2>&1; then
+            dpkg-statoverride --remove "$dir"
+        fi
+        rm -rf "$dir"
+    done
+    # remove the AUTHKEY we created in postinst
+    AUTHKEY=/etc/pacemaker/authkey
+    rm -f $AUTHKEY
+    # remove the detail logs
+    rm -rf /var/log/pacemaker
+fi
+
+#DEBHELPER#

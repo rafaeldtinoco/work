@@ -1,0 +1,247 @@
+Description: Replace chkconfig calls
+ All chkconfig calls should be replaced with update-rc.d
+ and insserv calls to work on Debian.
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Last-Update: 2016-11-13
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/pcsd/pcs.rb
++++ b/pcsd/pcs.rb
+@@ -1706,11 +1706,22 @@
+ def is_service_enabled?(service)
+   if ISSYSTEMCTL
+     cmd = ['systemctl', 'is-enabled', "#{service}.service"]
++    _, _, retcode = run_cmd(PCSAuth.getSuperuserAuth(), *cmd)
++    return (retcode == 0)
+   else
+-    cmd = ['chkconfig', service]
++    cmd = ['/sbin/insserv', '-s']
++    stdout, _, retcode = run_cmd(PCSAuth.getSuperuserAuth(), *cmd)
++    if retcode != 0
++      return nil
++    end
++    stdout.each { |line|
++      parts = line.split(':')
++      if parts[3] == service and parts[0] == 'S'
++        return true
++      end
++    }
++    return false
+   end
+-  _, _, retcode = run_cmd(PCSAuth.getSuperuserAuth(), *cmd)
+-  return (retcode == 0)
+ end
+ 
+ def is_service_running?(service)
+@@ -1773,11 +1784,11 @@
+ class ServiceInstalledCheckerChkconfig < ServiceInstalledChecker
+   protected
+   def run_command
+-    return run_cmd(PCSAuth.getSuperuserAuth(), 'chkconfig')
++    return run_cmd(PCSAuth.getSuperuserAuth(), '/sbin/insserv', '-s')
+   end
+ 
+   def contains_line_service?(line, service)
+-    return line.split(' ')[0] == service
++    return line.split(':')[3] == service
+   end
+ end
+ 
+@@ -1800,7 +1811,7 @@
+     cmd = ['systemctl', 'enable', "#{service}.service"]
+   else
+     # fails when the service is not installed
+-    cmd = ['chkconfig', service, 'on']
++    cmd = ['update-rc.d', service, 'enable']
+   end
+   _, _, retcode = run_cmd(PCSAuth.getSuperuserAuth(), *cmd)
+   return (retcode == 0)
+@@ -1815,7 +1826,7 @@
+   if ISSYSTEMCTL
+     cmd = ['systemctl', 'disable', "#{service}.service"]
+   else
+-    cmd = ['chkconfig', service, 'off']
++    cmd = ['update-rc.d', service, 'disable']
+   end
+   _, _, retcode = run_cmd(PCSAuth.getSuperuserAuth(), *cmd)
+   return (retcode == 0)
+--- a/pcs/lib/external.py
++++ b/pcs/lib/external.py
+@@ -192,7 +192,7 @@
+             [_systemctl, "disable", _get_service_name(service, instance)]
+         )
+     else:
+-        stdout, stderr, retval = runner.run([_chkconfig, service, "off"])
++        stdout, stderr, retval = runner.run([_chkconfig, service, "disable"])
+     if retval != 0:
+         raise DisableServiceError(
+             service, join_multilines([stderr, stdout]), instance
+@@ -214,7 +214,7 @@
+             [_systemctl, "enable", _get_service_name(service, instance)]
+         )
+     else:
+-        stdout, stderr, retval = runner.run([_chkconfig, service, "on"])
++        stdout, stderr, retval = runner.run([_chkconfig, service, "enable"])
+     if retval != 0:
+         raise EnableServiceError(
+             service, join_multilines([stderr, stdout]), instance
+@@ -294,10 +294,17 @@
+         dummy_stdout, dummy_stderr, retval = runner.run(
+             [_systemctl, "is-enabled", _get_service_name(service, instance)]
+         )
++        return retval == 0
+     else:
+-        dummy_stdout, dummy_stderr, retval = runner.run([_chkconfig, service])
+-
+-    return retval == 0
++        stdout, dummy_stderr, retval = runner.run(["/sbin/insserv", "-s"])
++        if retval != 0:
++            return False
++
++        for line in stdout.splitlines():
++            fields = line.split(":")
++            if fields[3] == service and fields[0] == "S":
++                return True
++        return False
+ 
+ 
+ def is_service_running(
+@@ -345,13 +352,13 @@
+     if is_systemctl():
+         return []
+ 
+-    stdout, dummy_stderr, return_code = runner.run([_chkconfig])
++    stdout, dummy_stderr, return_code = runner.run(["/sbin/insserv", "-s"])
+     if return_code != 0:
+         return []
+ 
+     service_list = []
+     for service in stdout.splitlines():
+-        service = service.split(" ", 1)[0]
++        service = service.split(":")[3]
+         if service:
+             service_list.append(service)
+     return service_list
+--- a/pcs_test/tier0/lib/test_external.py
++++ b/pcs_test/tier0/lib/test_external.py
+@@ -415,7 +415,7 @@
+             self.mock_runner, self.service, None
+         )
+         self.mock_runner.run.assert_called_once_with(
+-            [_chkconfig, self.service, "off"]
++            [_chkconfig, self.service, "disable"]
+         )
+ 
+     def test_not_systemctl_failed(self, mock_is_installed, mock_systemctl):
+@@ -430,7 +430,7 @@
+             self.mock_runner, self.service, None
+         )
+         self.mock_runner.run.assert_called_once_with(
+-            [_chkconfig, self.service, "off"]
++            [_chkconfig, self.service, "disable"]
+         )
+ 
+     def test_systemctl_not_installed(self, mock_is_installed, mock_systemctl):
+@@ -480,7 +480,7 @@
+             self.mock_runner, self.service, instance
+         )
+         self.mock_runner.run.assert_called_once_with(
+-            [_chkconfig, self.service, "off"]
++            [_chkconfig, self.service, "disable"]
+         )
+ 
+ 
+@@ -514,7 +514,7 @@
+         self.mock_runner.run.return_value = ("", "", 0)
+         lib.enable_service(self.mock_runner, self.service)
+         self.mock_runner.run.assert_called_once_with(
+-            [_chkconfig, self.service, "on"]
++            [_chkconfig, self.service, "enable"]
+         )
+ 
+     def test_not_systemctl_failed(self, mock_systemctl):
+@@ -525,7 +525,7 @@
+             lambda: lib.enable_service(self.mock_runner, self.service),
+         )
+         self.mock_runner.run.assert_called_once_with(
+-            [_chkconfig, self.service, "on"]
++            [_chkconfig, self.service, "enable"]
+         )
+ 
+     def test_instance_systemctl(self, mock_systemctl):
+@@ -545,7 +545,7 @@
+         self.mock_runner.run.return_value = ("", "", 0)
+         lib.enable_service(self.mock_runner, self.service, instance="test")
+         self.mock_runner.run.assert_called_once_with(
+-            [_chkconfig, self.service, "on"]
++            [_chkconfig, self.service, "enable"]
+         )
+ 
+ 
+@@ -732,15 +732,15 @@
+ 
+     def test_not_systemctl_enabled(self, mock_systemctl):
+         mock_systemctl.return_value = False
+-        self.mock_runner.run.return_value = ("", "", 0)
++        self.mock_runner.run.return_value = ("S:02:2 3 4 5:" + self.service, "", 0)
+         self.assertTrue(lib.is_service_enabled(self.mock_runner, self.service))
+-        self.mock_runner.run.assert_called_once_with([_chkconfig, self.service])
++        self.mock_runner.run.assert_called_once_with(["/sbin/insserv", "-s"])
+ 
+     def test_not_systemctl_disabled(self, mock_systemctl):
+         mock_systemctl.return_value = False
+-        self.mock_runner.run.return_value = ("", "", 3)
++        self.mock_runner.run.return_value = ("K:01:0 1 6:" + self.service, "", 0)
+         self.assertFalse(lib.is_service_enabled(self.mock_runner, self.service))
+-        self.mock_runner.run.assert_called_once_with([_chkconfig, self.service])
++        self.mock_runner.run.assert_called_once_with(["/sbin/insserv", "-s"])
+ 
+ 
+ @mock.patch("pcs.lib.external.is_systemctl")
+@@ -929,10 +929,9 @@
+         self.mock_runner.run.return_value = (
+             outdent(
+                 """\
+-            pcsd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+-            sbd            	0:off	1:on	2:on	3:on	4:on	5:on	6:off
+-            pacemaker      	0:off	1:off	2:off	3:off	4:off	5:off	6:off
+-            """
++            K:01:0 1 6:pcsd
++            S:02:2 3 4 5:sbd
++            S:02:2 3 4 5:pacemaker"""
+             ),
+             "",
+             0,
+@@ -942,14 +941,14 @@
+             ["pcsd", "sbd", "pacemaker"],
+         )
+         self.assertEqual(mock_is_systemctl.call_count, 1)
+-        self.mock_runner.run.assert_called_once_with([_chkconfig])
++        self.mock_runner.run.assert_called_once_with(["/sbin/insserv", "-s"])
+ 
+     def test_failed(self, mock_is_systemctl):
+         mock_is_systemctl.return_value = False
+         self.mock_runner.run.return_value = ("stdout", "failed", 1)
+         self.assertEqual(lib.get_non_systemd_services(self.mock_runner), [])
+         self.assertEqual(mock_is_systemctl.call_count, 1)
+-        self.mock_runner.run.assert_called_once_with([_chkconfig])
++        self.mock_runner.run.assert_called_once_with(["/sbin/insserv", "-s"])
+ 
+     def test_systemd(self, mock_is_systemctl):
+         mock_is_systemctl.return_value = True
+--- a/pcs/settings.py.debian
++++ b/pcs/settings.py.debian
+@@ -9,3 +9,4 @@
+ pcsd_gem_path = None
+ pcsd_config = "/etc/default/pcsd"
+ sbd_config = "/etc/default/sbd"
++chkconfig_binary = "/usr/sbin/update-rc.d"
+--- a/pcsd/settings.rb.debian
++++ b/pcsd/settings.rb.debian
+@@ -1,5 +1,5 @@
+ PCS_EXEC = '/usr/sbin/pcs'
+-PCS_INTERNAL_EXEC = '/usr/lib/pcs/pcs_internal'
++PCS_INTERNAL_EXEC = '/usr/share/pcs/pcs_internal'
+ PCSD_EXEC_LOCATION = '/usr/share/pcsd/'
+ PCSD_VAR_LOCATION = '/var/lib/pcsd/'
+ PCSD_DEFAULT_PORT = 2224

@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+# build fails when format hardening is on
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- --with-udevdir=/lib/udev
+
+override_dh_auto_install:
+	dh_auto_install
+	rm debian/gfs2-utils/usr/share/doc/gfs2-utils/COPY*
+	rm debian/gfs2-utils/usr/share/doc/gfs2-utils/README.licence
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+override_dh_auto_test:
+	if ! dh_auto_test; then cat tests/testsuite.log; exit 1; fi

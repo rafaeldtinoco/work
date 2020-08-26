@@ -1,0 +1,9 @@
+/etc/booth/booth.conf.example	/usr/share/doc/booth/examples/
+conf/booth-arbitrator.service	/lib/systemd/system/
+conf/booth@.service		/lib/systemd/system/
+debian/booth-generator		/lib/systemd/system-generators
+debian/booth@.service 		/lib/systemd/system
+usr/sbin
+usr/share/booth/service-runnable
+usr/share/doc
+usr/share/man

@@ -1,0 +1,64 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+include /usr/share/dpkg/pkg-info.mk
+
+%:
+	dh $@ --with python3
+
+override_dh_autoreconf:
+	# fix version reported by agents
+	echo $(DEB_VERSION_UPSTREAM) > .tarball-version
+	dh_autoreconf ./autogen.sh
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		--libexecdir=/usr/libexec/fence-agents \
+		PING_CMD=/bin/ping \
+		PING6_CMD=/bin/ping6 \
+		PING4_CMD="/bin/ping -4" \
+		PYTHON=/usr/bin/python3 \
+		SBD_PATH=/usr/sbin/sbd \
+		VGS_PATH=/sbin/vgs
+
+override_dh_auto_install:
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+
+override_dh_install:
+	rm -v debian/tmp/usr/share/doc/fence-agents/COPY*
+	rm -v debian/tmp/usr/share/doc/fence-agents/README.licence
+	rmdir debian/tmp/usr/share/doc/fence-agents
+ifneq ($(shell dpkg-architecture -qDEB_HOST_ARCH),s390x)
+	# remove fence_zvm because it doesn't do anything except on 390x
+	rm -v debian/tmp/usr/sbin/fence_zvm
+	rm -v debian/tmp/usr/share/man/man8/fence_zvm.8
+endif
+	dh_install
+	# test agents (skip ack_manual, it doesn't have --help, skip vmware_helper, it wants VIRuntime.pm)
+	# we test in tmp after install so the .pyc files generated don't make it into the package
+	for agent in debian/tmp/usr/sbin/*; do \
+		case $${agent##*/} in fence_ack_manual|fence_vmware_helper) continue;; esac; \
+		echo "Testing $$agent"; \
+		PYTHONPATH=debian/tmp/usr/share/fence $$agent --help >/dev/null || exit; \
+	done
+
+# tests are slow and require network access so moved to debian/tests/{delay,metadata}
+override_dh_auto_test:
+
+override_dh_python3:
+	dh_python3
+	dh_python3 /usr/share/fence
+
+override_dh_gencontrol:
+	# extract agent descriptions for use in debian/control
+	export LC_ALL=C; \
+	( echo -n "agents="; \
+	  sed -ne 's/<resource-agent name="\(.*\)" shortdesc="\(.*\)".*/\1: \2/p' tests/data/metadata/*.xml | \
+	  sed -e 's/\(I.O \)\?\(Fence\|Fencing\) agent for //' | \
+	  grep -v fence_amt_ws | \
+	  while read line; do echo -n " $$line\$${Newline}"; done ; \
+	  echo ; \
+	) >> debian/fence-agents.substvars
+	dh_gencontrol

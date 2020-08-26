@@ -1,0 +1,43 @@
+Description: Fix installation paths
+ Use /usr/share/pcsd/ for ruby code.
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-01-12
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Makefile
++++ b/Makefile
+@@ -157,7 +157,7 @@
+ # ================
+ 
+ DEST_PYTHON_SITELIB = ${DESTDIR}${PYTHON_SITELIB}
+-DEST_PYTHON_SCRIPT_DIR=${DESTDIR}$(shell $(PYTHON) setup.py scriptdir | tail --lines=1)
++DEST_PYTHON_SCRIPT_DIR=${DESTDIR}/usr/bin
+ DEST_MAN=${DESTDIR}/usr/share/man/man8
+ DEST_SYSTEMD_SYSTEM = ${DESTDIR}${SYSTEMD_UNIT_DIR}
+ DEST_INIT = ${DESTDIR}${INIT_DIR}
+@@ -268,13 +268,13 @@
+ 	make -C pcsd build_gems
+ endif
+ 	install -d -m 700 ${DESTDIR}/var/log/pcsd
+-	mkdir -p ${DEST_LIB}/pcsd/
+-	cp -r pcsd ${DEST_LIB}
++	mkdir -p ${DESTDIR}/usr/share/pcsd/
++	cp -r pcsd ${DESTDIR}/usr/share/
+ 	install -m 644 -D pcsd/pcsd.conf ${DEST_CONF}/pcsd
+ 	install -d ${DESTDIR}/etc/pam.d
+ 	install -m 644 pcsd/pcsd.pam ${DESTDIR}/etc/pam.d/pcsd
+ ifeq ($(IS_DEBIAN),true)
+-	$(call use-alternative-file,pcsd/settings.rb.debian,${DEST_LIB}/pcsd/settings.rb)
++	$(call use-alternative-file,pcsd/settings.rb.debian,${DESTDIR}/usr/share/pcsd/settings.rb)
+ endif
+ ifeq ($(IS_DEBIAN)$(IS_SYSTEMCTL),truefalse)
+ 	install -m 755 -D pcsd/pcsd.debian ${DEST_INIT}/pcsd
+@@ -294,7 +294,7 @@
+ 		$(eval font_file = $(word 1,$(subst ;, ,$(font)))) \
+ 		$(eval font_def = $(word 2,$(subst ;, ,$(font)))) \
+ 		$(eval font_path = $(shell fc-match '--format=%{file}' '$(font_def)')) \
+-		$(if $(font_path),ln -s -f $(font_path) ${DEST_LIB}/pcsd/public/css/$(font_file);,$(error Font $(font_def) not found)) \
++		$(if $(font_path),ln -s -f $(font_path) ${DESTDIR}/usr/share/pcsd/public/css/$(font_file);,$(error Font $(font_def) not found)) \
+ 	)
+ 
+ # For running pcs_snmp_agent from a local (git clone) directory (without full

@@ -1,0 +1,7 @@
+Document: crmsh
+Title: crmsh HTML documentation
+Section: System/Administration
+
+Format: HTML
+Index: /usr/share/doc/crmsh/crm.8.html
+Files: /usr/share/doc/crmsh/*.html

@@ -1,0 +1,19 @@
+From: =?utf-8?q?Ferenc_W=C3=A1gner?= <wferi@niif.hu>
+Date: Fri, 4 Mar 2016 10:34:10 +0100
+Subject: Make the asciidoc documentation reproducible
+
+---
+ doc/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/doc/Makefile.am
++++ b/doc/Makefile.am
+@@ -104,7 +104,7 @@
+ 	  || $(INKSCAPE) --export-dpi=180 -C --export-filename=$@ $<; } $(PCMK_quiet)
+ 
+ if IS_ASCIIDOC
+-ASCIIDOC_HTML_ARGS	= --unsafe --backend=xhtml11
++ASCIIDOC_HTML_ARGS	= --unsafe --backend=xhtml11 --attribute footer-style=none
+ ASCIIDOC_DBOOK_ARGS	= -b docbook -d book
+ else
+ ASCIIDOC_HTML_ARGS	= --backend=html5

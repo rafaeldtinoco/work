@@ -1,0 +1,17 @@
+Description: Fix flaky lock file test
+ Try to wait a bit between starting the daemon and checking
+ the lock file for pid.
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2020-02-10
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/test/serverenv.py
++++ b/test/serverenv.py
+@@ -106,6 +106,7 @@
+         self.check_return_code(pid, return_code, expected_exitcode)
+ 
+         if expected_daemon:
++            time.sleep(1) # Wait for lock file write
+             self.check_daemon_handling(runner, expected_daemon)
+         elif return_code is None:
+             # This isn't strictly necessary because we ensure no

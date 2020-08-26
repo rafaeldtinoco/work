@@ -1,0 +1,22 @@
+#!/usr/bin/dh-exec
+
+etc/init.d/pacemaker
+lib/systemd/system/pacemaker.service [linux-any]
+usr/lib/pacemaker
+usr/lib/ocf/resource.d/pacemaker/controld
+usr/lib/ocf/resource.d/pacemaker/o2cb
+usr/lib/ocf/resource.d/pacemaker/remote
+usr/sbin/crm_attribute
+usr/sbin/crm_node
+usr/sbin/fence_legacy
+usr/sbin/pacemakerd
+usr/share/man/man7/ocf_pacemaker_controld.7
+usr/share/man/man7/ocf_pacemaker_o2cb.7
+usr/share/man/man7/ocf_pacemaker_remote.7
+usr/share/man/man7/pacemaker-schedulerd.7
+usr/share/man/man7/pacemaker-controld.7
+usr/share/man/man7/pacemaker-fenced.7
+usr/share/man/man8/crm_attribute.8
+usr/share/man/man8/crm_node.8
+usr/share/man/man8/fence_legacy.8
+usr/share/man/man8/pacemakerd.8

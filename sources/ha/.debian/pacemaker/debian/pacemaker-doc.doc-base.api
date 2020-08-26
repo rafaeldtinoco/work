@@ -1,0 +1,9 @@
+Document: pacemaker-api
+Title: Pacemaker API documentation
+Section: Programming/C
+
+Format: HTML
+Index: /usr/share/doc/pacemaker/html/index.html
+Files:
+ /usr/share/doc/pacemaker/html/*
+ /usr/share/doc/pacemaker/html/search/*

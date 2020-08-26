@@ -1,0 +1,2 @@
+version=3
+https://github.com/ClusterLabs/fence-agents/releases .*/archive/v(.*).tar.gz

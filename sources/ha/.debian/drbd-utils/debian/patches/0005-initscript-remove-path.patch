@@ -1,0 +1,26 @@
+From: Apollon Oikonomopoulos <apoikos@debian.org>
+Date: Mon, 18 Nov 2019 22:27:25 +0200
+Subject: Remove /usr from the initscript's PATH
+
+All utilities reside on /sbin. Furthermore, the declaration of
+/usr/sbin makes lintian complain about a missing dependency on $remote_fs,
+which is strictly not necessary.
+Last-Update: 2014-06-13
+Forwarded: no
+---
+ scripts/drbd | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/drbd b/scripts/drbd
+index 5b610f9..81a79a8 100755
+--- a/scripts/drbd
++++ b/scripts/drbd
+@@ -41,7 +41,7 @@ RMMOD="/sbin/rmmod"
+ UDEV_TIMEOUT=10
+ ADD_MOD_PARAM=""
+ 
+-PATH=/usr/sbin:/sbin:$PATH
++PATH=/sbin:/bin
+ 
+ if [ -f $DEFAULTFILE ]; then
+   . $DEFAULTFILE

@@ -1,0 +1,13 @@
+ocfs2-tools (1.8.4-2) unstable; urgency=medium
+
+  Nodes using systemd now require additional fstab options for
+  the filesystem to mount automatically on boot:
+
+    /dev/sdc1 /srv ocfs2 _netdev,x-systemd.requires=o2cb.service 0 0
+
+  Option _netdev is required to mount the filesystem by the
+  remote-fs.target, while the x-systemd.requires option starts
+  the cluster service before the filesystem (this option is
+  available since systemd v220).
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Tue, 12 Jul 2016 22:26:31 +0200

@@ -1,0 +1,36 @@
+#!/bin/sh
+# kFreeBSD do not accept scripts as interpreters, using #!/bin/sh and sourcing.
+if [ true != "$INIT_D_SCRIPT_SOURCED" ] ; then
+    set "$0" "$@"; INIT_D_SCRIPT_SOURCED=true . /lib/init/init-d-script
+fi
+### BEGIN INIT INFO
+# Provides:          o2cb
+# Required-Start:    $network $local_fs
+# Required-Stop:     $network $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Load O2CB cluster services at system boot
+# Description:       Load OCFS2 kernel modules and start O2CB services
+### END INIT INFO
+
+# Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+
+DESC="O2CB cluster services"
+DAEMON=/usr/libexec/ocfs2-tools/o2cb
+PIDFILE=none
+
+do_start_override() {
+    $DAEMON start
+}
+
+do_stop_override() {
+    $DAEMON stop
+}
+
+do_restart_override() {
+    $DAEMON restart
+}
+
+do_status_override() {
+    $DAEMON status
+}

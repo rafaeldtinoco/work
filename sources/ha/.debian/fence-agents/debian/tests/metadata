@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+TMPXML=$AUTOPKGTEST_TMP/xml
+
+for agent in /usr/sbin/fence_*; do
+  [ "$agent" = "/usr/sbin/fence_ack_manual" ] && continue
+
+  printf '\nTesting %s...\n' "$agent"
+  $agent -o metadata > "$TMPXML"
+  cat "$TMPXML"
+
+  TESTXML=tests/data/metadata/${agent##*/}.xml
+  if [ -f "$TESTXML" ]; then
+    gawk 'BEGIN {store=-1} /name=".*_path"/ {store=2} {if (store!=0) {print}; store--}' "$TMPXML" \
+    | diff -u "$TESTXML" -
+  fi
+
+  xsltproc lib/fence2rng.xsl "$TMPXML" \
+  | sed -e 's/ rha:description=/ description=/g' -e 's/ rha:name=/ name=/g' \
+  | xmllint --nsclean --noout -
+done

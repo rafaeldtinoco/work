@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+ulimit -H -l unlimited 2>/dev/null || {
+    # https://bugs.launchpad.net/bugs/1828228
+    echo "test disabled for unprivileged namespaces"
+    exit 77
+}
+
+cleanup () {
+  service pcsd stop
+  service pacemaker stop
+  service corosync stop
+  passwd --delete --lock hacluster
+}
+
+trap "cleanup" 0 2 3 15
+
+echo hacluster:hacluster | chpasswd
+pcs cluster auth -u hacluster -p hacluster
+pcs cluster setup debian node1 --start --force
+
+sleep 60
+
+pcs cluster pcsd-status | grep -20 "node1: Online"

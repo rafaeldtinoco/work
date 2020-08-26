@@ -1,0 +1,65 @@
+#!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#DH_VERBOSE = 1
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# Ensure that we link against all needed libraries (cf. Policy 10.2)
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
+
+# Properly support multi-arch triplet paths
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+# If your package provides eggs, install egg-info directories instead of real eggs
+DEB_PYTHON_INSTALL_ARGS_ALL += --single-version-externally-managed
+
+# main packaging script based on dh7 syntax
+%:
+	dh $@ --with python3
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+override_dh_auto_configure:
+	dh_auto_configure -- --prefix=/usr --sysconfdir=/etc \
+	    --libdir=/usr/lib/$(DEB_HOST_MULTIARCH) --includedir=/usr/include/$(DEB_HOST_MULTIARCH) \
+	    --datadir=/usr/share --docdir=/usr/share/doc/crmsh --htmldir=/usr/share/doc/crmsh/html
+
+# Make generated documentation reproducible
+override_dh_auto_build: export TZ=UTC
+override_dh_auto_build:
+	dh_auto_build
+# Manually invoke building of the asciidoc html documentation
+	cd $(CURDIR)/doc/website-v1 && $(MAKE)
+
+DOC = debian/tmp/usr/share/doc/crmsh
+
+override_dh_auto_install:
+	dh_auto_install
+# remove redundant files
+	rm -v $(DOC)/COPYING
+# move README to doc dir
+	mv debian/tmp/usr/share/crmsh/tests/README.regression $(DOC)/README.regression
+# keep crm in /usr/sbin for now
+	install -D debian/tmp/usr/bin/crm debian/tmp/usr/sbin/crm
+	rm debian/tmp/usr/bin/crm
+# remove uninstall file list (breaks reproducible builds)
+	rm debian/tmp/usr/lib/python*/site-packages/crmsh/install_files.txt
+# install bash completion
+	install -m 644 -D contrib/bash_completion.sh debian/tmp/usr/share/bash-completion/completions/crm
+# install vim plugin
+	install -m 644 -D debian/vim-pcmk.yaml debian/tmp/usr/share/vim/registry/vim-pcmk.yaml
+	install -m 644 -D contrib/pcmk-ftdetect.vim debian/tmp/usr/share/vim/addons/ftplugin/vim-pcmk.vim
+	install -m 644 -D contrib/pcmk.vim debian/tmp/usr/share/vim/addons/syntax/pcmk.vim
+	rm -r debian/tmp/usr/share/doc/crmsh/contrib/
+
+# clean with python 3
+override_dh_auto_clean:
+	python3 setup.py clean -a
+
+override_dh_clean:
+	dh_clean build/ doc/*.8 doc/*.html doc/website-v1/gen/
+# Restore timestamp after patching to make build reproducible
+	touch --reference=$(CURDIR)/doc/crmsh_hb_report.8.adoc $(CURDIR)/doc/crm.8.adoc

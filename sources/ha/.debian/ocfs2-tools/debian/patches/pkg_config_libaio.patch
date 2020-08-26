@@ -1,0 +1,16 @@
+Description: Move libaio reference to Libs.private
+ Try to fix lintian warning pkg-config-references-unknown-shared-library
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-07-13
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/ocfs2.pc.in
++++ b/ocfs2.pc.in
+@@ -7,5 +7,6 @@
+ Description: Userspace ocfs2 library
+ Version: @VERSION@
+ Requires: o2dlm o2cb com_err
+-Libs: -L${libdir} -locfs2 -laio
++Libs: -L${libdir} -locfs2
++Libs.private: -laio
+ Cflags: -I${includedir}

@@ -1,0 +1,26 @@
+libcrmservice.so.28 libcrmservice28 #MINVER#
+* Build-Depends-Package: pacemaker-dev
+ (arch=!hppa !powerpc !powerpcspe !ppc64 !ppc64el !hurd-i386)__start___verbose@Base 1.1.18
+ (arch=!hppa !powerpc !powerpcspe !ppc64 !ppc64el !hurd-i386)__stop___verbose@Base 1.1.18
+ get_directory_list@Base 1.1.13
+ pcmk_dbus_cb@Base 1.1.13
+ resources_action_create@Base 1.1.13
+ resources_agent_exists@Base 2.0.2
+ resources_find_service_class@Base 1.1.13
+ resources_list_agents@Base 1.1.13
+ resources_list_providers@Base 1.1.13
+ resources_list_standards@Base 1.1.13
+ services_action_async@Base 1.1.13
+ services_action_async_fork_notify@Base 2.0.2
+ services_action_cancel@Base 1.1.13
+ services_action_cleanup@Base 1.1.13
+ services_action_create@Base 1.1.13
+ services_action_create_generic@Base 1.1.13
+ services_action_free@Base 1.1.13
+ services_action_kick@Base 1.1.13
+ services_action_sync@Base 1.1.13
+ services_action_user@Base 1.1.18~rc3
+ services_alert_async@Base 1.1.18~rc3
+ services_alert_create@Base 1.1.18~rc3
+ services_list@Base 1.1.13
+ (arch=linux-any)systemd_unit_exec_with_unit@Base 1.1.13

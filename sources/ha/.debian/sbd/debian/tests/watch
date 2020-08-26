@@ -1,0 +1,51 @@
+#!/bin/sh
+
+set -e
+
+DISK=$AUTOPKGTEST_TMP/disk
+NODE=autopkgtest
+
+cleanup () {
+  [ "$LOOP" ] && losetup -d $LOOP
+}
+
+trap "cleanup" 0 2 3 15
+
+# create test disk
+echo "=== losetup ==="
+dd if=/dev/zero of=$DISK bs=1M count=10 2>&1
+LOOP=$(losetup --find --show $DISK)
+
+echo "=== create ==="
+sbd -n $NODE -d $LOOP create
+
+echo "=== allocate ==="
+sbd -n $NODE -d $LOOP allocate $NODE
+
+echo "=== list ==="
+sbd -n $NODE -d $LOOP list
+
+echo "=== dump ==="
+sbd -n $NODE -d $LOOP dump
+
+echo "=== watch ==="
+mkdir -p /var/lib/pacemaker/cores
+sbd -n $NODE -d $LOOP -W -W watch
+pgrep -a sbd
+
+echo "=== test ==="
+sbd -n $NODE -d $LOOP message $NODE test
+
+echo "=== exit ==="
+sbd -n $NODE -d $LOOP message $NODE exit
+
+# wait for exit
+for i in 1 2 3 4 5; do
+  pgrep sbd >/dev/null || break
+  sleep 1
+done
+
+if pgrep -a sbd; then
+  echo sbd did not exit
+  exit 1
+fi

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+DISK=$AUTOPKGTEST_TMP/disk
+
+cleanup () {
+  rm -f $DISK || true
+}
+
+trap "cleanup" 0 2 3 15
+
+# create test disk
+printf "\n=== disk ===\n"
+dd if=/dev/zero of=$DISK bs=1M count=200 2>&1
+
+# test tools
+printf "\n=== mkfs ===\n"
+mkfs.ocfs2 --force --mount local --block-size $(stat -f $DISK --format='%s') $DISK 2>&1
+
+printf "\n=== fsck ===\n"
+echo y | fsck.ocfs2 -f -y -F $DISK 2>&1
+
+printf "\n=== debugfs ===\n"
+debugfs.ocfs2 -R stats $DISK

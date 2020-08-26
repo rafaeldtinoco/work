@@ -1,0 +1,11 @@
+Tests: metadata
+Depends: @, python3-openstackclient, xsltproc, libxml2-utils, gawk
+
+Tests: delay
+Depends: @, python3-openstackclient, time, iputils-ping
+
+Tests: fence-dummy
+Restrictions: allow-stderr
+
+Tests: fence-aws
+Restrictions: skippable

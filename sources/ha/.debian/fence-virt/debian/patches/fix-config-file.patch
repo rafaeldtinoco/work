@@ -1,0 +1,24 @@
+Description: Update configuration file for Debian
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-11-24
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/config/fence_virt.conf
++++ b/config/fence_virt.conf
+@@ -5,10 +5,8 @@
+ 
+ listeners {
+ 	multicast {
+-		key_file = "/etc/cluster/fence_xvm.key";
++		key_file = "/etc/fence_virt.key";
+ 		address = "225.0.0.12";
+-		# Needed on Fedora systems
+-		interface = "virbr0";
+ 	}
+ }
+ 
+@@ -17,4 +15,3 @@
+ 		uri = "qemu:///system";
+ 	}
+ }
+-

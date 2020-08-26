@@ -1,0 +1,62 @@
+Instructions for OCFS2 filesystems in Debian
+============================================
+
+1. Cluster setup
+----------------
+
+You need to create a configuration file /etc/ocfs2/cluster.conf
+describing your cluster.  The most basic example includes two nodes
+in a cluster named ocfs2:
+
+cluster:
+        node_count = 2
+        name = ocfs2
+
+node:
+        number = 1
+        cluster = ocfs2
+        ip_port = 7777
+        ip_address = 192.168.1.1
+        name = node1
+
+node:
+        number = 2
+        cluster = ocfs2
+        ip_port = 7777
+        ip_address = 192.168.1.2
+        name = node2
+
+This cluster uses the TCP port 7777 for cluster communication and
+a local heartbeat mode (one disk heartbeat per OCFS2 filesystem).
+Make sure the node names listed in the configuration match the
+hostnames configured on the nodes.
+
+Next, reconfigure ocfs2-tools to enable the cluster service:
+
+  dpkg-reconfigure ocfs2-tools
+
+Finally, restarting the o2cb service will load the required
+kernel modules and start the cluster service:
+
+  service o2cb restart
+
+2. Filesystem setup
+-------------------
+
+When the cluster is running, OCFS2 filesystem can be created on a
+shared disk device:
+
+  mkfs.ocfs2 --cluster-stack=o2cb --cluster-name=ocfs2 /dev/sdc1
+
+Now, you should be able to mount the filesystem on both cluster
+nodes. Note that nodes using systemd require additional fstab
+options for the filesystem to mount automatically on boot:
+
+  /dev/sdc1 /srv ocfs2 _netdev,x-systemd.requires=o2cb.service 0 0
+
+Option _netdev is required to mount the filesystem by the
+remote-fs.target, while the x-systemd.requires option starts
+the cluster service before the filesystem (this option is
+available since systemd v220).
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Tue, 12 Jul 2016 22:26:31 +0200

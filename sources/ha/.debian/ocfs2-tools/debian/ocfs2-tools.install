@@ -1,0 +1,7 @@
+lib/systemd/system/*
+sbin/*
+usr/bin/*
+usr/libexec/ocfs2-tools/*
+usr/sbin/*
+usr/share/man/*
+vendor/common/51-ocfs2.rules /lib/udev/rules.d/

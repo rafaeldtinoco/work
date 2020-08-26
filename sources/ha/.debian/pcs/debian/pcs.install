@@ -1,0 +1,17 @@
+README.md usr/share/doc/pcs
+etc/bash_completion.d/* usr/share/bash-completion/completions/
+etc/default/pcsd
+etc/logrotate.d/pcsd
+etc/pam.d/pcsd
+lib/systemd/system/pcsd-ruby.service
+lib/systemd/system/pcsd.service
+usr/lib/python*/*-packages/pcs-*.egg-info
+usr/lib/python*/*-packages/pcs/*
+usr/sbin/pcs
+usr/sbin/pcsd
+usr/share/man/man8/pcs.8
+usr/share/man/man8/pcsd.8
+usr/share/pcs/pcs_internal
+usr/share/pcsd/*
+var/lib/pcsd
+var/log/pcsd

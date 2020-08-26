@@ -1,0 +1,17 @@
+Description: Use local stylesheet prefix
+Author: Martin Loschwitz <madkiss@debian.org>
+Last-Update: 2011-10-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+diff -ruN ClusterLabs-resource-agents-dc69db5.orig/doc/man/Makefile.am ClusterLabs-resource-agents-dc69db5/doc/man/Makefile.am
+--- ClusterLabs-resource-agents-dc69db5.orig/doc/man/Makefile.am	2012-10-05 19:27:22.000000000 +0000
++++ ClusterLabs-resource-agents-dc69db5/doc/man/Makefile.am	2012-10-09 11:20:26.009849098 +0000
+@@ -26,7 +26,7 @@
+ 
+ CLEANFILES              = $(man_MANS) $(xmlfiles) metadata-*.xml
+ 
+-STYLESHEET_PREFIX 	?= http://docbook.sourceforge.net/release/xsl/current
++STYLESHEET_PREFIX	?= /usr/share/xml/docbook/stylesheet/docbook-xsl
+ MANPAGES_STYLESHEET 	?= $(STYLESHEET_PREFIX)/manpages/docbook.xsl
+ HTML_STYLESHEET 	?= $(STYLESHEET_PREFIX)/xhtml/docbook.xsl
+ FO_STYLESHEET 		?= $(STYLESHEET_PREFIX)/fo/docbook.xsl

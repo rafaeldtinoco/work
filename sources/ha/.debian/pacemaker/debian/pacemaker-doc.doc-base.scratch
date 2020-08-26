@@ -1,0 +1,11 @@
+Document: clusters-from-scratch
+Title: Clusters from Scratch
+Section: System/Administration
+
+Format: HTML
+Index: /usr/share/doc/pacemaker/Clusters_from_Scratch/desktop/en-US/index.html
+Files:
+ /usr/share/doc/pacemaker/Clusters_from_Scratch/desktop/en-US/*
+ /usr/share/doc/pacemaker/Clusters_from_Scratch/desktop/en-US/images/*
+ /usr/share/doc/pacemaker/Clusters_from_Scratch/desktop/en-US/Common_Content/css/*
+ /usr/share/doc/pacemaker/Clusters_from_Scratch/desktop/en-US/Common_Content/images/*

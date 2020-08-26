@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+DEFAULT_ARGS='delay=10\n login=test\n passwd=test\n ipaddr=127.0.0.1\n port=1\n managed=1\n devices=test\n session_url=http://127.0.0.1\n email=test@test.te\n ping_targets=localhost'
+
+for agent in /usr/sbin/fence_*; do
+  [ "$agent" = "/usr/sbin/fence_ack_manual" ] && continue
+  [ "$agent" = "/usr/sbin/fence_kdump" ] && continue
+
+  printf 'Testing %s...\n' "$agent"
+
+  ARGS="$DEFAULT_ARGS"
+  if [ "$agent" = "/usr/sbin/fence_cisco_mds" ]; then
+    ARGS=$(echo "$ARGS" | sed 's#port=1#port=fc1/1#')
+  fi
+
+  TIME=$(/usr/bin/time -p sh -c "printf '$ARGS' | $agent " 2>&1 | awk -F"[. ]" -vOFS= '/real/ {print $2,$3}')
+  if [ "$TIME" -lt 1000 ]; then
+    printf 'Delay too low: %s\n', "$TIME"
+    exit 1
+  fi
+
+  printf 'Delay ok: %s\n' "$TIME"
+done

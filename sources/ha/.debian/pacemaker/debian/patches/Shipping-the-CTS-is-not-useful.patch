@@ -1,0 +1,43 @@
+From: =?utf-8?q?Ferenc_W=C3=A1gner?= <wferi@debian.org>
+Date: Mon, 31 Dec 2018 13:31:21 +0100
+Subject: Shipping the CTS is not useful
+
+---
+ Makefile.am                | 2 +-
+ daemons/execd/Makefile.am  | 2 +-
+ daemons/fenced/Makefile.am | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -57,7 +57,7 @@
+ CORE_INSTALL	= replace include lib daemons tools xml
+ 
+ # Only these will get built with a plain "make" or "make clean"
+-CORE		= $(CORE_INSTALL) cts
++CORE		= $(CORE_INSTALL)
+ 
+ SUBDIRS	= $(CORE) doc extra maint tests
+ 
+--- a/daemons/execd/Makefile.am
++++ b/daemons/execd/Makefile.am
+@@ -11,7 +11,7 @@
+ 
+ halibdir		= $(CRM_DAEMON_DIR)
+ 
+-halib_PROGRAMS		= pacemaker-execd cts-exec-helper
++halib_PROGRAMS		= pacemaker-execd
+ 
+ initdir			= $(INITDIR)
+ init_SCRIPTS		= pacemaker_remote
+--- a/daemons/fenced/Makefile.am
++++ b/daemons/fenced/Makefile.am
+@@ -13,7 +13,7 @@
+ 
+ halibdir	= $(CRM_DAEMON_DIR)
+ 
+-halib_PROGRAMS	= pacemaker-fenced cts-fence-helper
++halib_PROGRAMS	= pacemaker-fenced
+ 
+ sbin_SCRIPTS	= fence_legacy
+ 

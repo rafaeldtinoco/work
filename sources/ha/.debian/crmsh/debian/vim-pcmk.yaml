@@ -1,0 +1,5 @@
+addon: pcmk
+description: "The Pacemaker crmsh plugin for Vim"
+files:
+  - ftplugin/pcmk-ftdetect.vim
+  - syntax/pcmk.vim

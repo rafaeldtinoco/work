@@ -1,0 +1,61 @@
+Description: Fix testsuite failures
+ Update libexec calls in tests and settings.
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-01-12
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/pcs_test/tier0/lib/test_resource_agent.py
++++ b/pcs_test/tier0/lib/test_resource_agent.py
+@@ -1461,7 +1461,7 @@
+         )
+ 
+         self.mock_runner.run.assert_called_once_with(
+-            ["/usr/libexec/pacemaker/pacemaker-fenced", "metadata"]
++            ["/usr/lib/pacemaker/pacemaker-fenced", "metadata"]
+         )
+ 
+     def test_failed_to_get_xml(self):
+@@ -1474,7 +1474,7 @@
+         )
+ 
+         self.mock_runner.run.assert_called_once_with(
+-            ["/usr/libexec/pacemaker/pacemaker-fenced", "metadata"]
++            ["/usr/lib/pacemaker/pacemaker-fenced", "metadata"]
+         )
+ 
+     def test_invalid_xml(self):
+@@ -1487,7 +1487,7 @@
+         )
+ 
+         self.mock_runner.run.assert_called_once_with(
+-            ["/usr/libexec/pacemaker/pacemaker-fenced", "metadata"]
++            ["/usr/lib/pacemaker/pacemaker-fenced", "metadata"]
+         )
+ 
+ 
+@@ -1832,7 +1832,7 @@
+                     env_extend={"PATH": "/usr/sbin/:/bin/:/usr/bin/",},
+                 ),
+                 mock.call(
+-                    ["/usr/libexec/pacemaker/pacemaker-fenced", "metadata"]
++                    ["/usr/lib/pacemaker/pacemaker-fenced", "metadata"]
+                 ),
+             ]
+         )
+--- a/pcs/settings_default.py
++++ b/pcs/settings_default.py
+@@ -29,10 +29,10 @@
+ booth_authkey_bytes = 64
+ cluster_conf_file = "/etc/cluster/cluster.conf"
+ fence_agent_binaries = "/usr/sbin/"
+-pacemaker_schedulerd = "/usr/libexec/pacemaker/pacemaker-schedulerd"
+-pacemaker_controld = "/usr/libexec/pacemaker/pacemaker-controld"
+-pacemaker_based = "/usr/libexec/pacemaker/pacemaker-based"
+-pacemaker_fenced = "/usr/libexec/pacemaker/pacemaker-fenced"
++pacemaker_schedulerd = "/usr/lib/pacemaker/pacemaker-schedulerd"
++pacemaker_controld = "/usr/lib/pacemaker/pacemaker-controld"
++pacemaker_based = "/usr/lib/pacemaker/pacemaker-based"
++pacemaker_fenced = "/usr/lib/pacemaker/pacemaker-fenced"
+ pcs_version = "0.10.6"
+ crm_report = os.path.join(pacemaker_binaries, "crm_report")
+ crm_rule = os.path.join(pacemaker_binaries, "crm_rule")

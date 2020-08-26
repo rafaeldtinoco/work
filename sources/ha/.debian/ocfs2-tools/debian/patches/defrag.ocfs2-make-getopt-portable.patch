@@ -1,0 +1,54 @@
+Description: defragfs.ocfs2: make getopt return variable portable
+
+Fixes #42
+
+From ISO/IEC 9899:1999 (E):
+
+6.3.1.3 Signed and unsigned integers
+
+1 When a value with integer type is converted to another integer type
+other than _Bool, if the value can be represented by the new type, it is
+unchanged.
+
+2 Otherwise, if the new type is unsigned, the value is converted by
+repeatedly adding or subtracting one more than the maximum value that
+can be represented in the new type until the value is in the range of
+the new type.
+
+3 Otherwise, the new type is signed and the value cannot be represented
+in it; either the result is implementation-defined or an
+implementation-defined signal is raised.
+
+gcc-9-aarch64-linux-gnu 9.2.1 makes ((char = getopt()) != EOF) to always
+compare (255 != -1), considering char to be unsigned, as states item
+(3): implementation-defined. Meaning that the code has to change "char"
+to "int" to become fully portable.
+
+Bug: https://bugs.launchpad.net/bugs/1840958
+
+Signed-off-by: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+
+Bug: https://github.com/markfasheh/ocfs2-tools/issues/42
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/1840958
+Forwarded: https://github.com/markfasheh/ocfs2-tools/pull/43
+Last-Update: 2019-09-02
+---
+ defragfs.ocfs2/main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/defragfs.ocfs2/main.c b/defragfs.ocfs2/main.c
+index 747afb71..f029cd9a 100644
+--- a/defragfs.ocfs2/main.c
++++ b/defragfs.ocfs2/main.c
+@@ -577,7 +577,7 @@ static void dump_mode_flag(int mode_flag)
+ 
+ static int parse_opt(int argc, char **argv, int *_mode_flag)
+ {
+-	char opt;
++	int opt;
+ 
+ 	if (argc == 1)
+ 		return 0;
+-- 
+2.23.0
+

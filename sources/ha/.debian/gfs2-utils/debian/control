@@ -1,0 +1,41 @@
+Source: gfs2-utils
+Section: admin
+Priority: optional
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Uploaders: Valentin Vidic <vvidic@debian.org>
+Build-Depends:
+ autoconf,
+ automake,
+ autopoint,
+ bison,
+ check,
+ debhelper-compat (= 12),
+ flex,
+ libblkid-dev,
+ libncurses5-dev,
+ libtool,
+ pkg-config,
+ zlib1g-dev
+Standards-Version: 4.5.0
+Rules-Requires-Root: no
+Homepage: https://pagure.io/gfs2-utils
+Vcs-Browser: https://salsa.debian.org/ha-team/gfs2-utils
+Vcs-Git: https://salsa.debian.org/ha-team/gfs2-utils.git
+
+Package: gfs2-utils
+Architecture: linux-any
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ python3,
+ ${misc:Depends},
+ ${shlibs:Depends}
+Replaces: gfs2-tools (<= 3.0.17)
+Breaks: gfs2-tools (<= 3.0.17)
+Description: Global File System 2 - filesystem tools
+ The Global File System allows a cluster of machines to concurrently access
+ shared storage hardware like SANs or iSCSI and network block devices. GFS
+ can be deployed to build high-availability services without the single point
+ of failure of a file server.
+ .
+ This package contains tools for creating and managing global file systems.
+ GFS itself is a set of kernel modules.

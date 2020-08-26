@@ -1,0 +1,2 @@
+# AppStream not relevant for dlm
+dlm-controld: appstream-metadata-missing-modalias-provide lib/udev/rules.d/51-dlm.rules

@@ -1,0 +1,14 @@
+# ignore manpage warnings
+resource-agents: binary-without-manpage usr/sbin/ocft
+resource-agents: binary-without-manpage usr/sbin/sfex_stat
+resource-agents: manpage-has-errors-from-man usr/share/man/man7/ocf_heartbeat_SAPInstance.7.gz 131: warning [p 3, 5.7i]: can't break line
+resource-agents: manpage-has-errors-from-man usr/share/man/man7/ocf_heartbeat_openstack-info.7.gz 37: warning [p 1, 2.7i]: can't break line
+resource-agents: manpage-has-errors-from-man usr/share/man/man7/ocf_heartbeat_redis.7.gz 113: warning [p 2, 3.5i]: can't break line
+
+# ignore defunct RHEL script:
+resource-agents: binary-without-manpage usr/sbin/rhev-check.sh
+resource-agents: script-with-language-extension usr/sbin/rhev-check.sh
+
+# these are sourced shell libraries:
+resource-agents: script-not-executable usr/lib/ocf/lib/heartbeat/findif.sh
+resource-agents: script-not-executable usr/lib/ocf/lib/heartbeat/mysql-common.sh

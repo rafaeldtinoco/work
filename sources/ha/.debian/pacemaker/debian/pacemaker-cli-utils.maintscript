@@ -1,0 +1,1 @@
+rm_conffile /etc/default/crm_mon 1.1.15-2~

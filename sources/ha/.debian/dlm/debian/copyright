@@ -1,0 +1,51 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: dlm
+Source: https://pagure.io/dlm
+
+Files: *
+Comment: Based on the distributed README.license file
+Copyright: 2004-2012 Red Hat, Inc.
+License: GPL-2+
+
+Files: libdlm/libdlm.c libdlm/libdlm.h libdlm/libdlm_internal.h
+Copyright: 2004-2011 Red Hat, Inc.
+License: LGPL-2.1+
+
+Files: dlm_controld/list.h
+Copyright: Linux kernel developers
+License: GPL-2
+
+Files: dlm_controld/rbtree.c
+Copyright: 1999  Andrea Arcangeli <andrea@suse.de>
+           2002  David Woodhouse <dwmw2@infradead.org>
+License: GPL-2+
+
+Files: dlm_controld/rbtree.h
+Copyright: 1999  Andrea Arcangeli <andrea@suse.de>
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2015-2019  Ferenc Wágner <wferi@debian.org>
+License: GPL-2+
+
+License: GPL-2
+ On Debian systems, the complete text of the GNU General Public License
+ version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+License: GPL-2+
+ This copyrighted material is made available to anyone wishing to use,
+ modify, copy, or redistribute it subject to the terms and conditions
+ of the GNU General Public License v2 or (at your option) any later version.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ .
+ On Debian systems, the complete text of the GNU Lesser General Public
+ License version 2.1 can be found in "/usr/share/common-licenses/LGPL-2.1".
+

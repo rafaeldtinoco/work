@@ -1,0 +1,29 @@
+#!/bin/sh
+# kFreeBSD do not accept scripts as interpreters, using #!/bin/sh and sourcing.
+if [ true != "$INIT_D_SCRIPT_SOURCED" ] ; then
+    set "$0" "$@"; INIT_D_SCRIPT_SOURCED=true . /lib/init/init-d-script
+fi
+### BEGIN INIT INFO
+# Provides:		dlm
+# Required-Start:	$remote_fs $syslog corosync
+# Required-Stop:	$remote_fs $syslog corosync
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	dlm control daemon
+# Description:		Starts and stops dlm control daemon.
+### END INIT INFO
+
+NAME="dlm_controld"
+DESC="dlm control daemon"
+DAEMON="/usr/sbin/$NAME"
+PIDFILE="/run/$NAME/$NAME.pid"
+
+CONFIG="/etc/default/dlm"
+[ -f "$CONFIG" ] && . "$CONFIG"
+
+DAEMON_ARGS="$DLM_CONTROLD_OPTS"
+
+do_start_prepare() {
+    modprobe dlm >/dev/null 2>&1
+    mount -t configfs none /sys/kernel/config >/dev/null 2>&1
+}

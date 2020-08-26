@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# Ensure that we link against all needed libraries (cf. Policy 10.2)
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	dh_auto_install -- LIBNUM=/lib/$(DEB_HOST_MULTIARCH)
+
+DEFDIR=debian/dlm-controld/etc/default
+SDDIR= debian/dlm-controld/lib/systemd/system
+override_dh_install:
+	dh_install
+	mkdir -p "$(DEFDIR)" "$(SDDIR)"
+	cp init/dlm.sysconfig "$(DEFDIR)"/dlm
+	cp init/dlm.service "$(SDDIR)"
+
+override_dh_installinit:
+	dh_installinit -pdlm-controld --name=dlm
+
+override_dh_missing:
+	dh_missing --fail-missing

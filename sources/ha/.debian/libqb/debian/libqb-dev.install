@@ -1,0 +1,9 @@
+usr/include/qb
+usr/lib/*/libqb.so
+usr/lib/*/pkgconfig/libqb.pc
+usr/sbin/qb-blackbox
+usr/bin/doxygen2man
+usr/share/doc/libqb /usr/share/doc/libqb-dev
+usr/share/man/man3
+usr/share/man/man8
+usr/share/man/man1

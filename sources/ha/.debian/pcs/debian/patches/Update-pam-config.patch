@@ -1,0 +1,18 @@
+Description: Fix pam config for Debian
+ Use @include for default auth setup.
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-01-12
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/pcsd/pcsd.pam
++++ b/pcsd/pcsd.pam
+@@ -1,5 +1,5 @@
+ #%PAM-1.0
+-auth       include      system-auth
+-account    include      system-auth
+-password   include      system-auth
+-session    include      system-auth
++@include common-auth
++@include common-account
++@include common-password
++@include common-session

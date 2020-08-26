@@ -1,0 +1,18 @@
+Description: Fix o2image segfault on s390x
+ Use correct union member. On little endian this worked
+ because of the union layout.
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2020-05-21
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/o2image/o2image.c
++++ b/o2image/o2image.c
+@@ -113,7 +113,7 @@
+ 			if (ret)
+ 				goto out;
+ 		} else {
+-			for (j = 0; j < (rec->e_int_clusters*ost->ost_bpc); j++)
++			for (j = 0; j < (rec->e_leaf_clusters*ost->ost_bpc); j++)
+ 				ocfs2_image_mark_bitmap(ofs,
+ 							(rec->e_blkno + j));
+ 		}

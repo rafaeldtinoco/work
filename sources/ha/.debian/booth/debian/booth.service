@@ -1,0 +1,17 @@
+# systemd service for managing all booth instances on the system. This
+# service is actually a systemd target, but we are using a service
+# since targets cannot be reloaded.
+
+[Unit]
+Description=Booth Ticketmanager
+Documentation=man:boothd(8)
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/true
+ExecReload=/bin/true
+RemainAfterExit=on
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+Test-Command: /usr/sbin/fence_virt -h
+Depends: fence-virt
+
+Test-Command: service fence_virtd status
+Depends: fence-virtd
+Restrictions: needs-root, isolation-container

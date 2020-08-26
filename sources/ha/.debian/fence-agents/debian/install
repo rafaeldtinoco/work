@@ -1,0 +1,7 @@
+usr/libexec/fence-agents/fence_kdump_send
+usr/sbin/fence*
+usr/share/cluster/fence*
+usr/share/cluster/relaxng*
+usr/share/doc
+usr/share/fence*
+usr/share/man/man8/fence*

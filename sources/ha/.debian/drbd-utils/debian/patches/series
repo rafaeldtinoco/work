@@ -1,0 +1,9 @@
+0001-dpkg-statoverride-instead-of-chgrp-chmod.patch
+0002-udev-rules-name
+0003-disable-version-warning
+0004-disable-automatic-user-survey.patch
+0005-initscript-remove-path.patch
+0006-initscript-add-start-runlevels.patch
+0007-drbdmon-buildflags.patch
+0008-drbdmon-pass-LDFLAGS-to-g.patch
+0009-v84-Make-setup_options-definitions-as-extern.patch

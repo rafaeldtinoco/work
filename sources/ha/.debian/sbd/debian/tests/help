@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+/usr/sbin/sbd -h 2>&1 | grep ^Options: -C 10

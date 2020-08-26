@@ -1,0 +1,19 @@
+#!/usr/bin/dh-exec
+
+etc/ha.d/shellfuncs
+usr/include
+usr/lib/heartbeat
+usr/lib/ocf
+usr/lib/tmpfiles.d/resource-agents.conf [linux-any]
+lib/systemd/system/resource-agents-deps.target [linux-any]
+usr/sbin/ocft
+usr/sbin/ocf-tester
+usr/sbin/rhev-check.sh
+usr/sbin/sfex_init [linux-any]
+usr/sbin/sfex_stat [linux-any]
+usr/share/cluster
+usr/share/doc/resource-agents
+usr/share/man/man7/*
+usr/share/man/man8/ocf-tester.8
+usr/share/man/man8/sfex_init.8 [linux-any]
+usr/share/resource-agents

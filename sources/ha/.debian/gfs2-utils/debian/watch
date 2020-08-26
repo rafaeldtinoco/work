@@ -1,0 +1,3 @@
+version=4
+https://releases.pagure.org/gfs2-utils/ \
+    gfs2-utils-(.*).tar.xz debian uupdate

@@ -1,0 +1,5 @@
+debian/configfs.conf usr/lib/modules-load.d
+usr/lib/udev/rules.d/51-dlm.rules lib/udev/rules.d
+usr/sbin
+usr/share/man/man5
+usr/share/man/man8

@@ -1,0 +1,28 @@
+Description: Use /run for PIDFile location
+ systemd complains if PIDFile uses /var/run
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-04-26
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/src/sbd.service.in
++++ b/src/sbd.service.in
+@@ -10,7 +10,7 @@
+ 
+ [Service]
+ Type=forking
+-PIDFile=@localstatedir@/run/sbd.pid
++PIDFile=@runstatedir@/sbd.pid
+ EnvironmentFile=-@CONFIGDIR@/sbd
+ ExecStart=@sbindir@/sbd $SBD_OPTS -p @localstatedir@/run/sbd.pid watch
+ ExecStop=@bindir@/kill -TERM $MAINPID
+--- a/src/sbd_remote.service.in
++++ b/src/sbd_remote.service.in
+@@ -8,7 +8,7 @@
+ 
+ [Service]
+ Type=forking
+-PIDFile=@localstatedir@/run/sbd.pid
++PIDFile=@runstatedir@/sbd.pid
+ EnvironmentFile=-@CONFIGDIR@/sbd
+ ExecStart=@sbindir@/sbd $SBD_OPTS -p @localstatedir@/run/sbd.pid watch
+ ExecStop=@bindir@/kill -TERM $MAINPID

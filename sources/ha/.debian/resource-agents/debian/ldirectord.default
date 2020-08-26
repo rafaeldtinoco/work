@@ -1,0 +1,4 @@
+# Set the following variable to define a default configuration 
+# file for ldirectord.
+
+# CONFIG_FILE=/etc/ldirectord.cf

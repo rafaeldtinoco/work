@@ -1,0 +1,11 @@
+Document: pacemaker-explained
+Title: Pacemaker Explained
+Section: System/Administration
+
+Format: HTML
+Index: /usr/share/doc/pacemaker/Pacemaker_Explained/desktop/en-US/index.html
+Files:
+ /usr/share/doc/pacemaker/Pacemaker_Explained/desktop/en-US/*
+ /usr/share/doc/pacemaker/Pacemaker_Explained/desktop/en-US/images/*
+ /usr/share/doc/pacemaker/Pacemaker_Explained/desktop/en-US/Common_Content/css/*
+ /usr/share/doc/pacemaker/Pacemaker_Explained/desktop/en-US/Common_Content/images/*

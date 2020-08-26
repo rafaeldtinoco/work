@@ -1,0 +1,11 @@
+Document: pacemaker-fencing
+Title: Fencing and Stonith
+Author: Dejan Muhamedagic <dejan@suse.de>
+Section: System/Administration
+
+Format: HTML
+Index: /usr/share/doc/pacemaker/crm_fencing.html
+Files: /usr/share/doc/pacemaker/crm_fencing.html
+
+Format: Text
+Files: /usr/share/doc/pacemaker/crm_fencing.txt.gz

@@ -1,0 +1,131 @@
+Description: Make agent tests work on Debian
+ Patch package names and other details in ocft test
+ configs to be usable by debian/tests.
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Forwarded: not-needed
+Last-Update: 2017-01-12
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/tools/ocft/mysql
++++ b/tools/ocft/mysql
+@@ -3,7 +3,7 @@
+ CONFIG
+ 	Agent mysql
+ 	AgentRoot /usr/lib/ocf/resource.d/heartbeat
+-	InstallPackage mysql
++	InstallPackage default-mysql-server
+         HangTimeout 20
+ 
+ SETUP-AGENT
+@@ -65,7 +65,7 @@
+ 	Include prepare
+ 	Bash chmod u-w /var/lib/mysql
+ 	BashAtExit chmod u+w /var/lib/mysql
+-	AgentRun start OCF_ERR_PERM
++	AgentRun start OCF_ERR_GENERIC
+ 
+ CASE "unimplemented command"
+ 	Include prepare
+--- a/tools/ocft/named
++++ b/tools/ocft/named
+@@ -6,8 +6,8 @@
+ CONFIG
+ 	Agent named
+ 	AgentRoot /usr/lib/ocf/resource.d/heartbeat
+-	InstallPackage bind
+-	InstallPackage bind-utils
++	InstallPackage bind9
++	InstallPackage bind9-utils
+ 
+ SETUP-AGENT
+ 	/etc/init.d/named start
+@@ -15,6 +15,7 @@
+ 
+ CASE-BLOCK crm_setting
+         Env OCF_RESKEY_CRM_meta_timeout=15000
++        Env OCF_RESKEY_named_user=bind
+ 
+ CASE-BLOCK default_status
+         AgentRun stop
+--- a/tools/ocft/iscsi
++++ b/tools/ocft/iscsi
+@@ -3,7 +3,7 @@
+ CONFIG
+ 	Agent iscsi
+ 	AgentRoot /usr/lib/ocf/resource.d/heartbeat
+-	InstallPackage open-iscsi targetcli
++	InstallPackage open-iscsi targetcli-fb
+ 	HangTimeout 20
+ 
+ VARIABLE
+@@ -24,11 +24,6 @@
+ 	else
+ 		/etc/init.d/open-iscsi start
+ 	fi
+-	if systemctl list-unit-files 2>/dev/null | fgrep -q target.service; then
+-		systemctl start target.service
+-	else
+-		/etc/init.d/target start
+-	fi
+ 	export OCF_RESKEY_iqn=$OCFT_target
+ 	export OCF_RESKEY_portals=$OCFT_portal
+ 	export OCF_RESKEY_target_iqn=$OCFT_target
+@@ -45,9 +40,6 @@
+ 	export OCF_RESKEY_lun=1
+ 	/usr/lib/ocf/resource.d/heartbeat/iSCSILogicalUnit stop
+ 	/usr/lib/ocf/resource.d/heartbeat/iSCSITarget stop
+-	if systemctl list-unit-files 2>/dev/null | fgrep -q target.service; then
+-		systemctl stop target.service
+-	fi
+ 	loopbackeddev unmake $OCFT_disk
+ 
+ CASE-BLOCK required_args
+--- a/tools/ocft/MailTo
++++ b/tools/ocft/MailTo
+@@ -3,7 +3,7 @@
+ CONFIG
+ 	Agent MailTo
+ 	AgentRoot /usr/lib/ocf/resource.d/heartbeat
+-	InstallPackage mailx
++	InstallPackage bsd-mailx
+ 	HangTimeout 20
+ 
+ CASE-BLOCK required_args
+--- a/tools/ocft/nfsserver
++++ b/tools/ocft/nfsserver
+@@ -11,6 +11,7 @@
+ 	if test -f /etc/init.d/nfsserver; then
+ 		INITSCRIPT="/etc/init.d/nfsserver"
+ 	fi
++	service nfs-kernel-server stop
+ 	true
+ 
+ CASE-BLOCK required_args
+--- a/tools/ocft/pgsql
++++ b/tools/ocft/pgsql
+@@ -3,15 +3,22 @@
+ CONFIG
+ 	Agent pgsql
+ 	AgentRoot /usr/lib/ocf/resource.d/heartbeat
+-	InstallPackage postgresql-server
++	InstallPackage postgresql
+         HangTimeout 20
+ 
+ SETUP-AGENT
+-	/etc/init.d/postgresql start
+-	/etc/init.d/postgresql stop
++	# nothing
++
++VARIABLE
++        cluster_name="$(pg_conftool -s show cluster_name)"
++        cluster_version="$(pg_conftool -s show cluster_name | cut -d/ -f1)"
+ 
+ CASE-BLOCK crm_setting
+         Env OCF_RESKEY_CRM_meta_timeout=15000
++        Env OCF_RESKEY_pgctl=/usr/lib/postgresql/$cluster_version/bin/pg_ctl
++        Env OCF_RESKEY_pgdata=/var/lib/postgresql/$cluster_name
++        Env OCF_RESKEY_config=/etc/postgresql/$cluster_name/postgresql.conf
++        Env OCF_RESKEY_socketdir=/var/run/postgresql
+ 
+ CASE-BLOCK default_status
+         AgentRun stop

@@ -1,0 +1,2 @@
+# /etc/init.d/booth uses /etc/booth/booth.conf, same config as booth-arbitrator.service
+booth: package-supports-alternative-init-but-no-init.d-script lib/systemd/system/booth-arbitrator.service

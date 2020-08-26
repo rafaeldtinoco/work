@@ -1,0 +1,3 @@
+Enable-PrivateTmp-in-the-systemd-service-files.patch
+Make-the-example-config-valid.patch
+man-move-cmap_keys-man-page-from-section-8-to-7.patch

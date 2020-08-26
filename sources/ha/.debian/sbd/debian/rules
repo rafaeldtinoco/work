@@ -1,0 +1,42 @@
+#!/usr/bin/make -f
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+# crm_config.h lives outside the default include direcotires.
+# Moreover, we need to use std=gnu89 to prevent compiling errors.
+export DEB_CFLAGS_MAINT_APPEND = -I/usr/include/$(shell dpkg-architecture -q DEB_TARGET_MULTIARCH)/pacemaker
+
+# Avoid useless dependencies in the utilities
+export DEB_LDFLAGS_MAINT_APPEND+=-Wl,--as-needed
+
+%:
+	dh $@
+
+# We need to override the libdir, otherwise it will be installed
+# within /usr/lib/${DEB_HOST_MULTIARCH} and pacemaker will not be
+# able to find the external/sbd agent.
+override_dh_auto_configure:
+	dh_auto_configure -- --libdir=/usr/lib --bindir=/bin --with-configdir=/etc/default
+
+# Generate tests-opt.m4 before autoreconf runs.
+override_dh_autoreconf:
+	./autogen.sh
+	dh_autoreconf
+
+override_dh_install:
+	dh_install
+	install -D -m 0755 src/sbd.sh        debian/sbd/etc/init.d/sbd
+	install -D -m 0644 src/sbd.sysconfig debian/sbd/etc/default/sbd
+	rm debian/sbd/usr/lib/libsbdtestbed*
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+# sbd is started through corosync.
+override_dh_installinit:
+	dh_installinit --only-scripts --no-start
+
+# sbd_remote is started through pacemaker_remote.
+override_dh_installsystemd:
+	dh_installsystemd --no-start --no-restart-on-upgrade --no-restart-after-upgrade

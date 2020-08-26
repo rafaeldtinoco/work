@@ -1,0 +1,57 @@
+Tests: IPaddr2
+Depends: resource-agents
+Restrictions: needs-root, isolation-container
+
+Test-Command: service ldirectord status
+Depends: ldirectord
+Restrictions: needs-root, isolation-container
+
+Test-Command: debian/tests/run-ocft MailTo
+Depends: resource-agents, bsd-mailx
+Restrictions: needs-root, isolation-container
+
+Test-Command: debian/tests/run-ocft apache
+Depends: resource-agents, apache2, wget
+Restrictions: needs-root, isolation-container
+
+Test-Command: debian/tests/run-ocft mysql
+Depends: resource-agents, default-mysql-server
+Restrictions: needs-root, isolation-container
+
+Test-Command: debian/tests/run-ocft pgsql
+Depends: resource-agents, postgresql
+Restrictions: needs-root, isolation-container
+
+Test-Command: debian/tests/run-ocft postfix
+Depends: resource-agents, postfix
+Restrictions: needs-root, isolation-container
+
+# currently failing on Ubuntu autopkgtest setup for networking differences, so skip there
+# Working in Debci, but compared to badtest retains all the other tests coverage
+Test-Command: [ "`lsb_release -is`" = "Ubuntu" ] || debian/tests/run-ocft named
+Depends: resource-agents, bind9 (>= 1:9.16.1-2), bind9-host, bind9-utils, lsb-release
+Restrictions: needs-root, isolation-container
+
+Test-Command: debian/tests/run-ocft Filesystem
+Depends: resource-agents
+Restrictions: needs-root, isolation-machine
+
+Test-Command: debian/tests/run-ocft LVM
+Depends: resource-agents, lvm2
+Restrictions: needs-root, isolation-machine
+
+Test-Command: debian/tests/run-ocft exportfs
+Depends: resource-agents, nfs-kernel-server
+Restrictions: needs-root, isolation-machine
+
+Test-Command: debian/tests/run-ocft exportfs-multidir
+Depends: resource-agents, nfs-kernel-server
+Restrictions: needs-root, isolation-machine
+
+Test-Command: debian/tests/run-ocft nfsserver
+Depends: resource-agents, nfs-kernel-server
+Restrictions: needs-root, isolation-machine
+
+Test-Command: debian/tests/run-ocft iscsi
+Depends: resource-agents, open-iscsi, targetcli-fb, openssl
+Restrictions: needs-root, isolation-machine

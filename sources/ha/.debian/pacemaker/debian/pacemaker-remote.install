@@ -1,0 +1,7 @@
+#!/usr/bin/dh-exec
+
+etc/init.d/pacemaker_remote
+lib/systemd/system/pacemaker_remote.service [linux-any]
+usr/sbin/pacemaker_remoted
+usr/sbin/pacemaker-remoted
+usr/share/man/man8/pacemaker-remoted.8

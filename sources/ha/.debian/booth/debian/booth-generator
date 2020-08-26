@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -eu
+
+GENDIR="$1"
+WANTDIR="$1/booth.service.wants"
+SERVICEFILE="/lib/systemd/system/booth@.service"
+AUTOSTART="all"
+CONFIG_DIR=/etc/booth
+DEFAULT_CONF=/etc/default/booth
+
+mkdir -p "$WANTDIR"
+
+# generate systemd service files for all *.conf files within $CONFIG_DIR
+for CONFIG in `cd $CONFIG_DIR; ls *.conf 2> /dev/null`; do
+	NAME=${CONFIG%%.conf}
+	ln -s "$SERVICEFILE" "$WANTDIR/booth@$NAME.service"
+done
+
+exit 0
+

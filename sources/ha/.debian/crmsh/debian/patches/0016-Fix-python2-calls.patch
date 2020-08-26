@@ -1,0 +1,158 @@
+Description: Build using only python 3
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-08-16
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/doc/website-v1/Makefile
++++ b/doc/website-v1/Makefile
+@@ -54,6 +54,7 @@
+ XDGOPEN := xdg-open
+ NEWS := $(wildcard news/*.adoc)
+ NEWSDOC := $(patsubst %.adoc,gen/%/index.html,$(NEWS))
++PYTHON := python3
+ 
+ .PHONY: all clean deploy open
+ 
+@@ -62,33 +63,33 @@
+ gen/index.html: index.adoc $(CRMCONF)
+ 	@mkdir -p $(dir $@)
+ 	@$(ASCIIDOC) --unsafe -b html5 -a icons -a iconsdir=/img/icons -f $(CRMCONF) -o $@ $<
+-	@python ./postprocess.py -o $@ $<
++	@$(PYTHON) ./postprocess.py -o $@ $<
+ 
+ gen/%/index.html: %.adoc $(CRMCONF)
+ 	@mkdir -p $(dir $@)
+ 	@$(ASCIIDOC) --unsafe -b html5 -a icons -a iconsdir=/img/icons -f $(CRMCONF) -o $@ $<
+-	@python ./postprocess.py -o $@ $<
++	@$(PYTHON) ./postprocess.py -o $@ $<
+ 
+ gen/history-guide/index.html: $(HISTORY_LISTINGS)
+ 
+ gen/man/index.html: ../crm.8.adoc $(CRMCONF)
+ 	@mkdir -p $(dir $@)
+ 	@$(ASCIIDOC) --unsafe -b html5 -f $(CRMCONF) -o $@ $<
+-	@python ./postprocess.py -o $@ $<
++	@$(PYTHON) ./postprocess.py -o $@ $<
+ 
+ gen/404.html: 404.adoc $(CRMCONF)
+ 	@mkdir -p $(dir $@)
+ 	@$(ASCIIDOC) --unsafe -b html5 -f $(CRMCONF) -o $@ $<
+-	@python ./postprocess.py -o $@ $<
++	@$(PYTHON) ./postprocess.py -o $@ $<
+ 
+ news.adoc: $(NEWS) $(CRMCONF)
+ 	@echo "news:" $(NEWS)
+-	python ./make-news.py $@ $(NEWS)
++	$(PYTHON) ./make-news.py $@ $(NEWS)
+ 
+ gen/news/index.html: news.adoc
+ 	@mkdir -p $(dir $@)
+ 	$(ASCIIDOC) --unsafe -b html5 -f $(CRMCONF) -o $@ $<
+-	@python ./postprocess.py -o $@ $<
++	@$(PYTHON) ./postprocess.py -o $@ $<
+ 
+ gen/css/%.css: css/%.css
+ 	@mkdir -p gen/css
+@@ -127,7 +128,7 @@
+ 
+ gen/atom.xml: $(NEWSDOC)
+ 	@echo "atom:" $(NEWSDOC)
+-	python ./make-news.py gen/atom.xml $(NEWS)
++	$(PYTHON) ./make-news.py gen/atom.xml $(NEWS)
+ 
+ site: gen/atom.xml gen/index.html gen/404.html gen/news/index.html gen/man/index.html $(TGT) $(CSS) $(IMG) $(FONTS) $(NEWSDOC)
+ 	@which dos2unix >/dev/null && find gen -name "*.html" -type f -exec dos2unix {} \;
+--- a/doc/website-v1/postprocess.py
++++ b/doc/website-v1/postprocess.py
+@@ -47,7 +47,7 @@
+ def generate_toc(infile, outfile, debug):
+ 
+     if debug:
+-        print "Infile:", infile
++        print("Infile:", infile)
+     toc = read_toc_data(infile, debug)
+     '''
+     toc_data = []
+@@ -56,7 +56,7 @@
+         m = section.match(line)
+         if m:
+             if debug:
+-                print "toc_data: %s" % str(((m.group('depth'), m.group('text'), m.group('id'))))
++                print("toc_data: %s" % str(((m.group('depth'), m.group('text'), m.group('id')))))
+             toc_data.append((m.group('depth'), m.group('text'), m.group('id')))
+ 
+     toc = ''
+@@ -72,11 +72,11 @@
+     # Write TOC to outfile
+     if outfile:
+         if debug:
+-            print "Writing TOC:"
+-            print "----"
+-            print toc
+-            print "----"
+-            print "Outfile:", outfile
++            print("Writing TOC:")
++            print("----")
++            print(toc)
++            print("----")
++            print("Outfile:", outfile)
+         fil = open(outfile)
+         f = fil.readlines()
+         fil.close()
+@@ -95,14 +95,14 @@
+         m = section.match(line)
+         if m:
+             if debug:
+-                print "toc_data: %s" % str(((m.group('depth'), m.group('text'), m.group('id'))))
++                print("toc_data: %s" % str(((m.group('depth'), m.group('text'), m.group('id')))))
+             toc_data.append((m.group('depth'), m.group('text'), m.group('id')))
+ 
+     toc = ''
+     if len(toc_data) > 0:
+         toc = '<div id="toc">\n'
+         for depth, text, link in toc_data:
+-            if depth >= 2 and link is not None:
++            if int(depth) >= 2 and link is not None:
+                 toc += '<div class="toclevel%s"><a href="#%s">%s</a></div>\n' % (
+                     int(depth) - 1, link, text)
+         toc += '</div>\n'
+@@ -125,7 +125,7 @@
+     debug = args.debug
+     outfile = args.output
+     infile = args.input
+-    print "+ %s -> %s" % (infile, outfile)
++    print("+ %s -> %s" % (infile, outfile))
+     gen = False
+     for tocpage in TOC_PAGES:
+         if not gen and outfile.endswith(tocpage):
+--- a/doc/website-v1/make-news.py
++++ b/doc/website-v1/make-news.py
+@@ -63,7 +63,7 @@
+             raise ValueError("Missing date")
+ 
+     def atom_id(self):
+-        return root_id + '::' + hashlib.sha1(self.filename).hexdigest()
++        return root_id + '::' + hashlib.sha1(self.filename.encode('utf-8')).hexdigest()
+ 
+     def atom_date(self):
+         return self.date.replace(' ', 'T') + ':00' + time.tzname[0]
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,5 +1,5 @@
+ lxml
+ PyYAML
+ nosexcover
+-py-dateutil
++python-dateutil
+ parallax
+--- a/setup.py
++++ b/setup.py
+@@ -10,7 +10,7 @@
+       author_email='kgronlund@suse.com',
+       url='http://crmsh.github.io/',
+       packages=['crmsh'],
+-      install_requires=['parallax', 'lxml', 'PyYAML', 'py-dateutil'],
++      install_requires=['parallax', 'lxml', 'PyYAML', 'python-dateutil'],
+       scripts=['bin/crm'],
+       data_files=[('/usr/share/crmsh', ['doc/crm.8.adoc'])],
+       include_package_data=True)

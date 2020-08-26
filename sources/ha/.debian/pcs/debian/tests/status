@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+ulimit -H -l unlimited 2>/dev/null || {
+    # https://bugs.launchpad.net/bugs/1828228
+    echo "test disabled for unprivileged namespaces"
+    exit 77
+}
+
+cleanup () {
+  service pacemaker stop
+  service corosync stop
+}
+
+trap "cleanup" 0 2 3 15
+
+service corosync start
+service pacemaker start
+
+sleep 60
+
+pcs cluster status 2>&1 | grep -20 -E '0 resource( instance)?s configured'

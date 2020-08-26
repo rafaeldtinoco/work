@@ -1,0 +1,58 @@
+From: Philipp Hug <philipp@hug.cx>
+Date: Tue, 20 Mar 2012 14:57:25 +0100
+Subject: dpkg-statoverride instead of chgrp/chmod
+
+Last-Update: 2015-02-24
+Forwarded: no
+---
+ user/v83/drbdadm_main.c     | 4 +---
+ user/v84/drbdadm_main.c     | 4 +---
+ user/v9/drbdadm_postparse.c | 5 +----
+ 3 files changed, 3 insertions(+), 10 deletions(-)
+
+diff --git a/user/v83/drbdadm_main.c b/user/v83/drbdadm_main.c
+index 329afb6..fa4edf4 100644
+--- a/user/v83/drbdadm_main.c
++++ b/user/v83/drbdadm_main.c
+@@ -2306,9 +2306,7 @@ int sanity_check_abs_cmd(char *cmd_name)
+ 				"  You need to fix this with these commands:\n");
+ 		did_header = 1;
+ 		fprintf(stderr,
+-			"  chgrp haclient %s\n"
+-			"  chmod o-x %s\n"
+-			"  chmod u+s %s\n\n", cmd_name, cmd_name, cmd_name);
++			"  dpkg-statoverride --add --update root haclient 4750 %s\n\n", cmd_name);
+ 	}
+ 	return 1;
+ }
+diff --git a/user/v84/drbdadm_main.c b/user/v84/drbdadm_main.c
+index 3db3b77..ca30b2e 100644
+--- a/user/v84/drbdadm_main.c
++++ b/user/v84/drbdadm_main.c
+@@ -2880,9 +2880,7 @@ int sanity_check_abs_cmd(char *cmd_name)
+ 				"  You need to fix this with these commands:\n");
+ 		did_header = 1;
+ 		err(
+-			"  chgrp haclient %s\n"
+-			"  chmod o-x %s\n"
+-			"  chmod u+s %s\n\n", cmd_name, cmd_name, cmd_name);
++			"  dpkg-statoverride --add --update root haclient 4750 %s\n\n", cmd_name);
+ 	}
+ 	return 1;
+ }
+diff --git a/user/v9/drbdadm_postparse.c b/user/v9/drbdadm_postparse.c
+index ffcde5d..7840b2a 100644
+--- a/user/v9/drbdadm_postparse.c
++++ b/user/v9/drbdadm_postparse.c
+@@ -1382,10 +1382,7 @@ static int sanity_check_abs_cmd(char *cmd_name)
+ 			    "  to be able to call drbdsetup and drbdmeta with root privileges.\n\n"
+ 			    "  You need to fix this with these commands:\n");
+ 		did_header = 1;
+-		err("  chgrp haclient %s\n"
+-		    "  chmod o-x %s\n"
+-		    "  chmod u+s %s\n\n",
+-		    cmd_name, cmd_name, cmd_name);
++		err("dpkg-statoverride --add --update root haclient 4750 %s\n\n", cmd_name);
+ 	}
+ 	return 1;
+ }

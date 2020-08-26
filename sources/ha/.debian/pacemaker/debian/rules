@@ -1,0 +1,73 @@
+#!/usr/bin/make -f
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# Ensure that we link against all needed libraries (cf. Policy 10.2)
+# This needs adding libraries to libpengine_la_LIBADD
+# Not upstreamed, see https://github.com/ClusterLabs/pacemaker/pull/800
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
+
+# Ubuntu/i386 shrank into a compatibility layer not carrying the
+# dependencies of some of our binary packages (#948379):
+ifeq ($(shell dpkg-vendor --query vendor)/$(DEB_HOST_ARCH), Ubuntu/i386)
+    UBUNTU_EXCLUDES = \
+	-Npacemaker \
+	-Npacemaker-cli-utils \
+	-Npacemaker-remote \
+	-Npacemaker-resource-agents
+endif
+
+# ftime causes deprecation errors now, but the clock_gettime replacement is
+# disabled by default in 2.0.3. Enable it.
+CPPFLAGS = -UPCMK_TIME_EMERGENCY_CGT
+
+%:
+	dh $@ --with python3 $(UBUNTU_EXCLUDES)
+
+# Explicit BASH_PATH makes build reproducible on merged-usr vs non-merged:
+override_dh_auto_configure:
+	dh_auto_configure -- --disable-static \
+		BASH_PATH=/bin/bash \
+		PYTHON=/usr/bin/python3 \
+		--with-brand=clusterlabs \
+		--with-cibsecrets \
+		--with-configdir=/etc/default \
+		--libexecdir=/usr/lib
+# because the daemon executables and Nagios plugins don't need multiarch paths
+
+override_dh_auto_build-indep:
+	dh_auto_build
+	$(MAKE) -C doc doxygen
+	# the Doxygen output isn't installed, we can cleanup immediately:
+	rm doc/api/html/*.md5
+
+# make check does not check the compiled software, but rebuilds everything
+# with clang.  This takes a lot of time and does not help us at all.  Skip.
+override_dh_auto_test:
+
+override_dh_install:
+	rm -r	debian/tmp/usr/lib/*/lib*.la \
+		debian/tmp/usr/share/doc/pacemaker/COPYING \
+		debian/tmp/usr/share/doc/pacemaker/README.markdown \
+		debian/tmp/usr/share/doc/pacemaker/licenses
+	dh_install
+
+override_dh_installdocs:
+	dh_installdocs -A README.markdown
+
+override_dh_installinit:
+# Upstream ships the pacemaker and pacemaker-remote init files,
+# so we have to force the maintainer script modifications
+	dh_installinit --onlyscripts --no-restart-after-upgrade -p pacemaker
+	dh_installinit --onlyscripts --no-restart-after-upgrade -p pacemaker-remote --name=pacemaker_remote
+
+override_dh_installsystemd:
+	dh_installsystemd --no-restart-after-upgrade
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf doc/api

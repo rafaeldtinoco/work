@@ -1,0 +1,41 @@
+libpe_rules.so.26 libpe-rules26 #MINVER#
+* Build-Depends-Package: pacemaker-dev
+ (arch=!hppa !powerpc !powerpcspe !ppc64 !ppc64el)__start___verbose@Base 1.1.9
+ (arch=!hppa !powerpc !powerpcspe !ppc64 !ppc64el)__stop___verbose@Base 1.1.9
+ add_hash_param@Base 1.0.10
+ fail2text@Base 1.0.10
+ find_expression_type@Base 1.0.10
+ pe__add_scores@Base 2.0.4
+ pe_cron_range_satisfied@Base 2.0.2
+ pe_eval_date_expression@Base 2.0.2
+ pe_evaluate_rules@Base 2.0.3
+ pe_expand_re_matches@Base 1.1.16~rc1
+ pe_free_alert_list@Base 1.1.18~rc3
+ pe_metadata@Base 1.0.10
+ pe_node_attribute_calculated@Base 1.1.18~rc3
+ pe_node_attribute_raw@Base 1.1.18~rc3
+ pe_parse_xml_duration@Base 2.0.2
+ pe_pref@Base 1.0.10
+ (arch=!powerpc !powerpcspe !ppc64 !ppc64el)pe_rules@Base 1.1.9
+ pe_test_attr_expression@Base 2.0.2
+ pe_test_date_expression@Base 2.0.2
+ pe_test_expression@Base 2.0.3
+ pe_test_expression_full@Base 1.1.17~rc1
+ pe_test_expression_re@Base 1.1.16~rc1
+ pe_test_role_expression@Base 2.0.2
+ pe_test_rule@Base 2.0.3
+ pe_test_rule_full@Base 1.1.17~rc1
+ pe_test_rule_re@Base 1.1.16~rc1
+ pe_unpack_alerts@Base 1.1.18~rc3
+ pe_unpack_nvpairs@Base 2.0.3
+ role2text@Base 1.0.10
+ task2text@Base 1.0.10
+ test_expression@Base 1.0.10
+ test_rule@Base 1.0.10
+ test_ruleset@Base 1.0.10
+ text2role@Base 1.0.10
+ text2task@Base 1.0.10
+ unpack_instance_attributes@Base 1.0.10
+ verify_pe_options@Base 1.0.10
+ was_processing_error@Base 1.0.10
+ was_processing_warning@Base 1.0.10

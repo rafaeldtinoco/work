@@ -1,0 +1,26 @@
+Description: Fix defragfs segfault
+Author: Valentin Vidic <vvidic@debian.org>
+Bug: https://github.com/markfasheh/ocfs2-tools/pull/39
+Last-Update: 2019-06-02
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/defragfs.ocfs2/main.c
++++ b/defragfs.ocfs2/main.c
+@@ -644,7 +644,7 @@
+ 	int _mode_flag = 0;
+ 	int index;
+ 	struct resume_record rr_tmp;
+-	struct list_head *pos;
++	struct list_head *pos, *pos2;
+ 
+ 	init_signal_handler();
+ 
+@@ -674,7 +674,7 @@
+ 	current_uid = getuid();
+ 
+ 	/* Main process */
+-	list_for_each(pos, &rr.r_argvs) {
++	list_for_each_safe(pos, pos2, &rr.r_argvs) {
+ 		struct argv_node *n = list_entry(pos, struct argv_node, a_list);
+ 		char *path = n->a_path;
+ 

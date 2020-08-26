@@ -1,0 +1,8 @@
+0010-Fix-package-management.patch
+0011-Fix-scripts-init.patch
+0012-Fix-crm-history.patch
+0013-Fix-cluster-bootstrap.patch
+0014-Fix-cluster-stop-start.patch
+0015-Fix-testsuite-errors.patch
+0016-Fix-python2-calls.patch
+0017-Fix-python3.8-unittest-compatibility.patch

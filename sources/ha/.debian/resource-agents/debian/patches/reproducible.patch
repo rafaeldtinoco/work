@@ -1,0 +1,19 @@
+Description: Try to make the package build reproducible
+ Some compile options cause the build to be unreproducible:
+  -ggdb3: debug info and Build ID in the binaries change
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Forwarded: not-needed
+Last-Update: 2017-08-22
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/configure.ac
++++ b/configure.ac
+@@ -859,7 +859,7 @@
+         CFLAGS="$CFLAGS -g"
+ 	enable_fatal_warnings=no
+ else
+-        CFLAGS="$CFLAGS -ggdb3"
++        CFLAGS="$CFLAGS -ggdb2"
+ 
+ 	# We had to eliminate -Wnested-externs because of libtool changes
+ 	# Also remove -Waggregate-return because we use one libnet

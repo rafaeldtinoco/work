@@ -1,0 +1,61 @@
+From c6b15764786b3a28502070a35fd0f433d2aa3cbc Mon Sep 17 00:00:00 2001
+From: Christian Ehrhardt <christian.ehrhardt@canonical.com>
+Date: Tue, 28 Jan 2020 13:23:59 +0200
+Subject: [PATCH] scripts: python3.8 unittest compatibility
+
+When the unitetss are run with python 3.8 they break on changes in ast.
+  File "/usr/lib/python3/dist-packages/crmsh/minieval.py", line 222, in _eval
+    handler = self.nodes[type(node)]
+  KeyError: <class '_ast.Constant'>
+
+This is due to [1] which states "Class ast.Constant is now used for all
+constants. Old classes ast.Num, ast.Str, ast.Bytes, ast.NameConstant and
+ast.Ellipsis are still available, but they will be removed in future
+Python releases.".
+Even thou this is just the deprecation it already triggers an error
+in the tests of crmsh.
+
+[1]: https://docs.python.org/3/library/ast.html#ast.AST
+
+Fixes #518
+
+Signed-off-by: Christian Ehrhardt <christian.ehrhardt@canonical.com>
+---
+ crmsh/minieval.py | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/crmsh/minieval.py b/crmsh/minieval.py
+index 4403d0925..06e780c2e 100644
+--- a/crmsh/minieval.py
++++ b/crmsh/minieval.py
+@@ -200,10 +200,14 @@ def __init__(self, names):
+ 
+         # py3k stuff:
+         if hasattr(ast, 'NameConstant'):
+-            self.nodes[ast.NameConstant] = self._eval_nameconstant
++            self.nodes[ast.NameConstant] = self._eval_constant
+         elif isinstance(self.names, dict) and "None" not in self.names:
+             self.names["None"] = None
+ 
++        # py3.8 uses ast.Constant instead of ast.Num, ast.Str, ast.NameConstant
++        if hasattr(ast, 'Constant'):
++            self.nodes[ast.Constant] = self._eval_constant
++
+     def evaluate(self, expr):
+         """ evaluate an expresssion, using the operators, functions and
+             names previously set up. """
+@@ -239,7 +243,13 @@ def _eval_str(node):
+         return node.s
+ 
+     @staticmethod
+-    def _eval_nameconstant(node):
++    def _eval_constant(node):
++        if (hasattr(node.value, '__len__') and
++                len(node.value) > MAX_STRING_LENGTH):
++            raise IterableTooLong("Literal in statement is too long!"
++                                  " ({0}, when {1} is max)"
++                                  "".format(len(node.value),
++                                            MAX_STRING_LENGTH))
+         return node.value
+ 
+     def _eval_unaryop(self, node):

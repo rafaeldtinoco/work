@@ -1,0 +1,33 @@
+Description: Use dpkg and apt for package management
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Last-Update: 2019-01-12
+--- a/utils/crm_init.py
++++ b/utils/crm_init.py
+@@ -27,12 +27,12 @@
+ def service_info(service):
+     "Returns information about a given service"
+     active, enabled = 'unknown', 'unknown'
+-    rc, out, err = crm_script.call(["/usr/bin/systemctl", "is-enabled", "%s.service" % (service)])
++    rc, out, err = crm_script.call(["/bin/systemctl", "is-enabled", "%s.service" % (service)])
+     if rc in (0, 1, 3) and out:
+         enabled = out.strip()
+     else:
+         return {'name': service, 'error': err.strip()}
+-    rc, out, err = crm_script.call(["/usr/bin/systemctl", "is-active", "%s.service" % (service)])
++    rc, out, err = crm_script.call(["/bin/systemctl", "is-active", "%s.service" % (service)])
+     if rc in (0, 1, 3) and out:
+         active = out.strip()
+     else:
+--- a/utils/crm_script.py
++++ b/utils/crm_script.py
+@@ -133,8 +133,8 @@
+ 
+ def service(name, action):
+     if action.startswith('is-'):
+-        return call(['/usr/bin/systemctl', action, name + '.service'])
+-    return sudo_call(['/usr/bin/systemctl', action, name + '.service'])
++        return call(['/bin/systemctl', action, name + '.service'])
++    return sudo_call(['/bin/systemctl', action, name + '.service'])
+ 
+ 
+ def package(name, state):

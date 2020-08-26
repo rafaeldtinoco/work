@@ -1,0 +1,6 @@
+etc/default/pcs_snmp_agent
+lib/systemd/system/pcs_snmp_agent.service
+usr/lib/python3/dist-packages/pcs/snmp/*
+usr/share/man/man8/pcs_snmp_agent.8
+usr/share/pcs/pcs_snmp_agent
+usr/share/snmp/mibs/*

@@ -1,0 +1,16 @@
+Document: crmsh-doc
+Title: crmsh complete HTML documentation
+Section: System/Administration
+
+Format: HTML
+Index: /usr/share/doc/crmsh-doc/html/index.html
+Files: /usr/share/doc/crmsh-doc/html/*.html
+ /usr/share/doc/crmsh-doc/html/*/*/*.html
+ /usr/share/doc/crmsh-doc/html/*/*.png
+ /usr/share/doc/crmsh-doc/html/*/*.gif
+ /usr/share/doc/crmsh-doc/html/*/*.css
+ /usr/share/doc/crmsh-doc/html/*/*.otf
+ /usr/share/doc/crmsh-doc/html/*/*.eot
+ /usr/share/doc/crmsh-doc/html/*/*.svg
+ /usr/share/doc/crmsh-doc/html/*/*.ttf
+ /usr/share/doc/crmsh-doc/html/*/*.woff

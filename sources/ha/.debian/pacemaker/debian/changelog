@@ -1,0 +1,2038 @@
+pacemaker (2.0.4-2ubuntu1) groovy; urgency=medium
+
+  * Merge with Debian unstable (LP: #1886546). Remaining changes:
+    - Dropped: debian/patches/pacemaker_is_partof_corosync.patch:
+      Disagreement among Debian and Ubuntu about service dependencies.
+    - d/control: Demote fence-agents to Suggests, avoiding main inclusion.
+    - Skip autopkgtest for unprivileged containers: (LP #1828228)
+      + d/t/control: mark pacemaker test as skippable
+      + d/t/pacemaker: skip if memlock can't be set to unlimited by root
+    - Make crmsh the default management tool for now (LP #1862947)
+    - d/rules: Forcibly switch from ftime to clock_gettime, since building
+      with ftime now results in deprecation errors
+  * Dropped (from Ubuntu):
+    - Post 2.0.3 release fixes backported to Ubuntu (LP #1870235)
+      debian/patches/ubuntu-2.0.3-fixes/:
+      - lp1870235-0a8e789f9-Fix-libpengine-Options-should-be-uint.patch
+      - lp1870235-186042bcb-Ref-libcrmservice-SIGCHLD-handling.patch
+      - lp1870235-28bfd00e9-Low-libcrmservice-handle-child-wait-errors.patch
+      - lp1870235-426f06cc0-Fix-tools-Fix-curses_indented_printf.patch
+      - lp1870235-4f5207a28-Fix-tools-Correct-crm_mon-man-page.patch
+      - lp1870235-5afe84e45-Fix-libstonithd-validate-arg-non-const.patch
+      - lp1870235-c98987824-Fix-iso8601-Fix-crm_time_parse_offset.patch
+      - lp1870235-dec326391-Log-libcrmcommon-correct-log-line-length.patch
+      - lp1870235-e35908c79-Log-libcrmservice-impr-msgs-wait-child.patch
+      - lp1870235-eaaa20949-Fix-libstonithd-tools-Fix-arg-stonith-event.patch
+      - lp1870235-f0fe45806-Fix-scheduler-cluster-maint-mode-true.patch
+      [in Debian Pacemaker-2.0.4]
+
+ -- Rafael David Tinoco <rafaeldtinoco@ubuntu.com>  Mon, 06 Jul 2020 19:04:45 +0000
+
+pacemaker (2.0.4-2) unstable; urgency=medium
+
+  * [a0fdbb5] The special libqb symbols aren't present on PowerPC architectures
+
+ -- Ferenc Wágner <wferi@debian.org>  Mon, 22 Jun 2020 18:08:57 +0200
+
+pacemaker (2.0.4-1) unstable; urgency=medium
+
+  [ Rafael David Tinoco ]
+  * [30838df] Omit pacemaker-resource-agents on Ubuntu/i386
+
+  [ Ferenc Wágner ]
+  * [bc43eed] New upstream release (2.0.4) (Closes: #959593)
+  * [a4e8629] Drop upstreamed patch, refresh the rest
+  * [42ee58f] Enable CIB secrets and ship the cibsecret tool
+  * [13be83d] Update Standards-Version to 4.5.0 (no changes required)
+  * [90d9610] New patch: libpacemaker calls into libstonithd directly
+  * [61500a3] The obsolete ACL document was removed altogether.
+    In upstream commit d796f1e, because it was superseded by a new chapter
+    of Pacemaker Explained.
+  * [dce33c1] Drop dummy packages which were already transitional in buster
+  * [3f7de34] Update symbols files.
+    The newly disappeared symbols weren't present in the headers shipped in
+    pacemaker-dev, except for three functions in attrd.h.  However, those
+    weren't documented either and the header was renamed to attrd_internal.h
+    to show its internal status (see upstream commit 16c7d122e).
+  * [4bbb828] Update packaging list email address
+  * [7c12194] New patch: Fix typo: evalute => evaluate
+  * [8d9cbd4] The bullseye toolchain defaults to linking with --as-needed
+
+ -- Ferenc Wágner <wferi@debian.org>  Sun, 21 Jun 2020 20:32:05 +0200
+
+pacemaker (2.0.3-3ubuntu3) focal; urgency=medium
+
+  * Post 2.0.3 release fixes backported to Ubuntu (LP: #1870235)
+    debian/patches/ubuntu-2.0.3-fixes/:
+    - lp1870235-0a8e789f9-Fix-libpengine-Options-should-be-uint.patch
+    - lp1870235-186042bcb-Ref-libcrmservice-SIGCHLD-handling.patch
+    - lp1870235-28bfd00e9-Low-libcrmservice-handle-child-wait-errors.patch
+    - lp1870235-426f06cc0-Fix-tools-Fix-curses_indented_printf.patch
+    - lp1870235-4f5207a28-Fix-tools-Correct-crm_mon-man-page.patch
+    - lp1870235-5afe84e45-Fix-libstonithd-validate-arg-non-const.patch
+    - lp1870235-c98987824-Fix-iso8601-Fix-crm_time_parse_offset.patch
+    - lp1870235-dec326391-Log-libcrmcommon-correct-log-line-length.patch
+    - lp1870235-e35908c79-Log-libcrmservice-impr-msgs-wait-child.patch
+    - lp1870235-eaaa20949-Fix-libstonithd-tools-Fix-arg-stonith-event.patch
+    - lp1870235-f0fe45806-Fix-scheduler-cluster-maint-mode-true.patch
+
+ -- Rafael David Tinoco <rafaeldtinoco@ubuntu.com>  Mon, 06 Apr 2020 10:48:48 -0300
+
+pacemaker (2.0.3-3ubuntu2) focal; urgency=medium
+
+  * Forcibly switch from ftime to clock_gettime, since building with ftime now
+    results in deprecation errors
+
+ -- William Grant <wgrant@ubuntu.com>  Sat, 04 Apr 2020 19:15:34 +1100
+
+pacemaker (2.0.3-3ubuntu1) focal; urgency=medium
+
+  * Merge with Debian unstable (LP: #1864116). Remaining changes:
+    - Skip autopkgtest for unprivileged containers: (LP: 1828228)
+      - d/t/control: mark pacemaker test as skippable
+      - d/t/pacemaker: skip if memlock can't be set to unlimited by root
+    - Make crmsh the default management tool for now (LP #1862947)
+    - Fix: Last attempt i386 binary packages removal was wrong (-Nlibkate)
+    - Ubuntu i386 binary compatibility only effort: (LP #1863437)
+      - i386 binary package removal:
+        - pacemaker
+        - pacemaker-cli-utils
+        - pacemaker-remote
+        - pacemaker-resource-agents
+  * Dropped (from Debian):
+    - debian/patches/pacemaker_is_partof_corosync.patch
+      [fixed in corosync debian/2.4.2-3+deb9u1_bpo8+1]
+    - Omit pacemaker, pacemaker-cli-utils, pacemaker-remote binary
+      packages on i386.
+      [merged in debian/2.0.3-3]
+
+ -- Rafael David Tinoco <rafaeldtinoco@ubuntu.com>  Fri, 21 Feb 2020 01:18:12 +0000
+
+pacemaker (2.0.3-3) unstable; urgency=medium
+
+  * [543574f] Omit pacemaker{, -cli-utils, -remote} on Ubuntu/i386
+    (Closes: #948379)
+  * [327889e] Reenable dwz, it already works with the magic sections from libqb
+
+ -- Ferenc Wágner <wferi@debian.org>  Sun, 12 Jan 2020 13:08:03 +0100
+
+pacemaker (2.0.3-2) unstable; urgency=medium
+
+  * [2b80438] Special libqb symbols not present on Power architectures
+  * [99905eb] New patch: Avoid clashes with glibc error codes on HPPA
+  * [b3928b4] Add -dev package dependencies
+  * [712627c] Suppress stderr output of autopkgtest instead of ignoring it
+  * [8f47294] Generate an autopkgtest artifact
+  * [1e66b70] Run Salsa CI reprotest with diffoscope
+  * [4560320] Recognize the autopkgtest artifacts in Salsa CI
+
+ -- Ferenc Wágner <wferi@debian.org>  Wed, 08 Jan 2020 20:02:12 +0100
+
+pacemaker (2.0.3-1) unstable; urgency=medium
+
+  * [20ccd21] Shorten and explain the autopkgtest wait
+  * [d2eb58b] Ship /var/log/pacemaker, the new default directory of the detail
+    logs.
+    Without this directory the default configuration emits errors and the
+    detail log is not written.  The old /var/log/pacemaker.log* detail log
+    files are not moved automatically on upgrade, but the /var/log/pacemaker
+    directory is removed when purging pacemaker-common.
+  * [6d373b3] Drop a patch: libtransitioner does not use liblrmd since 092281b
+  * [5b8f4bf] New upstream pre-release (2.0.2~rc1)
+  * [ab9d200] Remove obsolete patch, refresh the rest
+  * [21ab824] Update changelog for 2.0.2~rc1-1 release
+  * [3cc6291] New patch: libpacemaker directly uses libcrmcommon
+  * [edc559c] The doxygen target moved into the doc subdirectory (5c77ae3)
+  * [d9c423f] libpengine and libtransitioner merged into libpacemaker
+  * [d361d67] pacemaker-dev is our single umbrella dev package
+  * [a407d6e] Some agents use top, so Depend on procps
+  * [7cb9d3a] Ship the new HealthIOWait resource agent
+  * [313cb68] Ship the new crm_rule utility
+  * [72dc571] New upstream release (2.0.2)
+  * [2a58663] libpengine and libtransitioner merged into libpacemaker
+  * [1198ccb] Update symbols files (all removed symbols were internal)
+  * [dec7dcf] New patch: Don't reference the build path in the documentation
+  * [de1a3f1] Update Standards-Version to 4.4.1 (no changes required)
+  * [1dc4e5a] Advertise Rules-Requires-Root: no
+  * [075b6a5] New upstream release (2.0.3)
+  * [5fad681] Remove included patches, refresh the rest
+  * [84788f8] Ship the new arch-independent pacemaker-schemas.pc
+  * [c8bcad3] Update symbols files
+  * [38cb849] Fix formatting of long license text
+  * [fa95063] acls.txt was retired, the short placeholder text is not compressed
+  * [b7a160d] Enroll to basic Salsa CI
+
+ -- Ferenc Wágner <wferi@debian.org>  Sun, 22 Dec 2019 21:08:01 +0100
+
+pacemaker (2.0.1-5ubuntu5) focal; urgency=medium
+
+  * Fix: Last attempt i386 binary packages removal was wrong (-Nlibkate)
+  * Ubuntu i386 binary compatibility only effort: (LP: #1863437)
+    - i386 binary package removal:
+      - pacemaker
+      - pacemaker-cli-utils
+      - pacemaker-remote
+      - pacemaker-resource-agents
+
+ -- Rafael David Tinoco <rafaeldtinoco@ubuntu.com>  Sat, 15 Feb 2020 18:52:20 +0000
+
+pacemaker (2.0.1-5ubuntu4) focal; urgency=medium
+
+  * d/control: Make crmsh the default management tool for now (LP: #1862947)
+
+ -- Rafael David Tinoco <rafaeldtinoco@ubuntu.com>  Wed, 12 Feb 2020 14:36:27 +0000
+
+pacemaker (2.0.1-5ubuntu3) focal; urgency=medium
+
+  * No-change rebuild with fixed binutils on arm64.
+
+ -- Matthias Klose <doko@ubuntu.com>  Mon, 10 Feb 2020 08:15:04 +0100
+
+pacemaker (2.0.1-5ubuntu2) focal; urgency=medium
+
+  * Omit pacemaker, pacemaker-cli-utils, pacemaker-remote binary packages on
+    i386.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Tue, 07 Jan 2020 15:41:07 -0800
+
+pacemaker (2.0.1-5ubuntu1) focal; urgency=medium
+
+  * Merge with Debian unstable. Remaining changes:
+    - debian/patches/pacemaker_is_partof_corosync.patch: Default systemd
+      unit hard-requires corosync.
+      + Debian disagrees in Debian bug 887563 message 36. We could revert back
+        to Debian's behaviour, but keeping the patch in this merge maintains
+        existing behaviour for Ubuntu users pending any separate future
+        decision.
+    - d/control: Demote fence-agents to Suggests, avoiding main
+      inclusion.
+    - Skip autopkgtest for unprivileged containers: (LP #1828228)
+      + d/t/control: mark pacemaker  test as skippable
+      + d/t/pacemaker: skip if memlock can't be set to unlimited by root
+
+ -- Rafael David Tinoco <rafaeldtinoco@ubuntu.com>  Mon, 04 Nov 2019 17:31:07 -0300
+
+pacemaker (2.0.1-5) unstable; urgency=medium
+
+  * [17ae230] Backport three more patches from upstream fixing memory safety
+    bugs.
+    Clearing up fallout from the preceding security fixes.
+    Thanks to Ken Gaillot <kgaillot@redhat.com>
+
+ -- Ferenc Wágner <wferi@debian.org>  Sun, 02 Jun 2019 14:01:06 +0200
+
+pacemaker (2.0.1-4ubuntu2) eoan; urgency=medium
+
+   * Skip autopkgtest for unprivileged containers: (LP: #1828228)
+     - d/t/control: mark pacemaker test as skippable
+     - d/t/pacemaker: skip if memlock can't be set to unlimited by root
+
+ -- Rafael David Tinoco <rafaeldtinoco@ubuntu.com>  Thu, 25 Jul 2019 16:50:01 +0000
+
+pacemaker (2.0.1-4ubuntu1) eoan; urgency=medium
+
+   * Merge from Debian unstable.  Remaining changes:
+    - d/control: Demote fence-agents to Suggests, avoiding main
+      inclusion.
+    - debian/patches/pacemaker_is_partof_corosync.patch: Default systemd
+      unit hard-requires corosync.
+      + Debian disagrees in Debian bug 887563 message 36. We could revert back
+        to Debian's behaviour, but keeping the patch in this merge maintains
+        existing behaviour for Ubuntu users pending any separate future
+        decision.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 13 May 2019 12:11:35 +0200
+
+pacemaker (2.0.1-4) unstable; urgency=high
+
+  * [54ace53] Fix check for already present statoverride.
+    When adding flexible modes in 2.0.1-3 (3c7b0b4), I accidentally broke
+    the check, and the breakage led to piupart failures.  (Closes: #928841)
+  * High urgency due to the security fix in the not yet migrated 2.0.1-3.
+
+ -- Ferenc Wágner <wferi@debian.org>  Sun, 12 May 2019 14:23:41 +0200
+
+pacemaker (2.0.1-3) unstable; urgency=high
+
+  * [20ccd21] Shorten and explain the autopkgtest wait
+  * [3c7b0b4] Ship /var/log/pacemaker, the new default directory of the detail
+    logs.
+    Without this directory the default configuration emits errors and the
+    detail log is simply not written.
+    The /var/log/pacemaker.log* detail log files from Pacemaker 1 are not
+    moved automatically on upgrade, but this new /var/log/pacemaker
+    directory and its contents are removed when purging pacemaker-common.
+    The owner and mode of the log directory is set to let clients like
+    crm_resource --force-start running as any user in the haclient group
+    write their messages into the detail log.  The logrotate config relies
+    on these settings as well.
+  * [21a4325] Drop a build patch: libtransitioner does not use liblrmd since
+    092281b
+  * [920ca93] Apply upstream security pull request #1749.
+    Cumulative patchset to fix CVE-2019-3885, CVE-2018-16877, CVE-2018-16878
+    + additional unmasked null pointer deref
+    1. CVE-2018-16877: Insufficient local IPC client-server authentication
+       on the client's side can lead to local privesc.  A local attacker
+       could use this flaw, and combine it with other IPC weaknesses, to
+       achieve local privilege escalation.
+    2. CVE-2018-16878: Insufficient verification inflicted preference of
+       uncontrolled processes can lead to DoS.
+    3. CVE-2019-3885: A use-after-free defect was discovered in pacemaker
+       that can possibly lead to unsolicited information disclosure in the
+       log outputs.
+    The Travis CI fix also in the GitHub pull request was omitted here.
+    (Closes: #927714)
+  * [501e5bb] We've got exactly two daemons
+  * [c0f7339] Move to debhelper compat level 12.
+    To avoid #887904: dh_installsystemd will unmask services *after* an
+    attempt to start them, leaving them stopped upon re-installation.
+    Pacemaker is not affected by any other changes between compat level 11
+    and 12, because we disable dh_dwz anyway (currently it isn't compatible
+    with libqb).
+
+ -- Ferenc Wágner <wferi@debian.org>  Tue, 07 May 2019 17:19:08 +0200
+
+pacemaker (2.0.1-2ubuntu1) eoan; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - upstream CVE fixes
+      - CVE-2018-16877
+      - CVE-2018-16878
+      - CVE-2019-3885
+    - d/control: Demote fence-agents to Suggests, avoiding main
+      inclusion.
+    - debian/patches/pacemaker_is_partof_corosync.patch: Default systemd
+      unit hard-requires corosync.
+      + Debian disagrees in Debian bug 887563 message 36. We could revert back
+        to Debian's behaviour, but keeping the patch in this merge maintains
+        existing behaviour for Ubuntu users pending any separate future
+        decision.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 05 May 2019 08:28:53 +0200
+
+pacemaker (2.0.1-2) unstable; urgency=medium
+
+  * [d8939cc] Avoid file conflicts with leftover packages from wheezy.
+    Pacemaker-dev in wheezy was a metapackage pulling in several -dev
+    packages.  It is removed during the jessie dist-upgrade due to
+    dependency problems, and jessie does not have pacemaker at all, so these
+    obsolete -dev packages are left behind, unless replaced by the
+    renamed -dev packages from jessie-backports or later from stretch, both
+    of which requires manual action.  Lacking that, a manual install of the
+    reintroduced pacemaker-dev from buster will try to overwrite headers
+    from those obsolete -dev packages causing file conflicts, because the
+    old Breaks+Replaces relations weren't carried over from the stretch
+    packages. (Closes: #925354)
+
+ -- Ferenc Wágner <wferi@debian.org>  Mon, 01 Apr 2019 13:39:28 +0200
+
+pacemaker (2.0.1-1) unstable; urgency=medium
+
+  * [7d6ff2e] New upstream release (2.0.1)
+
+ -- Ferenc Wágner <wferi@debian.org>  Mon, 04 Mar 2019 21:34:46 +0100
+
+pacemaker (2.0.1~rc5-1) unstable; urgency=medium
+
+  * [79e9089] Drop duplicate external library linkages
+  * [07f0c78] Make the libpe_rules dependency of schedulerd explicit
+  * [5346dc9] New upstream pre-release (2.0.1~rc5)
+  * [c5ce20d] Refresh our patches
+  * [af3fc54] Update libcrmcommon34.symbols
+
+ -- Ferenc Wágner <wferi@debian.org>  Tue, 26 Feb 2019 09:52:21 +0100
+
+pacemaker (2.0.1~rc4-1) unstable; urgency=medium
+
+  * [dfc5875] New upstream pre-release (2.0.1~rc4)
+  * [e25c248] Refresh our patches
+  * [5622895] Update symbols files
+
+ -- Ferenc Wágner <wferi@debian.org>  Mon, 04 Feb 2019 09:44:21 +0100
+
+pacemaker (2.0.1~rc2-2) unstable; urgency=medium
+
+  * [b7a3e66] Fix BASH_PATH to make it reproducible.
+    Otherwise it's detected differently on merged-usr vs non-merged.
+  * [7c66cac] Header dependency generation is not needed with merged dev
+    packages
+  * Upload to unstable
+
+ -- Ferenc Wágner <wferi@debian.org>  Wed, 09 Jan 2019 09:28:39 +0100
+
+pacemaker (2.0.1~rc2-1) experimental; urgency=medium
+
+  * [04a14aa] New upstream pre-release (2.0.1~rc2)
+  * [b50164d] Delete the upstreamed patch and refresh the rest.
+    Simplify skipping the CTS, upstream is not interested in making it
+    optional (https://github.com/ClusterLabs/pacemaker/pull/1149).
+  * [1ae3096] The development documentation gained actual images, ship them
+  * [a8311c7] Upstream renamed the daemons.
+    But we keep the compatibility symlinks for now, based on Ken Gaillot's
+    "Pacemaker packagers: important information about 2.0.0":
+    The configure script has a new option, --enable-legacy-links. If
+    enabled (the default), symlinks will be installed at the old daemon
+    names pointing at the new ones.
+    This has two purposes: to allow older versions of tools (such as crm
+    shell and pcs) that directly invoke the old names for metadata etc. to
+    continue working; and to allow Pacemaker 1.1.17+ cluster nodes to host
+    bundles using a container image containing Pacemaker 2.0.0+. If you do
+    not need this support (most likely in the future when versions of the
+    tools that support the new names are available), you can specify
+    --disable-legacy-links.
+  * [ae3ffd0] fence_pcmk was removed with CMAN compatibility (7a9891f)
+  * [412939c] Isolation wrapper support was removed in c713bbe
+  * [f072d4a] Upstream refactored libcrmcommon in 4864ed4
+  * [07bcf39] Ship new document: Pacemaker Administration
+  * [4416b33] Adjust library package names to their new SO versions
+  * [7e06681] Pre-Depends aren't needed for multiarch since jessie
+  * [932df15] fence_legacy switched to Python.
+    We choose Python 3 instead of the default Python 2.
+  * [5669068] Provide man page for the pacemaker_remote compatibility symlink
+  * [b0b5a21] Follow renames and years in debian/copyright
+  * [e4f73c3] Switch Build-Depends to libsensors-dev from libsensors4-dev
+    (Closes: #917445)
+  * [d559bde] Merge all dev packages into pacemaker-dev.
+    The header files are interdependent, so meaningful separation wasn't
+    possible anyway.
+  * [5db3079] dh_installchangelogs finds ChangeLog by itself
+
+ -- Ferenc Wágner <wferi@debian.org>  Wed, 02 Jan 2019 19:21:59 +0100
+
+pacemaker (1.1.19-2) unstable; urgency=medium
+
+  * [8975ce9] Adapt autopkgtest to the node1 name from Corosync
+  * [f579893] The debug symbol migration is complete
+
+ -- Ferenc Wágner <wferi@debian.org>  Wed, 26 Dec 2018 01:36:24 +0100
+
+pacemaker (1.1.19-1) unstable; urgency=medium
+
+  * [f8af7fd] New upstream release (1.1.19)
+  * [fd1d1a2] Delete the patches from-upstream and refresh ours
+  * [b66cd0e] Hurd compatibility is off the table due to Kronosnet
+  * [b22ae0b] Update Standards-Version to 4.3.0 (no changes required)
+  * [ce19e2e] Update symbols files (all dropped symbols were internal)
+
+ -- Ferenc Wágner <wferi@debian.org>  Tue, 25 Dec 2018 20:17:46 +0100
+
+pacemaker (1.1.18-2ubuntu1.19.04.1) disco-security; urgency=medium
+
+  * SECURITY UPDATE: DoS and local privilege escalation in client-server
+    authentication
+    - debian/patches/CVE-2018-1687x-1.patch: make crm_pid_active more
+      precise as to when detections fail in include/crm_internal.h,
+      lib/common/utils.c.
+    - debian/patches/CVE-2018-1687x-2.patch: add new helpers to allow IPC
+      client side to authenticate the server in configure.ac,
+      include/crm/common/Makefile.am, include/crm/common/ipc.h,
+      include/crm/common/ipc_internal.h, lib/common/ipc.c.
+    - debian/patches/CVE-2018-1687x-3.patch: pacemakerd to trust
+      pre-existing processes via new checks instead in mcp/pacemaker.c.
+    - debian/patches/CVE-2018-1687x-4.patch: other daemons to authenticate
+      IPC servers of fellow processes in lib/cluster/corosync.c,
+      lib/cluster/cpg.c, lib/common/ipc.c, mcp/corosync.c.
+    - debian/patches/CVE-2018-1687x-5.patch: CPG users to be careful about
+      now-more-probable rival processes in attrd/main.c, cib/main.c,
+      crmd/main.c, fencing/main.c, lib/cluster/cpg.c.
+    - debian/patches/CVE-2018-1687x-6.patch: fix possible NULL pointer
+      dereference in crmd/control.c.
+    - debian/libcrmcommon3.symbols: added new symbols.
+    - CVE-2018-16877
+    - CVE-2018-16878
+  * SECURITY UPDATE: information disclosure via use-after-free
+    - debian/patches/CVE-2019-3885.patch: fix alert handling in
+      lib/services/services.c, lib/services/services_linux.c.
+    - CVE-2019-3885
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 18 Apr 2019 07:32:00 -0400
+
+pacemaker (1.1.18-2ubuntu1) cosmic; urgency=medium
+
+  * Merge with Debian. Remaining changes:
+    - d/control: Demote fence-agents to Suggests, avoiding main
+      inclusion.
+    - debian/patches/pacemaker_is_partof_corosync.patch: Default systemd
+      unit hard-requires corosync.
+      + Debian disagrees in Debian bug 887563 message 36. We could revert back
+        to Debian's behaviour, but keeping the patch in this merge maintains
+        existing behaviour for Ubuntu users pending any separate future
+        decision.
+  * Drop changes:
+    - Drop upstreamed patches (dropped in Debian now instead).
+    - Refresh d/p/portability-define-EKEYREJECTED-if-necessary.patch: no longer
+      needed; dropped in Debian.
+    - d/pacemaker.{pre,post}inst flag for corosync: upgrade path no longer
+      needed post-Bionic.
+
+ -- Robie Basak <robie.basak@ubuntu.com>  Tue, 24 Jul 2018 14:12:03 +0100
+
+pacemaker (1.1.18-2) unstable; urgency=medium
+
+  * [812cda7] Fixup symbols files.
+    The Hurd architecture looks strangely irregular.
+  * [38d49fe] Simplify autopkgtest script
+  * [87f237c] Remove trailing empty line from debian/changelog
+
+ -- Ferenc Wágner <wferi@debian.org>  Tue, 08 May 2018 14:13:24 +0200
+
+pacemaker (1.1.18-1) unstable; urgency=medium
+
+  * [da58a7f] Some overlooked libqb vs new binutils symbol flux
+  * [c6b8c8a] New upstream release (1.1.18)
+  * [871dcfa] Delete upstreamed patches, refresh the rest
+  * [7c9e795] Add post-1.1.18 regression fixes
+    https://lists.clusterlabs.org/pipermail/users/2017-December/014227.html
+    * 1.1.18 improved scalability by eliminating redundant node attribute
+    write-outs. This proved to be too aggressive in one case: when a
+    cluster is configured with only IP addresses (no node names) in
+    corosync.conf, attribute write-outs can be incorrectly delayed; in the
+    worst case, this prevents a node from shutting down due to the shutdown
+    attribute not being written.
+    * 1.1.18 overhauled unfencing in order to support it on remote nodes.
+    (Unfencing is for devices such as fence_scsi that require a fenced node
+    to be explicitly re-admitted to the cluster.) This made the faulty
+    assumption that the fence devices themselves could operate before
+    unfencing happened. As a result, a cluster with unfencing could see
+    unnecessary fence device monitoring failures (these do not harm the
+    cluster's ability to fence or unfence).
+    * 1.1.18 implemented ordering constraints for the new bundle resource
+    type. This had a corner case that could lead to an invalid transition.
+    As part of the fix for this, we have included a fix for an issue
+    discussed in an earlier thread on this list ("pcmk_remote evaluation"),
+    so the cluster will always prefer the newest Pacemaker Remote
+    connection to a remote node, even if an older (dead) connection has not
+    yet timed out.
+  * [4d9e29c] Update Standards-Version to 4.1.4 (no changes required)
+  * [c77cdf4] Migrate to salsa.debian.org/ha-team
+  * [269dcb6] Switch to HTTPS in the Homepage and Source URLs
+  * [371288b] Switch to Debhelper compat level 11
+  * [c58d652] Replace hand-made control substitution with stock dpkg method.
+    Remove the superfluous check_header_deps call as well.
+  * [eb76cbd] Update symbols files
+
+ -- Ferenc Wágner <wferi@debian.org>  Wed, 02 May 2018 12:18:36 +0200
+
+pacemaker (1.1.18-0ubuntu2) cosmic; urgency=medium
+
+  * No-change rebuild for ncurses soname changes.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu, 03 May 2018 14:17:47 +0000
+
+pacemaker (1.1.18-0ubuntu1) bionic; urgency=medium
+
+  * New upstream release (1.1.18)
+    - Drop upstreamed patches and refresh others.
+    - LP: #1763085
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 11 Apr 2018 09:23:27 -0700
+
+pacemaker (1.1.18~rc4-1ubuntu1) bionic; urgency=medium
+
+  * Merge with Debian unstable (LP: #1743059). Remaining changes:
+    - d/control: Demote fence-agents to Suggests, avoiding main
+      inclusion.
+  * Drop:
+    - d/control: Promote crmsh | pcs to Recommends for upgraders from
+      14.04.
+      [ Not needed since 16.10 ]
+  * Properly restart corosync and pacemaker together (LP: #1740892)
+    - d/pacemaker.preinst: flag corosync to restart pacemaker on
+      upgrade.
+    - d/pacemaker.postinst: clear flag unconditionally in case of errors
+      + The preinst and postinst changes can be dropped after bionic
+        releases as long as the other changes are maintained.
+    - debian/patches/pacemaker_is_partof_corosync.patch: Default systemd
+      unit hard-requires corosync.  LP #1740892.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Tue, 30 Jan 2018 16:38:09 -0800
+
+pacemaker (1.1.18~rc4-1) unstable; urgency=medium
+
+  * [50dcb19] New upstream pre-release (1.1.18~rc4)
+  * [053fd40] Remove upstreamed patch, refresh the rest
+  * [b62df2f] Update symbols files.
+    All the removed symbols were internal ones.
+  * [8613fab] The mmogp.com domain has expired
+  * [7c77ab9] More libqb vs new binutils symbol flux
+  * [ec3e433] New patch: portability: the difference of time_t values is given
+    by difftime()
+  * [5d92e4e] New patch: Include errno codes before augmenting them
+  * [564d3fa] New patch: Don't include the Linux-specific prctl for no reason
+  * [bcf2b3e] Drop now-unused Lintian override, #736360 is fixed in 2.5.57
+  * [b280329] New patch: Fix typo: overriden -> overridden
+  * [5d0d7b5] New patch: portability: define EKEYREJECTED if necessary
+
+ -- Ferenc Wágner <wferi@debian.org>  Mon, 06 Nov 2017 15:02:08 +0100
+
+pacemaker (1.1.18~rc3-1ubuntu1) bionic; urgency=medium
+
+  * Merge with Debian unstable. Remaining changes:
+    - d/control: Demote fence-agents to Suggests, avoiding main
+      inclusion.
+    - d/control: Promote crmsh | pcs to Recommends for upgraders from
+      14.04.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Fri, 03 Nov 2017 08:11:06 -0700
+
+pacemaker (1.1.18~rc3-1) unstable; urgency=medium
+
+  * [311badb] Add forgotten Closes to already uploaded changelog
+  * [04e920e] Update old style gbp.conf section names
+  * [a273949] Let the package name live in the Debian tag messages
+  * [3b6cea3] New upstream pre-release (1.1.18~rc3)
+  * [091b4bc] Refresh our patches
+  * [e54e643] Remove build dependencies obsoleted by Debhelper 10
+  * [16be744] Update Standards-Version to 4.1.1 (no changes needed)
+  * [be6a427] New patch libtransitioner-explicitly-depend-on-liblrmd.patch
+    libtransitioner: explicitly depend on liblrmd
+  * [faa8aa8] Ship the newly installed ifspeed resource agent
+  * [6a773b6] libqb vs new binutils symbol flux
+  * [706bbfb] Update symbols files.
+    All the removed symbols were internal ones.
+  * [1a77058] Remove trailing spaces from old changelog entries
+  * [63b1381] New patch Fix-typo-ouput-output.patch.
+    Fix typo: ouput -> output
+
+ -- Ferenc Wágner <wferi@debian.org>  Mon, 30 Oct 2017 13:36:03 +0100
+
+pacemaker (1.1.17-1ubuntu1) artful; urgency=medium
+
+  * Merge with Debian unstable. Remaining changes:
+    - d/control: Demote fence-agents to Suggests, avoiding main inclusion.
+    - d/control: Promote crmsh | pcs to Recommends for upgraders from 14.04.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 09 Aug 2017 10:52:14 -0700
+
+pacemaker (1.1.17-1) unstable; urgency=medium
+
+  [ Christoph Berg ]
+  * [d3d1561] Remove myself from Uploaders.
+
+  [ Ferenc Wágner ]
+  * [a5a42be] crm.h and stonith-ng.h include libxml/tree.h
+  * [76d3188] We apparently won't need more transitional packages
+  * [5a1da57] New upstream release (1.1.17)
+  * [608c6b8] Remove upstreamed patches, refresh the rest
+  * [3f7a663] Some internal symbols disappeared, some new ones got introduced
+  * [ab7ef54] Update Standards-Version to 4.0.0 (HTTPS is preferred for
+    copyright-format)
+  * [42d3457] Use debhelper compat level 10
+  * [9a4e43d] New patch consider-ac_tool_prefix-for-pkg-config.patch
+    Thanks to Helmut Grohne (Closes: #865048)
+
+ -- Ferenc Wágner <wferi@debian.org>  Sat, 08 Jul 2017 23:00:09 +0200
+
+pacemaker (1.1.16-1ubuntu1) zesty; urgency=medium
+
+  * Merge from Debian unstable (LP: #1655753). Remaining changes:
+    - d/control: Demote fence-agents to Suggests, avoiding main inclusion.
+    - d/control: Promote crmsh | pcs to Recommends for upgraders from 14.04.
+  * Drop:
+    - d/rules: update CTS python files' path for python3 and possibly
+      site-packages. If the code is updated to use setuptools, cts should
+      continue to not be shipped. Fixes FTBFS for arch-only builds
+      (LP #1627125).
+    [ Debian resolved this by disabling the testing infrastructure in
+      1.1.15-2 ]
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 11 Jan 2017 12:30:02 -0800
+
+pacemaker (1.1.16-1) unstable; urgency=medium
+
+  * [d90daf5] Refresh our patches
+  * [971ea08] Cherry pick two small fixes from upstream
+    - crm_perror appends a colon to its fmt argument
+    - Don't report error if the output file isn't syncable
+  * Upload to unstable
+
+ -- Ferenc Wágner <wferi@debian.org>  Thu, 01 Dec 2016 14:15:23 +0100
+
+pacemaker (1.1.16~rc2-1) experimental; urgency=medium
+
+  * [21f8ee8] Delete upstreamed patch, refresh the rest
+
+ -- Ferenc Wágner <wferi@debian.org>  Sat, 19 Nov 2016 10:06:07 +0100
+
+pacemaker (1.1.16~rc1-2) experimental; urgency=medium
+
+  * [ce976f5] Arch builds don't install the empty documentation directory
+
+ -- Ferenc Wágner <wferi@debian.org>  Tue, 08 Nov 2016 15:55:41 +0100
+
+pacemaker (1.1.16~rc1-1) experimental; urgency=medium
+
+  * [9067691] New upstream release candidate (1.1.16~rc1)
+  * [da2886c] Remove upstreamed patches, refresh the rest
+  * [c1e19e1] New patch Fix-shell-syntax.patch.
+    Fix shell syntax.  Upstream will fix this soon.
+  * [d76e150] New patch Enable-the-subdir-objects-Automake-option.patch.
+    Enable the subdir-objects Automake option
+  * [da902b7] Update copyright according to f01f734
+  * [ab25e04] Follow upstream doc overhaul (6b1d65b)
+  * [17c4e5a] Ship the attribute resource agent and its manual
+  * [b5a3280] Update symbols files.
+    The removed unpack_rsc_location symbol was not part of the API.
+  * [2014b63] Ship the Pacemaker Development document
+  * [12e6471] fence_pcmk and fence_legacy need Perl
+  * [2f10e09] Don't ship the placeholder file with the documentation
+
+ -- Ferenc Wágner <wferi@debian.org>  Tue, 08 Nov 2016 13:22:21 +0100
+
+pacemaker (1.1.15-3) unstable; urgency=high
+
+  * [1a878c9] Mark pacemaker-doc Multi-Arch: foreign.
+    The Multi-Arch hinter is right here, even if I don't expect packages to
+    depend on the Pacemaker documentation.
+  * [3086e0c] /lib/lsb/init-functions is in package lsb-base (>= 3.0-6)
+  * [9f90697] New patch High-libcrmcommon-fix-CVE-2016-7035-improper-IPC-
+    gua.patch.
+    High: libcrmcommon: fix CVE-2016-7035 (improper IPC guarding)
+    Thanks to Jan Pokorný (Closes: #843041)
+  * [196057c] New patch Fix-spelling-Negligable-Negligible.patch.
+    Fix spelling: Negligable -> Negligible
+
+ -- Ferenc Wágner <wferi@debian.org>  Sat, 05 Nov 2016 03:43:44 +0100
+
+pacemaker (1.1.15-2) unstable; urgency=medium
+
+  * [77fcaec] Migrate from backported pacemaker-dbg versions as well.
+    Drop the version constraint as hinted by
+    https://lists.debian.org/debian-backports/2016/01/msg00051.html.
+    Even Lintian does not complain anymore, see #605744.
+  * [eddbb5c] Ship the upstream crm_mon service file as an example.
+    The built in alerts of Pacemaker 1.1.15 provide a more reliable method
+    for sending out notifications about cluster events.
+  * [17eeccb] Use dh-exec for installing the pacemaker default file
+  * [ed1df52] Disable the testing infrastructure.
+    This gets rid of the Python version number and directory names in
+    debian/rules, making the packaging more robust against their changes.
+    (Closes: #838715)
+  * [5398db4] Switch gbp dch to verbose changelog entries
+  * [813bbdc] Migrate to my Debian address
+
+ -- Ferenc Wágner <wferi@debian.org>  Sat, 01 Oct 2016 22:01:27 +0200
+
+pacemaker (1.1.15-1ubuntu2) yakkety; urgency=medium
+
+  * d/rules: update CTS python files' path for python3 and possibly
+    site-packages. If the code is updated to use setuptools, cts should
+    continue to not be shipped. Fixes FTBFS for arch-only builds
+    (LP: #1627125).
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Fri, 23 Sep 2016 13:51:00 -0700
+
+pacemaker (1.1.15-1ubuntu1) yakkety; urgency=medium
+
+  * Merge from Debian unstable (LP: #1604694). Remaining changes:
+    - d/control: Demote fence-agents to Suggests, avoiding main inclusion.
+    - d/control: Promote crmsh | pcs to Recommends for upgraders from 14.04.
+  * Dropped changes:
+    - d/control: bump depend on corosync to >= 2.3.0
+      (unimportant since this version was provided in Debian stable &
+      Ubuntu 14.04 LTS)
+    - d/control: Drop publican from BD's, skip some doc generation.
+    - d/pacemaker-doc.*: Drop docs generated using publican from install.
+      (universe build-depends are ok now)
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Wed, 20 Jul 2016 02:39:01 -0400
+
+pacemaker (1.1.15-1) unstable; urgency=medium
+
+  * [bda3c8c] Use the clusterlabs Publican brand for the documentation
+  * [89a44da] New upstream release candidate (1.1.15~rc4)
+  * [ff5d133] Replace three Debianizing patches with the new --with-configdir
+    option
+  * [18f3773] New patches fixing various alert issues
+  * [96f1510] The package name is superfluous in the debian release tags
+  * [9151796] New upstream release (1.1.15)
+  * [3b17707] Remove upstreamed patches, refresh the rest
+  * [071796e] Re-enable pacemakerd restart by systemd: upstream means it
+  * [0ac7f20] New patches fixing typos
+
+ -- Ferenc Wágner <wferi@niif.hu>  Thu, 23 Jun 2016 22:47:13 +0200
+
+pacemaker (1.1.15~rc3-2) unstable; urgency=medium
+
+  * [bcd1e85] Update symbols files for powerpcspe
+
+ -- Christoph Berg <myon@debian.org>  Sun, 05 Jun 2016 11:49:52 +0200
+
+pacemaker (1.1.15~rc3-1) unstable; urgency=medium
+
+  [ Christoph Berg ]
+  * [23ee108] libcrmservice3.symbols: Exclude systemd symbol on non-linux
+  * [41dea05] Fix time formatting on x32
+  * [533c5cc] Fix FTBFS on GNU Hurd
+
+  [ Arturo Borrero Gonzalez ]
+  * [698053d] d/tests/control: add isolation-container restriction
+
+  [ Ferenc Wágner ]
+  * [065159d] New patch Enable-the-init-scripts-on-multi-user-runlevels.patch
+  * [7a5008b] New patch Make-the-asciidoc-documentation-reproducible.patch
+  * [08a4162] New patch Add-remote_fs-dependencies-to-the-init-scripts.patch
+  * [7a65d2c] New upstream release (1.1.15~rc1)
+  * [dd9f5f4] Remove upstreamed patches, refresh the rest
+  * [0cdd116] Update symbol files
+  * [3de7a21] New patch Add-documentation-URIs-to-the-service-files.patch
+  * [9faaa02] Move documentation generators into Build-Depends-Indep
+  * [9362a46] Move documentation into /usr/share/doc/pacemaker
+  * [64c0e84] Move misc documentation files into the pacemaker-doc package
+  * [837e74d] New patch Read-default-files-in-pacemaker.service.patch
+  * [72fef80] New upstream release (1.1.15~rc2)
+  * [69ee575] Remove patch included in 1.1.15~rc2
+  * [46dce98] Also add documentation URI to our version of crm_mon.service
+  * [8c25aff] New patch to avoid using WIFCONTINUED entirely
+  * [a28e0ae] New upstream release (1.1.15~rc3)
+  * [a8976fe] Remove freshly upstreamed patches, refresh the rest
+
+ -- Ferenc Wágner <wferi@niif.hu>  Sat, 28 May 2016 22:28:49 +0200
+
+pacemaker (1.1.14-4) unstable; urgency=medium
+
+  * Move crm_config.h back to the standard location, it doesn't differ
+    between architectures anymore. (Reverts f55a265 partly.)
+  * Fix init script exit code, patch by Christian Schneider.
+    (Closes: #686548).
+  * Update Uploaders list.
+
+ -- Christoph Berg <myon@debian.org>  Thu, 05 May 2016 10:02:06 +0200
+
+pacemaker (1.1.14-3) unstable; urgency=medium
+
+  [ Christoph Berg ]
+  * [cedee71] debian/tests: Add simple smoke test.
+
+  [ Adrian Vondendriesch ]
+  * [2609634] Remove /etc/pacemaker/authkey on purge (Closes: #817768)
+  * [ddaf0e1] Add dbus as dependency for pacemaker (Closes: #819162).
+  * [9906643] Add myself to uploaders.
+
+ -- Adrian Vondendriesch <adrian.vondendriesch@credativ.de>  Thu, 24 Mar 2016 13:58:54 +0100
+
+pacemaker (1.1.14-2ubuntu1) xenial; urgency=medium
+
+  * Merge from Debian unstable.  Remaining changes:
+    - d/control: Drop publican from BD's, skip some doc generation.
+    - d/control: depend on corosync ( >= 2.3.0 )
+    - d/control: Demote fence-agents to Suggests, avoiding main inclusion.
+    - d/control: Promote crmsh | pcs to Recommends for upgraders from 14.04.
+    - d/pacemaker-doc.*: Drop docs generated using publican from install.
+
+ -- Pierre-André MOREY <pierre-andre.morey@canonical.com>  Mon, 21 Mar 2016 15:56:54 +0000
+
+pacemaker (1.1.14-2) unstable; urgency=medium
+
+  * [42577da] Promote resource-agents to Depends (Closes: #813009)
+  * [55ed163] Move the dummy RA script and its man page into pacemaker
+    (Closes: #813008)
+  * [5c89773] Freshen package descriptions, factor out common text
+  * [520288c] Run wrap-and-sort -ast on the package, add back comments
+  * [86fccce] Split out common part and agents from the pacemaker package
+  * [6ac6989] Move crm_attribute and crm_node into the pacemaker package
+  * [6ff66d1] Move attrd_updater and stonith_admin into pacemaker-cli-utils
+  * [ce91694] Create auth secret for pacemaker-remote
+  * [1186e73] Use HTTPS for Vcs-Browser
+  * [dd08977] New patches fixing typos
+  * [613eaab] New patch Drop-misleading-comment-from-config-set-a-does-
+    the-e.patch
+  * [e0e5d90] Update Standards-Version to 3.9.7 (no changes needed)
+  * [0c258fa] Make systemd support optional
+  * [e2022ea] Set libexecdir to /usr/lib
+  * [c9b3945] New patch Fix-typo-afer-after.patch
+  * [a53197e] Override breaks-without-version Lintian warning
+  * [c27b3b8] Explicitly delete the unwanted paths instead of ignoring the names
+    everywhere
+  * [d855aa0] Also move the default file into pacemaker-common
+  * [142edfa] New patch The-DTD-RNG-and-XSL-files-are-not-executable.patch
+  * [539a4e4] Add /var/lib/pacemaker/cores to the common package
+  * [75f7f71] Let pacemaker_remoted use the common default file
+  * [69920b0] Auto-export the init script variables read from the config
+
+ -- Ferenc Wágner <wferi@niif.hu>  Fri, 26 Feb 2016 11:58:06 +0100
+
+pacemaker (1.1.14-1ubuntu2) xenial; urgency=medium
+
+  * No-change rebuild for gnutls transition.
+
+ -- Matthias Klose <doko@ubuntu.com>  Wed, 17 Feb 2016 22:27:08 +0000
+
+pacemaker (1.1.14-1ubuntu1) xenial; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - d/control: Drop publican from BD's, skip some doc generation.
+    - d/pacemaker-doc.*: Drop docs generated using publican from install.
+    - d/control: Demote fence-agents to Suggests, avoiding main inclusion.
+    - d/control: Promote crmsh | pcs to Recommends for upgraders from 14.04.
+
+ -- James Page <james.page@ubuntu.com>  Thu, 04 Feb 2016 16:32:03 +0000
+
+pacemaker (1.1.14-1) unstable; urgency=medium
+
+  * [4cae0b4] New upstream release candidate (1.1.14~rc4)
+  * [30980dc] Delete upstreamed patches
+  * [43883ae] The debug package overrides are not needed with automatic debug
+    packages
+  * [356a33e] Stop disabling -Werror
+  * [286053e] New patch Don-t-override-a-libdir-containing.patch
+  * [0cc1142] Enable parallel builds
+  * [03f18e2] Rewrite debian/check_header_deps
+  * [ac34441] Replace remote RA description patch with upstream proposal
+  * [b4ddc03] New upstream release (1.1.14)
+  * [cf25e77] Delete upstreamed patch
+  * [fdbb9ab] Delete rejected RA description patch
+
+ -- Ferenc Wágner <wferi@niif.hu>  Sat, 23 Jan 2016 21:42:03 +0100
+
+pacemaker (1.1.14~rc4-2ubuntu1) xenial; urgency=medium
+
+  * Merge from Debian unstable, remaining changes:
+    - d/control: Drop publican from BD's, skip some doc generation.
+    - d/pacemaker-doc.*: Drop docs generated using publican from install.
+    - d/control: Demote fence-agents to Suggests, avoiding main inclusion.
+    - d/control: Promote crmsh | pcs to Recommends for upgraders from 14.04.
+
+ -- James Page <james.page@ubuntu.com>  Fri, 15 Jan 2016 13:59:46 +0200
+
+pacemaker (1.1.14~rc4-2) unstable; urgency=medium
+
+  [ Ferenc Wágner ]
+  * Fix debian/check_header_deps.
+
+ -- Christoph Berg <myon@debian.org>  Fri, 08 Jan 2016 15:46:07 +0100
+
+pacemaker (1.1.14~rc4-1) unstable; urgency=medium
+
+  * [462bed4] Correct systemd build dependency.
+    Thanks to Christoph Berg
+  * [7997c76] Delete upstreamed patches, update the rest
+  * [07f265d] New patch Fix-typos-dependan-dependen.patch
+  * [ab012f7] Update symbols files and libpe-status package name
+  * [f083796] Migrate from the manual dbg package
+  * [7a99412] Update libpengine package name and symbols
+  * [e145501] Two new patches fixing typos
+  * [93e0b95] New patch crm_resource-avoid-printing-uninitialized-memory.patch
+  * [2ff35d0] PowerPC architectures miss some magic symbols
+  * [f55a265] Move crm_config.h into an arch-specific directory
+    (Closes: #809966)
+
+ -- Ferenc Wágner <wferi@niif.hu>  Wed, 06 Jan 2016 10:23:46 +0100
+
+pacemaker (1.1.13-2ubuntu1) xenial; urgency=medium
+
+  * Resync with Debian unstable.
+  * d/control: Drop publican from BD's, skip some doc generation.
+  * d/pacemaker-doc.*: Drop docs generated using publican from install.
+  * d/control: Demote fence-agents to Suggests, avoiding main inclusion.
+  * d/control: Promote crmsh | pcs to Recommends for upgraders from 14.04.
+
+ -- James Page <james.page@ubuntu.com>  Thu, 14 Jan 2016 13:57:55 +0200
+
+pacemaker (1.1.13-2) unstable; urgency=medium
+
+  * Declare some symbols optional that do not show up on ppc(64el).
+  * Add myself to Uploaders.
+
+ -- Christoph Berg <myon@debian.org>  Mon, 04 Jan 2016 22:59:46 +0100
+
+pacemaker (1.1.13-1) unstable; urgency=medium
+
+  * New upstream version, full repackaging
+    (Closes: #633963, #665591, #686342, #700923, #705191, #728431,
+             #739731, #757514, #768618, #768922)
+  * New patch Library-options-go-into-Libs-not-Cflags.patch
+  * Add several patches fixing various typos found by Lintian
+  * The upstream init scripts did not trigger dh_installinit
+  * New patch Fix-typos-dependan-cies-t-dependen-cies-t.patch
+  * Also build the books
+  * New patch Don-t-create-doc-775-the-intent-was-setting-the-mode.patch
+  * New patch hb2openais-was-removed-by-c2344c9-kill-its-documenta.patch
+  * Add Build-Depends-Package info to symbols files
+  * generate_location_rule was an inadvertent export, OK to miss it
+  * Fill out dependencies of pacemaker-dbg
+  * Demote cluster-glue and crmsh | pcs to Suggests
+  * The doc-base Files fields don't take directories
+  * We do not install CTS Python files, so no need to remove them
+    (Closes: #630719)
+  * Reproduce the empty directories created by the upstream install target
+    (Closes: #740324)
+  * Get rid of an adduser warning on install
+  * Do not enable crm_mon.service
+  * New patch Fix-typo-OPSTIONS-OPTIONS.patch
+  * Add my copyright to files under debian/
+  * Remove easily regenerated cruft from debian/rules
+  * Version 1.23 of init-system-helpers does not start disabled services
+  * Recommend fence-agents, they are needed for most clusters
+  * New patch Restarting-pacemaker-adds-confusion-only.patch
+  * New patch Use-the-clusterlabs-Publican-brand-for-building-the-.patch
+  * The books are under CC-BY-SA-3
+  * New patch Enable-redirecting-etc-init.d-script-calls-to-system.patch
+  * New patch Fix-typo-isnt-isn-t.patch
+  * New patch Fix-typo-doesnt-doesn-t.patch
+  * New patch Libraries-go-after-linker-flags.patch
+  * Use autoreconf almost like autogen.sh
+  * New patch Clean-up-generated-files.patch
+  * Clean the Doxygen documentation
+  * Upload to unstable
+
+ -- Ferenc Wágner <wferi@niif.hu>  Wed, 23 Dec 2015 23:16:27 +0100
+
+pacemaker (1.1.11-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/patches/series: Disable 5 patches added for the last release
+    as these are included in the upstream source now
+  * debian/control: Bump Standards-Version
+
+ -- Martin Loschwitz <madkiss@debian.org>  Fri, 21 Feb 2014 14:21:09 +0000
+
+pacemaker (1.1.10+git20130802-4) unstable; urgency=low
+
+  * debian/patches/fix_crm_mon_host_list.patch: Patch by Andrew Beekhof to
+    finally fix crm_mon.
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 06 Aug 2013 11:03:04 +0000
+
+pacemaker (1.1.10+git20130802-3) unstable; urgency=low
+
+  * Added four patches by Andrew Beekhof to make the CLI utils behave in a
+    rather expected way than before
+  * debian/patches/fix_crm_mon_utils.patch: drop
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 06 Aug 2013 05:08:48 +0000
+
+pacemaker (1.1.10+git20130802-2) unstable; urgency=low
+
+  * debian/patches/fix_crm_mon_utils.patch: Patch by Andrew Beekhof to
+    fix crm_mon
+
+ -- Martin Loschwitz <madkiss@debian.org>  Mon, 05 Aug 2013 12:55:31 +0000
+
+pacemaker (1.1.10+git20130802-1) unstable; urgency=low
+
+  * Update to latest Git HEAD for M/S fix
+  * Bump Build-Dependency on libqb to 0.16.0.real-1
+
+ -- Martin Loschwitz <madkiss@debian.org>  Fri, 02 Aug 2013 07:19:18 +0000
+
+pacemaker (1.1.10-2) unstable; urgency=low
+
+  * Fix versioned Corosync dependency
+  * Bump the Build-Dependency on cluster-glue
+
+ -- Martin Loschwitz <madkiss@debian.org>  Fri, 02 Aug 2013 06:59:10 +0000
+
+pacemaker (1.1.10-1) unstable; urgency=low
+
+  * New upstream version; Pacemaker 1.1.10 for Unstable, still using the old
+    Corosync.
+  * debian/patches/ftbfs: Drop, upstream now
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 01 Aug 2013 10:51:50 +0000
+
+pacemaker (1.1.9+git20130321-1) experimental; urgency=low
+
+  * New upstream version
+  * debian/patches/libpils_fix.patch: Drop, included in upstream now
+  * debian/patches/default_file_for_pacemaker.patch: Updated
+  * debian/patches/fix_dir_creation.patch: Drop, included in upstream now
+  * Added the pacemaker-remote package
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 21 Mar 2013 08:55:41 +0000
+
+pacemaker (1.1.8+git20121010-2) unstable; urgency=low
+
+  * debian/patches/libpils_fix.patch: Make pacemaker load libpils
+    to make oldsk00l stonith agents work again
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 11 Oct 2012 08:18:39 +0000
+
+pacemaker (1.1.8+git20121010-1) unstable; urgency=low
+
+  * New git checkout to fix a problem with ver:1 mode on unstable
+  * debian/pacemaker-dev.install: Re-locate the .pc files to -lib packages
+    so that the CRM shell can find them without problems
+  * debian/rules: Install the new pacemaker default file
+  * debian/pacemaker.postinst: Make sure directories in /var/lib/pacemaker
+    exist and have the right permissions
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 10 Oct 2012 11:07:28 +0000
+
+pacemaker (1.1.8+git20121009-3) unstable; urgency=low
+
+  * Apply another little fix by Andrew to fix the same issue
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 10 Oct 2012 07:33:23 +0000
+
+pacemaker (1.1.8+git20121009-2) unstable; urgency=low
+
+  * Apply a fix by Andrew Beekhof to fix the ver:1 mode of Pacemaker in
+    conjunction with Corosync 1.4.4 and libqb
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 10 Oct 2012 06:53:16 +0000
+
+pacemaker (1.1.8+git20121009-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control: Bump Standards-Version to 3.9.3
+  * debian/control: Add libqb-dev to Build-Depends
+  * debian/*: Tops of adaptions for new upstream release
+  * debian/rules: Enabled build hardening
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 09 Oct 2012 12:17:46 +0000
+
+pacemaker (1.1.7-1) unstable; urgency=low
+
+  * New upstream revision (Pacemaker 1.1.7)
+  * debian/libcrmcommon2-dev.install,
+    debian/pacemaker.install: Numerous additions and removals caused by the
+    recent file reorganization done by upstream
+  * debian/control: Build-Conflict with libqb-dev
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 17 Apr 2012 11:46:52 +0000
+
+pacemaker (1.1.6-2) unstable; urgency=low
+
+  * Adopted numerous changes from the Ubuntu packages, implemented by Andres
+    Rodriguez to make co-maintaining these packages in Ubuntu and Debian a
+    bit easier.
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 20 Oct 2011 13:45:56 +0000
+
+pacemaker (1.1.6-1) unstable; urgency=low
+
+  * New upstream version 1.1.6
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 19 Oct 2011 16:26:24 +0000
+
+pacemaker (1.1.5-3) unstable; urgency=low
+
+  * debian/control: Really fix the issue with conflicting files this time,
+    esp. for libstonithd1-dev vs. libstonithd0-dev (Closes: #639272)
+
+ -- Martin Loschwitz <madkiss@debian.org>  Fri, 26 Aug 2011 13:09:40 +0000
+
+pacemaker (1.1.5-2) unstable; urgency=low
+
+  * debian/control: Fix the Replaces: and Conflicts: for libpe-status3-dev
+    to make sure there are no conflicting files with libpe-status2-dev
+    (Closes: #639270)
+
+ -- Martin Loschwitz <madkiss@debian.org>  Fri, 26 Aug 2011 07:05:47 +0000
+
+pacemaker (1.1.5-1) unstable; urgency=low
+
+  [ Martin G. Loschwitz ]
+    * New upstream release. Packaging is based largely on the Ubuntu package
+      created by Andres Rodriguez. Thank you for the cool work!
+    * Changing Ubuntu specific entries so that they become compatible with the
+      Debian System
+    * Bump Standards-Version -- no changes were necessary in the package
+    * Fix magic for repairing dependency_libs problem
+  [ Andres Rodriguez ]
+    * debian/patches:
+      - debian/patches/raexecupstart.patch: Refreshed.
+    * debian/control:
+      - Build-Depends on xsltproc, docbook-xsl, resource-agents-dev.
+      - Bump libpe-status2 to libpe-status3
+      - Bump libstonithd0 to libstonithd1
+      - Depends on resource-agents.
+    * debian/libpe-status2{-dev}.install: Rename to libpe-status3{-dev}.install
+    * debian/libstonithd0{-dev}.install: Rename to libstonithd1{-dev}.install
+    * debian/clean: Do not clean nvset.rng and rule.rng.
+    * debian/pacemaker.install:
+      - Add missing binaries, manpages and files.
+      - Drop files no longer needed.
+      - Change nvset-1.0.rng to nvset.rng and rule-1.0.rng to rule.rng.
+    * debian/pacemaker.manpages: No longer needed.
+    * debian/libstonithd1-dev.install: Remove files that no longer exist
+    * debian/libcrmcluster1-dev.install: Add missing header.
+    * debian/libpe-status3.install: Update version in file.
+    * debian/libstonithd1.install: Update version in file.
+    * debian/pacemaker-dev.install: Do not install *.pyc or *.pyo files
+    * debian/rules: Change from --fail-missing to --list-missing to not fail
+      when *.pyc or *.pyo files are not installed.
+    * Switch from dh_pycentral to dh_python2.
+    * debian/pacemaker.postinst: Remove pycentral pkginstall rule.
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 24 Aug 2011 12:10:00 +0000
+
+pacemaker (1.0.11-1.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Don't install python bytecode so the upload gets accepted to the archive
+
+ -- Luk Claes <luk@debian.org>  Sun, 05 Jun 2011 22:21:18 +0200
+
+pacemaker (1.0.11-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Remove references to other libraries from dependency_libs field
+    (Closes: #619552).
+
+ -- Luk Claes <luk@debian.org>  Tue, 31 May 2011 19:44:53 +0200
+
+pacemaker (1.0.11-1) unstable; urgency=low
+
+  [ Martin G. Loschwitz ]
+  * New upstream version
+
+ -- Martin Loschwitz <madkiss@debian.org>  Sun, 22 May 2011 08:52:18 +0000
+
+pacemaker (1.0.10-6) unstable; urgency=low
+
+  [ Martin G. Loschwitz ]
+  * Added Build-Depends on libxml2-dev and help2man, kudos
+    go to Florian Haas for pointing this out.
+  * Replaced the lines in debian/rules to wipe dependency_libs
+    from .la files with Steve Langasek's version (Closes: #619552)
+  * Remove ancient leftovers from debian/rules file, again kudos
+    to Florian Haas
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 20 Apr 2011 13:17:24 +0000
+
+pacemaker (1.0.10-5) unstable; urgency=low
+
+  [ Andres Rodriguez ]
+  * Fix versioned dependency on cluster-glue-dev
+    - The version should be a cluster-glue-dev version,
+      not a pacemaker version.
+      Closes: #608275
+  * Resolve libpe-rules2 upgrade failure
+    Closes: #609480
+
+  [  Andreas Metzler ]
+  * Empty dependency_libs in libtool la file.
+    http://wiki.debian.org/ReleaseGoals/LAFileRemoval
+    Closes: #610156
+
+ -- Simon Horman <horms@debian.org>  Mon, 17 Jan 2011 08:10:29 +0900
+
+pacemaker (1.0.10-4) unstable; urgency=low
+
+  * Add dependency on cluster-glue-dev to libcrmcommon2-dev
+    Closes: #608275
+
+ -- Simon Horman <horms@debian.org>  Tue, 04 Jan 2011 12:53:31 +0900
+
+pacemaker (1.0.10-3) unstable; urgency=low
+
+  * Use correct names for libpe-rules2-dev and libpe-status2-dev
+    - This fixes a regression introduced in 1.0.10-2
+
+ -- Simon Horman <horms@debian.org>  Mon, 20 Dec 2010 15:31:41 +0900
+
+pacemaker (1.0.10-2) unstable; urgency=low
+
+  [ Andres Rodriguez ]
+  * debian/rules: dh_pycentral only for pacemaker and pacemaker-dev.
+  * debian/control:
+    - Really remove Build-Depends on python-dev.
+    - pacemaker-dev: Change from ${source:Version} to ${binary:Version}.
+    - Add missing Section for library packages.
+    - lib -dev binary packages: Drop ${python:Depends}, ${shlibs:Depends};
+      add dependency to its corresponding binary package.
+    - lib binary packages: Drop ${python:Depends}
+    - Rename libpe-{status,rules}-2 to libpe-{status,rules}2 respectively.
+  * debian/libpe-{status,rules}-2{-dev}.install:
+    - Rename to libpe-{status,rules}2{-dev}.
+
+ -- Simon Horman <horms@debian.org>  Mon, 20 Dec 2010 09:29:39 +0900
+
+pacemaker (1.0.10-1) unstable; urgency=low
+
+  * New upstream
+  * Depend on new binary packages of cluster-glue
+    Closes: 593319
+
+ -- Simon Horman <horms@debian.org>  Thu, 16 Dec 2010 21:50:06 +0900
+
+pacemaker (1.0.9.1+hg15626-2) experimental; urgency=low
+
+  * Package split to better comply with Debian Policy (c. 8.1.)
+  * Adapt package to new cluster-glue structure
+  * Remove service_crm.so as according to beekhof, it's an unneeded
+    copy only anyway
+  * Bump Standards-Version
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 20 Oct 2010 17:15:45 +0200
+
+pacemaker (1.0.9.1+hg15626-1) unstable; urgency=low
+
+  * New upstream Mercurial checkout to fix the "cleanup" command
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 05 Aug 2010 13:24:45 +0000
+
+pacemaker (1.0.9.1-2) unstable; urgency=low
+
+  * Rebuild against fresh cluster-glue
+    - Updated dependencies
+  * Update debian/watch
+  * Add dependencies on libglib2.0-dev, libxml2-dev and libcluster-glue-dev
+    to pacemaker-dev.
+    Closes: #586787
+  * Update standards version to 3.9.0
+
+ -- Simon Horman <horms@debian.org>  Wed, 14 Jul 2010 17:06:02 +0900
+
+pacemaker (1.0.9.1-1) unstable; urgency=low
+
+  * New Upstream
+
+ -- Simon Horman <horms@debian.org>  Mon, 05 Jul 2010 22:01:05 +0900
+
+pacemaker (1.0.8+hg15494-4) unstable; urgency=low
+
+  * run dh_installdeb *after* dh_perl and dh_pycentral.
+
+ -- Frederik Schüler <fs@debian.org>  Mon, 03 May 2010 20:10:48 +0200
+
+pacemaker (1.0.8+hg15494-3) unstable; urgency=low
+
+  * Merge 1.0.8+hg15494-2ubuntu1
+    debian/pacemaker-dev.install: Changed 'python2.5/site-packages' to
+    'python*/*-packages'.
+    debian/control:
+    - Add missing Build-Depends on libcluster-glue-dev.
+    - Drop unnecessary Build-Depends on python-dev.
+  * Build depend on libcluster-glue-dev
+    Patch by Nobuhiro Iwamatsu
+    Closes: 578340
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Wed, 21 Apr 2010 16:10:25 +1000
+
+pacemaker (1.0.8+hg15494-2) unstable; urgency=low
+
+  * Fix support of python file handling for CRM shell
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 30 Mar 2010 15:07:48 +0000
+
+pacemaker (1.0.8+hg15494-1) unstable; urgency=low
+
+  * Build new packages for upload to official unstable repository
+  * Base build on new cluster-glue and heartbeat
+  * Removed spelling fixes patch; merged upstream.
+  * Drop obsolete Build-Dependency on libnet1-dev
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 30 Mar 2010 09:09:11 +0000
+
+pacemaker (1.0.8-1) unstable; urgency=low
+
+  [ Simon Horman ]
+  * New Upstream
+
+ -- Simon Horman <horms@debian.org>  Fri, 26 Mar 2010 21:02:28 +1100
+
+pacemaker (1.0.7+hg20100303r15404-3) unstable; urgency=low
+
+  [ Martin Loschwitz ]
+  * Fixing the CRM shell finally
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 03 Mar 2010 18:16:00 +0100
+
+pacemaker (1.0.7+hg20100303r15404-2) unstable; urgency=low
+
+  [ Martin Loschwitz ]
+  * Fix inclusion of files for the CRM shell
+  * Include two manpages in pacemaker package
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 03 Mar 2010 15:33:00 +0100
+
+pacemaker (1.0.7+hg20100303r15404-1) unstable; urgency=low
+
+  [ Martin Loschwitz ]
+  * Update the copyright-file to the version updated by Ante Karamatic
+  * Remove the Build-Dependency on heartbeat-dev (obsolete)
+  * Add Build-Dependency on libcluster-glue-dev
+  * New upstream checkout; officially ready for unstable
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 03 Mar 2010 09:00:00 +0100
+
+pacemaker (1.0.7+hg20100203-2) UNRELEASED; urgency=low
+
+  * Use debian source format 3.0 "quilt".
+  * Raise debconf compatibility level to 7, and depend on this version
+    accordingly.
+  * Bump standars version to 3.8.4, no changes needed.
+  * Remove duplicate control fields.
+  * Add lintian overrides.
+  * debian/rules: fix indentations.
+  * Install manpages using dh_installman.
+
+ -- Frederik Schüler <fs@debian.org>  Thu, 11 Feb 2010 23:45:25 +0100
+
+pacemaker (1.0.7+hg20100203-1) unstable; urgency=low
+
+  * Rebuild against the new cluster stack releases
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 03 Feb 2010 08:30:00 +0100
+
+pacemaker (1.0.7+hg20100127-0test1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Martin Loschwitz <madkiss@debian.org>  Wed, 27 Jan 2010 13:58:00 +0200
+
+pacemaker (1.0.6+hg20091102-4~bpo50+1) lenny-backports; urgency=low
+
+  * Rebuild for lenny-backports.
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 03 Nov 2009 10:44:24 +0000
+
+pacemaker (1.0.6+hg20091102-4) unstable; urgency=low
+
+  * Make pacemaker depend on cluster-agents to make sure it does not
+    get removed during updates.
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 03 Nov 2009 09:52:57 +0000
+
+pacemaker (1.0.6+hg20091102-3) unstable; urgency=low
+
+  * Replace dependency on cluster-messaging-framework with corosync or
+    heartbeat -- enforce heartbeat for default installations
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 03 Nov 2009 08:40:05 +0000
+
+pacemaker (1.0.6+hg20091102-2) unstable; urgency=low
+
+  * Fix broken dependency on heartbeat
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 03 Nov 2009 07:49:33 +0000
+
+pacemaker (1.0.6+hg20091102-1) unstable; urgency=low
+
+  * New upstream version: 1.0.6
+  * Undo packagesplit for pacemaker -- it's one package now
+  * Depend on cluster-messaging-framework
+
+ -- Martin Loschwitz <madkiss@debian.org>  Mon, 02 Nov 2009 13:35:16 +0000
+
+pacemaker (1.0.5+hg20091012-1) unstable; urgency=low
+
+  * New upstream version
+  * Switch back to openais-legacy for the time being
+
+ -- Martin Loschwitz <madkiss@debian.org>  Mon, 12 Oct 2009 17:30:00 +0200
+
+pacemaker (1.0.5+hg20090915-1) unstable; urgency=low
+
+  * New upstream version
+  * Some cleanups in debian/-subdirectory
+  * Changes to control-file to reflect new HB situation
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 15 Sep 2009 10:10:00 +0200
+
+pacemaker (1.0.4.1+hg20090606-1) experimental; urgency=low
+
+  * Rebuild, now with the finally "official" 1.0.4.
+  * Some cleanups in debian/ (remove ancient files)
+
+ -- Martin Loschwitz <madkiss@debian.org>  Sat, 06 Jun 2009 10:06:00 +0200
+
+pacemaker (1.0.4.1+hg20090604-1) experimental; urgency=low
+
+  * Rebuild to reflect another set of upstream changes. Sigh.
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 04 Jun 2009 09:26:00 +0200
+
+pacemaker (1.0.4+hg20090604-1) experimental; urgency=low
+
+  * New upstream version: pacemaker 1.0.4+hg20090604
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 04 Jun 2009 09:26:00 +0200
+
+pacemaker (1.0.3+svn20090522-2) experimental; urgency=low
+
+  * Added --libdir to configure script to make sure libraries go
+  into the correct directories.
+  * Make postinst no longer bail out if /var/run/heartbeat/crm and / or
+  /var/lib/heartbeat/pengine are missing
+
+ -- Martin Loschwitz <madkiss@debian.org>  Tue, 26 May 2009 13:39:00 +0200
+
+pacemaker (1.0.3+svn20090522-1) experimental; urgency=low
+
+  * Updated to latest version of upstream 1.0 stable tree
+
+ -- Martin Loschwitz <madkiss@debian.org>  Fri, 22 May 2009 13:00:00 +0200
+
+pacemaker (1.0.2-4) experimental; urgency=low
+
+  * Add missing build dependency on libheartbeat2-dev
+
+ -- Simon Horman <horms@debian.org>  Wed, 20 May 2009 15:01:15 +0000
+
+pacemaker (1.0.2-3) experimental; urgency=low
+
+  * Added pacemaker.lcrso
+  * Build against newer Heartbeat package
+  * Provide separate packages for heartbeat / openais
+  * Changed the Maintainer-Field to the Debian HA-Group
+
+ -- Martin Loschwitz <madkiss@debian.org>  Thu, 25 Feb 2009 08:18:00 +0100
+
+pacemaker (1.0.2-2) experimental; urgency=low
+
+  * Increased versioned build-depend on heartbeat-dev and
+    depend of pacemaker on heartbeat to 2.99.2+sles11r3-1
+    so that crmd is built against and uses liblrm.so.2
+
+  * Include var/* in pacemaker package
+
+  * Add dependency on the following virtual packages provided by heartbeat.
+    This is to ensure that if the versions of these libraries increase
+    this version of pacemaker will conflict with the new heartbeat package
+    - libapphb2, liblrm2, libpils2, libplumb2, libstonith1
+
+ -- Simon Horman <horms@debian.org>  Fri, 20 Feb 2009 21:11:39 +1100
+
+pacemaker (1.0.2-1) experimental; urgency=medium
+
+  [ Andrew Beekhof ]
+  * Update source tarball to revision: d232d19daeb9 (stable-1.0) tip
+  * Statistics:
+      Changesets:      441
+      Diff:            639 files changed, 20871 insertions(+), 21594 deletions(-)
+
+  * Changes since Pacemaker-1.0.1
+  + High (bnc#450815): Tools: crm cli: don't generate id for the operations tag
+  + High: ais: Add support for the new AIS IPC layer
+  + High: ais: Always set header.error to the correct default: SA_AIS_OK
+  + High: ais: Bug BNC#456243 - Ensure the membership cache always contains an entry for the local node
+  + High: ais: Bug BNC:456208 - Prevent deadlocks by not logging in the child process before exec()
+  + High: ais: By default, disable supprt for the WIP openais IPC patch
+  + High: ais: Detect and handle situations where ais and the crm disagree on the node name
+  + High: ais: Ensure crm_peer_seq is updated after a membership update
+  + High: ais: Make sure all IPC header fields are set to sane defaults
+  + High: ais: Repair and streamline service load now that whitetank startup functions correctly
+  + High: build: create and install doc files
+  + High: cib: Allow clients without mainloop to connect to the cib
+  + High: cib: CID:18 - Fix use-of-NULL in cib_perform_op
+  + High: cib: CID:18 - Repair errors introduced in b5a18704477b - Fix use-of-NULL in cib_perform_op
+  + High: cib: Ensure diff's contain the correct values of admin_epoch
+  + High: cib: Fix four moderately sized memory leaks detected by Valgrind
+  + High: Core: CID:10 - Prevent indexing into an array of schemas with a negative value
+  + High: Core: CID:13 - Fix memory leak in log_data_element
+  + High: Core: CID:15 - Fix memory leak in crm_get_peer
+  + High: Core: CID:6 - Fix use-of-NULL in copy_ha_msg_input
+  + High: Core: Fix crash in the membership code preventing node shutdown
+  + High: Core: Fix more memory leaks foudn by valgrind
+  + High: Core: Prevent unterminated strings after decompression
+  + High: crmd: Bug BNC:467995 - Delay marking STONITH operations complete until STONITH tells us so
+  + High: crmd: Bug LF:1962 - Don't NACK peers because they're not (yet) in our membership.  Just ignore them.
+  + High: crmd: Bug LF:2010 - Ensure fencing cib updates create the node_state entry if needed to preent re-fencing during cluster startup
+  + High: crmd: Correctly handle reconnections to attrd
+  + High: crmd: Ensure updates for lost migrate operations indicate which node it tried to migrating to
+  + High: crmd: If there are no nodes to finalize, start an election.
+  + High: crmd: If there are no nodes to welcome, start an election.
+  + High: crmd: Prevent node attribute loss by detecting attrd disconnections immediately
+  + High: crmd: Prevent node re-probe loops by ensuring manditory actions always complete
+  + High: PE: Bug 2005 - Fix startup ordering of cloned stonith groups
+  + High: PE: Bug 2006 - Correctly reprobe cloned groups
+  + High: PE: Bug BNC:465484 - Fix the no-quorum-policy=suicide option
+  + High: PE: Bug LF:1996 - Correctly process disabled monitor operations
+  + High: PE: CID:19 - Fix use-of-NULL in determine_online_status
+  + High: PE: Clones now default to globally-unique=false
+  + High: PE: Correctly calculate the number of available nodes for the clone to use
+  + High: PE: Only shoot online nodes with no-quorum-policy=suicide
+  + High: PE: Prevent on-fail settings being ignored after a resource is successfully stopped
+  + High: PE: Prevent use-of-NULL for failed migrate actions in process_rsc_state()
+  + High: PE: Remove an optimization for the terminate node attribute that caused the cluster to block indefinitly
+  + High: PE: Repar the ability to colocate based on node attributes other than uname
+  + High: PE: Start the correct monitor operation for unmanaged masters
+  + High: stonith: CID:3 - Fix another case of exceptionally poor error handling by the original stonith developers
+  + High: stonith: CID:5 - Checking for NULL and then dereferencing it anyway is an interesting approach to error handling
+  + High: stonithd: Sending IPC to the cluster is a privileged operation
+  + High: stonithd: wrong checks for shmid (0 is a valid id)
+  + High: Tools: attrd - Correctly determine when an attribute has stopped changing and should be committed to the CIB
+  + High: Tools: Bug 2003 - pingd doesn't correctly detect failures when the interface is down
+  + High: Tools: Bug 2003 - pingd doesn't correctly handle node-down events on multi-NIC systems
+  + High: Tools: Bug 2021 - pingd does not detect sequence wrapping correctly, incorrectly reports nodes offline
+  + High: Tools: Bug BNC:468066 - Don't use the result of uname() when its no longer in scope
+  + High: Tools: Bug BNC:473265 - crm_resource -L dumps core
+  + High: Tools: Bug LF:2001 - Transient node attributes should be set via attrd
+  + High: Tools: Bug LF:2036 - crm_resource cannot set/get parameters for cloned resources
+  + High: Tools: Bug LF:2046 - Node attribute updates are lost because attrd can take too long to start
+  + High: Tools: Cause the correct clone instance to be failed with crm_resource -F
+  + High: Tools: cluster_test - Allow the user to select a stack and fix CTS invocation
+  + High: Tools: crm cli: allow rename only if the resource is stopped
+  + High: Tools: crm cli: catch system errors on file operations
+  + High: Tools: crm cli: completion for ids in configure
+  + High: Tools: crm cli: drop '-rsc' from attributes for order constraint
+  + High: Tools: crm cli: exit with an appropriate exit code
+  + High: Tools: crm cli: fix wrong order of action and resource in order constraint
+  + High: Tools: crm cli: fox wrong exit code
+  + High: Tools: crm cli: improve handling of cib attributes
+  + High: Tools: crm cli: new command: configure rename
+  + High: Tools: crm cli: new command: configure upgrade
+  + High: Tools: crm cli: new command: node delete
+  + High: Tools: crm cli: prevent key errors on missing cib attributes
+  + High: Tools: crm cli: print long help for help topics
+  + High: Tools: crm cli: return on syntax error when parsing score
+  + High: Tools: crm cli: rsc_location can be without nvpairs
+  + High: Tools: crm cli: short node preference location constraint
+  + High: Tools: crm cli: sometimes, on errors, level would change on single shot use
+  + High: Tools: crm cli: syntax: drop a bunch of commas (remains of help tables conversion)
+  + High: Tools: crm cli: verify user input for sanity
+  + High: Tools: crm: find expressions within rules (don't always skip xml nodes due to used id)
+  + High: Tools: crm_master shouldn't define a set id now that attrd is used.  Defining one can break lookups
+  + High: Tools: crm_mon Use the OID assigned to the project by IANA for SNMP traps
+  + High: Tools: hb2openais: add constraints for clvmd to controld
+  + High: Tools: hb2openais: adjust path to the supporting script and set CONF variable
+  + High: Tools: hb2openais: improve media processing and set rrp_mode for multiple rings configuration
+  + High: Tools: hb2openais: openais supports up to two rings
+  + High: Tools: hb2openais: set no-quorum-policy to ignore for 2-node clusters
+  + High: Tools: hb2openais: start mgmtd if appropriate
+  + Medium (bnc#445622): Tools: crm cli: improve the node show command and drop node status
+  + Medium (LF 2009): stonithd: improve timeouts for remote fencing
+  + Medium: ais: Allow dead peers to be removed from membership calculations
+  + Medium: ais: Pass node deletion events on to clients
+  + Medium: ais: Sanitize ipc usage
+  + Medium: ais: Supply the node's uname in addtion to the id
+  + Medium: Build: Clean up configure to ensure NON_FATAL_CFLAGS is consistent with CFLAGS (ie. includes -g)
+  + Medium: Build: Install cluster_test
+  + Medium: Build: Use more restrictive CFLAGS and fix the resulting errors
+  + Medium: cib: CID:20 - Fix potential use-after-free in cib_native_signon
+  + Medium: Core: Bug BNC:474727 - Set a maximum time to wait for IPC messages
+  + Medium: Core: CID:12 - Fix memory leak in decode_transition_magic error path
+  + Medium: Core: CID:14 - Fix memory leak in calculate_xml_digest error path
+  + Medium: Core: CID:16 - Fix memory leak in date_to_string error path
+  + Medium: Core: Try to track down the cause of XML parsing errors
+  + Medium: crmd: Bug BNC:472473 - Don't wait excessive amounts of time for lost actions
+  + Medium: crmd: Bug BNC:472473 - Reduce the transition timeout to action_timeout+network_delay
+  + Medium: crmd: Don't fast-track the processing of LRM refreshes when there are pending actions.
+  + Medium: crmd: do_dc_join_filter_offer - Check the 'join' message is for the current instance before deciding to NACK peers
+  + Medium: crmd: Find option values without having to do a config upgrade
+  + Medium: crmd: Implement shutdown using a transient node attribute
+  + Medium: crmd: Update the crmd options to use dashes instead of underscores
+  + Medium: cts: Add 'cluster reattach' to the suite of automated regression tests
+  + Medium: cts: cluster_test - Make some usability enhancements
+  + Medium: CTS: cluster_test - suggest a valid port number
+  + Medium: CTS: Fix python import order
+  + Medium: cts: Implement an automated SplitBrain test
+  + Medium: CTS: Remove references to deleted classes
+  + Medium: Extra: Resources - Use HA_VARRUN instead of HA_RSCTMP for state files as Heartbeat removes HA_RSCTMP at startup
+  + Medium: HB: Bug 1933 - Fake crmd_client_status_callback() calls because HB doesn't provide them for already running processes
+  + Medium: PE: CID:17 - Fix memory leak in find_actions_by_task error path
+  + Medium: PE: CID:7,8 - Prevent hypothetical use-of-NULL in LogActions
+  + Medium: PE: Defer logging the actions performed on a resource until we've processed ordering constraints
+  + Medium: PE: Remove the symmetrical attribute of colocation constraints
+  + Medium: Resources: pingd - fix the meta defaults
+  + Medium: Resources: Stateful - Add missing meta defaults
+  + Medium: stonithd: exit if we the pid file cannot be locked
+  + Medium: Tools: Allow attrd clients to specify the ID the attribute should be created with
+  + Medium: Tools: attrd - Allow attribute updates to be performed from a hosts' peer
+  + Medium: Tools: Bug LF:1994 - Clean up crm_verify return codes
+  + Medium: Tools: Change the pingd defaults to ping hosts once every second (instead of 5 times every 10 seconds)
+  + Medium: Tools: cibmin - Detect resource operations with a view to providing email/snmp/cim notification
+  + Medium: Tools: crm cli: add back symmetrical for order constraints
+  + Medium: Tools: crm cli: generate role in location when converting from xml
+  + Medium: Tools: crm cli: handle shlex exceptions
+  + Medium: Tools: crm cli: keep order of help topics
+  + Medium: Tools: crm cli: refine completion for ids in configure
+  + Medium: Tools: crm cli: replace inf with INFINITY
+  + Medium: Tools: crm cli: streamline cib load and parsing
+  + Medium: Tools: crm cli: supply provider only for ocf class primitives
+  + Medium: Tools: crm_mon - Add support for sending mail notifications of resource events
+  + Medium: Tools: crm_mon - Include the DC's version in status summary
+  + Medium: Tools: crm_mon - Sanitize startup and option processing
+  + Medium: Tools: crm_mon - switch to event-driven updates and add support for sending snmp traps
+  + Medium: Tools: crm_shadow - Replace the --locate option with the saner --edit
+  + Medium: Tools: hb2openais: do not remove Evmsd resources, but replace them with clvmd
+  + Medium: Tools: hb2openais: replace crmadmin with crm_mon
+  + Medium: Tools: hb2openais: replace the lsb class with ocf for o2cb
+  + Medium: Tools: hb2openais: reuse code
+  + Medium: Tools: LF:2029 - Display an error if crm_resource is used to reset the operation history of non-primitive resources
+  + Medium: Tools: Make pingd resilient to attrd failures
+  + Medium: Tools: pingd - fix the command line switches
+  + Medium: Tools: Rename ccm_tool to crm_node
+
+  [ Simon Horman ]
+  * Changes made while producing Debian packages
+  + Change distribution from sid to experimental
+  + Remove autoconf automake autoheader on clean as these
+    end up as symlinks which dpkg-source can't handle
+  + Remove libltdl.tar on as this is a binary which dpkg-source can't handle
+  + Make sure configure and py-compile are executable if present
+  + Remove build-stamp on clean, otherwise the package can't be rebuilt
+  + Remove lib64 path mangling code from configure,
+    it seems to be broken on Debian
+  + Use dh_install instead of dh_movefiles
+    - Remove debian/*.files debian/*.dirs
+      These files are not needed, as debian/*.install is used.
+      They should be removed from upstream.
+  + Use dh_clean and dh_auto_clean in clean target of debian/rules
+  + Use dh_prep instead of dh_clean in build target of debian/rules
+
+ -- Simon Horman <horms@debian.org>  Tue, 17 Feb 2009 00:59:08 +0000
+
+pacemaker (1.0.1-1) stable; urgency=high
+  * Update source tarball to revision: 2883431a818b (stable-1.0) tip
+  * Statistics:
+      Changesets:      160
+      Diff:            810 files changed, 6881 insertions(+), 6214 deletions(-)
+
+  * Changes since 388654dfef8f
+  + High: ais: Allow the crmd to get callbacks whenever a node's state changes
+  + High: ais: Ensure HA_RSCTMP exists for use by resource agents
+  + High: ais: Hook up the openais.conf config logging options
+  + High: ais: Zero out the PID of disconnecting clients
+  + High: cib: Ensure global updates cause a disk write when appropriate
+  + High: Core: Add an extra snaity check to getXpathResults() to prevent segfaults
+  + High: Core: Don't redefine __FUNCTION__ unnecessarily
+  + High: Core: Repair the ability to have comments in the configuration
+  + High: crmd: Bug:1975 - crmd should wait indefinitely for stonith operations to complete
+  + High: crmd: Ensure PE processing does not occur for all error cases in do_pe_invoke_callback
+  + High: crmd: Requests to the CIB should cause any prior PE calculations to be ignored
+  + High: PE: Bug LF:1988 - Ensure recurring operations always have the correct target-rc set
+  + High: PE: Bug LF:1988 - For unmanaged resources we need to skip the usual can_run_resources() checks
+  + High: PE: Ensure the terminate node attribute is handled correctly
+  + High: PE: Fix optional colocation
+  + High: PE: Improve up the detection of 'new' nodes joining the cluster
+  + High: PE: Prevent assert failures in master_color() by ensuring unmanaged masters are always reallocated to their current location
+  + High: Tools: crm cli: parser: return False on syntax error and None for comments
+  + High: Tools: crm cli: unify template and edit commands
+  + High: Tools: crm_shadow - Show more line number information after validation failures
+  + High: Tools: hb2openais: add option to upgrade the CIB to v3.0
+  + High: Tools: hb2openais: add U option to getopts and update usage
+  + High: Tools: hb2openais: backup improved and multiple fixes
+  + High: Tools: hb2openais: fix class/provider reversal
+  + High: Tools: hb2openais: fix testing
+  + High: Tools: hb2openais: move the CIB update to the end
+  + High: Tools: hb2openais: update logging and set logfile appropriately
+  + High: Tools: LF:1969 - Attrd never sets any properties in the cib
+  + High: Tools: Make attrd functional on OpenAIS
+  + Medium: ais: Hook up the options for specifying the expected number of nodes and total quorum votes
+  + Medium: ais: Provide better feedback when nodes change nodeid's (in openais.conf)
+  + Medium: cib: Always store cib contents on disk with num_updates=0
+  + Medium: cib: Ensure remote access ports are cleaned up on shutdown
+  + Medium: crmd: Detect deleted resource operations automatically
+  + Medium: crmd: Erase a node's resource operations and transient attributes after a successful STONITH
+  + Medium: crmd: Find a more appropriate place to update quorum and refresh attrd attributes
+  + Medium: crmd: Fix the handling of unexpected PE exits to ensure the current CIB is stored
+  + Medium: crmd: Fix the recording of pending operations in the CIB
+  + Medium: crmd: Initiate an attrd refresh _after_ the status section has been fully repopulated
+  + Medium: crmd: Only the DC should update quorum in an openais cluster
+  + Medium: Ensure meta attributes are used consistantly
+  + Medium: PE: Allow group and clone level resource attributes
+  + Medium: PE: Bug N:437719 - Ensure scores from colocated resources count when allocating groups
+  + Medium: PE: Prevent lsb scripts from being used in globally unique clones
+  + Medium: PE: Make a best-effort guess at a migration threshold for people with 0.6 configs
+  + Medium: Resources: controld - ensure we are part of a clone with globally_unique=false
+  + Medium: Tools: attrd - Automatically refresh all attributes after a CIB replace operation
+  + Medium: Tools: Bug LF:1985 - crm_mon - Correctly process failed cib queries to allow reconnection after cluster restarts
+  + Medium: Tools: Bug LF:1987 - crm_verify incorrectly warns of configuration upgrades for the most recent version
+  + Medium: Tools: crm (bnc#441028): check for key error in attributes management
+  + Medium: Tools: crm_mon - display the meaning of the operation's rc code instead of the status
+  + Medium: Tools: crm_mon - Fix the display of timing data
+  + Medium: Tools: crm_verify - check that we're being asked to validate a complete config
+  + Medium: xml: Relax the restriction on the contents of rsc_locaiton.node
+
+ -- Andrew Beekhof <abeekhof@suse.de>  Mon, 17 Nov 2008 10:31:37 +0100
+
+pacemaker (1.0.0-1) stable; urgency=medium
+  * Update source tarball to revision: 388654dfef8f tip
+  * Statistics:
+      Changesets:      261
+      Diff:            3021 files changed, 244985 insertions(+), 111596 deletions(-)
+
+  * Changes since f805e1b30103
+  + High: add the crm cli program
+  + High: ais: Move the service id definition to a common location and make sure it is always used
+  + High: build: rename hb2openais.sh to .in and replace paths with vars
+  + High: cib: Implement --create for crm_shadow
+  + High: cib: Remove dead files
+  + High: Core: Allow the expected number of quorum votes to be configrable
+  + High: Core: cl_malloc and friends were removed from Heartbeat
+  + High: Core: Only call xmlCleanupParser() if we parsed anything.  Doing so unconditionally seems to cause a segfault
+  + High: hb2openais.sh: improve pingd handling; several bugs fixed
+  + High: hb2openais: fix clone creation; replace EVMS strings
+  + High: new hb2openais.sh conversion script
+  + High: PE: Bug LF:1950 - Ensure the current values for all notification variables are always set (even if empty)
+  + High: PE: Bug LF:1955 - Ensure unmanaged masters are unconditionally repromoted to ensure they are monitored correctly.
+  + High: PE: Bug LF:1955 - Fix another case of filtering causing unmanaged master failures
+  + High: PE: Bug LF:1955 - Umanaged mode prevents master resources from being allocated correctly
+  + High: PE: Bug N:420538 - Anit-colocation caused a positive node preference
+  + High: PE: Correctly handle unmanaged resources to prevent them from being started elsewhere
+  + High: PE: crm_resource - Fix the --migrate command
+  + High: PE: MAke stonith-enabled default to true and warn if no STONITH resources are found
+  + High: PE: Make sure orphaned clone children are created correctly
+  + High: PE: Monitors for unmanaged resources don't need to wait for start/promote/demote actions to complete
+  + High: stonithd (LF 1951): fix remote stonith operations
+  + High: stonithd: fix handling of timeouts
+  + High: stonithd: fix logic for stonith resource priorities
+  + High: stonithd: implement the fence-timeout instance attribute
+  + High: stonithd: initialize value before reading fence-timeout
+  + High: stonithd: set timeouts for fencing ops to the timeout of the start op
+  + High: stonithd: stonith rsc priorities (new feature)
+  + High: Tools: Add hb2openais - a tool for upgrading a Heartbeat cluster to use OpenAIS instead
+  + High: Tools: crm_verify - clean up the upgrade logic to prevent crash on invalid configurations
+  + High: Tools: Make pingd functional on Linux
+  + High: Update version numbers for 1.0 candidates
+  + Medium: ais: Add support for a synchronous call to retrieve the node's nodeid
+  + Medium: ais: Use the agreed service number
+  + Medium: Build: Reliably detect heartbeat libraries during configure
+  + Medium: Build: Supply prototypes for libreplace functions when needed
+  + Medium: Build: Teach configure how to find corosync
+  + Medium: Core: Provide better feedback if Pacemaker is started by a stack it doesn't support
+  + Medium: crmd: Avoid calling GHashTable functions with NULL
+  + Medium: crmd: Delay raising I_ERROR when the PE exits until we've had a chance to save the current CIB
+  + Medium: crmd: Hook up the stonith-timeout option to stonithd
+  + Medium: crmd: Prevent potential use-of-NULL in global_timer_callback
+  + Medium: crmd: Rationalize the logging of graph aborts
+  + Medium: PE: Add a stonith_timeout option and remove new options that are better set in rsc_defaults
+  + Medium: PE: Allow external entities to ask for a node to be shot by creating a terminate=true transient node attribute
+  + Medium: PE: Bug LF:1950 - Notifications do not contain all documented resource state fields
+  + Medium: PE: Bug N:417585 - Don't restart group children who's individual score drops below zero
+  + Medium: PE: Detect clients that disconnect before receiving their reply
+  + Medium: PE: Implement a true maintenance mode
+  + Medium: PE: Implement on-fail=standby for NTT.  Derived from a patch by Satomi TANIGUCHI
+  + Medium: PE: Print the correct message when stonith is disabled
+  + Medium: PE: ptest - check the input is valid before proceeding
+  + Medium: PE: Revert group stickiness to the 'old way'
+  + Medium: PE: Use the correct attribute for action 'requires' (was prereq)
+  + Medium: stonithd: Fix compilation without full heartbeat install
+  + Medium: stonithd: exit with better code on empty host list
+  + Medium: tools: Add a new regression test for CLI tools
+  + Medium: tools: crm_resource - return with non-zero when a resource migration command is invalid
+  + Medium: tools: crm_shadow - Allow the admin to start with an empty CIB (and no cluster connection)
+  + Medium: xml: pacemaker-0.7 is now an alias for the 1.0 schema
+
+ -- Andrew Beekhof <abeekhof@suse.de>  Thu, 16 Oct 2008 11:16:46 +0200
+
+pacemaker (0.7.3-1) stable; urgency=medium
+  * Update source tarball to revision: 33e677ab7764+ tip
+  * Statistics:
+      Changesets:      133
+      Diff:            89 files changed, 7492 insertions(+), 1125 deletions(-)
+
+  * Changes since f805e1b30103
+  + High: Tools: add the crm cli program
+  + High: Core: cl_malloc and friends were removed from Heartbeat
+  + High: Core: Only call xmlCleanupParser() if we parsed anything.  Doing so unconditionally seems to cause a segfault
+  + High: new hb2openais.sh conversion script
+  + High: PE: Bug LF:1950 - Ensure the current values for all notification variables are always set (even if empty)
+  + High: PE: Bug LF:1955 - Ensure unmanaged masters are unconditionally repromoted to ensure they are monitored correctly.
+  + High: PE: Bug LF:1955 - Fix another case of filtering causing unmanaged master failures
+  + High: PE: Bug LF:1955 - Umanaged mode prevents master resources from being allocated correctly
+  + High: PE: Bug N:420538 - Anit-colocation caused a positive node preference
+  + High: PE: Correctly handle unmanaged resources to prevent them from being started elsewhere
+  + High: PE: crm_resource - Fix the --migrate command
+  + High: PE: MAke stonith-enabled default to true and warn if no STONITH resources are found
+  + High: PE: Make sure orphaned clone children are created correctly
+  + High: PE: Monitors for unmanaged resources don't need to wait for start/promote/demote actions to complete
+  + High: stonithd (LF 1951): fix remote stonith operations
+  + High: Tools: crm_verify - clean up the upgrade logic to prevent crash on invalid configurations
+  + Medium: ais: Add support for a synchronous call to retrieve the node's nodeid
+  + Medium: ais: Use the agreed service number
+  + Medium: PE: Allow external entities to ask for a node to be shot by creating a terminate=true transient node attribute
+  + Medium: PE: Bug LF:1950 - Notifications do not contain all documented resource state fields
+  + Medium: PE: Bug N:417585 - Don't restart group children who's individual score drops below zero
+  + Medium: PE: Implement a true maintenance mode
+  + Medium: PE: Print the correct message when stonith is disabled
+  + Medium: stonithd: exit with better code on empty host list
+  + Medium: xml: pacemaker-0.7 is now an alias for the 1.0 schema
+
+ -- Andrew Beekhof <abeekhof@suse.de>  Mon, 22 Sep 2008 12:24:54 +0200
+
+pacemaker (0.7.1-1) stable; urgency=medium
+  * Update source tarball to revision: f805e1b30103+ tip
+  * Statistics:
+      Changesets:      184
+      Diff:            513 files changed, 43408 insertions(+), 43783 deletions(-)
+
+  * Testing Notes:
+
+  + Test hardware:
+
+  + All testing was performed with STONITH enabled
+
+  + Pending bugs encountered during testing:
+
+  * Changes since 0.7.0-19
+  + Fix compilation when GNUTLS isn't found
+  + Hg: Use the default branch name for dev
+  + High: admin: Fix use-after-free in crm_mon
+  + High: Build: Remove testing code that prevented heartbeat-only builds
+  + High: cib: Use single quotes so that the xpath queries for nvpairs will succeed
+  + High: crmd: Always connect to stonithd when the TE starts and ensure we notice if it dies
+  + High: crmd: Correctly handle a dead PE process
+  + High: crmd: Make sure async-failures cause the failcount to be incrimented
+  + High: PE: Bug LF:1941 - Handle failed clone instance probes when clone-max < #nodes
+  + High: PE: Parse resource ordering sets correctly
+  + High: PE: Prevent use-of-NULL - order->rsc_rh will not always be non-NULL
+  + High: PE: Unpack colocation sets correctly
+  + High: Tools: crm_mon - Prevent use-of-NULL for orphaned resources
+  + Medium: ais: Add support for a synchronous call to retrieve the node's nodeid
+  + Medium: ais: Allow transient clients to receive membership updates
+  + Medium: ais: Avoid double-free in error path
+  + Medium: ais: Include in the mebership nodes for which we haven't determined their hostname
+  + Medium: ais: Spawn the PE from the ais plugin instead of the crmd
+  + Medium: cib: By default, new configurations use the latest schema
+  + Medium: cib: Clean up the CIB if it was already disconnected
+  + Medium: cib: Only incriment num_updates if something actually changed
+  + Medium: cib: Prevent use-after-free in client after abnormal termination of the CIB
+  + Medium: Core: Fix memory leak in xpath searches
+  + Medium: Core: Get more details regarding parser errors
+  + Medium: Core: Repair expand_plus_plus - don't call char2score on unexpanded values
+  + Medium: Core: Switch to the libxml2 parser - its significantly faster
+  + Medium: Core: Use a libxml2 library function for xml -> text conversion
+  + Medium: crmd: Asynchronous failure actions have no parameters
+  + Medium: crmd: Avoid calling glib functions with NULL
+  + Medium: crmd: Do not allow an election to promote a node from S_STARTING
+  + Medium: crmd: Do not vote if we've not completed the local startup
+  + Medium: crmd: Fix te_update_diff() now that get_object_root() functions differently
+  + Medium: crmd: Fix the lrmd xpath expressions to not contain quotes
+  + Medium: crmd: If we get a join offer during an election, better restart the election
+  + Medium: crmd: No further processing is needed when using the LRM's API call for failing resources
+  + Medium: crmd: Only update have-quorum if the value changed
+  + Medium: crmd: Repair the input validation logic in do_te_invoke
+  + Medium: cts: CIB's can no longer contain comments
+  + Medium: cts: Enable a bunch of tests that were incorrectly disabled
+  + Medium: cts: The libxml2 parser wont allow v1 resources to use integers as parameter names
+  + Medium: Don't use the cluster UID and GID directly.  Look them up based on the configured value of HA_CCMUSER
+  + Medium: Fix compilation when heartbeat is not supported
+  + Medium: PE: Allow groups to be involved in optional ordering constraints
+  + Medium: PE: Allow sets of operations to be reused by multiple resources
+  + Medium: PE: Bug LF:1941 - Mark extra clone instances as orphans and don't show inactive ones
+  + Medium: PE: Determin the correct migration-threshold during resource expansion
+  + Medium: PE: Implement no-quorum-policy=suicide (FATE #303619)
+  + Medium: pengine: Clean up resources after stopping old copies of the PE
+  + Medium: pengine: Teach the PE how to stop old copies of itself
+  + Medium: Tools: Backport hb_report updates
+  + Medium: Tools: cib_shadow - On create, spawn a new shell with CIB_shadow and PS1 set accordingly
+  + Medium: Tools: Rename cib_shadow to crm_shadow
+
+ -- Andrew Beekhof <abeekhof@suse.de>  Wed, 20 Aug 2008 10:19:14 +0200
+
+pacemaker (0.7.0-19) unstable; urgency=medium
+  * Update source tarball to revision: 007c3a1c50f5 (unstable) tip
+  * Statistics:
+      Changesets:      108
+      Diff:            216 files changed, 4632 insertions(+), 4173 deletions(-)
+
+  * Changes added since unstable-0.7
+  + High: admin: Fix use-after-free in crm_mon
+  + High: ais: Change the tag for the ais plugin to "pacemaker" (used in openais.conf)
+  + High: ais: Log terminated processes as an error
+  + High: cib: Performance - Reorganize things to avoid calculating the XML diff twice
+  + High: PE: Bug LF:1941 - Handle failed clone instance probes when clone-max < #nodes
+  + High: PE: Fix memory leak in action2xml
+  + High: PE: Make OCF_ERR_ARGS a node-level error rather than a cluster-level one
+  + High: PE: Properly handle clones that are not installed on all nodes
+  + Medium: admin: cibadmin - Show any validation errors if the upgrade failed
+  + Medium: admin: cib_shadow - Implement --locate to display the underlying filename
+  + Medium: admin: cib_shadow - Implement a --diff option
+  + Medium: admin: cib_shadow - Implement a --switch option
+  + Medium: admin: crm_resource - create more compact constraints that don't use lifetime (which is deprecated)
+  + Medium: ais: Approximate born_on for OpenAIS based clusters
+  + Medium: cib: Remove do_id_check, it is a poor substitute for ID validation by a schema
+  + Medium: cib: Skip construction of pre-notify messages if no-one wants one
+  + Medium: Core: Attempt to streamline some key functions to increase performance
+  + Medium: Core: Clean up XML parser after validation
+  + Medium: crmd: Detect and optimize the crm's behavior when processing diffs of an LRM refresh
+  + Medium: Fix memory leaks when resetting the name of an XML object
+  + Medium: PE: Prefer the current location if it is one of a group of nodes with the same (highest) score
+
+ -- Andrew Beekhof <abeekhof@suse.de>  Fri, 18 Jul 2008 10:06:36 +0200
+
+pacemaker (0.7.0-1) unstable; urgency=low
+  * Update source tarball to revision: bde0c7db74fb tip
+  * Statistics:
+      Changesets:      439
+      Diff:            676 files changed, 41310 insertions(+), 52071 deletions(-)
+
+  * Changes added since stable-0.6
+  + High: A new tool for setting up and invoking CTS
+  + High: Admin: All tools now use --node (-N) for specifying node unames
+  + High: Admin: All tools now use --xml-file (-x) and --xml-text (-X) for specifying where to find XML blobs
+  + High: cib: Cleanup the API - remove redundant input fields
+  + High: cib: Implement CIB_shadow - a facility for making and testing changes before uploading them to the cluster
+  + High: cib: Make registering per-op callbacks an API call and renamed (for clarity) the API call for requesting notifications
+  + High: Core: Add a facility for automatically upgrading old configurations
+  + High: Core: Adopt libxml2 as the XML processing library - all external clients need to be recompiled
+  + High: Core: Allow sending TLS messages larger than the MTU
+  + High: Core: Fix parsing of time-only ISO dates
+  + High: Core: Smarter handling of XML values containing quotes
+  + High: Core: XML memory corruption - catch, and handle, cases where we're overwriting an attribute value with itself
+  + High: Core: The xml ID type doesn't allow UUIDs that start with a number
+  + High: Core: Implement XPath based versions of query/delete/replace/modify
+  + High: Core: Remove some HA2.0.(3,4) compatability code
+  + High: crmd: Overhaul the detection of nodes that are starting vs. failed
+  + High: PE: Bug LF:1459 - Allow failures to expire
+  + High: PE: Have the PE do non-persistent configuration upgrades before performing calculations
+  + High: PE: Replace failure-stickiness with a simple 'migration-threshold'
+  + High: TE: Simplify the design by folding the tengine process into the crmd
+  + Medium: Admin: Bug LF:1438 - Allow the list of all/active resource operations to be queried by crm_resource
+  + Medium: Admin: Bug LF:1708 - crm_resource should print a warning if an attribute is already set as a meta attribute
+  + Medium: Admin: Bug LF:1883 - crm_mon should display fail-count and operation history
+  + Medium: Admin: Bug LF:1883 - crm_mon should display operation timing data
+  + Medium: Admin: Bug N:371785 - crm_resource -C doesn't also clean up fail-count attributes
+  + Medium: Admin: crm_mon - include timing data for failed actions
+  + Medium: ais: Read options from the environment since objdb isn't completely usable yet
+  + Medium: cib: Add sections for op_defaults and rsc_defaults
+  + Medium: cib: Better matching notification callbacks (for detecting duplicates and removal)
+  + Medium: cib: Bug LF:1348 - Allow rules and attribute sets to be referenced for use in other objects
+  + Medium: cib: BUG LF:1918 - By default, all cib calls now timeout after 30s
+  + Medium: cib: Detect updates that decrease the version tuple
+  + Medium: cib: Implement a client-side operation timeout - Requires LHA update
+  + Medium: cib: Implement callbacks and async notifications for remote connections
+  + Medium: cib: Make cib->cmds->update() an alias for modify at the API level (also implemented in cibadmin)
+  + Medium: cib: Mark the CIB as disconnected if the IPC connection is terminated
+  + Medium: cib: New call option 'cib_can_create' which can be passed to modify actions - allows the object to be created if it doesn't exist yet
+  + Medium: cib: Reimplement get|set|delete attributes using XPath
+  + Medium: cib: Remove some useless parts of the API
+  + Medium: cib: Remove the 'attributes' scaffolding from the new format
+  + Medium: cib: Implement the ability for clients to connect to remote servers
+  + Medium: Core: Add support for validating xml against RelaxNG schemas
+  + Medium: Core: Allow more than one item to be modified/deleted in XPath based operations
+  + Medium: Core: Fix the sort_pairs function for creating sorted xml objects
+  + Medium: Core: iso8601 - Implement subtract_duration and fix subtract_time
+  + Medium: Core: Reduce the amount of xml copying occuring
+  + Medium: Core: Support value='value+=N' XML updates (in addtion to value='value++')
+  + Medium: crmd: Add support for lrm_ops->fail_rsc if its available
+  + Medium: crmd: HB - watch link status for node leaving events
+  + Medium: crmd: Bug LF:1924 - Improved handling of lrmd disconnects and shutdowns
+  + Medium: crmd: Do not wait for actions with a start_delay over 5 minutes. Confirm them immediately
+  + Medium: PE: Bug LF:1328 - Don't fencing nodes in clusters without managed resources
+  + Medium: PE: Bug LF:1461 - Give transient node attributes (in <status/>) preference over persistent ones (in <nodes/>)
+  + Medium: PE: Bug LF:1884, Bug LF:1885 - Implement N:M ordering and colocation constraints
+  + Medium: PE: Bug LF:1886 - Create a resource and operation 'defaults' config section
+  + Medium: PE: Bug LF:1892 - Allow recurring actions to be triggered at known times
+  + Medium: PE: Bug LF:1926 - Probes should complete before stop actions are invoked
+  + Medium: PE: Fix the standby when it's set as a transient attribute
+  + Medium: PE: Implement a global 'stop-all-resources' option
+  + Medium: PE: Implement cibpipe, a tool for performing/simulating config changes "offline"
+  + Medium: PE: We don't allow colocation with specific clone instances
+  + Medium: Tools: pingd - Implement a stack-independant version of pingd
+  + Medium: xml: Ship an xslt for upgrading from 0.6 to 0.7
+
+ -- Andrew Beekhof <abeekhof@suse.de>  Wed, 25 Jun 2008 12:55:38 +0200
+
+pacemaker (0.6.5-1) unstable; urgency=low
+
+   * New upstream release
+   * Standards version is 3.8.0
+   * Change "Recommends:" to "Suggests:"
+   * Add debian/watch
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Sat, 21 Jun 2008 11:47:42 +1000
+
+pacemaker (0.6.0-1) experimental; urgency=low
+
+   * New debian package. Closes: #458497
+   * New upstream release
+   * debian/copyright: updated
+   * Makefile.am: pacemaker.lcrso permissions are 0644
+   * crm_utils.py.in: interpreter is /usr/bin/python
+   * service_crm.so: removed, it's a copy of pacemaker.lcrso
+   * crm.dtd: is not executable
+   * *.py files are executables
+   * pacemaker.lcrso: stripped
+   * Test if Makefile exists before running $(MAKE)
+   * Updated descriptions and homepage
+   * Updated build-dependency and dependency lists
+   * Deleted rpaths with chrpath
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Sat, 19 Jan 2008 18:28:49 +1100

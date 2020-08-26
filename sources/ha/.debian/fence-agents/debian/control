@@ -1,0 +1,65 @@
+Source: fence-agents
+Section: admin
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian HA Maintainers <debian-ha-maintainers@alioth-lists.debian.net>
+Uploaders: Adrian Vondendriesch <adrian.vondendriesch@credativ.de>,
+           Valentin Vidic <vvidic@debian.org>
+Build-Depends: autoconf,
+               automake,
+               debhelper-compat (= 13),
+               dh-python,
+               iputils-ping,
+               libglib2.0-dev,
+               libnspr4-dev,
+               libnss3-dev,
+               libtool,
+               perl,
+               python3,
+               python3-boto3,
+               python3-googleapi,
+               python3-pexpect,
+               python3-pycurl,
+               python3-requests,
+               python3-suds,
+               time,
+               xsltproc,
+               libxml2-utils,
+               libnet-telnet-perl
+Rules-Requires-Root: no
+Standards-Version: 4.5.0
+Homepage: https://github.com/ClusterLabs/fence-agents
+Vcs-Browser: https://salsa.debian.org/ha-team/fence-agents
+Vcs-Git: https://salsa.debian.org/ha-team/fence-agents.git
+
+Package: fence-agents
+Architecture: any
+Depends: ${misc:Depends}, ${perl:Depends}, ${python3:Depends}, ${shlibs:Depends},
+         python3-boto3,
+         python3-googleapi,
+         python3-pycurl,
+         python3-pexpect,
+         python3-requests,
+         python3-suds
+Breaks: cman (<= 3.0.12-2ubuntu4)
+Replaces: cman (<= 3.0.12-2ubuntu4)
+Recommends: libnet-telnet-perl,
+            openssh-client,
+            sg3-utils,
+            snmp
+Suggests:
+# Needed by fence_azure_arm:
+          python3-adal,
+          python3-azure,
+# Needed by fence_openstack:
+          python3-keystoneauth1,
+          python3-keystoneclient,
+          python3-novaclient,
+Description: Fence Agents for Red Hat Cluster
+ Red Hat Fence Agents is a collection of scripts to handle remote
+ power management for several devices.  They allow failed or
+ unreachable nodes to be forcibly restarted and removed from the
+ cluster.
+ .
+ Fence agents included:
+ ${agents}

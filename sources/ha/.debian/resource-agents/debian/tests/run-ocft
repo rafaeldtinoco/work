@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+AGENT=$1
+
+cleanup () {
+  ocft clean $AGENT
+}
+
+trap "cleanup" 0 2 3 15
+
+mkdir -p /run/resource-agents
+
+echo "Running: ocft make $AGENT"
+ocft make $AGENT
+
+echo "Running: ocft test -v $AGENT"
+ocft test -v $AGENT

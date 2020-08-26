@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+ulimit -H -l unlimited 2>/dev/null || {
+    # https://bugs.launchpad.net/bugs/1828228
+    echo "test disabled for unprivileged namespaces"
+    exit 77
+}
+
+OUTPUT="${AUTOPKGTEST_ARTIFACTS:-.}/quorumtool.txt"
+
+corosync-quorumtool >"$OUTPUT"
+cat "$OUTPUT"
+grep -q ' 1 node1 (local)' "$OUTPUT"

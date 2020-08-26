@@ -1,0 +1,36 @@
+Description: update udev script to work in Debian
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Last-Update: 2018-04-05
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/gfs2/scripts/82-gfs2-withdraw.rules
++++ b/gfs2/scripts/82-gfs2-withdraw.rules
+@@ -1,2 +1 @@
+-SUBSYSTEM=="gfs2", ACTION=="offline", RUN+="/bin/sh /usr/sbin/gfs2_withdraw_helper"
+-
++SUBSYSTEM=="gfs2", ACTION=="offline", RUN+="gfs2_withdraw_helper"
+--- a/gfs2/scripts/Makefile.am
++++ b/gfs2/scripts/Makefile.am
+@@ -2,7 +2,10 @@
+ 
+ dist_sbin_SCRIPTS = \
+ 	gfs2_lockcapture \
+-	gfs2_trace \
++	gfs2_trace
++
++udevlibexecdir=@udevdir@
++udevlibexec_SCRIPTS = \
+ 	gfs2_withdraw_helper
+ 
+ udevrulesdir=@udevdir@/rules.d
+--- a/gfs2/scripts/gfs2_withdraw_helper
++++ b/gfs2/scripts/gfs2_withdraw_helper
+@@ -19,7 +19,7 @@
+ 
+ if [ -z "$DM_DEV" ]
+ then
+-    /usr/bin/dmsetup suspend $DM_DEV
++    /sbin/dmsetup suspend $DM_DEV
+ fi
+ 
+ # Signal completion of withdraw

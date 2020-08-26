@@ -1,0 +1,48 @@
+Source: fence-virt
+Section: admin
+Priority: optional
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Uploaders: Valentin Vidic <vvidic@debian.org>
+Build-Depends:
+ bison,
+ debhelper-compat (= 12),
+ flex,
+ libcpg-dev,
+ libnss3-dev,
+ libvirt-dev,
+ libxml2-dev,
+ pkg-config,
+ uuid-dev,
+Standards-Version: 4.5.0
+Rules-Requires-Root: no
+Homepage: https://github.com/ClusterLabs/fence-virt/
+Vcs-Browser: https://salsa.debian.org/ha-team/fence-virt
+Vcs-Git: https://salsa.debian.org/ha-team/fence-virt.git
+
+Package: fence-virt
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Pluggable fencing framework for virtual machines - agent
+ The fencing framework consists of the agent (fence_virt) and
+ the host daemon (fence_virtd). The fence_virtd host daemon is
+ responsible for processing fencing requests from fence_virt agents
+ running in virtual machines and routing the requests to the
+ appropriate physical machine for action.
+ .
+ This package contains the fence_virt agent to be used inside the
+ virtual machine.
+
+
+Package: fence-virtd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Description: Pluggable fencing framework for virtual machines - daemon
+ The fencing framework consists of the agent (fence_virt) and
+ the host daemon (fence_virtd). The fence_virtd host daemon is
+ responsible for processing fencing requests from fence_virt agents
+ running in virtual machines and routing the requests to the
+ appropriate physical machine for action.
+ .
+ This package contains the fence_virtd daemon to be used on the
+ physical host.

@@ -1,0 +1,2 @@
+libqb-dev: development-package-ships-elf-binary-in-path usr/sbin/qb-blackbox
+libqb-dev: development-package-ships-elf-binary-in-path usr/bin/doxygen2man

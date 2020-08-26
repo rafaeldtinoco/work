@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# use boothd binary from the package
+sed -i "s|boothd_path *=.*|boothd_path = '/usr/sbin/boothd'|" test/boothtestenv.py
+
+# run tests
+python3 test/runtests.py 2>&1
+rc=$?
+
+# store test files
+test_dir=/tmp/booth-tests
+if [ -d "$test_dir" -a -d "$AUTOPKGTEST_ARTIFACTS" ]; then
+  cp -a $test_dir $AUTOPKGTEST_ARTIFACTS
+fi
+
+exit $rc

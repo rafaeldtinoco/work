@@ -1,0 +1,11 @@
+Document: pacemaker-administration
+Title: Pacemaker Administration
+Section: System/Administration
+
+Format: HTML
+Index: /usr/share/doc/pacemaker/Pacemaker_Administration/desktop/en-US/index.html
+Files:
+ /usr/share/doc/pacemaker/Pacemaker_Administration/desktop/en-US/*
+ /usr/share/doc/pacemaker/Pacemaker_Administration/desktop/en-US/images/*
+ /usr/share/doc/pacemaker/Pacemaker_Administration/desktop/en-US/Common_Content/css/*
+ /usr/share/doc/pacemaker/Pacemaker_Administration/desktop/en-US/Common_Content/images/*

@@ -1,0 +1,64 @@
+From: =?utf-8?q?Ferenc_W=C3=A1gner?= <wferi@debian.org>
+Date: Sun, 16 Dec 2018 22:51:46 +0100
+Subject: Make the example config valid
+
+---
+ conf/corosync.conf.example | 22 +++++++---------------
+ 1 file changed, 7 insertions(+), 15 deletions(-)
+
+diff --git a/conf/corosync.conf.example b/conf/corosync.conf.example
+index 4658a86..91de572 100644
+--- a/conf/corosync.conf.example
++++ b/conf/corosync.conf.example
+@@ -2,8 +2,10 @@
+ totem {
+ 	version: 2
+ 
+-	# Set name of the cluster
+-	cluster_name: ExampleCluster
++	# Corosync itself works without a cluster name, but DLM needs one.
++	# The cluster name is also written into the VG metadata of newly
++	# created shared LVM volume groups, if lvmlockd uses DLM locking.
++	cluster_name: debian
+ 
+ 	# crypto_cipher and crypto_hash: Used for mutual node authentication.
+ 	# If you choose to enable this, then do remember to create a shared
+@@ -25,7 +27,7 @@ logging {
+ 	# Log to a log file. When set to "no", the "logfile" option
+ 	# must not be set.
+ 	to_logfile: yes
+-	logfile: /var/log/cluster/corosync.log
++	logfile: /var/log/corosync/corosync.log
+ 	# Log to the system log daemon. When in doubt, set to yes.
+ 	to_syslog: yes
+ 	# Log debug messages (very verbose). When in doubt, leave off.
+@@ -41,7 +43,7 @@ logging {
+ quorum {
+ 	# Enable and configure quorum subsystem (default: off)
+ 	# see also corosync.conf.5 and votequorum.5
+-	#provider: corosync_votequorum
++	provider: corosync_votequorum
+ }
+ 
+ nodelist {
+@@ -53,19 +55,9 @@ nodelist {
+ 		# Cluster membership node identifier
+ 		nodeid: 1
+ 		# Address of first link
+-		#ring0_addr: 192.168.0.1
++		ring0_addr: 127.0.0.1
+ 		# When knet transport is used it's possible to define up to 8 links
+ 		#ring1_addr: 192.168.1.1
+ 	}
+-	node {
+-		# Hostname of the node
+-		name: node2
+-		# Cluster membership node identifier
+-		nodeid: 2
+-		# Address of first link
+-		#ring0_addr: 192.168.0.2
+-		# When knet transport is used it's possible to define up to 8 links
+-		#ring1_addr: 192.168.1.2
+-	}
+ 	# ...
+ }

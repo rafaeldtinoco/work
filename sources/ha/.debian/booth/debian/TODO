@@ -1,0 +1,3 @@
+* Create booth-arbitrator.service generator.
+* Create and ship booth-arbitrator sysv init script.
+* Create package tests based on upstream testsuite.

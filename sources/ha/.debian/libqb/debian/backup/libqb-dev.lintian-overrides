@@ -1,0 +1,4 @@
+# qb-blackbox is not used for building applications, so it does not harm
+# cross-builds.  It was put in the dev package to keep the main library
+# package Multi-Arch: same.
+libqb-dev: development-package-ships-elf-binary-in-path usr/sbin/qb-blackbox

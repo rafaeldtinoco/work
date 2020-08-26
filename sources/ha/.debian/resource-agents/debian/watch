@@ -1,0 +1,3 @@
+version=3
+opts="uversionmangle=s/(\d)[_\.\-\+]?((RC|rc|pre|dev|beta|alpha)\d*)$/$1~$2/" \
+https://github.com/ClusterLabs/resource-agents/releases/ .*archive/v([\d\.]*.*)\.tar\.gz

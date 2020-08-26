@@ -1,0 +1,4 @@
+usr/sbin/fsck.gfs2 usr/sbin/gfs2_fsck
+usr/sbin/mkfs.gfs2 usr/sbin/gfs2_mkfs
+usr/share/man/man8/fsck.gfs2.8.gz usr/share/man/man8/gfs2_fsck.8.gz
+usr/share/man/man8/mkfs.gfs2.8.gz usr/share/man/man8/gfs2_mkfs.8.gz

@@ -1,0 +1,3 @@
+pidfile-in-runstatedir.patch
+disable-autoreconf.patch
+fix-regressions-test.patch

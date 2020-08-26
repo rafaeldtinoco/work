@@ -1,0 +1,130 @@
+Instructions for PCS - Pacemaker/Corosync configuration system on Debian
+========================================================================
+
+1. Adding PCS to an existing cluster
+------------------------------------
+
+These instructions assume you wish to install PCS on a running
+Pacemaker/Corosync cluster already configured using crmsh.
+
+First of all, install pcs package on all cluster nodes and
+check that pcsd service is running on each of the nodes:
+
+  # service pcsd status
+  ● pcsd.service - PCS GUI and remote configuration interface
+     Loaded: loaded (/lib/systemd/system/pcsd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Fri 2019-01-11 13:22:19 UTC; 22h ago
+       Docs: man:pcsd(8)
+             man:pcs(8)
+   Main PID: 26533 (pcsd)
+      Tasks: 1 (limit: 1149)
+     Memory: 25.5M
+     CGroup: /system.slice/pcsd.service
+             └─26533 /usr/bin/python3 -Es /usr/sbin/pcsd
+
+Service pcsd uses TCP port 2224 so make sure this port is open
+for access by all cluster nodes.
+
+Next, set a password for hacluster user on all cluster nodes:
+
+  # passwd hacluster
+  Enter new UNIX password:
+  Retype new UNIX password:
+  passwd: password updated successfully
+
+Finally, authenticate the cluster nodes by running only on one of them:
+
+  # pcs cluster auth
+  Username: hacluster
+  Password:
+  node1: Authorized
+  node2: Authorized
+
+Cluster is now fully operational and both crm and pcs commands can
+be used to manage cluster resources:
+
+  # pcs cluster status
+  Cluster Status:
+   Stack: corosync
+   Current DC: node2 (version 2.0.1-15814c6c0d) - partition with quorum
+   Last updated: Sat Jan 12 11:43:01 2019
+   Last change: Sat Jan 12 11:36:04 2019 by hacluster via crmd on node2
+   2 nodes configured
+   1 resource configured
+
+  PCSD Status:
+    node1: Online
+    node2: Online
+
+
+2. Initializing a new cluster using PCS
+---------------------------------------
+
+These instructions assume you wish to create a new Pacemaker/Corosync
+cluster using PCS.
+
+WARNING: Do not run the commands from this section on a working
+cluster as they will delete the existing cluster configuration
+and therefore influence running cluster resources.
+
+First of all, install pcs package on all cluster nodes.  After
+package installation cluster services (corosync, pacemaker and pcsd)
+should be running on all nodes with default configuration.
+
+Next, set a password for hacluster user on all cluster nodes:
+
+  # passwd hacluster
+  Enter new UNIX password:
+  Retype new UNIX password:
+  passwd: password updated successfully
+
+Then authenticate the cluster nodes by running:
+
+  # pcs host auth node1 addr=10.0.0.1 node2 addr=10.0.0.2
+  Username: hacluster
+  Password:
+  node1: Authorized
+  node2: Authorized
+
+Finally, the cluster is configured and started by running on one
+of the nodes:
+
+  # pcs cluster setup debian node1 addr=10.0.0.1 node2 addr=10.0.0.2 --force --enable --start --wait
+  Warning: node1: Running cluster services: 'corosync', 'pacemaker', the host seems to be in a cluster already
+  Warning: node1: Cluster configuration files found, the host seems to be in a cluster already
+  Warning: node2: Running cluster services: 'corosync', 'pacemaker', the host seems to be in a cluster already
+  Warning: node2: Cluster configuration files found, the host seems to be in a cluster already
+  Destroying cluster on hosts: 'node1', 'node2'...
+  node2: Successfully destroyed cluster
+  node1: Successfully destroyed cluster
+
+  Requesting remove 'pcsd settings' from 'node1', 'node2'
+  node1: successful removal of the file 'pcsd settings'
+  node2: successful removal of the file 'pcsd settings'
+
+  Sending 'corosync authkey', 'pacemaker authkey' to 'node1', 'node2'
+  node1: successful distribution of the file 'corosync authkey'
+  node1: successful distribution of the file 'pacemaker authkey'
+  node2: successful distribution of the file 'corosync authkey'
+  node2: successful distribution of the file 'pacemaker authkey'
+
+  Synchronizing pcsd SSL certificates on nodes 'node1', 'node2'...
+  node1: Success
+  node2: Success
+
+  Sending 'corosync.conf' to 'node1', 'node2'
+  node1: successful distribution of the file 'corosync.conf'
+  node2: successful distribution of the file 'corosync.conf'
+  Cluster has been successfully set up.
+
+  Enabling cluster on hosts: 'node1', 'node2'...
+  node2: Cluster enabled
+  node1: Cluster enabled
+
+  Starting cluster on hosts: 'node1', 'node2'...
+
+  Waiting for nodes to start: 'node1', 'node2'...
+  node2: Cluster started
+  node1: Cluster started
+
+ -- Valentin Vidic <vvidic@debian.org>  Sat, 12 Jan 2019 12:42:29 +0100

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+sed -i 's/\/dev\/watchdog/\/dev\/null/' /etc/default/sbd
+service pacemaker_remote restart
+sleep 5
+
+pgrep --list-full sbd

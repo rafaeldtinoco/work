@@ -1,0 +1,7 @@
+Enable-redirecting-etc-init.d-script-calls-to-system.patch
+Enable-the-init-scripts-on-multi-user-runlevels.patch
+Make-the-asciidoc-documentation-reproducible.patch
+alerts-make-the-scripts-executable.patch
+Shipping-the-CTS-is-not-useful.patch
+libpacemaker-calls-into-libstonithd-directly.patch
+Fix-typo-evalute-evaluate.patch

@@ -1,0 +1,38 @@
+From: =?utf-8?q?Ferenc_W=C3=A1gner?= <wferi@niif.hu>
+Date: Sun, 28 Feb 2016 17:56:16 +0100
+Subject: Enable the init scripts on multi-user runlevels
+
+Upstream does not find this a good idea (see 5b5acab vs fc11a46 and also
+https://github.com/ClusterLabs/pacemaker/pull/656), but Debian runs
+installed daemons by default.
+---
+ daemons/execd/pacemaker_remote.in | 4 ++--
+ daemons/pacemakerd/pacemaker.in   | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+--- a/daemons/execd/pacemaker_remote.in
++++ b/daemons/execd/pacemaker_remote.in
+@@ -14,8 +14,8 @@
+ # Required-Start:	$network $remote_fs
+ # Should-Start:		$syslog
+ # Required-Stop:	$network $remote_fs
+-# Default-Start:
+-# Default-Stop:
++# Default-Start:	2 3 4 5
++# Default-Stop:		0 1 6
+ # Short-Description:	Manage the executor for Pacemaker Remote nodes
+ # Description:		Manage the executor for Pacemaker Remote nodes
+ ### END INIT INFO
+--- a/daemons/pacemakerd/pacemaker.in
++++ b/daemons/pacemakerd/pacemaker.in
+@@ -15,8 +15,8 @@
+ # Required-Start:	$network $remote_fs corosync
+ # Should-Start:		$syslog
+ # Required-Stop:	$network $remote_fs corosync
+-# Default-Start:
+-# Default-Stop:
++# Default-Start:	2 3 4 5
++# Default-Stop:		0 1 6
+ # Short-Description:	Starts and stops Pacemaker Cluster Manager.
+ # Description:		Starts and stops Pacemaker Cluster Manager.
+ ### END INIT INFO

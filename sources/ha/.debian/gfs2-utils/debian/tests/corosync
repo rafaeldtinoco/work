@@ -1,0 +1,61 @@
+#!/bin/sh
+
+set -e
+
+DISK=$AUTOPKGTEST_TMP/disk
+
+cleanup () {
+  umount /mnt || true
+  [ "$LOOP" ] && losetup -d $LOOP
+  rm -f $DISK || true
+  service dlm stop
+  service corosync stop
+}
+
+trap "cleanup" 0 2 3 15
+
+# configure cluster
+echo "=== corosync ==="
+corosync-quorumtool -e 1
+corosync-quorumtool || true
+
+echo "=== dlm ==="
+service dlm restart
+dlm_tool status
+
+# create test disk
+echo "=== losetup ==="
+dd if=/dev/zero of=$DISK bs=1M count=200 2>&1
+LOOP=$(losetup --find --show $DISK)
+
+# test tools
+echo "=== mkfs ==="
+mkfs.gfs2 -p lock_dlm -t debian:test -J 32 -j 2 -O $LOOP
+
+echo "=== fsck ==="
+fsck.gfs2 -f -y $LOOP 2>&1
+
+echo "=== convert ==="
+gfs2_convert $LOOP 2>&1 | grep -20 'does not look like a gfs1 filesystem'
+
+echo "=== edit ==="
+gfs2_edit -p sb $LOOP
+
+echo "=== tunefs ==="
+tunegfs2 -l $LOOP
+
+echo "=== mount ==="
+mount $LOOP /mnt
+df /mnt
+
+echo "=== grow ==="
+dd if=/dev/zero of=$DISK bs=1M count=50 seek=200 2>&1
+losetup --set-capacity $LOOP
+gfs2_grow /mnt 2>&1
+df /mnt
+
+echo "=== jadd ==="
+gfs2_jadd -j 1 /mnt
+
+echo "=== glocktop ==="
+glocktop -n 1

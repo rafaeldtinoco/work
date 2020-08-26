@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+OUTPUT="${AUTOPKGTEST_ARTIFACTS:-.}/crm_mon.txt"
+
+ulimit -H -l unlimited 2>/dev/null || {
+    # https://bugs.launchpad.net/bugs/1828228
+    echo "test disabled for unprivileged namespaces"
+    exit 77
+}
+
+# Wait more than dc-deadtime (20s by default)
+sleep 25
+
+crm_mon -1 >"$OUTPUT"
+cat "$OUTPUT"
+fgrep -q "Online: [ node1 ]" "$OUTPUT"

@@ -1,0 +1,71 @@
+Source: pcs
+Section: admin
+Priority: optional
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Uploaders:
+ Valentin Vidic <vvidic@debian.org>
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-python,
+ fontconfig,
+ libpam0g-dev,
+ python3-all,
+ python3-setuptools
+Rules-Requires-Root: no
+Standards-Version: 4.5.0
+Homepage: https://github.com/ClusterLabs/pcs
+Vcs-Browser: https://salsa.debian.org/ha-team/pcs
+Vcs-Git: https://salsa.debian.org/ha-team/pcs.git
+
+Package: pcs
+Architecture: all
+Depends:
+ ${misc:Depends},
+ lsb-base (>= 3.0-6),
+ psmisc,
+ fonts-dejavu-core,
+ fonts-liberation,
+ ${python3:Depends},
+ python3-dacite,
+ python3-distro,
+ python3-lxml,
+ python3-openssl,
+ python3-pkg-resources,
+ python3-pycurl,
+ python3-tornado (>= 6.0.4),
+ ruby,
+ ruby-backports,
+ ruby-ethon,
+ ruby-json,
+ ruby-open4,
+ ruby-sinatra,
+ thin
+Pre-Depends: ${misc:Pre-Depends}
+Recommends: pacemaker (>= 2.0)
+Breaks: pacemaker (<< 2.0)
+# unrelated python module that installs files in the same location;
+# conflict with it so it isn't loaded accidentally
+Conflicts: python3-pcs
+Description: Pacemaker Configuration System
+ pcs is a corosync and pacemaker configuration tool. It permits
+ users to easily view, modify and create pacemaker based clusters.
+ .
+ pcs also provides pcsd, which operates as a GUI and remote server
+ for pcs. Together pcs and pcsd form the recommended configuration
+ tool for use with pacemaker.
+
+Package: pcs-snmp
+Architecture: all
+Depends:
+ ${misc:Depends},
+ pcs,
+ ${python3:Depends},
+ python3-pyagentx,
+ snmpd
+Pre-Depends: ${misc:Pre-Depends}
+Breaks: pcs (<< 0.9.165-3)
+Replaces: pcs (<< 0.9.165-3)
+Description: Pacemaker Configuration System SNMP agent
+ SNMP agent which connects to the master agent (snmpd)
+ via AgentX protocol and provides information about
+ the status of a corosync/pacemaker cluster.

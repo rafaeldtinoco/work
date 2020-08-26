@@ -1,0 +1,11 @@
+Depends: ocfs2-tools
+Tests: basic
+Restrictions: needs-root
+
+Depends: ocfs2-tools
+Tests: o2cb
+Restrictions: needs-root, isolation-machine
+
+Depends: ocfs2-tools, corosync, dlm-controld
+Tests: pcmk
+Restrictions: needs-root, isolation-machine

@@ -1,0 +1,15 @@
+Description: Cleanup service file for Debian
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-11-24
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/fence_virtd.service.in
++++ b/fence_virtd.service.in
+@@ -5,7 +5,6 @@
+ 
+ After=basic.target
+ After=network.target
+-After=syslog.target
+ After=libvirt-qmf.service
+ After=libvirtd.service
+ After=corosync.service

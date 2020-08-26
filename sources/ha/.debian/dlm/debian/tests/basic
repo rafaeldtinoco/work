@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+printf "\n=== dlm_tool ===\n"
+dlm_tool -V
+
+printf "\n=== dlm_controld ===\n"
+dlm_controld -D 2>&1 || true
+
+printf "\n=== dlm_stonith ===\n"
+dlm_stonith -n 1 2>&1 || true

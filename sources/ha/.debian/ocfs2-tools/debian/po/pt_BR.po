@@ -1,0 +1,144 @@
+# ocfs2-tools Brazilian Portuguese translation
+# Copyright (C) 2008 THE ocfs2-tools'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the ocfs2-tools package.
+# Eder L. Marques (frolic) <frolic@debian-ce.org>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ocfs2-tools\n"
+"Report-Msgid-Bugs-To: ocfs2-tools@packages.debian.org\n"
+"POT-Creation-Date: 2010-03-12 19:27+0100\n"
+"PO-Revision-Date: 2011-03-19 18:16-0300\n"
+"Last-Translator: Eder L. Marques (frolic) <frolic@debian-ce.org>\n"
+"Language-Team: Brazilian Portuguese <debian-l10n-portuguese@lists.debian."
+"org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ocfs2-tools.templates:1001
+msgid "Would you like to start an OCFS2 cluster (O2CB) at boot time?"
+msgstr ""
+"Você gostaria de iniciar um cluster OCFS2 (O2CB) em tempo de inicialização?"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:2001
+msgid "Name of the cluster to start at boot time:"
+msgstr "Nome do cluster para iniciar em tempo de inicialização:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "O2CB heartbeat threshold:"
+msgstr "Threshold do heartbeat O2CB:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid ""
+"The O2CB heartbeat threshold sets up the maximum time in seconds that a node "
+"awaits for an I/O operation. After it, the node \"fences\" itself, and you "
+"will probably see a crash."
+msgstr ""
+"O threshold do heartbeat O2CB define o tempo máximo em segundos que um nó "
+"aguarda por uma operação de E/S. Após esse tempo, o nó cerca a si próprio, e "
+"você provavelmente verá uma falha."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "It is calculated as the result of: (threshold - 1) x 2."
+msgstr "Ele é calculado como o resultado de: (threshold - 1) x 2."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "Its default value is 31 (60 seconds)."
+msgstr "Seu valor padrão é 31 (60 segundos)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid ""
+"Raise it if you have slow disks and/or crashes with kernel messages like:"
+msgstr ""
+"Aumente esse valor se você possui discos lentos e/ou falhas com mensagens de "
+"kernel como:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid "O2CB idle timeout:"
+msgstr "Tempo de espera ocioso do O2CB:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid ""
+"The O2CB idle timeout (expressed in milliseconds) is the time before a "
+"network connection is considered dead."
+msgstr ""
+"O tempo de espera ocioso do O2CB (expresso em milissegundos) é o tempo antes "
+"de uma conexão de rede ser considerada morta."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid ""
+"Its default value is 30000 (30 seconds) and the minimum recommended value is "
+"5000 (5 seconds)."
+msgstr ""
+"Seu valor padrão é 30000 (30 segundos) e o valor mínimo recomendado é 5000 "
+"(5 segundos)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid "O2CB keepalive delay:"
+msgstr "Delay de conexões ativas do O2CB:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid ""
+"The O2CB keepalive delay (expressed in milliseconds) is the maximum time "
+"before a keepalive packet is sent."
+msgstr ""
+"O delay de conexões ativas (\"keepalive delay\") do O2CB (expresso em "
+"milissegundos) é o tempo máximo antes de um pacote keepalive ser enviado."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid ""
+"Its default value is 2000 (2 seconds) and the minimum recommended value is "
+"1000 (1 second)."
+msgstr ""
+"Seu valor padrão é 2000 (2 segundos) e o valor mínimo recomendado é 1000 (1 "
+"segundo)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid "O2CB reconnect delay:"
+msgstr "Delay de reconexão do O2CB:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid ""
+"The O2CB reconnect delay (expressed in milliseconds) is the minimum time "
+"between connection attempts."
+msgstr ""
+"O delay de reconexão do O2CB (expresso em milissegundos) é o tempo mínimo "
+"entre as tentativas de conexão."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid "Its default and recommended minimum value is 2000 (2 seconds)."
+msgstr "Seu valor padrão e mínimo recomendado é 2000 (2 segundos)."

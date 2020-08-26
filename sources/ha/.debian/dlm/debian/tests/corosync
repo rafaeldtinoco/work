@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+cleanup () {
+  service dlm stop
+  service corosync stop
+}
+
+trap "cleanup" 0 2 3 15
+
+# configure cluster
+printf "\n=== corosync ===\n"
+corosync-quorumtool -e 1
+corosync-quorumtool || true
+
+printf "\n=== dlm_controld ===\n"
+service dlm status
+
+printf "\n=== dlm_tool status ===\n"
+dlm_tool status
+
+printf "\n=== dlm_tool dump ===\n"
+dlm_tool dump
+
+printf "\n=== dlm_tool dump_config ===\n"
+dlm_tool dump_config
+
+printf "\n=== dlm_tool join test ===\n"
+dlm_tool join test
+
+printf "\n=== dlm_tool ls ===\n"
+dlm_tool ls
+
+printf "\n=== dlm_tool leave test ===\n"
+dlm_tool leave test

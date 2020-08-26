@@ -1,0 +1,27 @@
+From: Apollon Oikonomopoulos <apoikos@debian.org>
+Date: Mon, 18 Nov 2019 22:27:25 +0200
+Subject: Add Default-Start runlevels to the initscript
+
+Last-Update: 2017-05-12
+Forwarded: no
+Bug-Debian: https://bugs.debian.org/862248
+
+The initscripts lacks Default-Start runlevels, causing update-rc.d to
+shortcircuit any attempt to enable/disable the service.
+---
+ scripts/drbd | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/drbd b/scripts/drbd
+index 81a79a8..bb70877 100755
+--- a/scripts/drbd
++++ b/scripts/drbd
+@@ -13,7 +13,7 @@
+ # Required-Stop:  $local_fs $network $syslog
+ # Should-Start:   sshd multipathd
+ # Should-Stop:    sshd multipathd
+-# Default-Start:
++# Default-Start:  2 3 4 5
+ # Default-Stop:   0 1 6
+ # X-Start-Before: heartbeat corosync
+ # X-Stop-After:   heartbeat corosync

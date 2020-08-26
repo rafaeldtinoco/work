@@ -1,0 +1,16 @@
+Description: Use /run instead of /var/run
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2018-12-09
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/ldirectord/systemd/ldirectord.service.in
++++ b/ldirectord/systemd/ldirectord.service.in
+@@ -8,7 +8,7 @@
+ ExecStop=@sbindir@/ldirectord stop
+ ExecStopPost=@RM@ -f /var/lock/subsys/ldirectord
+ ExecReload=@sbindir@/ldirectord reload
+-PIDFile=/var/run/ldirectord.ldirectord.pid
++PIDFile=/run/ldirectord.ldirectord.pid
+ Type=forking
+ KillMode=none
+ 

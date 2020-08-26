@@ -1,0 +1,27 @@
+Description: Disable Internet access during build
+ Agents try to resolve and access hostname 'test', use
+ 127.0.0.1 instead.
+ .
+ Disable testing for ovh as it tries to access SOAP service
+ on www.ovh.com.
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Bug: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=849336
+Last-Update: 2017-12-03
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/agents/Makefile.am
++++ b/agents/Makefile.am
+@@ -63,11 +63,11 @@
+ FENCE_TEST_ARGS			= \
+ login=test\n\
+ passwd=test\n\
+-ipaddr=test\n\
++ipaddr=127.0.0.1\n\
+ port=1\n\
+ managed=1\n\
+ devices=test\n\
+-session_url=http://test\n\
++session_url=http://127.0.0.1\n\
+ email=test@test.te\n\
+ ping_targets=localhost
+ 

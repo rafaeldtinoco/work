@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+include /usr/share/dpkg/pkg-info.mk
+
+%:
+	dh $@
+
+override_dh_autoreconf:
+	echo $(DEB_VERSION_UPSTREAM) > .tarball-version
+	dh_autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-cpg-plugin
+
+override_dh_installsystemd:
+	mkdir -p debian/fence-virtd/lib/systemd/system/
+	cp fence_virtd.service debian/fence-virtd/lib/systemd/system/
+	dh_installsystemd -pfence-virtd
+
+override_dh_installinit:
+	dh_installinit -pfence-virtd --name=fence_virtd
+
+override_dh_missing:
+	rm debian/tmp/usr/lib/*/fence-virt/*.*a
+	dh_missing --fail-missing

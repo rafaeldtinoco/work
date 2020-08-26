@@ -1,0 +1,36 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: sbd
+Source: http://github.com/clusterlabs/sbd
+
+Files: *
+Copyright: 2008-2014 Lars Marowsky-Bree <lmb@suse.com>
+           2009      Hannes Eder <heder@google.com>
+           2010      Dejan Muhamedagic <dejan@hello-penguin.com>
+           2012      Florian Haas <florian@hastexo.com>
+           2015      aaronknister <aaron.knister@gmail.com>
+           2015-2016 Andrew Beekhof <andrew@beekhof.net>
+           2016      Gao,Yan <ygao@suse.com>
+           2016      Jan Pokorný <jpokorny@redhat.com>
+           2016      Lars Ellenberg <lars.ellenberg@linbit.com>
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2016 Adrian Vondendriesch <adrian.vondendriesch@credativ.de>
+License: GPL-2+
+
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <https://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".

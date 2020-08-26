@@ -1,0 +1,2 @@
+# start booth arbitrator at boot [yes|no]
+RUN_ARBITRATOR=no

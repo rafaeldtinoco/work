@@ -1,0 +1,7 @@
+Depends: @
+Tests: basic
+Restrictions: needs-root
+
+Depends: @, corosync, dlm-controld
+Tests: corosync
+Restrictions: needs-root, isolation-machine

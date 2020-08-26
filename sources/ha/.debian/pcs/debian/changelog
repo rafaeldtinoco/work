@@ -1,0 +1,363 @@
+pcs (0.10.6-1) unstable; urgency=medium
+
+  * New upstream version 0.10.6
+  * d/patches: refresh for new version
+  * d/control: drop rubygems-integration from Depends (Closes: #962460)
+  * d/control: add python3-distro to Depends
+  * d/control: use debhelper 13
+  * d/tests: add fence-virt to Depends
+
+ -- Valentin Vidic <vvidic@debian.org>  Sun, 14 Jun 2020 10:04:04 +0200
+
+pcs (0.10.5-2) unstable; urgency=medium
+
+  * d/patches: drop tornado 5 patch
+
+ -- Valentin Vidic <vvidic@debian.org>  Tue, 19 May 2020 00:27:42 +0200
+
+pcs (0.10.5-1) unstable; urgency=medium
+
+  * New upstream version 0.10.5
+  * d/patches: refresh for new version
+  * d/control: depend on python3-dacite
+  * d/control: depend on thin
+  * d/rules: update install location for internal binaries
+  * d/rules: add init script for pcsd-ruby daemon
+
+ -- Valentin Vidic <vvidic@debian.org>  Sat, 25 Apr 2020 18:47:45 +0200
+
+pcs (0.10.4-3) unstable; urgency=medium
+
+  [ Rafael David Tinoco ]
+  * d/p/Fix-python-tornado-5.patch: bring back workaround that fixes
+    python-tornado until v6 becomes available.
+  * Skip autopkgtest for unprivileged containers (LP: #1828228)
+
+  [ Valentin Vidic ]
+  * d/patches: fix warnings in ruby testsuite
+  * d/control: update Standards-Version to 4.5.0
+  * d/tests: show verbose progress for python tests
+
+ -- Valentin Vidic <vvidic@debian.org>  Sun, 05 Apr 2020 19:40:03 +0200
+
+pcs (0.10.4-2) unstable; urgency=medium
+
+  * d/salsa-ci.yml: enable CI
+  * d/tests: update for pacemaker 2.0.3
+
+ -- Valentin Vidic <vvidic@debian.org>  Thu, 26 Dec 2019 17:43:15 +0100
+
+pcs (0.10.4-1) unstable; urgency=medium
+
+  * New upstream version 0.10.4
+  * d/patches: refresh for new version
+
+ -- Valentin Vidic <vvidic@debian.org>  Sun, 01 Dec 2019 11:25:27 +0100
+
+pcs (0.10.3-3) unstable; urgency=medium
+
+  * d/tests: add depends for snmpd v5.8
+  * d/control: build with Rules-Requires-Root: no
+
+ -- Valentin Vidic <vvidic@debian.org>  Wed, 23 Oct 2019 19:31:02 +0200
+
+pcs (0.10.3-2) unstable; urgency=medium
+
+  * d/control: require tornado v6 for unit tests
+  * d/tests: fix tests to work with snmpd v5.8
+
+ -- Valentin Vidic <vvidic@debian.org>  Sun, 20 Oct 2019 14:37:55 +0200
+
+pcs (0.10.3-1) unstable; urgency=medium
+
+  * New upstream version 0.10.3
+  * d/patches: update for new version
+  * d/control: use debhelper-compat (= 12)
+  * d/control: add Pre-Depends for init-system-helpers
+  * d/control: update Standards-Version to 4.4.1
+
+ -- Valentin Vidic <vvidic@debian.org>  Mon, 30 Sep 2019 18:15:07 +0200
+
+pcs (0.10.2-1) unstable; urgency=medium
+
+  * New upstream version 0.10.2
+  * d/patches: update for new version
+  * d/rules: update for new version
+  * d/tests: update for new version
+  * d/rules: add init script for pcs_snmp_agent
+  * d/control: update Standards-Version to 4.3.0
+
+ -- Valentin Vidic <vvidic@debian.org>  Sat, 20 Jul 2019 07:51:21 +0200
+
+pcs (0.10.1-2) unstable; urgency=medium
+
+  * d/control: cleanup ruby dependencies
+  * d/tests: cleanup dependencies
+  * d/tests: require pacemaker 2.0
+  * d/control: require pacemaker 2.0
+
+ -- Valentin Vidic <vvidic@debian.org>  Thu, 17 Jan 2019 16:26:02 +0100
+
+pcs (0.10.1-1) unstable; urgency=medium
+
+  * New upstream version 0.10.1 (Closes: #918944)
+    - Works with Corosync 3 and Pacemaker 2
+
+ -- Valentin Vidic <vvidic@debian.org>  Sat, 12 Jan 2019 13:30:43 +0100
+
+pcs (0.9.166-5) unstable; urgency=medium
+
+  * d/patches: fixes for ruby-rack 2
+
+ -- Valentin Vidic <vvidic@debian.org>  Sun, 06 Jan 2019 18:54:19 +0100
+
+pcs (0.9.166-4) unstable; urgency=medium
+
+  * d/tests: fix testsuite-pcs for pacemaker 1.1.19 (Closes: #917462)
+  * d/control: update Standards-Version to 4.3.0
+
+ -- Valentin Vidic <vvidic@debian.org>  Thu, 27 Dec 2018 23:15:47 +0100
+
+pcs (0.9.166-3) unstable; urgency=medium
+
+  * d/patches: fix encoding test for python 3.6
+
+ -- Valentin Vidic <vvidic@debian.org>  Sun, 09 Dec 2018 13:17:19 +0100
+
+pcs (0.9.166-2) unstable; urgency=medium
+
+  * d/patches: fix encode fail in testsuite (Closes: #915223)
+
+ -- Valentin Vidic <vvidic@debian.org>  Sat, 01 Dec 2018 22:34:03 +0100
+
+pcs (0.9.166-1) unstable; urgency=medium
+
+  * New upstream version 0.9.166
+  * d/patches: update for new version
+
+ -- Valentin Vidic <vvidic@debian.org>  Sat, 06 Oct 2018 22:41:04 +0200
+
+pcs (0.9.165-3) unstable; urgency=medium
+
+  * d/control: update email in Uploaders
+  * d/rules: move snmp python modules to pcs-snmp
+
+ -- Valentin Vidic <vvidic@debian.org>  Mon, 10 Sep 2018 11:20:03 +0200
+
+pcs (0.9.165-2) unstable; urgency=medium
+
+  * Release pcs-snmp package
+  * d/control: update Standards-Version to 4.2.1
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Sun, 09 Sep 2018 21:51:01 +0200
+
+pcs (0.9.165-1) unstable; urgency=medium
+
+  * New upstream version 0.9.165
+  * d/patches: update for new version
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Sun, 24 Jun 2018 21:40:43 +0200
+
+pcs (0.9.164-1) unstable; urgency=high
+
+  * New upstream version 0.9.164 fixing:
+    - CVE-2018-1086: Debug parameter removal bypass,
+      allowing information disclosure (Closes: #895313)
+    - CVE-2018-1079: Privilege escalation via authorized
+      user malicious REST call (Closes: #895314)
+  * d/patches: revert changes from git
+  * d/patches: update for new version
+  * d/rules: update for new version
+  * d/copyright: use https in Format url
+  * d/control: update Vcs URLs to use salsa
+  * d/changelog: cleanup trailing whitespace
+  * d/control: update Standards-Version to 4.1.4
+  * d/compat: update debhelper to v11
+  * d/patches: fix seconds output in testsuite
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Thu, 12 Apr 2018 22:14:30 +0200
+
+pcs (0.9.162-1) unstable; urgency=medium
+
+  [ Christoph Berg ]
+  * Remove Richard and myself from Uploaders
+
+  [ Valentin Vidic ]
+  * New upstream version 0.9.162
+  * d/patches: refresh for new version
+  * d/rules: remove SNMP until python-pyagentx is available
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Mon, 27 Nov 2017 10:40:37 +0100
+
+pcs (0.9.161-1) unstable; urgency=medium
+
+  * New upstream version 0.9.161
+  * d/patches: refresh for new version
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Fri, 03 Nov 2017 18:08:01 +0100
+
+pcs (0.9.160-1) unstable; urgency=medium
+
+  * New upstream version 0.9.160
+  * d/control: remove Build-Depends on dh-systemd
+  * d/control: replace deprecated priority extra
+  * d/tests: fix testsuite-pcs failing in Ubuntu (Closes: #874026)
+  * d/patches: refresh for new version
+  * d/pcs.install: move README to README.md
+  * d/patches: drop 0009-Fix-python-lxml.patch
+  * d/patches: add 0009-Fix-pcsd-port.patch
+  * d/patches: add 0010-Fix-python3-build.patch
+  * d/rules: update build rules for python3
+  * d/control: update dependencies for python3
+  * d/tests: update testsuite-pcs to use python3
+  * d/control: update Standards-Version to 4.1.1
+  * d/copyright: drop paragraph for Liberation fonts
+  * d/patches: add 0011-Add-service-documentation.patch
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Sat, 14 Oct 2017 13:20:20 +0200
+
+pcs (0.9.159-3) unstable; urgency=medium
+
+  * d/control: build requires fontconfig (Closes: #867304)
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Wed, 05 Jul 2017 19:01:46 +0200
+
+pcs (0.9.159-2) unstable; urgency=medium
+
+  * d/patches: refresh for fuzz
+  * d/patches: fix Makefile to work with dash (Closes: #867287)
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Wed, 05 Jul 2017 16:44:21 +0200
+
+pcs (0.9.159-1) unstable; urgency=medium
+
+  * New upstream version 0.9.159
+  * Remove upstream repack
+  * d/control: add ruby-ethon to Depends
+  * d/control: remove ${shlibs:Depends}
+  * d/control: update Standards-Version to 4.0.0
+  * d/rules: use dh_missing --fail-missing
+  * d/rules: use debhelper version 10
+  * d/source/lintian-overrides: cleanup comments
+  * d/patches: refresh for new version
+  * d/patches: update numbering
+  * d/patches: fix failure in d/tests/testsuite-pcs
+  * d/control: add fonts-dejavu-core to Depends
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Wed, 05 Jul 2017 13:49:33 +0200
+
+pcs (0.9.155+dfsg-2) unstable; urgency=medium
+
+  * Add upstream fix for CVE-2017-2661 (Closes: #858379)
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Tue, 21 Mar 2017 20:37:55 +0100
+
+pcs (0.9.155+dfsg-1) unstable; urgency=medium
+
+  * Repack upstream source without Liberation fonts (Closes: #851115)
+  * Update font linking for new upstream
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Fri, 13 Jan 2017 13:50:46 +0100
+
+pcs (0.9.155-3) unstable; urgency=medium
+
+  * Add quilt dir .pc to .gitignore
+  * Update pcs testsuite for python-lxml 3.7.1-1
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Fri, 06 Jan 2017 10:51:24 +0100
+
+pcs (0.9.155-2) unstable; urgency=medium
+
+  * debian/tests: update pcs status check
+  * Cleanup debian/patches
+  * Add patch to fix file cleanup by cluster destroy
+  * Update README.Debian: cluster setup instructions
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Wed, 14 Dec 2016 20:46:14 +0100
+
+pcs (0.9.155-1) unstable; urgency=medium
+
+  * Add lsb-base dependency to fix lintian error
+  * New upstream version 0.9.155
+  * Update Vcs-Browser to use https
+  * Fix jquery path in debian/copyright
+  * Fix spelling in pcs manpage
+  * Remove unused lintian override
+  * Update debian/patches
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Sun, 13 Nov 2016 13:48:16 +0100
+
+pcs (0.9.154-1) unstable; urgency=medium
+
+  * New upstream version 0.9.154
+  * Cleanup on purge: /var/lib/pcsd, /var/log/pcsd
+  * Replace chkconfig invocations with update-rc.d
+  * Update debian/patches for new version
+  * Update debian/tests for new version
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Mon, 26 Sep 2016 17:57:32 +0200
+
+pcs (0.9.153-2) unstable; urgency=medium
+
+  * Fix package description
+  * Drop unused dependencies: ruby-thor, ruby-tilt
+  * Re-enable the upstream init script
+  * Fix test fail with ruby-json 2.0 (Closes: #832172)
+  * Avoid depending on thread finish order in tests
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Sat, 30 Jul 2016 11:28:50 +0200
+
+pcs (0.9.153-1) unstable; urgency=medium
+
+  * New upstream version.
+  * Update upstream homepage.
+  * Update IPv6 bind patch to work with rack.
+  * Drop unused ruby-eventmachine dependency.
+
+ -- Valentin Vidic <Valentin.Vidic@CARNet.hr>  Tue, 05 Jul 2016 13:32:45 +0200
+
+pcs (0.9.151-1) unstable; urgency=medium
+
+  [ Valentin Vidic ]
+  * New upstream version.
+  * Replace orderedhash with active_support. (Closes: #818760)
+  * Update Architecture from any to all.
+  * Update Standards-Version: no changes required.
+  * Update Uploaders: add Valentin Vidic.
+  * Fix pcsd listening on IPv6 only.
+  * Update python dependencies.
+
+  [ Christoph Berg ]
+  * debian/tests: Run "pcs cluster status". (No pcsd checks yet.)
+
+ -- Christoph Berg <christoph.berg@credativ.de>  Mon, 20 Jun 2016 12:29:41 +0200
+
+pcs (0.9.149-1) unstable; urgency=medium
+
+  * New upstream version.
+  * Use non-multi-arch settings.py/rb on all architectures.
+    (Closes: #814450)
+  * Conflict with python-pcs. This (unrelated) python module installs files to
+    the same location as we do. (Closes: #814516)
+    Installing our files to a different location would still risk this module
+    getting loaded when we wanted our own files. The real solution would be
+    renaming our (private) module, but this seems infeasible for now.
+
+ -- Christoph Berg <myon@debian.org>  Thu, 10 Mar 2016 20:04:36 +0100
+
+pcs (0.9.148-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Remove all ruby* packages from the build-dependencies, as nothing in the
+    build process uses Ruby (Closes: #816383)
+  * Remove dependency on ruby-monkey-lib, as it is not used at all by this
+    software (Closes: #816614)
+
+ -- Cédric Boutillier <boutil@debian.org>  Thu, 03 Mar 2016 15:46:48 +0100
+
+pcs (0.9.148-1) unstable; urgency=medium
+
+  [ Richard B Winters, Christoph Berg ]
+  * Initial release.
+
+ -- Richard B Winters <rik@mmogp.com>  Thu, 28 Jan 2016 10:12:39 +0100

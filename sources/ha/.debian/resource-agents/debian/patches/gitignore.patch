@@ -1,0 +1,27 @@
+Description: Fix .gitignore to work with debian package
+ Remove entries that interfere with maintaining debian/patches
+ in the Debian HA git repository.
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Forwarded: not-needed
+Last-Update: 2017-08-03
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/.gitignore
++++ b/.gitignore
+@@ -78,7 +78,6 @@
+ MISC_ERRORS
+ cscope.files
+ cscope.out
+-patches
+ updates
+ logs
+ 
+@@ -90,8 +89,6 @@
+ *.gz
+ *.xz
+ *.sed
+-*.diff
+-*.patch
+ *.gres
+ *~
+ 

@@ -1,0 +1,33 @@
+Description: Fixes for service files on Debian
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2020-04-25
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/pcs/snmp/pcs_snmp_agent.service
++++ b/pcs/snmp/pcs_snmp_agent.service
+@@ -4,8 +4,8 @@
+ Requires=snmpd.service
+ 
+ [Service]
+-EnvironmentFile=/etc/sysconfig/pcs_snmp_agent
+-ExecStart=/usr/lib/pcs/pcs_snmp_agent
++EnvironmentFile=/etc/default/pcs_snmp_agent
++ExecStart=/usr/share/pcs/pcs_snmp_agent
+ Type=simple
+ TimeoutSec=500
+ 
+--- a/pcsd/pcsd-ruby.service
++++ b/pcsd/pcsd-ruby.service
+@@ -10,10 +10,9 @@
+ PartOf=pcsd.service
+ 
+ [Service]
+-EnvironmentFile=/etc/sysconfig/pcsd
+-Environment=GEM_HOME=/usr/lib/pcsd/vendor/bundle/ruby
++EnvironmentFile=/etc/default/pcsd
+ # This file holds the selinux context
+-ExecStart=/usr/lib/pcsd/pcsd
++ExecStart=/usr/share/pcsd/pcsd
+ Type=notify
+ 
+ [Install]

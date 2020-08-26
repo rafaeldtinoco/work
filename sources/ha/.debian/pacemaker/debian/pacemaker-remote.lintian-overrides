@@ -1,0 +1,2 @@
+# These packages run daemons which listen on the same sockets
+pacemaker-remote: breaks-without-version pacemaker

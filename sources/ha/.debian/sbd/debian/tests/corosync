@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+# https://bugs.launchpad.net/bugs/1828228
+ulimit -H -l unlimited 2>/dev/null || {
+        echo "test disabled for unprivileged namespaces"
+        exit 77
+}
+
+sed -i 's/\/dev\/watchdog/\/dev\/null/' /etc/default/sbd
+service corosync restart
+sleep 5
+
+pgrep --list-full sbd

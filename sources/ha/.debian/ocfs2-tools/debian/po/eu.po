@@ -1,0 +1,143 @@
+# translation of ocfs2-tools-eu.po to Euskara
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Piarres Beobide <pi@beobide.net>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: ocfs2-tools-eu\n"
+"Report-Msgid-Bugs-To: ocfs2-tools@packages.debian.org\n"
+"POT-Creation-Date: 2010-03-12 19:27+0100\n"
+"PO-Revision-Date: 2008-06-02 23:27+0200\n"
+"Last-Translator: Piarres Beobide <pi@beobide.net>\n"
+"Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#. Type: boolean
+#. Description
+#: ../ocfs2-tools.templates:1001
+msgid "Would you like to start an OCFS2 cluster (O2CB) at boot time?"
+msgstr "Abioan OCFS2 cluster bat (O2CB) abiarazi nahi al duzu?"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:2001
+msgid "Name of the cluster to start at boot time:"
+msgstr "Abioan abiarazi behar den klusterraren izena:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "O2CB heartbeat threshold:"
+msgstr "O2CB taupada muga:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid ""
+"The O2CB heartbeat threshold sets up the maximum time in seconds that a node "
+"awaits for an I/O operation. After it, the node \"fences\" itself, and you "
+"will probably see a crash."
+msgstr ""
+"O2CB taupada mugak nodo batek segundutan S/I ekintza baten zain egon "
+"daiteken denbora-muga ezartzen du. Honen ondoren, nodoak bere burua "
+"\"hesitzen\" du eta ziurrenik kraskatze bat ikusiko duzu."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "It is calculated as the result of: (threshold - 1) x 2."
+msgstr "Berau honen emaitza bezala kalkulatzen da (muga - 1) x 2."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "Its default value is 31 (60 seconds)."
+msgstr "Lehenetsiriko balioa 31 da (60 segundu)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid ""
+"Raise it if you have slow disks and/or crashes with kernel messages like:"
+msgstr ""
+"Handitu ezazu disko geldoak edo/eta horrelako kernel mezudun kraskatzeak "
+"badituzu:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid "O2CB idle timeout:"
+msgstr "O2CB inaktibo denbora-muga:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid ""
+"The O2CB idle timeout (expressed in milliseconds) is the time before a "
+"network connection is considered dead."
+msgstr ""
+"O2CB inaktibo denbora-muga (milisegundutan) sare konexio bat hilda "
+"kontsideratu aurretik itxarongo den denbora da."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid ""
+"Its default value is 30000 (30 seconds) and the minimum recommended value is "
+"5000 (5 seconds)."
+msgstr ""
+"Bere lehenetsiriko balioa 30000 da (30 segundu) eta gomendaturiko gutxieneko "
+"balioa 5000 da (5 segundu)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid "O2CB keepalive delay:"
+msgstr "O2CB bizirik-mantedu (keepalive) atzerapena:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid ""
+"The O2CB keepalive delay (expressed in milliseconds) is the maximum time "
+"before a keepalive packet is sent."
+msgstr ""
+"O2CB bizirik-mantedu atzerapena (milisegundutan zehaztua) mantedu-bizirik "
+"paketeak bidaltzeko tarte handiena da."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid ""
+"Its default value is 2000 (2 seconds) and the minimum recommended value is "
+"1000 (1 second)."
+msgstr ""
+"Bere lehenetsiriko balioa 2000 da (2 segundu) eta gomendaturiko gutxieneko "
+"balioa 1000 da (1 segundu)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid "O2CB reconnect delay:"
+msgstr "O2CB berkonexio atzerapena:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid ""
+"The O2CB reconnect delay (expressed in milliseconds) is the minimum time "
+"between connection attempts."
+msgstr ""
+"O2CB berkonexio atzerapena (milisegundutan zehaztua) konexio saiakera arteko "
+"gutxieneko tartea da."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid "Its default and recommended minimum value is 2000 (2 seconds)."
+msgstr "Lehenetsiriko eta gomendaturiko gutxieneko balioa 2000 da (2 segundu)."

@@ -1,0 +1,4 @@
+usr/sbin/fence_virt
+usr/sbin/fence_xvm
+usr/share/man/man8/fence_virt.8
+usr/share/man/man8/fence_xvm.8

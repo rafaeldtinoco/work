@@ -1,0 +1,14 @@
+Description: Make cluster init work on Debian
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Last-Update: 2016-11-19
+--- a/crmsh/corosync.py
++++ b/crmsh/corosync.py
+@@ -969,7 +969,7 @@
+     fileline:   off
+     to_stderr:  no
+     to_logfile:     no
+-    logfile:    /var/log/cluster/corosync.log
++    logfile:    /var/log/corosync/corosync.log
+     to_syslog:  yes
+     debug:      off
+     timestamp:  on

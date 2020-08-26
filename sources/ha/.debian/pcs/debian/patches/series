@@ -1,0 +1,6 @@
+Fix-Makefile-install.patch
+Disable-ruby-gems.patch
+Replace-chkconfig.patch
+Update-service-files.patch
+Fix-python-testsuite.patch
+Update-pam-config.patch

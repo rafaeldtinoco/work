@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+    addgroup --system haclient
+    adduser --system hacluster --ingroup haclient --home /var/lib/pacemaker --no-create-home
+    # keep this list in sync with that in the postrm
+    for dir in \
+        750:/var/lib/pacemaker/pengine \
+        750:/var/lib/pacemaker/cib \
+        750:/var/lib/pacemaker/cores \
+        750:/var/lib/pacemaker/blackbox \
+        770:/var/log/pacemaker/bundles \
+        770:/var/log/pacemaker \
+        ; do
+        if ! dpkg-statoverride --list "${dir#*:}" >/dev/null 2>&1; then
+            dpkg-statoverride --update --add hacluster haclient "${dir%%:*}" "${dir#*:}"
+        fi
+    done
+    AUTHKEY=/etc/pacemaker/authkey
+    if ! [ -e "$AUTHKEY" ]; then
+        ( umask 037 && dd if=/dev/urandom of="$AUTHKEY" bs=4096 count=1 )
+        chgrp haclient "$AUTHKEY"
+    fi
+fi
+
+#DEBHELPER#

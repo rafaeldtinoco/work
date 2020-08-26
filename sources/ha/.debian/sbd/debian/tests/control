@@ -1,0 +1,20 @@
+Tests: help
+
+Depends: @, corosync
+Restrictions: needs-root, isolation-container, skippable
+Tests: corosync
+
+Depends: @, pacemaker-remote
+Restrictions: needs-root, isolation-container
+Tests: pacemaker-remote
+
+Restrictions: needs-root, isolation-machine
+Tests: watch
+
+Depends: @
+Restrictions: needs-root, isolation-machine, breaks-testbed
+Tests: fence-external
+
+Depends: @
+Restrictions: needs-root, isolation-machine, breaks-testbed
+Tests: fence-agents

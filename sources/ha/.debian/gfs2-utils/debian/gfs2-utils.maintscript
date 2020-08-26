@@ -1,0 +1,1 @@
+rm_conffile /etc/init.d/gfs2-tools 3.1.3-1.2~ gfs2-tools

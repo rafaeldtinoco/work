@@ -1,0 +1,2 @@
+docs/html usr/share/doc/libqb-dev
+examples/*.c usr/share/doc/libqb-dev/examples

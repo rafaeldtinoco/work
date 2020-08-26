@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+# build fails when format hardening is on
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all,-format
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/tmp/usr/libexec/ocfs2-tools
+	cp -f vendor/common/o2cb.init debian/tmp/usr/libexec/ocfs2-tools/o2cb
+	cp -f vendor/common/ocfs2.init debian/tmp/usr/libexec/ocfs2-tools/ocfs2
+	mkdir -p debian/tmp/lib/systemd/system
+	cp -f vendor/common/o2cb.service debian/tmp/lib/systemd/system
+	cp -f vendor/common/ocfs2.service debian/tmp/lib/systemd/system
+
+override_dh_installinit:
+	dh_installinit -pocfs2-tools --name=o2cb --no-stop-on-upgrade --no-restart-after-upgrade
+	dh_installinit -pocfs2-tools --name=ocfs2 --no-stop-on-upgrade --no-restart-after-upgrade
+
+override_dh_installsystemd:
+	dh_installsystemd -pocfs2-tools --name=o2cb --no-stop-on-upgrade --no-restart-after-upgrade
+	dh_installsystemd -pocfs2-tools --name=ocfs2 --no-stop-on-upgrade --no-restart-after-upgrade

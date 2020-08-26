@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# Cleanup the old systemd unit state, if applicable
+if dpkg --compare-versions "$2" lt-nl "8.9.5-1~"; then
+	if deb-systemd-helper debian-installed drbd.service; then
+		deb-systemd-helper purge drbd.service >/dev/null
+		deb-systemd-helper unmask drbd.service >/dev/null
+	fi
+fi
+
+#DEBHELPER#

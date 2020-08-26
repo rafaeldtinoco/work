@@ -1,0 +1,19 @@
+Description: Disable IPv6addr and send_ua on non-Linux
+ They need SIOCSIFADDR and SIOGIFINDEX.
+Author: Christoph Berg <myon@debian.org>
+Last-Update: 2016-04-08
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/configure.ac
++++ b/configure.ac
+@@ -832,8 +832,8 @@
+ dnl ************************************************************************
+ dnl * Check for netinet/icmp6.h to enable the IPv6addr resource agent
+ AC_CHECK_HEADERS(netinet/icmp6.h,[],[],[#include <sys/types.h>])
+-AM_CONDITIONAL(USE_IPV6ADDR_AGENT, test "$ac_cv_header_netinet_icmp6_h" = yes && test "$ac_cv_header_heartbeat_glue_config_h" = yes)
+-AM_CONDITIONAL(IPV6ADDR_COMPATIBLE, test "$ac_cv_header_netinet_icmp6_h" = yes)
++AM_CONDITIONAL(USE_IPV6ADDR_AGENT, test "$ac_cv_header_netinet_icmp6_h" = yes && test "$ac_cv_header_heartbeat_glue_config_h" = yes && test $(uname) = Linux)
++AM_CONDITIONAL(IPV6ADDR_COMPATIBLE, test "$ac_cv_header_netinet_icmp6_h" = yes && test $(uname) = Linux)
+ 
+ dnl ========================================================================
+ dnl Compiler flags

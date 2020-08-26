@@ -1,0 +1,41 @@
+Description: Debianize upstream service files
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Last-Update: 2018-01-24
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/vendor/common/o2cb.service
++++ b/vendor/common/o2cb.service
+@@ -1,14 +1,14 @@
+ [Unit]
+ Description=Load o2cb Modules
+ Documentation=man:o2cb(7) man:o2cb.sysconfig(5)
+-Requires=network.service
+-After=network.service
++Requires=network-online.target
++After=network-online.target
+ 
+ [Service]
+ Type=oneshot
+ RemainAfterExit=yes
+-ExecStart=/sbin/o2cb.init enable
+-ExecStop=/sbin/o2cb.init disable
++ExecStart=/usr/libexec/ocfs2-tools/o2cb start
++ExecStop=/usr/libexec/ocfs2-tools/o2cb stop
+ 
+ [Install]
+ WantedBy=multi-user.target
+--- a/vendor/common/ocfs2.service
++++ b/vendor/common/ocfs2.service
+@@ -7,9 +7,9 @@
+ [Service]
+ Type=oneshot
+ RemainAfterExit=yes
+-ExecStart=/sbin/ocfs2.init start
+-ExecStop=/sbin/ocfs2.init stop
+-ExecReload=/sbin/ocfs2.init restart
++ExecStart=/usr/libexec/ocfs2-tools/ocfs2 start
++ExecStop=/usr/libexec/ocfs2-tools/ocfs2 stop
++ExecReload=/usr/libexec/ocfs2-tools/ocfs2 restart
+ 
+ [Install]
+ WantedBy=multi-user.target

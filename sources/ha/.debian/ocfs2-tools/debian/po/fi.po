@@ -1,0 +1,140 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ocfs2-tools\n"
+"Report-Msgid-Bugs-To: ocfs2-tools@packages.debian.org\n"
+"POT-Creation-Date: 2010-03-12 19:27+0100\n"
+"PO-Revision-Date: 2008-06-03 08:52+0200\n"
+"Last-Translator: Esko Arajärvi <edu@iki.fi>\n"
+"Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+
+#. Type: boolean
+#. Description
+#: ../ocfs2-tools.templates:1001
+msgid "Would you like to start an OCFS2 cluster (O2CB) at boot time?"
+msgstr ""
+"Tulisiko OCFS2-klusteri (O2CB) käynnistää käynnistettäessä järjestelmä?"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:2001
+msgid "Name of the cluster to start at boot time:"
+msgstr "Järjestelmän käynnistyksen yhteydessä käynnistettävän klusterin nimi:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "O2CB heartbeat threshold:"
+msgstr "O2CB:n ajoituksen rajoitin: "
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid ""
+"The O2CB heartbeat threshold sets up the maximum time in seconds that a node "
+"awaits for an I/O operation. After it, the node \"fences\" itself, and you "
+"will probably see a crash."
+msgstr ""
+"O2CB:n ajoituksen rajoitin määrittää enimmäisajan sekunneissa kauanko solmu "
+"odottaa I/O-operaation valmistumista. Tämän jälkeen solmu ”sulkee” itsensä "
+"ja ohjelma luultavasti kaatuu."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "It is calculated as the result of: (threshold - 1) x 2."
+msgstr "Enimmäisaika lasketaan kaavasta: (raja -1) x 2."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid "Its default value is 31 (60 seconds)."
+msgstr "Oletusarvo on 31 (60 sekuntia)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:3001
+msgid ""
+"Raise it if you have slow disks and/or crashes with kernel messages like:"
+msgstr ""
+"Arvoa kannattaa suurentaa, jos käytössä on hitaita levyjä tai tapahtuu "
+"kaatumisia, jotka tuottavat seuraavanlaisia ytimen viestejä:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid "O2CB idle timeout:"
+msgstr "O2CB:n odotuksen aikaraja:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid ""
+"The O2CB idle timeout (expressed in milliseconds) is the time before a "
+"network connection is considered dead."
+msgstr ""
+"O2CB:n odotuksen aikaraja (määritetään millisekunteina) on aika, jonka "
+"jälkeen verkkoyhteyden oletetaan katkenneen."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:4001
+msgid ""
+"Its default value is 30000 (30 seconds) and the minimum recommended value is "
+"5000 (5 seconds)."
+msgstr ""
+"Oletusarvo on 30000 (30 sekuntia) ja suositeltu vähimmäisarvo 2000 (2 "
+"sekuntia)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid "O2CB keepalive delay:"
+msgstr "O2CB:n virkistysviive:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid ""
+"The O2CB keepalive delay (expressed in milliseconds) is the maximum time "
+"before a keepalive packet is sent."
+msgstr ""
+"O2CB:n virkistysviive (määritetään millisekunteina) on enimmäisaika ennen "
+"keepalive-paketin lähettämistä."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:5001
+msgid ""
+"Its default value is 2000 (2 seconds) and the minimum recommended value is "
+"1000 (1 second)."
+msgstr ""
+"Oletusarvo on 2000 (2 sekuntia) ja suositeltu vähimmäisarvo on 1000 (1 "
+"sekunti)."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid "O2CB reconnect delay:"
+msgstr "O2CB:n yhteydenottoviive:"
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid ""
+"The O2CB reconnect delay (expressed in milliseconds) is the minimum time "
+"between connection attempts."
+msgstr ""
+"O2CB:n yhteydenottoviive (määritetään millisekunteina) on vähimmäisaika "
+"yhteydenottoyritysten välillä."
+
+#. Type: string
+#. Description
+#: ../ocfs2-tools.templates:6001
+msgid "Its default and recommended minimum value is 2000 (2 seconds)."
+msgstr "Se oletusarvo ja suositeltu vähimmäisarvo on 2000 (2 sekuntia)."

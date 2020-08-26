@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@
+
+# Make generated documentation reproducible
+override_dh_auto_build:
+	TZ=UTC dh_auto_build
+	make test/boothtestenv.py test/runtests.py
+
+override_dh_auto_install:
+	dh_auto_install
+# we can't ship the upstream init script, it uses startproc
+	rm -v debian/tmp/etc/init.d/booth-arbitrator
+	rm -v debian/tmp/usr/share/doc/booth/COPYING
+
+override_dh_install:
+	dh_install --exclude=.md5
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+# upstream tests fail on some architectures, run them from debian/tests
+override_dh_auto_test:
+
+# 1) booth should be started through pacemaker. So, neither enable nor
+#    start the service.
+# 2) booth-arbitrator should be enabled manually to not conflict with
+#    pacemaker setups.
+override_dh_installinit:
+	dh_installinit --no-enable --no-start
+override_dh_installsystemd:
+	dh_installsystemd --no-enable --no-start

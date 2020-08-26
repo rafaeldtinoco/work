@@ -1,0 +1,365 @@
+Source: pacemaker
+Section: admin
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian HA Maintainers <debian-ha-maintainers@alioth-lists.debian.net>
+Uploaders:
+ Ferenc Wágner <wferi@debian.org>,
+ Adrian Vondendriesch <adrian.vondendriesch@credativ.de>,
+Build-Depends:
+ cluster-glue-dev,
+# debian/check_header_deps needs:
+ dctrl-tools,
+ debhelper-compat (= 12),
+ dh-exec,
+ dh-python,
+# resource agent man pages are generated via:
+ docbook-xsl,
+ help2man,
+ libbz2-dev,
+ libcfg-dev (>= 1.99),
+ libcmap-dev (>= 1.99),
+ libcpg-dev (>= 1.99),
+ libdbus-1-dev,
+ libesmtp-dev,
+ libglib2.0-dev,
+ libgnutls28-dev,
+ libltdl-dev,
+ libncurses5-dev,
+ libpam0g-dev,
+ libqb-dev (>= 0.17.1),
+ libquorum-dev (>= 1.99),
+# net-snmp-config --agent-libs contains -lsensors in sid on 2015-09-15
+ libsensors-dev,
+ libsnmp-dev,
+ libxml2-dev,
+ libxml2-utils,
+ libxslt1-dev,
+ pkg-config,
+ python3,
+ systemd [linux-any],
+ uuid-dev,
+# detecting docbook-xsl needs:
+ xsltproc,
+Build-Depends-Indep:
+ asciidoc,
+ doxygen,
+ graphviz,
+ inkscape,
+ publican,
+Rules-Requires-Root: no
+Standards-Version: 4.5.0
+Homepage: https://www.clusterlabs.org/
+Vcs-Git: https://salsa.debian.org/ha-team/pacemaker.git
+Vcs-Browser: https://salsa.debian.org/ha-team/pacemaker
+X-Common-Description: At its core, Pacemaker is a distributed finite state
+ machine capable of co-ordinating the startup and recovery of inter-related
+ services across a set of machines.
+ .
+ Pacemaker understands many different resource types (OCF, SYSV, systemd) and
+ can accurately model the relationships between them (colocation, ordering).
+ .
+ It can even use technology such as Docker to automatically isolate the
+ resources managed by the cluster.
+
+Package: pacemaker-common
+Architecture: all
+Depends:
+ adduser,
+ ${misc:Depends},
+# The dedicated user and group, and configuration, MIB, RNG and XSL files
+# were pulled out of pacemaker so that pacemaker-remote can also use them:
+Breaks:
+ pacemaker (<< 1.1.14-2~),
+Replaces:
+ pacemaker (<< 1.1.14-2~),
+Description: cluster resource manager common files
+ ${S:X-Common-Description}
+ .
+ This package contains common infrastructure and data files for the
+ Pacemaker daemons and utilities.
+
+Package: pacemaker-resource-agents
+Architecture: all
+Depends:
+# some agents use top:
+ procps,
+ resource-agents,
+ ${misc:Depends},
+# split out of pacemaker so that pacemaker-remote can also use them:
+Breaks:
+ pacemaker (<< 1.1.14-2~),
+Replaces:
+ pacemaker (<< 1.1.14-2~),
+Description: cluster resource manager general resource agents
+ ${S:X-Common-Description}
+ .
+ This package contains Pacemaker resource agents not requiring access
+ to the cluster stack, thus also usable by the remote daemon.
+
+Package: pacemaker
+Architecture: any
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ corosync (>= 1.99),
+ crmsh,
+ dbus,
+# the init script sources /lib/lsb/init-functions:
+ lsb-base (>= 3.0-6),
+ pacemaker-common,
+ pacemaker-resource-agents,
+ ${misc:Depends},
+ ${python3:Depends},
+ ${shlibs:Depends},
+Recommends:
+ pacemaker-cli-utils,
+Suggests:
+# the fence_legacy helper uses /usr/sbin/stonith from cluster-glue:
+ cluster-glue,
+ pcs,
+ fence-agents,
+Breaks:
+ pacemaker-remote,
+# pulled in crm_attribute and crm_node, because they depend on the
+# cluster-layer libraries:
+ pacemaker-cli-utils (<< 1.1.14-2~),
+Replaces:
+ pacemaker-cli-utils (<< 1.1.14-2~),
+# we moved the dummy remote RA script and its man page into pacemaker:
+ pacemaker-remote (<< 1.1.14-2~),
+Description: cluster resource manager
+ ${S:X-Common-Description}
+ .
+ This package contains the Pacemaker daemons directly interacting with
+ the cluster stack.
+
+Package: pacemaker-cli-utils
+Architecture: any
+Depends:
+ pacemaker | pacemaker-remote,
+# cibsecret sources ocf-shellfuncs:
+ resource-agents,
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+# took over cibsecret from cluster-glue:
+ cluster-glue (<< 1.0.12-18~),
+# pulled in attrd_updater and stonith_admin, because they work on remote nodes:
+ pacemaker (<< 1.1.14-2~),
+Replaces:
+ cluster-glue (<< 1.0.12-18~),
+ pacemaker (<< 1.1.14-2~),
+Description: cluster resource manager command line utilities
+ ${S:X-Common-Description}
+ .
+ This package contains those command line utilities of the Pacemaker
+ cluster manager which work on remote nodes as well.
+
+Package: pacemaker-remote
+Architecture: any
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+# the init script sources /lib/lsb/init-functions:
+ lsb-base (>= 3.0-6),
+ pacemaker-common,
+ pacemaker-resource-agents,
+ ${misc:Depends},
+ ${shlibs:Depends},
+Recommends:
+ pacemaker-cli-utils,
+Breaks:
+ pacemaker,
+Description: cluster resource manager proxy daemon for remote nodes
+ ${S:X-Common-Description}
+ .
+ This package contains the Pacemaker proxy daemon, which simulates cluster
+ services on a node not running the cluster stack.  Such "remote" nodes can
+ run resources but don't participate in the quorum.  This package is
+ mutually exclusive with Pacemaker proper.
+
+Package: pacemaker-doc
+Section: doc
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+# pulled in {acls,crm_fencing}.{txt,html}
+Breaks:
+ pacemaker (<< 1.1.15~rc1-1~),
+Replaces:
+ pacemaker (<< 1.1.15~rc1-1~),
+Description: cluster resource manager HTML documentation
+ ${S:X-Common-Description}
+ .
+ This package contains
+  * the Pacemaker API documentation generated by Doxygen,
+  * the Clusters from Scratch book,
+  * the Pacemaker Administration book,
+  * the Pacemaker Development book,
+  * the Pacemaker Explained book and
+  * the Pacemaker Remote book.
+
+Package: libcib27
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager CIB library
+ ${S:X-Common-Description}
+ .
+ This package contains the Cluster Information Base library.
+
+Package: libcrmcluster29
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager cluster library
+ ${S:X-Common-Description}
+ .
+ This package contains the cluster library.
+
+Package: libcrmcommon34
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager common library
+ ${S:X-Common-Description}
+ .
+ This package contains the common library.
+
+Package: libcrmservice28
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager service library
+ ${S:X-Common-Description}
+ .
+ This package contains the service library.
+
+Package: liblrmd28
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager LRMD library
+ ${S:X-Common-Description}
+ .
+ This package contains the Local Resource Manager Daemon library.
+
+Package: libpacemaker1
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager utility library
+ ${S:X-Common-Description}
+ .
+ This package contains the utility library resulting from the merge
+ of libpengine and libtransitioner.
+
+Package: libpe-rules26
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager Policy Engine rules library
+ ${S:X-Common-Description}
+ .
+ This package contains the Policy Engine rules library.
+
+Package: libpe-status28
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager Policy Engine status library
+ ${S:X-Common-Description}
+ .
+ This package contains the Policy Engine status library.
+
+Package: libstonithd26
+Architecture: any
+Multi-Arch: same
+Section: libs
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: cluster resource manager STONITH daemon library
+ ${S:X-Common-Description}
+ .
+ This package contains the STONITH daemon library.
+
+Package: pacemaker-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends:
+ ${misc:Depends},
+ libcib27 (= ${binary:Version}),
+ libcrmcluster29 (= ${binary:Version}),
+ libcrmcommon34 (= ${binary:Version}),
+ libcrmservice28 (= ${binary:Version}),
+ liblrmd28 (= ${binary:Version}),
+ libpe-rules26 (= ${binary:Version}),
+ libpe-status28 (= ${binary:Version}),
+ libstonithd26 (= ${binary:Version}),
+# we include headers from these:
+ libcpg-dev,
+ libglib2.0-dev,
+ libqb-dev,
+ libxml2-dev,
+# private pkg-config dependencies are only needed for static linking,
+# which we don't support, but pkg-config doesn't know this, so:
+ libgnutls28-dev,
+ libxslt1-dev,
+ uuid-dev,
+Breaks:
+ libcib-dev (<< 2),
+ libcrmcluster-dev (<< 2),
+ libcrmcommon-dev (<< 2),
+ libcrmservice-dev (<< 2),
+ liblrmd-dev (<< 2),
+ libpengine-dev (<< 2),
+ libstonithd-dev (<< 2),
+# header ghosts from wheezy, where pacemaker-dev used to exist:
+ libcrmcluster1-dev,
+ libcrmcommon2-dev,
+ libpengine3-dev,
+Replaces:
+ libcib-dev (<< 2),
+ libcrmcluster-dev (<< 2),
+ libcrmcommon-dev (<< 2),
+ libcrmservice-dev (<< 2),
+ liblrmd-dev (<< 2),
+ libpengine-dev (<< 2),
+ libstonithd-dev (<< 2),
+# header ghosts from wheezy, where pacemaker-dev used to exist:
+ libcrmcluster1-dev,
+ libcrmcommon2-dev,
+ libpengine3-dev,
+Description: cluster resource manager development
+ ${S:X-Common-Description}
+ .
+ This package contains the headers and other necessary files to build
+ applications or libraries that use the Pacemaker libraries.

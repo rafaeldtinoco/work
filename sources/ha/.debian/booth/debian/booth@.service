@@ -1,0 +1,19 @@
+#  This file is part of Booth.
+
+[Unit]
+Description=Booth - Ticket Manager for Pacemaker Clusters
+Documentation=man:boothd(8)
+ConditionFileNotEmpty=/etc/booth/%i.conf
+Conflicts=pacemaker.service
+PartOf=booth.service
+ReloadPropagatedFrom=booth.service
+Before=booth.service
+
+[Install]
+Alias=boothd.service
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/boothd daemon -S -c %i
+

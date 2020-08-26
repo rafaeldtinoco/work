@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -e
+
+printf "=== config ===\n"
+booth-keygen
+cat <<EOF | tee /etc/booth/booth.conf
+authfile = /etc/booth/authkey
+site = 127.0.0.1
+ticket = "ticket-A"
+EOF
+
+printf "\n=== cluster ===\n"
+service corosync start
+service pacemaker start
+sleep 60
+
+crm configure property stonith-enabled=false
+crm configure property no-quorum-policy=ignore
+crm configure primitive booth ocf:pacemaker:booth-site 2>&1
+crm configure primitive dummy ocf:heartbeat:Dummy 2>&1
+crm configure rsc_ticket ticket-A_dummy ticket-A: dummy 2>&1
+crm configure show
+sleep 10
+crm status
+
+printf "\n=== booth ===\n"
+booth status
+booth list
+
+printf "\n=== grant ===\n"
+crm site ticket show ticket-A
+crm status | grep dummy.*Stopped
+crm --force site ticket grant ticket-A
+sleep 10
+crm site ticket show ticket-A
+crm status | grep dummy.*Started
+
+printf "\n=== revoke ===\n"
+crm site ticket standby ticket-A
+sleep 10
+crm status | grep dummy.*Stopped
+crm --force site ticket revoke ticket-A
+crm site ticket show ticket-A

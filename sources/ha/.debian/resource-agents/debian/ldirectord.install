@@ -1,0 +1,9 @@
+#!/usr/bin/dh-exec
+
+debian/ldirectord.cf /etc/ha.d
+etc/ha.d/resource.d/ldirectord
+etc/init.d/ldirectord
+etc/logrotate.d/ldirectord
+lib/systemd/system/ldirectord.service [linux-any]
+usr/sbin/ldirectord
+usr/share/man/man8/ldirectord.8

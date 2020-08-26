@@ -1,0 +1,2 @@
+version=3
+https://github.com/markfasheh/ocfs2-tools/releases .*/ocfs2-tools-?(\d\S*)\.tar\.gz

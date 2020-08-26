@@ -1,0 +1,40 @@
+liblrmd.so.28 liblrmd28 #MINVER#
+* Build-Depends-Package: pacemaker-dev
+ (arch=!hppa !powerpc !powerpcspe !ppc64 !ppc64el)__start___verbose@Base 1.1.9
+ (arch=!hppa !powerpc !powerpcspe !ppc64 !ppc64el)__stop___verbose@Base 1.1.9
+ (arch=!powerpc !powerpcspe !ppc64 !ppc64el)lrmd@Base 1.1.9
+ lrmd_api_delete@Base 1.1.9
+ lrmd_api_new@Base 1.1.9
+ lrmd_copy_event@Base 1.1.9
+ lrmd_copy_rsc_info@Base 1.1.9
+ lrmd_dispatch@Base 1.1.9
+ lrmd_free_event@Base 1.1.9
+ lrmd_free_op_info@Base 2.0.0~rc4
+ lrmd_free_rsc_info@Base 1.1.9
+ lrmd_internal_proxy_send@Base 1.1.9
+ lrmd_internal_set_proxy_callback@Base 1.1.9
+ lrmd_key_value_add@Base 1.1.9
+ lrmd_key_value_freeall@Base 1.1.9
+ lrmd_list_freeall@Base 1.1.9
+ lrmd_new_event@Base 2.0.4
+ lrmd_new_rsc_info@Base 1.1.19
+ lrmd_poll@Base 1.1.9
+ lrmd_remote_api_new@Base 1.1.9
+ lrmd_send_attribute_alert@Base 1.1.18~rc3
+ lrmd_send_fencing_alert@Base 1.1.18~rc3
+ lrmd_send_node_alert@Base 1.1.18~rc3
+ lrmd_send_resource_alert@Base 1.1.18~rc3
+ lrmd_tls_send_msg@Base 1.1.9
+ lrmd_tls_set_key@Base 1.1.9
+ proxy_table@Base 1.1.13
+ psk_cred_s@Base 1.1.9
+ remote_proxy_ack_shutdown@Base 1.1.15~rc1
+ remote_proxy_cb@Base 1.1.17~rc1
+ remote_proxy_check@Base 1.1.15~rc1
+ remote_proxy_disconnected@Base 1.1.17~rc1
+ remote_proxy_dispatch@Base 1.1.17~rc1
+ remote_proxy_free@Base 1.1.13
+ remote_proxy_nack_shutdown@Base 1.1.17~rc1
+ remote_proxy_new@Base 1.1.17~rc1
+ remote_proxy_relay_event@Base 1.1.13
+ remote_proxy_relay_response@Base 1.1.13

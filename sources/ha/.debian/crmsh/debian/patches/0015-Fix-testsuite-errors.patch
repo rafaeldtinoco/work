@@ -1,0 +1,584 @@
+Description: Fix testsuite
+ Make sure testsuite output works with Pacemaker 2.
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-01-13
+--- a/test/testcases/confbasic.exp
++++ b/test/testcases/confbasic.exp
+@@ -58,6 +58,8 @@
+ .INP: set d2.mondelay 45
+ .INP: _test
+ .INP: verify
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ WARNING: 53: c2: resource d1 is grouped, constraints should apply to the group
+ .EXT crmd metadata
+ .EXT pengine metadata
+@@ -146,13 +148,18 @@
+ 	rule 100: #uname eq node1 \
+ 	record-pending=true
+ .INP: commit
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
++WARNING: 55: c2: resource d1 is grouped, constraints should apply to the group
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ WARNING: 55: c2: resource d1 is grouped, constraints should apply to the group
+ .TRY -F node maintenance node1
+ .TRY -F resource maintenance g1 off
++ERROR: Resource not found: g1
+ .TRY -F resource maintenance d1
++ERROR: Resource not found: d1
+ .TRY -F configure property maintenance-mode=true
+-INFO: 'maintenance' attribute already exists in d1. Remove it? [YES]
+-INFO: 'maintenance' attribute already exists in g1. Remove it? [YES]
+ INFO: 'maintenance' attribute already exists in node1. Remove it? [YES]
+ .EXT crmd metadata
+ .EXT pengine metadata
+--- a/test/testcases/resource.exp
++++ b/test/testcases/resource.exp
+@@ -189,8 +189,7 @@
+ .SETENV showobj=p0
+ .TRY resource param p0 set a0 "1 2 3"
+ .EXT crm_resource --resource 'p0' --set-parameter 'a0' --parameter-value '1 2 3'
+-
+-Set 'p0' option: id=p0-instance_attributes-a0 set=p0-instance_attributes name=a0=1 2 3
++Set 'p0' option: id=p0-instance_attributes-a0 set=p0-instance_attributes name=a0 value=1 2 3
+ .INP: configure
+ .INP: _regtest on
+ .INP: show xml p0
+@@ -254,8 +253,7 @@
+ 
+ .TRY resource meta p0 set m0 123
+ .EXT crm_resource --meta --resource 'p0' --set-parameter 'm0' --parameter-value '123'
+-
+-Set 'p0' option: id=p0-meta_attributes-m0 set=p0-meta_attributes name=m0=123
++Set 'p0' option: id=p0-meta_attributes-m0 set=p0-meta_attributes name=m0 value=123
+ .INP: configure
+ .INP: _regtest on
+ .INP: show xml p0
+@@ -889,34 +887,44 @@
+ .TRY resource start p3
+ .TRY resource cleanup
+ .EXT crm_resource --cleanup
++Cleaned up all resources on all nodes
+ .TRY resource cleanup p3
+ .EXT crm_resource --cleanup --resource p3
+ .TRY resource cleanup p3 node1
+ .EXT crm_resource --cleanup --resource p3 --node node1
++Cleaned up p3 on node1
+ .TRY resource cleanup force
+ .EXT crm_resource --cleanup --force
++Cleaned up all resources on all nodes
+ .TRY resource cleanup p3 force
+ .EXT crm_resource --cleanup --resource p3 --force
+ .TRY resource cleanup p3 node1 force
+ .EXT crm_resource --cleanup --resource p3 --node node1 --force
++Cleaned up p3 on node1
+ .TRY resource refresh
+ .EXT crm_resource --refresh
++Waiting for 1 reply from the controller. OK
+ .TRY resource refresh p3
+ .EXT crm_resource --refresh --resource p3
+ .TRY resource refresh p3 node1
+ .EXT crm_resource --refresh --resource p3 --node node1
++Waiting for 1 reply from the controller. OK
++Cleaned up p3 on node1
+ .TRY resource refresh force
+ .EXT crm_resource --refresh --force
++Waiting for 1 reply from the controller. OK
+ .TRY resource refresh p3 force
+ .EXT crm_resource --refresh --resource p3 --force
+ .TRY resource refresh p3 node1 force
+ .EXT crm_resource --refresh --resource p3 --node node1 --force
++Waiting for 1 reply from the controller. OK
++Cleaned up p3 on node1
+ .TRY resource stop p3
+ .TRY configure rm cg
+ .TRY configure ms msg g
+ .TRY resource scores
+ .EXT crm_simulate -sUL
+-3 of 6 resources DISABLED and 0 BLOCKED from being started due to failures
++2 of 6 resource instances DISABLED and 0 BLOCKED from further action due to failure
+ 
+ Current cluster status:
+ Node node1: UNCLEAN (offline)
+@@ -924,10 +932,10 @@
+  st	(stonith:null):	Stopped 
+  Clone Set: c1 [p1] (unmanaged)
+      Stopped: [ node1 ]
+- Master/Slave Set: m1 [p2]
++ Clone Set: m1 [p2] (promotable)
+      Stopped: [ node1 ]
+  p3	(ocf::heartbeat:Dummy):	Stopped ( disabled ) 
+- Master/Slave Set: msg [g]
++ Clone Set: msg [g] (promotable)
+      Stopped: [ node1 ]
+ 
+ Allocation scores and utilization information:
+--- a/test/testcases/ra.exp
++++ b/test/testcases/ra.exp
+@@ -9,16 +9,10 @@
+ .EXT crm_resource --show-metadata ocf:pacemaker:Dummy
+ Example stateless resource agent (ocf:pacemaker:Dummy)
+ 
+-This is a Dummy Resource Agent. It does absolutely nothing except 
+-keep track of whether its running or not.
+-Its purpose in life is for testing and to serve as a template for RA writers.
+-
+-NB: Please pay attention to the timeouts specified in the actions
+-section below. They should be meaningful for the kind of resource
+-the agent manages. They should be the minimum advised timeouts,
+-but they shouldn't/cannot cover _all_ possible resource
+-instances. So, try to be neither overly generous nor too stingy,
+-but moderate. The minimum timeouts should never be below 10 seconds.
++This is a dummy OCF resource agent. It does absolutely nothing except keep track
++of whether it is running or not, and can be configured so that actions fail or
++take a long time. Its purpose is primarily for testing, and to serve as a
++template for resource agent writers.
+ 
+ Parameters (*: required, []: default):
+ 
+@@ -45,12 +39,12 @@
+ 
+ Operations' defaults (advisory minimum):
+ 
+-    start         timeout=20
+-    stop          timeout=20
+-    monitor       timeout=20 interval=10
+-    reload        timeout=20
+-    migrate_to    timeout=20
+-    migrate_from  timeout=20
++    start         timeout=20s
++    stop          timeout=20s
++    monitor       timeout=20s interval=10s
++    reload        timeout=20s
++    migrate_to    timeout=20s
++    migrate_from  timeout=20s
+ .INP: info stonith:external/ssh
+ .EXT crm_resource --show-metadata stonith:external/ssh
+ .EXT stonithd metadata
+@@ -72,7 +66,6 @@
+     setting this parameter to yes makes it an even worse idea.
+     Viva la Vida Loca!
+ 
+-priority (integer, [0]): The priority of the stonith resource. Devices are tried in order of highest priority to lowest.
+ pcmk_host_argument (string, [port]): Advanced use only: An alternate parameter to supply instead of 'port'
+     Some devices do not support the standard 'port' parameter or may provide additional ones.
+     Use this to specify an alternate, device-specific, parameter that should indicate the machine to be fenced.
+@@ -83,7 +76,7 @@
+ 
+ pcmk_host_list (string): A list of machines controlled by this device (Optional unless pcmk_host_check=static-list).
+ pcmk_host_check (string, [dynamic-list]): How to determine which machines are controlled by the device.
+-    Allowed values: dynamic-list (query the device), static-list (check the pcmk_host_list attribute), none (assume every device can fence every machine)
++    Allowed values: dynamic-list (query the device via the 'list' command), static-list (check the pcmk_host_list attribute), status (query the device via the 'status' command), none (assume every device can fence every machine)
+ 
+ pcmk_delay_max (time, [0s]): Enable a random delay for stonith actions and specify the maximum of random delay.
+     This prevents double fencing when using slow devices such as sbd.
+--- a/test/testcases/commit.exp
++++ b/test/testcases/commit.exp
+@@ -23,11 +23,15 @@
+ .INP: primitive d2 ocf:heartbeat:Dummy
+ .INP: primitive d3 ocf:heartbeat:Dummy
+ .INP: commit
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: rename p3 pp3
+ INFO: 21: modified location:l1 from p3 to pp3
+ INFO: 21: modified order:o1 from p3 to pp3
+ INFO: 21: modified colocation:cl1 from p3 to pp3
+ .INP: commit
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: rename pp3 p3
+ INFO: 23: modified location:l1 from pp3 to p3
+ INFO: 23: modified order:o1 from pp3 to p3
+@@ -36,16 +40,26 @@
+ INFO: 24: modified order:o1 from c1 to g1
+ INFO: 24: modified colocation:cl1 from c1 to g1
+ .INP: commit
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: group g2 d1 d2
+ .INP: commit
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: delete g2
+ .INP: commit
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: filter "sed '/g1/s/p1/d1/'"
+ .INP: group g2 d3 d2
+ .INP: delete d2
+ .INP: commit
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: _test
+ .INP: verify
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ WARNING: 35: st: unknown attribute 'yoyo-meta'
+ .INP: show
+ node node1 \
+@@ -70,5 +84,7 @@
+ op_defaults op-options: \
+ 	timeout=2m
+ .INP: commit
+-INFO: 37: apparently there is nothing to commit
+-INFO: 37: try changing something first
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
++(get_ordering_type)    warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+--- a/test/testcases/scripts.exp
++++ b/test/testcases/scripts.exp
+@@ -8,7 +8,6 @@
+ .EXT crm_resource --show-metadata ocf:heartbeat:db2
+ .EXT crm_resource --show-metadata ocf:heartbeat:exportfs
+ .EXT crm_resource --show-metadata systemd:haproxy
+-ERROR: 2: Error when loading script haproxy: No meta-data for agent: systemd:haproxy
+ .EXT crm_resource --show-metadata ocf:heartbeat:LVM
+ .EXT crm_resource --show-metadata ocf:heartbeat:MailTo
+ .EXT crm_resource --show-metadata ocf:heartbeat:nginx
+@@ -54,6 +53,7 @@
+ Server:
+ 
+ apache           Apache Webserver
++haproxy          HAProxy
+ nginx            Nginx Webserver
+ 
+ Stonith:
+@@ -63,7 +63,6 @@
+ vmware           Fencing using vCenter / ESX Server
+ 
+ .INP: list all
+-ERROR: 3: Error when loading script haproxy: No meta-data for agent: systemd:haproxy
+ Basic:
+ 
+ health           Verify health and configuration
+@@ -115,6 +114,7 @@
+ Server:
+ 
+ apache           Apache Webserver
++haproxy          HAProxy
+ nginx            Nginx Webserver
+ 
+ Stonith:
+@@ -134,7 +134,7 @@
+ exportfs
+ filesystem
+ gfs2
+-ERROR: 4: Error when loading script haproxy: No meta-data for agent: systemd:haproxy
++haproxy
+ health
+ libvirt
+ lvm-drbd
+@@ -287,7 +287,7 @@
+ ** localhost - crm --wait --no configure load update <<temporary file>>
+ OK: 10: Configure cluster resources
+ .INP: json '["show", "mailto"]'
+-{"category": "basic", "longdesc": "Notifies recipient by e-mail in the event of a resource takeover.", "name": "mailto", "shortdesc": "E-Mail", "steps": [{"longdesc": " This is a resource agent for MailTo. It sends email to a sysadmin\nwhenever  a takeover occurs.", "parameters": [{"advanced": false, "longdesc": "", "name": "id", "required": true, "shortdesc": "Identifier for the cluster resource", "type": "resource", "unique": true}, {"advanced": false, "example": "", "longdesc": " The email address of sysadmin.", "name": "email", "required": true, "shortdesc": "Email address", "type": "email", "unique": false}, {"advanced": false, "example": "", "longdesc": " The subject of the email.", "name": "subject", "required": false, "shortdesc": "Subject", "type": "string", "unique": false}], "required": true, "shortdesc": "Notifies recipients by email in the event of resource takeover"}]}
++{"category": "basic", "longdesc": "Notifies recipient by e-mail in the event of a resource takeover.", "name": "mailto", "shortdesc": "E-Mail", "steps": [{"longdesc": " This is a resource agent for MailTo. It sends email to a sysadmin\nwhenever  a takeover occurs.", "parameters": [{"advanced": false, "longdesc": "", "name": "id", "required": true, "shortdesc": "Identifier for the cluster resource", "type": "resource", "unique": true}, {"advanced": false, "example": "", "longdesc": " The email address of sysadmin.", "name": "email", "required": true, "shortdesc": "Email address", "type": "email", "unique": false}, {"advanced": false, "example": "Resource Group", "longdesc": " The subject of the email.", "name": "subject", "required": false, "shortdesc": "Subject", "type": "string", "unique": false}], "required": true, "shortdesc": "Notifies recipients by email in the event of resource takeover"}]}
+ .INP: json '["verify", "mailto", {"id":"foo", "email":"test@example.com", "subject":"hello"}]'
+ {"longdesc": "", "name": "install", "nodes": "", "shortdesc": "Ensure mail package is installed", "text": "mailx"}
+ {"longdesc": "", "name": "cib", "nodes": "", "shortdesc": "Configure cluster resources", "text": "primitive foo ocf:heartbeat:MailTo\n\temail=\"test@example.com\"\n\tsubject=\"hello\"\n\top start timeout=\"10\"\n\top stop timeout=\"10\"\n\top monitor interval=\"10\" timeout=\"10\"\n\nclone c-foo foo"}
+--- a/test/unittests/test_parse.py
++++ b/test/unittests/test_parse.py
+@@ -456,7 +456,7 @@
+         self.assertEqual(expect, xml_tostring(out))
+ 
+         out = self._parse('fencing_topology poison-pill power')
+-        expect = '<fencing-topology><fencing-level devices="poison-pill" index="1" target="ha-one"/><fencing-level devices="power" index="2" target="ha-one"/><fencing-level devices="poison-pill" index="1" target="ha-three"/><fencing-level devices="power" index="2" target="ha-three"/><fencing-level devices="poison-pill" index="1" target="ha-two"/><fencing-level devices="power" index="2" target="ha-two"/></fencing-topology>'
++        expect = '<fencing-topology><fencing-level target="ha-one" index="1" devices="poison-pill"/><fencing-level target="ha-one" index="2" devices="power"/><fencing-level target="ha-three" index="1" devices="poison-pill"/><fencing-level target="ha-three" index="2" devices="power"/><fencing-level target="ha-two" index="1" devices="poison-pill"/><fencing-level target="ha-two" index="2" devices="power"/></fencing-topology>'
+         self.assertEqual(expect, xml_tostring(out))
+ 
+         out = self._parse('fencing_topology node-a: poison-pill power node-b: ipmi serial')
+@@ -473,11 +473,11 @@
+         Test node attribute fence target assignment
+         """
+         out = self._parse('fencing_topology attr:rack=1 poison-pill power')
+-        expect = """<fencing-topology><fencing-level devices="poison-pill" index="1" target-attribute="rack" target-value="1"/><fencing-level devices="power" index="2" target-attribute="rack" target-value="1"/></fencing-topology>"""
++        expect = """<fencing-topology><fencing-level index="1" devices="poison-pill" target-attribute="rack" target-value="1"/><fencing-level index="2" devices="power" target-attribute="rack" target-value="1"/></fencing-topology>"""
+         self.assertEqual(expect, xml_tostring(out))
+ 
+         out = self._parse('fencing_topology attr:rack=1 poison-pill,power')
+-        expect = '<fencing-topology><fencing-level devices="poison-pill,power" index="1" target-attribute="rack" target-value="1"/></fencing-topology>'
++        expect = '<fencing-topology><fencing-level index="1" devices="poison-pill,power" target-attribute="rack" target-value="1"/></fencing-topology>'
+         self.assertEqual(expect, xml_tostring(out))
+ 
+     def test_tag(self):
+@@ -699,10 +699,10 @@
+             '<master id="m5"><crmsh-ref id="s5"/></master>',
+             '<master id="m6"><crmsh-ref id="s6"/></master>',
+             '<rsc_location id="l1" rsc="g1" score="100" node="node1"/>',
+-            '<rsc_location id="l2" rsc="c"><rule id="l2-rule1" score="100"><expression attribute="#uname" operation="eq" value="node1"/></rule></rsc_location>',
+-            '<rsc_location id="l3" rsc="m5"><rule score="INFINITY"><expression attribute="#uname" operation="eq" value="node1"/><expression attribute="pingd" operation="gt" value="0"/></rule></rsc_location>',
+-            '<rsc_location id="l4" rsc="m5"><rule score="-INFINITY" boolean-op="or"><expression attribute="pingd" operation="not_defined"/><expression attribute="pingd" operation="lte" value="0"/></rule></rsc_location>',
+-            '<rsc_location id="l5" rsc="m5"><rule score="-INFINITY" boolean-op="or"><expression attribute="pingd" operation="not_defined"/><expression attribute="pingd" operation="lte" value="0"/></rule><rule score="INFINITY"><expression attribute="#uname" operation="eq" value="node1"/><expression attribute="pingd" operation="gt" value="0"/></rule><rule score="INFINITY"><date_expression operation="lt" end="2009-05-26"/><date_expression operation="in_range" start="2009-05-26" end="2009-07-26"/><date_expression operation="in_range" start="2009-05-26"><duration years="2009"/></date_expression><date_expression operation="date_spec"><date_spec years="2009" hours="09-17"/></date_expression></rule></rsc_location>',
++            '<rsc_location id="l2" rsc="c"><rule id="l2-rule1" score="100"><expression operation="eq" attribute="#uname" value="node1"/></rule></rsc_location>',
++            '<rsc_location id="l3" rsc="m5"><rule score="INFINITY"><expression operation="eq" attribute="#uname" value="node1"/><expression operation="gt" attribute="pingd" value="0"/></rule></rsc_location>',
++            '<rsc_location id="l4" rsc="m5"><rule score="-INFINITY" boolean-op="or"><expression operation="not_defined" attribute="pingd"/><expression operation="lte" attribute="pingd" value="0"/></rule></rsc_location>',
++            '<rsc_location id="l5" rsc="m5"><rule score="-INFINITY" boolean-op="or"><expression operation="not_defined" attribute="pingd"/><expression operation="lte" attribute="pingd" value="0"/></rule><rule score="INFINITY"><expression operation="eq" attribute="#uname" value="node1"/><expression operation="gt" attribute="pingd" value="0"/></rule><rule score="INFINITY"><date_expression operation="lt" end="2009-05-26"/><date_expression operation="in_range" start="2009-05-26" end="2009-07-26"/><date_expression operation="in_range" start="2009-05-26"><duration years="2009"/></date_expression><date_expression operation="date_spec"><date_spec years="2009" hours="09-17"/></date_expression></rule></rsc_location>',
+             '<rsc_location id="l6" rsc="m5"><rule id-ref="l2-rule1"/></rsc_location>',
+             '<rsc_location id="l7" rsc="m5"><rule id-ref="l2"/></rsc_location>',
+             '<rsc_colocation id="c1" score="INFINITY" rsc="m6" with-rsc="m5"/>',
+@@ -714,7 +714,7 @@
+             '<rsc_ticket id="ticket-A_m6" ticket="ticket-A" rsc="m6"/>',
+             '<rsc_ticket id="ticket-B_m6_m5" ticket="ticket-B" loss-policy="fence"><resource_set><resource_ref id="m6"/><resource_ref id="m5"/></resource_set></rsc_ticket>',
+             '<rsc_ticket id="ticket-C_master" ticket="ticket-C" loss-policy="fence"><resource_set><resource_ref id="m6"/></resource_set><resource_set role="Master"><resource_ref id="m5"/></resource_set></rsc_ticket>',
+-            '<fencing-topology><fencing-level devices="st" index="1" target="ha-one"/><fencing-level devices="st2" index="2" target="ha-one"/><fencing-level devices="st" index="1" target="ha-three"/><fencing-level devices="st2" index="2" target="ha-three"/><fencing-level devices="st" index="1" target="ha-two"/><fencing-level devices="st2" index="2" target="ha-two"/></fencing-topology>',
++            '<fencing-topology><fencing-level target="ha-one" index="1" devices="st"/><fencing-level target="ha-one" index="2" devices="st2"/><fencing-level target="ha-three" index="1" devices="st"/><fencing-level target="ha-three" index="2" devices="st2"/><fencing-level target="ha-two" index="1" devices="st"/><fencing-level target="ha-two" index="2" devices="st2"/></fencing-topology>',
+             '<cluster_property_set><nvpair name="stonith-enabled" value="true"/></cluster_property_set>',
+             '<cluster_property_set id="cpset2"><nvpair name="maintenance-mode" value="true"/></cluster_property_set>',
+             '<rsc_defaults><meta_attributes><nvpair name="failure-timeout" value="10m"/></meta_attributes></rsc_defaults>',
+--- a/test/unittests/test_report.py
++++ b/test/unittests/test_report.py
+@@ -2,6 +2,7 @@
+ import os
+ import shutil
+ from nose.tools import eq_, ok_
++from datetime import datetime
+ 
+ from hb_report.utillib import which, ts_to_dt, sub_string, random_string,\
+                               head, create_tempfile, tail, grep,\
+@@ -22,10 +23,11 @@
+ evil_unicode_log = "evil_unicode.txt"
+ invalid_utf8 = b'Apr 03 11:01:18 [13042] \xe5abc\nApr 03 11:01:18 [13042] test\xe5'
+ 
+-time_before = crmsh.utils.parse_to_timestamp("2019/04/03 11:01:00")
+-time_after = crmsh.utils.parse_to_timestamp("2019/04/03 14:00:00")
+-time_between = crmsh.utils.parse_to_timestamp("2019/04/03 12:03:31")
+-first_time = crmsh.utils.parse_to_timestamp("2019/04/03 11:01:18")
++year = datetime.now().year
++time_before = crmsh.utils.parse_to_timestamp("%d/04/03 11:01:00" % year)
++time_after = crmsh.utils.parse_to_timestamp("%d/04/03 14:00:00" % year)
++time_between = crmsh.utils.parse_to_timestamp("%d/04/03 12:03:31" % year)
++first_time = crmsh.utils.parse_to_timestamp("%d/04/03 11:01:18" % year)
+ 
+ line5424_1 = r"2017-01-26T11:04:19.562885+08:00 12sp2-4 kernel: [    0.000000]"
+ line5424_2 = r"2017-07-10T01:33:54.993374+08:00 12sp2-1 pengine[2020]:   notice: Calculated transition 221"
+@@ -133,7 +135,7 @@
+ def test_find_first_ts():
+     with open(pacemaker_log, 'r') as f:
+         res = find_first_ts(f.read().split('\n'))
+-        eq_(ts_to_dt(res).strftime("%Y/%m/%d %H:%M:%S"), "2019/04/03 11:01:18")
++        eq_(ts_to_dt(res).strftime("%Y/%m/%d %H:%M:%S"), "%d/04/03 11:01:18" % year)
+ 
+ 
+ def test_find_files():
+@@ -231,8 +233,8 @@
+ 
+ 
+ def test_grep():
+-    res = grep("^Name", incmd="rpm -qi bash")[0]
+-    _, out = get_command_info("rpm -qi bash|grep \"^Name\"")
++    res = grep("^Package:", incmd="apt-cache show bash")[0]
++    _, out = get_command_info("apt-cache show bash|grep \"^Package:\"")
+     eq_(res, out.strip("\n"))
+ 
+     in_string = """aaaa
+@@ -298,15 +300,15 @@
+ 
+ 
+ def test_line_time():
+-    eq_(ts_to_dt(line_time(pacemaker_log, 2)).strftime("%Y/%m/%d %H:%M:%S"), "2019/04/03 11:01:18")
+-    eq_(ts_to_dt(line_time(pacemaker_log, 195)).strftime("%Y/%m/%d %H:%M:%S"), "2019/04/03 11:01:40")
++    eq_(ts_to_dt(line_time(pacemaker_log, 2)).strftime("%Y/%m/%d %H:%M:%S"), "%d/04/03 11:01:18" % year)
++    eq_(ts_to_dt(line_time(pacemaker_log, 195)).strftime("%Y/%m/%d %H:%M:%S"),"%d/04/03 11:01:40" % year)
+ 
+ 
+ def test_line_time_unicode():
+-    eq_(ts_to_dt(line_time(pacemaker_unicode_log, 3)).strftime("%Y/%m/%d %H:%M:%S"), "2019/04/03 11:01:18")
++    eq_(ts_to_dt(line_time(pacemaker_unicode_log, 3)).strftime("%Y/%m/%d %H:%M:%S"), "%d/04/03 11:01:18" % year)
+     with open(evil_unicode_log, 'wb') as f:
+         f.write(invalid_utf8)
+-    eq_(ts_to_dt(line_time(evil_unicode_log, 1)).strftime("%Y/%m/%d %H:%M:%S"), "2019/04/03 11:01:18")
++    eq_(ts_to_dt(line_time(evil_unicode_log, 1)).strftime("%Y/%m/%d %H:%M:%S"), "%d/04/03 11:01:18" % year)
+     os.remove(evil_unicode_log)
+ 
+ 
+--- a/test/unittests/test_bootstrap.py
++++ b/test/unittests/test_bootstrap.py
+@@ -60,7 +60,7 @@
+ 
+         bootstrap.init_ssh()
+ 
+-        mock_start_service.assert_called_once_with("sshd.service")
++        mock_start_service.assert_called_once_with("ssh.service")
+         mock_invoke.assert_has_calls([
+             mock.call("mkdir -m 700 -p /root/.ssh"),
+             mock.call("ssh-keygen -q -f /root/.ssh/id_rsa -C 'Cluster Internal' -N ''")
+@@ -84,7 +84,7 @@
+ 
+         bootstrap.init_ssh()
+ 
+-        mock_start_service.assert_called_once_with("sshd.service")
++        mock_start_service.assert_called_once_with("ssh.service")
+         mock_invoke.assert_has_calls([
+             mock.call("mkdir -m 700 -p /root/.ssh"),
+             mock.call("ssh-keygen -q -f /root/.ssh/id_rsa -C 'Cluster Internal' -N ''")
+@@ -107,7 +107,7 @@
+ 
+         bootstrap.init_ssh()
+ 
+-        mock_start_service.assert_called_once_with("sshd.service")
++        mock_start_service.assert_called_once_with("ssh.service")
+         mock_invoke.assert_called_once_with("mkdir -m 700 -p /root/.ssh")
+         mock_exists.assert_called_once_with("/root/.ssh/id_rsa")
+         mock_confirm.assert_not_called()
+--- a/test/testcases/edit.exp
++++ b/test/testcases/edit.exp
+@@ -163,11 +163,15 @@
+ op_defaults op-options: \
+ 	timeout=60s
+ .INP: commit
++(get_ordering_type) 	warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .EXT crmd metadata
+ .EXT pengine metadata
+ .EXT cib metadata
+ .INP: _test
+ .INP: verify
++(get_ordering_type) 	warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: primitive a0 ocf:heartbeat:Dummy
+ .INP: primitive a1 ocf:heartbeat:Dummy
+ .INP: primitive a2 ocf:heartbeat:Dummy
+@@ -181,60 +185,32 @@
+ .INP: primitive aErr ocf:heartbeat:Dummy
+ .INP: group as a0 a1 a2 a3 a4 a5 a6 a7 a8 a9 aErr
+ .INP: commit
++(get_ordering_type) 	warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: cd ..
++(get_ordering_type) 	warning: Support for 'score' in rsc_order is deprecated and will be removed in a future release (use 'kind' instead)
++Warnings found during check: config may not be valid
+ .INP: cd configure
+ .INP: filter "sed '/as/s/a9//'"
+ .INP: filter "sed '/as/s/a1/a1 a9/'"
+ .INP: commit
++INFO: 83: apparently there is nothing to commit
++INFO: 83: try changing something first
+ .INP: cd ..
+ .INP: cd configure
+ .INP: filter "sed '/abs/s/a9//'"
+ .INP: filter "sed '/abs/s/a8/a8 a9/'"
+ .INP: show
+-node node1 \
+-	attributes mem=16G
+-primitive a0 Dummy
+-primitive a1 Dummy
+-primitive a2 Dummy
+-primitive a3 Dummy
+-primitive a4 Dummy
+-primitive a5 Dummy
+-primitive a6 Dummy
+-primitive a7 Dummy
+-primitive a8 Dummy
+-primitive a9 Dummy
+-primitive aErr Dummy
+-primitive d1 Dummy
+-primitive d2 Dummy
+-primitive d3 Dummy
+-primitive d4 Dummy
+-primitive d5 Dummy
+-primitive d6 Dummy
+-primitive p1 Dummy \
+-	op monitor interval=60m \
+-	op monitor interval=120m \
+-	op_params OCF_CHECK_LEVEL=10
+-primitive p2 Dummy
+-primitive p3 Dummy
++node node1
++primitive p0 ocf:pacemaker:Dummy
++primitive p1 ocf:pacemaker:Dummy
++primitive p2 Delay \
++	params startdelay=2 mondelay=2 stopdelay=2
++primitive p3 ocf:pacemaker:Dummy
+ primitive st stonith:null \
+-	params hostlist=node1 \
+-	meta description="some description here" requires=nothing \
+-	op monitor interval=60m
+-group as a0 a1 a9 a2 a3 a4 a5 a6 a7 a8 aErr
+-group g1 p1 p2 d3
+-group g2 d1 d2
+-clone c1 g1
+-tag t-d45 d4 d5
+-location l1 p3 100: node1
+-location loc-d1 d1 \
+-	rule -inf: not_defined webserver or mem number:lte 0 \
+-	rule -inf: not_defined a2 \
+-	rule webserver: defined webserver
+-order o-d456 d4 d5 d6
+-order o1 inf: p3 c1
+-property cib-bootstrap-options:
+-rsc_defaults rsc_options: \
+-	failure-timeout=10m
++	params hostlist=node1
++ms m1 p2
++clone c1 p1
+ op_defaults op-options: \
+ 	timeout=60s
+ .INP: commit
+@@ -242,51 +218,19 @@
+ INFO: 89: try changing something first
+ .INP: _test
+ .INP: verify
++.EXT crm_resource --show-metadata ocf:pacemaker:Dummy
++.EXT crm_resource --show-metadata ocf:heartbeat:Delay
+ .INP: show
+-node node1 \
+-	attributes mem=16G
+-primitive a0 Dummy
+-primitive a1 Dummy
+-primitive a2 Dummy
+-primitive a3 Dummy
+-primitive a4 Dummy
+-primitive a5 Dummy
+-primitive a6 Dummy
+-primitive a7 Dummy
+-primitive a8 Dummy
+-primitive a9 Dummy
+-primitive aErr Dummy
+-primitive d1 Dummy
+-primitive d2 Dummy
+-primitive d3 Dummy
+-primitive d4 Dummy
+-primitive d5 Dummy
+-primitive d6 Dummy
+-primitive p1 Dummy \
+-	op monitor interval=60m \
+-	op monitor interval=120m \
+-	op_params OCF_CHECK_LEVEL=10
+-primitive p2 Dummy
+-primitive p3 Dummy
++node node1
++primitive p0 ocf:pacemaker:Dummy
++primitive p1 ocf:pacemaker:Dummy
++primitive p2 Delay \
++	params startdelay=2 mondelay=2 stopdelay=2
++primitive p3 ocf:pacemaker:Dummy
+ primitive st stonith:null \
+-	params hostlist=node1 \
+-	meta description="some description here" requires=nothing \
+-	op monitor interval=60m
+-group as a0 a1 a9 a2 a3 a4 a5 a6 a7 a8 aErr
+-group g1 p1 p2 d3
+-group g2 d1 d2
+-clone c1 g1
+-tag t-d45 d4 d5
+-location l1 p3 100: node1
+-location loc-d1 d1 \
+-	rule -inf: not_defined webserver or mem number:lte 0 \
+-	rule -inf: not_defined a2 \
+-	rule webserver: defined webserver
+-order o-d456 d4 d5 d6
+-order o1 inf: p3 c1
+-property cib-bootstrap-options:
+-rsc_defaults rsc_options: \
+-	failure-timeout=10m
++	params hostlist=node1
++ms m1 p2
++clone c1 p1
+ op_defaults op-options: \
+ 	timeout=60s
+ .INP: commit

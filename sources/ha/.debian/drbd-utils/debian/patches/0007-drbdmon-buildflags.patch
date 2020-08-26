@@ -1,0 +1,22 @@
+From: Apollon Oikonomopoulos <apoikos@debian.org>
+Date: Mon, 18 Nov 2019 22:27:25 +0200
+Subject: Respect dpkg-buildflags CXXFLAGS for drbdmon
+
+Last-Update: 2018-06-06
+Forwarded: no (Debian-specific)
+---
+ user/drbdmon/Makefile.in | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/user/drbdmon/Makefile.in b/user/drbdmon/Makefile.in
+index 5d37ed5..f721ba0 100644
+--- a/user/drbdmon/Makefile.in
++++ b/user/drbdmon/Makefile.in
+@@ -1,6 +1,4 @@
+-CXXFLAGS=-std=c++11 -I. -I../shared -Icppdsaext/src -Wall -Werror --pedantic-errors -fPIC -O2 \
+--Wsign-compare -Wpointer-arith -Wswitch-default -Wswitch-enum -Wtype-limits \
+--Wmissing-declarations -Wshadow
++CXXFLAGS+=-std=c++11 -I. -I../shared -Icppdsaext/src -Wall -fPIC
+ CXX = @CXX@
+ LIBS = @LIBS@
+ 

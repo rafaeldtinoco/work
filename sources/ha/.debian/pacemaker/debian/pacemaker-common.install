@@ -1,0 +1,12 @@
+#!/usr/bin/dh-exec
+
+etc/logrotate.d/pacemaker
+daemons/pacemakerd/pacemaker.sysconfig => etc/default/pacemaker
+usr/share/pacemaker
+usr/share/pkgconfig
+usr/share/snmp/mibs/PCMK-MIB.txt
+var/lib/pacemaker/pengine
+var/lib/pacemaker/cib
+var/lib/pacemaker/cores
+var/lib/pacemaker/blackbox
+var/log/pacemaker

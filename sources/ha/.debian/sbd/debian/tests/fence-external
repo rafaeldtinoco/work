@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+if [ "$AUTOPKGTEST_REBOOT_MARK" = fenced ]; then
+    echo "fence was successfull"
+    exit 0
+fi
+
+# create test disk
+echo "=== losetup ==="
+DISK=$AUTOPKGTEST_TMP/disk
+dd if=/dev/zero of=$DISK bs=1M count=10 2>&1
+LOOP=$(losetup --find --show $DISK)
+
+echo "=== create ==="
+hostname node1 # must match corosync for fence to work
+sbd -d $LOOP create
+sed -i "s|^#\\?\\(SBD_DEVICE=\\).*|\\1$LOOP|" /etc/default/sbd
+sed -i "s|^\\(SBD_WATCHDOG_DEV=\\).*|\\1/dev/null|" /etc/default/sbd
+
+echo "=== cluster ==="
+apt-get --yes --quiet install pacemaker crmsh
+service sbd status
+
+echo -n "Waiting for cluster to start... "
+for x in `seq 60 -1 1`; do echo -n "$x "; sleep 1; done; echo
+crm configure primitive sbd stonith:external/sbd params sbd_device=$LOOP
+crm configure show
+
+echo -n "Waiting for resource to start... "
+for x in `seq 10 -1 1`; do echo -n "$x "; sleep 1; done; echo
+crm status
+
+echo "=== fence ==="
+/tmp/autopkgtest-reboot-prepare fenced
+crm --force node fence node1

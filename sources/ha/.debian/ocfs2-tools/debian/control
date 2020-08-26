@@ -1,0 +1,42 @@
+Source: ocfs2-tools
+Section: admin
+Priority: optional
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@alioth-lists.debian.net>
+Uploaders: Valentin Vidic <vvidic@debian.org>
+Standards-Version: 4.5.0
+Rules-Requires-Root: no
+Build-Depends: debhelper-compat (= 13), po-debconf, comerr-dev,
+ uuid-dev, libncurses5-dev, libreadline-dev, libglib2.0-dev (>= 2.2.3),
+ libblkid-dev (>= 1.36), libbz2-dev, libdevmapper-dev, libdlm-dev,
+ libdlmcontrol-dev, libxml2-dev, libaio-dev, libcmap-dev
+Homepage: https://ocfs2.wiki.kernel.org/
+Vcs-Browser: https://salsa.debian.org/ha-team/ocfs2-tools
+Vcs-Git: https://salsa.debian.org/ha-team/ocfs2-tools.git
+
+Package: ocfs2-tools
+Architecture: linux-any
+Depends: ${shlibs:Depends}, ${misc:Depends}, psmisc, lsb-base (>= 3.0-6)
+Pre-Depends: ${misc:Pre-Depends}
+Description: tools for managing OCFS2 cluster filesystems
+ OCFS2 is a general purpose cluster filesystem. Unlike the initial release
+ of OCFS, which supported only Oracle database workloads, OCFS2 provides
+ full support as a general purpose filesystem.  OCFS2 is a complete rewrite
+ of the previous version, designed to work as a seamless addition to the
+ Linux kernel.
+ .
+ This package installs the tools to manage the OCFS2 filesystem, including mkfs,
+ tunefs, fsck, debugfs, and the utilities to control the O2CB clustering stack.
+
+Package: ocfs2-tools-dev
+Architecture: linux-any
+Multi-Arch: same
+Depends: ${misc:Depends}
+Section: devel
+Description: tools for managing OCFS2 cluster filesystems - development files
+ OCFS2 is a general purpose cluster filesystem. Unlike the initial release
+ of OCFS, which supported only Oracle database workloads, OCFS2 provides
+ full support as a general purpose filesystem.  OCFS2 is a complete rewrite
+ of the previous version, designed to work as a seamless addition to the
+ Linux kernel.
+ .
+ This package installs the development headers and static libraries.

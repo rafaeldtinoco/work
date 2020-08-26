@@ -1,0 +1,4 @@
+etc/crm/*
+usr/sbin/*
+usr/share/*
+usr/lib/python*/*

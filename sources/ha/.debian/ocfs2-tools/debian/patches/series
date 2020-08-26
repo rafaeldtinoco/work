@@ -1,0 +1,7 @@
+systemd-service.patch
+register_printf_specifier.patch
+defragfs_segfault.patch
+cross_build.patch
+pkg_config_libaio.patch
+defrag.ocfs2-make-getopt-portable.patch
+fix-o2image-segfault.patch

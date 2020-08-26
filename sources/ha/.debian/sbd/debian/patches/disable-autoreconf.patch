@@ -1,0 +1,15 @@
+Description: Disable running autoreconf from autogen.sh
+ dh_autoreconf will run autoreconf with correct parameters.
+Author: Valentin Vidic <vvidic@debian.org>
+Last-Update: 2019-11-23
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -5,6 +5,3 @@
+     *\ 1.11*|*\ 1.12*) echo 'm4_define([TESTS_OPTION], [])';;
+     *) echo 'm4_define([TESTS_OPTION], [serial-tests])';;
+ esac > tests-opt.m4
+-cat tests-opt.m4
+-# Run this to generate all the initial makefiles, etc.
+-autoreconf -i -v && echo Now run ./configure and make

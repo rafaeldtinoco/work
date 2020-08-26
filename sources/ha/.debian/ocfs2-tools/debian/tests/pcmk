@@ -1,0 +1,81 @@
+#!/bin/sh
+
+set -e
+
+DISK=$AUTOPKGTEST_TMP/disk
+
+cleanup () {
+  umount /mnt || true
+  [ "$LOOP" ] && losetup -d $LOOP
+  rm -f $DISK $DISK.image || true
+  service dlm stop
+  service corosync stop
+}
+
+trap "cleanup" 0 2 3 15
+
+# configure cluster
+printf "\n=== corosync ===\n"
+corosync-quorumtool -e 1
+corosync-quorumtool || true
+
+printf "\n=== dlm ===\n"
+service dlm restart
+dlm_tool status
+
+# create test disk
+printf "\n=== losetup ===\n"
+dd if=/dev/zero of=$DISK bs=1M count=200 2>&1
+LOOP=$(losetup --find --show $DISK)
+
+# test tools
+printf "\n=== mkfs ===\n"
+mkfs.ocfs2 --cluster-stack=pcmk --cluster-name=debian $LOOP 2>&1
+
+printf "\n=== pcmk ===\n"
+echo pcmk > /sys/fs/ocfs2/cluster_stack
+
+printf "\n=== o2image ===\n"
+o2image $LOOP $DISK.image
+ls -l $DISK.image
+HASH1=$(md5sum $LOOP)
+dd if=/dev/zero of=$LOOP bs=1M count=200 2>&1
+echo y | o2image -I $LOOP $DISK.image
+HASH2=$(md5sum $LOOP)
+if [ "$HASH1" != "$HASH2" ]; then
+  echo "WARNING: hash mismatch"
+  echo "$HASH1"
+  echo "$HASH2"
+fi
+
+printf "\n=== fsck ===\n"
+fsck.ocfs2 -f -y $LOOP 2>&1
+
+printf "\n=== o2cluster ===\n"
+o2cluster -o $LOOP
+
+printf "\n=== tunefs ===\n"
+tunefs.ocfs2 -L test-label -N 3 -Q 'Label = %V\nNumSlots = %N\n' $LOOP
+
+printf "\n=== debugfs ===\n"
+debugfs.ocfs2 -R stats $LOOP
+
+printf "\n=== o2info ===\n"
+o2info --volinfo $LOOP
+
+printf "\n=== grow ===\n"
+dd if=/dev/zero of=$DISK bs=1M count=50 seek=200 2>&1
+losetup --set-capacity $LOOP
+tunefs.ocfs2 -S $LOOP
+
+printf "\n=== mount ===\n"
+mount $LOOP /mnt
+df /mnt
+
+printf "\n=== mounted ===\n"
+mounted.ocfs2 -d
+mounted.ocfs2 -f
+
+printf "\n=== defragfs ===\n"
+cp -a /bin /mnt
+defragfs.ocfs2 -v /mnt

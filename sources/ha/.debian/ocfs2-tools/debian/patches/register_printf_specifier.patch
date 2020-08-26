@@ -1,0 +1,50 @@
+Description: Fix GCC 6 warnings
+Author: Valentin Vidic <vvidic@debian.org>
+Bug: https://github.com/markfasheh/ocfs2-tools/pull/13
+Last-Update: 2019-06-02
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/tunefs.ocfs2/op_query.c
++++ b/tunefs.ocfs2/op_query.c
+@@ -222,7 +222,7 @@
+ 	return len;
+ }
+ 
+-static int handle_arginfo(const struct printf_info *info, size_t n, int *types)
++static int handle_arginfo(const struct printf_info *info, size_t n, int *types, int *size)
+ {
+ 	return 0;
+ }
+@@ -323,19 +323,19 @@
+ 		return 1;
+ 	}
+ 
+-	register_printf_function('B', handle_blocksize, handle_arginfo);
+-	register_printf_function('T', handle_clustersize, handle_arginfo);
+-	register_printf_function('N', handle_numslots, handle_arginfo);
+-	register_printf_function('R', handle_rootdir, handle_arginfo);
+-	register_printf_function('Y', handle_sysdir, handle_arginfo);
+-	register_printf_function('P', handle_clustergroup, handle_arginfo);
+-
+-	register_printf_function('V', handle_label, handle_arginfo);
+-	register_printf_function('U', handle_uuid, handle_arginfo);
+-
+-	register_printf_function('M', handle_compat, handle_arginfo);
+-	register_printf_function('H', handle_incompat, handle_arginfo);
+-	register_printf_function('O', handle_ro_compat, handle_arginfo);
++	register_printf_specifier('B', handle_blocksize, handle_arginfo);
++	register_printf_specifier('T', handle_clustersize, handle_arginfo);
++	register_printf_specifier('N', handle_numslots, handle_arginfo);
++	register_printf_specifier('R', handle_rootdir, handle_arginfo);
++	register_printf_specifier('Y', handle_sysdir, handle_arginfo);
++	register_printf_specifier('P', handle_clustergroup, handle_arginfo);
++
++	register_printf_specifier('V', handle_label, handle_arginfo);
++	register_printf_specifier('U', handle_uuid, handle_arginfo);
++
++	register_printf_specifier('M', handle_compat, handle_arginfo);
++	register_printf_specifier('H', handle_incompat, handle_arginfo);
++	register_printf_specifier('O', handle_ro_compat, handle_arginfo);
+ 
+ 	query_fs = fs;
+ 	fprintf(stdout, fmt);

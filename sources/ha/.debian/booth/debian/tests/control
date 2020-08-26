@@ -1,0 +1,11 @@
+Depends: booth, pacemaker-cli-utils
+Restrictions: needs-root, isolation-container
+Tests: boothd
+
+Depends: booth-pacemaker, crmsh
+Restrictions: needs-root, isolation-container
+Tests: pacemaker
+
+Depends: booth, python3, cluster-glue, psmisc, net-tools, perl
+Restrictions: build-needed
+Tests: runtests

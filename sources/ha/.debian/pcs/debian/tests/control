@@ -1,0 +1,15 @@
+Depends: pcs, pacemaker (>= 2.0), pacemaker-cli-utils (>= 2.0)
+Restrictions: needs-root, skippable
+Tests: status, setup
+
+Depends: pcs, make, ruby-rack-test
+Restrictions: rw-build-tree
+Tests: testsuite-ruby
+
+Depends: pcs, pacemaker (>= 2.0), pacemaker-cli-utils (>= 2.0), fence-agents, fence-virt, booth-pacemaker
+Restrictions: needs-root, rw-build-tree, skippable
+Tests: testsuite-python
+
+Depends: pcs-snmp, pacemaker (>= 2.0), pacemaker-cli-utils (>= 2.0), snmp (>= 5.8), snmpd (>= 5.8), snmp-mibs-downloader
+Restrictions: needs-root, skippable
+Tests: snmp

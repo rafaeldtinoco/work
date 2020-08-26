@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+AGENT=IPaddr2
+
+cleanup () {
+  ocft clean $AGENT
+}
+
+trap "cleanup" 0 2 3 15
+
+IFACE=$(ip route show 0/0 | head -n 1 | cut -d ' ' -f 5)
+echo "Using $IFACE as default route interface"
+sed "s/eth0/$IFACE/g" /usr/share/resource-agents/ocft/configs/$AGENT > $AUTOPKGTEST_TMP/$AGENT
+
+mkdir -p /run/resource-agents
+
+echo "Running: ocft make -d $AUTOPKGTEST_TMP $AGENT"
+ocft make -d $AUTOPKGTEST_TMP $AGENT
+
+echo "Running: ocft test -v $AGENT"
+ocft test -v $AGENT

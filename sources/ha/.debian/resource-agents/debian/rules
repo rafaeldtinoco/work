@@ -1,0 +1,61 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+include /usr/share/dpkg/pkg-info.mk
+
+%:
+	dh $@ --with python3
+
+override_dh_auto_configure:
+	dh_testdir
+	# Remove epoch or else the Makefile explodes
+	echo $(DEB_VERSION_UPSTREAM_REVISION) > .tarball-version
+	[ -f configure ] || sh autogen.sh
+	if [ -e configure -a ! -x configure ]; then chmod u+x configure; fi
+	./configure --sbindir=/usr/sbin --libexecdir=/usr/lib			\
+		    --with-ocf-root=/usr/lib/ocf --with-initdir=/etc/init.d	\
+		    --with-rsctmpdir=/run/resource-agents			\
+		    --prefix=/usr --sysconfdir=/etc --localstatedir=/var	\
+		    --mandir=/usr/share/man --libdir=/usr/lib --disable-fatal-warnings \
+		    SHELL=/bin/bash PYTHON=/usr/bin/python3 \
+		    BASH_SHELL=/bin/bash RM=/bin/rm \
+		    ROUTE=/sbin/route GREP=/bin/grep \
+		    TAR=/bin/tar PING=/bin/ping IFCONFIG=/sbin/ifconfig \
+		    REBOOT=/sbin/reboot POWEROFF_CMD=/sbin/poweroff
+
+override_dh_auto_install:
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+
+	# drbd-utils ships this itself
+	rm $(CURDIR)/debian/tmp/usr/share/cluster/drbd.metadata
+	rm $(CURDIR)/debian/tmp/usr/share/cluster/drbd.sh
+
+override_dh_python3:
+	dh_python3 /usr/lib/ocf/lib/heartbeat
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f .version .tarball-version
+	find . -name Makefile.in | xargs -r rm
+
+override_dh_gencontrol:
+	set -e; \
+	export OCF_ROOT=$(CURDIR)/debian/resource-agents/usr/lib/ocf; \
+	export LC_ALL=C; \
+	( \
+	  echo -n "agents="; \
+	  for agent in debian/resource-agents/usr/lib/ocf/resource.d/heartbeat/*; do \
+	    echo "$$agent meta-data ..." >&2; \
+	    desc=$$($$agent meta-data 2>/dev/null | xml_grep --root resource-agent/shortdesc --text_only /dev/stdin | sed -n '/^$$/!{s/^[[:space:]]*//p; q}'); \
+	    line=$$(echo "$$(basename $$agent): $$desc" | sed -e 's/^\(.\{75\}\).\{4\}.*/\1.../'); \
+	    echo -n " $$line\$${Newline}"; \
+	  done; \
+	  echo \
+	) >> debian/resource-agents.substvars
+	rm -rf debian/resource-agents/usr/lib/ocf/lib/heartbeat/__pycache__
+	dh_gencontrol

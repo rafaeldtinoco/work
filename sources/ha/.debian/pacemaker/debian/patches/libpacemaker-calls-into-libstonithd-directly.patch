@@ -1,0 +1,18 @@
+From: =?utf-8?q?Ferenc_W=C3=A1gner?= <wferi@debian.org>
+Date: Thu, 28 May 2020 10:36:06 +0200
+Subject: libpacemaker calls into libstonithd directly
+
+---
+ lib/pacemaker/Makefile.am | 1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/lib/pacemaker/Makefile.am
++++ b/lib/pacemaker/Makefile.am
+@@ -24,6 +24,7 @@
+ libpacemaker_la_LIBADD	= $(top_builddir)/lib/pengine/libpe_status.la \
+ 			$(top_builddir)/lib/cib/libcib.la \
+ 			$(top_builddir)/lib/lrmd/liblrmd.la \
++			$(top_builddir)/lib/fencing/libstonithd.la \
+ 			$(top_builddir)/lib/common/libcrmcommon.la
+ # -L$(top_builddir)/lib/pils -lpils -export-dynamic -module -avoid-version
+ # Use += rather than backlashed continuation lines for parsing by bumplibs.sh

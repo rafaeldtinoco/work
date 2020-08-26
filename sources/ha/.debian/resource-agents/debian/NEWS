@@ -1,0 +1,8 @@
+resource-agents (1:3.9.5+git20130726-1) experimental; urgency=low
+
+  * This version gets rid of the old, heartbeat-based DRBD resource agent
+    (ocf:heartbeat:drbd). Instead, it's recommended to use the LINBIT OCF
+    agent as documented on 
+    http://www.drbd.org/users-guide/s-pacemaker-crm-drbd-backed-service.html
+
+ -- Martin Loschwitz <madkiss@debian.org>  Fri, 26 Jul 2013 09:25:10 +0000

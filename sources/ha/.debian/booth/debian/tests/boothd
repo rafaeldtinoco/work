@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+printf "=== config ===\n"
+booth-keygen
+cat <<EOF | tee /etc/booth/booth.conf
+authfile = /etc/booth/authkey
+site = 127.0.0.1
+ticket = "ticket-A"
+EOF
+
+printf "\n=== service ===\n"
+systemctl daemon-reload
+systemctl restart booth && sleep 3
+systemctl status booth@booth
+
+printf "\n=== status ===\n"
+booth status
+booth list
+
+printf "\n=== grant ===\n"
+booth grant ticket-A 2>&1
+booth list
+
+printf "\n=== revoke ===\n"
+booth revoke ticket-A 2>&1
+booth list
+
+printf "\n=== geostore ===\n"
+geostore set status GOOD 2>&1
+geostore get status
+geostore list
+geostore delete status

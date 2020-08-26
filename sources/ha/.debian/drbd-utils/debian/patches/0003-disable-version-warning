@@ -1,0 +1,39 @@
+From: Bastian Blank <waldi@debian.org>
+Date: Mon, 18 Nov 2019 22:27:25 +0200
+Subject: Disable module version warning for sublevel missmatch
+
+Bug-Debian: http://bugs.debian.org/659353
+
+Last-Update: 2014-06-13
+Forwarded: no
+---
+ user/v83/drbdadm_usage_cnt.c | 2 +-
+ user/v84/drbdadm_usage_cnt.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/user/v83/drbdadm_usage_cnt.c b/user/v83/drbdadm_usage_cnt.c
+index cfdfdc9..2c3b1f1 100644
+--- a/user/v83/drbdadm_usage_cnt.c
++++ b/user/v83/drbdadm_usage_cnt.c
+@@ -264,7 +264,7 @@ void warn_on_version_mismatch(void)
+ 	else if (cmp & 0xff00)		/* userland is newer minor version */
+ 		msg = "please don't mix different DRBD series.";
+ 	else		/* userland is newer, but only differ in sublevel. */
+-		msg = "preferably kernel and userland versions should match.";
++		return;
+ 
+ 	fprintf(stderr, "DRBD module version: %u.%u.%u\n"
+ 			"   userland version: %u.%u.%u\n%s\n",
+diff --git a/user/v84/drbdadm_usage_cnt.c b/user/v84/drbdadm_usage_cnt.c
+index 53bc9bc..29e2dc2 100644
+--- a/user/v84/drbdadm_usage_cnt.c
++++ b/user/v84/drbdadm_usage_cnt.c
+@@ -264,7 +264,7 @@ void warn_on_version_mismatch(void)
+ 	else if (cmp & 0xff00)		/* userland is newer minor version */
+ 		msg = "please don't mix different DRBD series.";
+ 	else		/* userland is newer, but only differ in sublevel. */
+-		msg = "preferably kernel and userland versions should match.";
++		return;
+ 
+ 	fprintf(stderr, "DRBD module version: %u.%u.%u\n"
+ 			"   userland version: %u.%u.%u\n%s\n",

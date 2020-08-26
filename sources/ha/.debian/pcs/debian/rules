@@ -1,0 +1,76 @@
+#!/usr/bin/make -f
+
+# output every command that modifies files on the build system.
+#DH_VERBOSE = 1
+
+# main packaging script based on dh7 syntax
+%:
+	dh $@ --with python3
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+override_dh_clean:
+	dh_clean --exclude="corosync.conf.orig"
+	rm -rf build pcs/usage.pyc pcs/bash_completion.d.pcs pcs.egg-info setup.cfg
+
+override_dh_auto_build:
+	echo "Bundler decoupled from build system"
+
+override_dh_auto_install:
+	mkdir -p $(CURDIR)/debian/tmp
+
+	# Make pcs
+	$(MAKE) install \
+		DESTDIR=$(CURDIR)/debian/tmp \
+		PYTHON_SITELIB=/usr/lib/python3/dist-packages \
+		BUILD_GEMS=false \
+		BUNDLE_INSTALL_PYAGENTX=false \
+		SYSTEMD_DIR=/lib/systemd \
+		SYSTEMCTL_OVERRIDE=true \
+		install_settings=true
+
+	# Remove embedded fonts
+	set -e && cd $(CURDIR)/debian/tmp/usr/share/pcsd/public/css && \
+	for ttf in LiberationSans-Bold.ttf LiberationSans-BoldItalic.ttf \
+		   LiberationSans-Italic.ttf LiberationSans-Regular.ttf; \
+	do \
+		ln -sf /usr/share/fonts/truetype/liberation/$$ttf $$ttf; \
+	done
+
+	# Cleanup pcsd installation
+	rm -r $(CURDIR)/debian/tmp/usr/share/pcsd/test
+	rm -r $(CURDIR)/debian/tmp/usr/share/pcsd/public/js/dev
+	rm $(CURDIR)/debian/tmp/usr/share/pcsd/*.debian
+	rm $(CURDIR)/debian/tmp/usr/share/pcsd/*.service
+	rm $(CURDIR)/debian/tmp/usr/share/pcsd/*.8
+	rm $(CURDIR)/debian/tmp/usr/share/pcsd/Gemfile*
+	rm $(CURDIR)/debian/tmp/usr/share/pcsd/Makefile
+	rm $(CURDIR)/debian/tmp/usr/share/pcsd/pcsd.conf
+	rm $(CURDIR)/debian/tmp/usr/share/pcsd/pcsd.logrotate
+	rm $(CURDIR)/debian/tmp/usr/share/pcsd/pcsd.pam
+	rm $(CURDIR)/debian/tmp/usr/lib/python3/dist-packages/pcs/bash_completion
+	rm $(CURDIR)/debian/tmp/usr/lib/python3/dist-packages/pcs/pcs.8
+	rm $(CURDIR)/debian/tmp/usr/lib/python3/dist-packages/pcs/pcs
+
+override_dh_install:
+	dh_install -p pcs -X /usr/lib/python3/dist-packages/pcs/snmp
+	dh_install -p pcs-snmp
+
+override_dh_python3:
+	dh_python3 --skip-private
+	dh_python3 /usr/share/pcsd
+
+override_dh_installinit:
+	dh_installinit -p pcs --name=pcsd-ruby
+	dh_installinit -p pcs --name=pcsd
+	dh_installinit -p pcs-snmp --name=pcs_snmp_agent
+
+override_dh_compress:
+	# make non-scripts non-executable
+	chmod -x $(CURDIR)/debian/pcs/usr/share/pcsd/public/css/* || : # ignore *.ttf symlinks
+	chmod -x $(CURDIR)/debian/pcs/etc/pam.d/pcsd
+	chmod -x $(CURDIR)/debian/pcs/usr/lib/python*/*-packages/pcs/settings.py
+	chmod -x $(CURDIR)/debian/pcs/usr/share/bash-completion/completions/pcs
+	chmod 755 $(CURDIR)/debian/pcs/usr/share/pcsd/public/css/images/
+	dh_compress

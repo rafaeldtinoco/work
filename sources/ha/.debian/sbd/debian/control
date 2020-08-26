@@ -1,0 +1,32 @@
+Source: sbd
+Section: admin
+Priority: optional
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Uploaders: Adrian Vondendriesch <adrian.vondendriesch@credativ.de>,
+ Valentin Vidic <vvidic@debian.org>,
+ Ferenc Wágner <wferi@debian.org>,
+Build-Depends:
+ debhelper-compat (= 12),
+ libaio-dev,
+ libcmap-dev,
+ libglib2.0-dev,
+ libqb-dev,
+ libvotequorum-dev,
+ pacemaker-dev,
+ uuid-dev,
+Standards-Version: 4.5.0
+Rules-Requires-Root: no
+Homepage: https://github.com/ClusterLabs/sbd/
+Vcs-Browser: https://salsa.debian.org/ha-team/sbd
+Vcs-Git: https://salsa.debian.org/ha-team/sbd.git
+
+Package: sbd
+Architecture: linux-any
+Depends: lsb-base, ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Description: STONITH Block Device daemon
+ SBD provides a node fencing mechanism (Shoot the other node in the
+ head, STONITH) for Pacemaker-based clusters through the exchange of
+ messages via shared block storage such as for example a SAN, iSCSI,
+ FCoE. It can be used as a STONITH mechanism in all configurations
+ that have reliable shared storage.

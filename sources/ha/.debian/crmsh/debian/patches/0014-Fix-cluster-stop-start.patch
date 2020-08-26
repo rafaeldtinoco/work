@@ -1,0 +1,24 @@
+Description: Fix crm cluster stop/start on Debian
+ Corosync remains running after 'crm cluster stop'.
+ Don't rely on systemd service dependencies to stop it
+ and also make it work with sysv init.
+Author: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Last-Update: 2017-10-20
+--- a/crmsh/ui_cluster.py
++++ b/crmsh/ui_cluster.py
+@@ -79,6 +79,7 @@
+         Starts the cluster services on this node
+         '''
+         try:
++            utils.start_service("corosync")
+             utils.start_service("pacemaker")
+             if utils.is_qdevice_configured():
+                 utils.start_service("corosync-qdevice")
+@@ -96,6 +97,7 @@
+         try:
+             if utils.is_qdevice_configured():
+                 utils.stop_service("corosync-qdevice")
++            utils.stop_service("pacemaker")
+             utils.stop_service("corosync")
+             err_buf.info("Cluster services stopped")
+         except IOError as err:

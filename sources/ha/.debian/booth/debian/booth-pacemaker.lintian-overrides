@@ -1,0 +1,6 @@
+# ignore warnings about pacemaker resource agents
+booth-pacemaker: executable-in-usr-lib usr/lib/ocf/resource.d/booth/geostore
+booth-pacemaker: executable-in-usr-lib usr/lib/ocf/resource.d/booth/sharedrsc
+booth-pacemaker: executable-in-usr-lib usr/lib/ocf/resource.d/pacemaker/booth-site
+booth-pacemaker: repeated-path-segment lib usr/lib/ocf/lib/booth/
+booth-pacemaker: repeated-path-segment lib usr/lib/ocf/lib/booth/geo_attr.sh

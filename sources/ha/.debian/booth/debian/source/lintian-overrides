@@ -1,0 +1,2 @@
+# ignore warning about git version
+booth source: hyphen-in-upstream-part-of-debian-changelog-version 1.0-205-gc9e90fe
