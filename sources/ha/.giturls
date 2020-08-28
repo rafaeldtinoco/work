@@ -1,4 +1,5 @@
 booth git@github.com:ClusterLabs/booth.git
+cluster-glue git@github.com:ClusterLabs/cluster-glue.git
 corosync git@github.com:corosync/corosync
 corosync-qdevice git@github.com:corosync/corosync-qdevice.git
 crmsh git@github.com:ClusterLabs/crmsh.git

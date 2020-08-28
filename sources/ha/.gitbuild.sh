@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 success=0
 
@@ -17,6 +17,14 @@ origdir=$(pwd)
 
 cleantree() {
     # clean source tree
+
+    quilt pop -af || true
+
+    [ -f debian/patches/debian-changes ] && {
+        rm debian/patches/debian-changes
+        cat debian/patches/series | grep -v debian-changes > /tmp/$$series
+        mv /tmp/$$series debian/patches/series
+    } || true
 
     dh clean
     git clean -fd
@@ -43,6 +51,7 @@ cleanup() {
 checkfirst() {
     # check if this is the first build (to generate orig tar.gz)
     [ ! -f .first ] && { extra=""; first=0; } || { extra="-sa"; first=1; }
+    [ -f .first ] && rm .first || true
 }
 
 checkbuilt() {
@@ -101,6 +110,8 @@ binarypkgs() {
     cd $origdir; cd $package
     [ ! -f .mine ] && { echo "something is wrong"; exit 1; }
 
+    cleantree
+
     dpkg-buildpackage -b -k$MYKEY
 
     cd $origdir
@@ -151,7 +162,7 @@ installpkgs() {
 
     cd $origdir
 
-    sudo dpkg -i $package*_${newversion}*.deb
+    sudo dpkg -i *.deb
 }
 
 theend() {
@@ -172,7 +183,7 @@ theend() {
 uploadsrc() {
     [ $already -eq 1 ] && return;
 
-    dput ppa:ubuntu-ha/staging $package*_${newversion}_source.changes
+    dput ppa:ubuntu-ha/staging *_source.changes
 
     ./.gitclean.sh
 }
@@ -181,8 +192,10 @@ trap cleanup EXIT
 
 # main loop
 
-#for package in libqb kronosnet
-for package in kronosnet
+pkglist="libqb kronosnet corosync cluster-glue resource-agents"
+[ "$1" != "" ] && pkglist=$1 || true
+
+for package in $pkglist
 do
     initial
     changelog
@@ -190,7 +203,7 @@ do
     binarypkgs
     installpkgs
     theend
-#    uploadsrc
+    [ $first -ne 1 ] && uploadsrc || true
 done
 
 success=1
