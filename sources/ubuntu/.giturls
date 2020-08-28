@@ -6,7 +6,7 @@ booth
 # cacti
 # chrony
 # cloud-utils
-# cluster-glue
+cluster-glue
 corosync
 corosync-qdevice
 crmsh
