@@ -6,4 +6,3 @@ ocft-configs.patch
 gitignore.patch
 reproducible.patch
 var-run.patch
-bashism.patch

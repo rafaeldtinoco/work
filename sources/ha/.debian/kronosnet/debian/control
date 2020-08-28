@@ -1,9 +1,9 @@
 Source: kronosnet
 Section: admin
 Priority: optional
-Maintainer: Debian HA Maintainers <debian-ha-maintainers@alioth-lists.debian.net>
-Uploaders:
- Ferenc Wágner <wferi@debian.org>,
+Maintainer: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+XSBC-Original-Maintainer: Debian HA Maintainers <debian-ha-maintainers@alioth-lists.debian.net>
+Uploaders: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
 Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Build-Depends:

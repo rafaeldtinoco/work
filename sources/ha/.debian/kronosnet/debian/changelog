@@ -1,3 +1,9 @@
+kronosnet (1.18-1ubuntu1+200827192020) groovy; urgency=medium
+
+  * fbd1b97 (Merge pull request #314 from kronosnet/stable1-proposed, 2020-08-17)
+
+ -- Rafael David Tinoco <rafaeldtinoco@ubuntu.com>  Thu, 27 Aug 2020 19:20:20 +0000
+
 kronosnet (1.18) unstable; urgency=medium
 
   * Initial upload.

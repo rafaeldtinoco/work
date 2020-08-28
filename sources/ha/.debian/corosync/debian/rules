@@ -1,9 +1,13 @@
 #!/usr/bin/make -f
+export DH_VERBOSE = 1
+export VERBOSE=1
 
-# see FEATURE AREAS in dpkg-buildflags(1)
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+CONF=debian/tmp/etc/corosync/corosync.conf
+
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
-
-# Ensure that we link against all needed libraries (cf. Policy 10.2)
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
 
 ifneq ($(wildcard /usr/include/statgrab.h),)
@@ -24,15 +28,14 @@ endif
 %:
 	dh $@
 
-# Avoid useless dependencies in the libraries
 override_dh_autoreconf:
 	dh_autoreconf --as-needed
 
-# Explicit BASHPATH fixes reproducible build on merged-usr vs non-merged:
 override_dh_auto_configure:
 	dh_auto_configure -- \
 	    BASHPATH=/bin/bash \
 	    --with-initconfigdir=/etc/default \
+		--with-systemddir=/lib/systemd/system \
 	    --with-logdir=/var/log/corosync \
 	    --enable-dbus \
 	    $(enable-monitoring) \
@@ -50,19 +53,15 @@ override_dh_auto_build-indep:
 	$(MAKE) doxygen
 	find doc/api/html -name "*.md5" -print -delete
 
-# The check target would unnecessarily build the software
 override_dh_auto_test-indep:
 
 override_dh_auto_install-indep:
 	$(MAKE) -C man DESTDIR="$(CURDIR)/debian/tmp" install
 
-CONF=debian/tmp/etc/corosync/corosync.conf
 override_dh_auto_install-arch:
 	dh_auto_install
-# We patched the example into a working config file:
 	mv -v $(CONF).example $(CONF)
 	rm -v debian/tmp/usr/lib/*/lib*.la
-# we don't need the upstream license
 	rm debian/tmp/usr/share/doc/corosync/LICENSE
 
 override_dh_missing:

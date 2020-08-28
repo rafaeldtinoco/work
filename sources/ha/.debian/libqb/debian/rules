@@ -31,6 +31,7 @@ override_dh_installdocs:
 	dh_installdocs -p libqb-doc ./docs/xml
 
 override_dh_missing:
+	find \( -name "*.a" -o -name "*.la" \)
 	dh_missing --fail-missing
 
 

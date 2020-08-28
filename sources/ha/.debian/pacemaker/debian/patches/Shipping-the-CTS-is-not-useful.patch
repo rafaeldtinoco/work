@@ -17,7 +17,7 @@ Subject: Shipping the CTS is not useful
 -CORE		= $(CORE_INSTALL) cts
 +CORE		= $(CORE_INSTALL)
  
- SUBDIRS	= $(CORE) doc extra maint tests
+ SUBDIRS	= $(CORE) devel doc extra maint tests
  
 --- a/daemons/execd/Makefile.am
 +++ b/daemons/execd/Makefile.am

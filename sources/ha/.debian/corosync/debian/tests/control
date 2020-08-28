@@ -1,3 +1,0 @@
-Depends: @
-Restrictions: needs-root, isolation-container, allow-stderr, skippable
-Tests: cfgtool quorumtool

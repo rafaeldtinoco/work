@@ -6,8 +6,6 @@ Subject: Make the example config valid
  conf/corosync.conf.example | 22 +++++++---------------
  1 file changed, 7 insertions(+), 15 deletions(-)
 
-diff --git a/conf/corosync.conf.example b/conf/corosync.conf.example
-index 4658a86..91de572 100644
 --- a/conf/corosync.conf.example
 +++ b/conf/corosync.conf.example
 @@ -2,8 +2,10 @@
@@ -23,7 +21,7 @@ index 4658a86..91de572 100644
  
  	# crypto_cipher and crypto_hash: Used for mutual node authentication.
  	# If you choose to enable this, then do remember to create a shared
-@@ -25,7 +27,7 @@ logging {
+@@ -25,7 +27,7 @@
  	# Log to a log file. When set to "no", the "logfile" option
  	# must not be set.
  	to_logfile: yes
@@ -32,7 +30,7 @@ index 4658a86..91de572 100644
  	# Log to the system log daemon. When in doubt, set to yes.
  	to_syslog: yes
  	# Log debug messages (very verbose). When in doubt, leave off.
-@@ -41,7 +43,7 @@ logging {
+@@ -41,7 +43,7 @@
  quorum {
  	# Enable and configure quorum subsystem (default: off)
  	# see also corosync.conf.5 and votequorum.5
@@ -41,7 +39,7 @@ index 4658a86..91de572 100644
  }
  
  nodelist {
-@@ -53,19 +55,9 @@ nodelist {
+@@ -53,19 +55,9 @@
  		# Cluster membership node identifier
  		nodeid: 1
  		# Address of first link
