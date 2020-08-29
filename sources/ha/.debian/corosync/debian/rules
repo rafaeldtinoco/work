@@ -1,14 +1,16 @@
 #!/usr/bin/make -f
-export DH_VERBOSE = 1
-export VERBOSE=1
 
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
 
-CONF=debian/tmp/etc/corosync/corosync.conf
+export DH_VERBOSE = 1
+export VERBOSE=1
+export VERSION=3.0.3
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
+
+CONF=debian/tmp/etc/corosync/corosync.conf
 
 ifneq ($(wildcard /usr/include/statgrab.h),)
 enable-monitoring=--enable-monitoring
@@ -29,6 +31,9 @@ endif
 	dh $@
 
 override_dh_autoreconf:
+	echo $(VERSION) > .tarball-version
+	test -f .gitarchivever && rm .gitarchivever || true
+	test -f .version && rm .version || true
 	dh_autoreconf --as-needed
 
 override_dh_auto_configure:
@@ -73,3 +78,9 @@ override_dh_gencontrol:
 
 # dwz fails with "Allocatable section in [...] after non-allocatable ones"
 override_dh_dwz:
+
+override_dh_auto_clean:
+	test -f .gitarchivever && rm .gitarchivever || true
+	test -f .version && rm .version || true
+	test -f .tarball-version && rm .tarball-version || true
+	dh_auto_clean

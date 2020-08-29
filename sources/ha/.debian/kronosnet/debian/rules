@@ -1,12 +1,23 @@
 #!/usr/bin/make -f
 
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
 
-# Ensure that we link against all needed libraries (cf. Policy 10.2)
+export DH_VERBOSE = 1
+export VERBOSE=1
+export VERSION=1.19
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
 
 %:
 	dh $@
+
+override_dh_autoreconf:
+	echo $(VERSION) > .tarball-version
+	test -f .gitarchivever && rm .gitarchivever || true
+	test -f .version && rm .version || true
+	dh_autoreconf
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -28,8 +39,14 @@ override_dh_install:
 override_dh_installdocs:
 	dh_installdocs -A COPYRIGHT README
 
+override_dh_makeshlibs:
+	dh_makeshlibs --exclude=/kronosnet/ # ignore the modules
+
 override_dh_missing:
 	dh_missing --fail-missing
 
-override_dh_makeshlibs:
-	dh_makeshlibs --exclude=/kronosnet/ # ignore the modules
+override_dh_auto_clean:
+	test -f .gitarchivever && rm .gitarchivever || true
+	test -f .version && rm .version || true
+	test -f .tarball-version && rm .tarball-version || true
+	dh_auto_clean

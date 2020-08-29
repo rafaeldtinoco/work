@@ -40,9 +40,12 @@ cleanup() {
     cd $origdir; cd $package
 
     [ -d ./debian ] && { rm -rf ./debian; ln -s ../.debian/$package/debian ./debian; }
-    [ -f debian/changelog.bkp ] && mv debian/changelog.bkp debian/changelog
-    [ -f .mine ] && rm .mine
+    [ -f debian/changelog.bkp ] && {
+        mv debian/changelog.bkp debian/changelog
+        cp debian/changelog debian/changelog.$(mysuite)
+    } || true
 
+    rm -f .mine || true
     cleantree
 
     cd $origdir
@@ -70,9 +73,10 @@ changelog() {
     cd $origdir; cd $package
     [ ! -f .mine ] && { echo "something is wrong"; exit 1; }
 
+    cp debian/changelog.$(mysuite) debian/changelog
     cp debian/changelog debian/changelog.bkp
     {
-        echo "$package ($newversion) $develsuite; urgency=medium"
+        echo "$package ($newversion) $mysuite; urgency=medium"
         echo ""
         echo "  * $gitdesc"
         echo ""
@@ -81,6 +85,7 @@ changelog() {
     } > debian/changelog
 
     cat debian/changelog.bkp >> debian/changelog
+    cp debian/changelog debian/changelog.$(mysuite)
 }
 
 initial() {
@@ -91,11 +96,11 @@ initial() {
 
     cleantree
 
-    develsuite=$(ubuntu-distro-info --devel)
-    develver=$(rmadison -u ubuntu -a source -s $develsuite -S $package | cut -d'|' -f2 | sed 's: ::g')
+    mysuite=$(lsb_release -c -s)
+    myver=$(rmadison -u ubuntu -a source -s $mysuite -S $package | cut -d'|' -f2 | sed 's: ::g')
     githash=$(git log --format=oneline -1 --abbrev | awk '{print $1}')
     gitdesc=$(git log --format=reference -1)
-    newversion=$develver+$(date -u +%y%m%d%H%M%S)
+    newversion=$myver+$(date -u +%y%m%d%H%M%S)
 
     checkfirst
     checkbuilt
@@ -125,21 +130,6 @@ sourcepkg() {
     [ ! -f .mine ] && { echo "something is wrong"; exit 1; }
 
     cleantree
-
-    cd $origdir
-
-    if [ $first -eq 1 ]
-    then
-        tar cfz ${package}_${develver/-*/}.orig.tar.gz \
-            --exclude=$package/debian*/* \
-            --exclude=$package/.git*/* \
-            --exclude=$package/.pc*/* \
-            --exclude=$package/.mine \
-            ${package}
-        sudo chattr +i ${package}_${develver/-*/}.orig.tar.gz
-    fi
-
-    cd $package
 
     [ -e debian ] && rm debian
     [ -d ../.debian/$package/debian ] || { echo "can't find debian"; exit 1; }
@@ -184,7 +174,9 @@ uploadsrc() {
     [ $already -eq 1 ] && return;
 
     dput ppa:ubuntu-ha/staging *_source.changes
+}
 
+cleanall() {
     ./.gitclean.sh
 }
 
@@ -200,10 +192,10 @@ do
     initial
     changelog
     sourcepkg
-    binarypkgs
-    installpkgs
+    #binarypkgs
+    #installpkgs
     theend
-    [ $first -ne 1 ] && uploadsrc || true
+    #[ $first -ne 1 ] && uploadsrc && cleanall || true
 done
 
 success=1

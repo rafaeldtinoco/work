@@ -1,5 +1,6 @@
 usr/include/qb
 usr/lib/*/libqb.so
+usr/lib/*/libqb.so.0
 usr/lib/*/pkgconfig/libqb.pc
 usr/sbin/qb-blackbox
 usr/bin/doxygen2man

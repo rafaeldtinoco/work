@@ -1,15 +1,25 @@
 #!/usr/bin/make -f
-export DH_VERBOSE = 1
-export VERBOSE=1
 
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
 
+export DH_VERBOSE = 1
+export VERBOSE=1
+export VERSION=2.0.1
+
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
 
+DEB_HOST_GNU_TYPE = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+
 %:
 	dh $@
+
+override_dh_autoreconf:
+	echo $(VERSION) > .tarball-version
+	test -f .gitarchivever && rm .gitarchivever || true
+	test -f .version && rm .version || true
+	dh_autoreconf
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -19,13 +29,11 @@ override_dh_auto_configure:
 override_dh_auto_build:
 	CFLAGS="$(CPPFLAGS) $(CFLAGS)" dh_auto_build
 
-override_dh_update_autotools_config:
-override_autoreconf:
-override_dh_auto_configure:
-
 override_dh_auto_install:
 	dh_auto_install $@
 	rm -f debian/tmp/usr/lib/*/libqb.la
+	# workaround for me not to create a new libqb binary package (for the new SONAME)
+	ln -s /usr/lib/$(DEB_HOST_GNU_TYPE)/libqb.so debian/tmp/usr/lib/$(DEB_HOST_GNU_TYPE)/libqb.so.0
 
 override_dh_installdocs:
 	dh_installdocs -p libqb-doc ./docs/xml
@@ -34,4 +42,8 @@ override_dh_missing:
 	find \( -name "*.a" -o -name "*.la" \)
 	dh_missing --fail-missing
 
-
+override_dh_auto_clean:
+	test -f .gitarchivever && rm .gitarchivever || true
+	test -f .version && rm .version || true
+	test -f .tarball-version && rm .tarball-version || true
+	dh_auto_clean
