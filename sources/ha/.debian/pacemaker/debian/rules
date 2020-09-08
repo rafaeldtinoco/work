@@ -9,6 +9,19 @@ export VERBOSE=1
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
 
+DEB_BUILD_OPTIONS+=nocheck
+DEB_BUILD_OPTIONS+=nostrip
+DEB_BUILD_OPTIONS+=noudeb
+DEB_BUILD_OPTIONS+=nodoc
+
+GCC_VERSION = $(shell gcc --version | head -1 | sed -E 's:.* ::g' | cut -d'.' -f1)
+
+ifeq (10, $(GCC_VERSION))
+# Fix gcc10 buggy warnings
+export DEB_CFLAGS_PREPEND=-Wno-error=zero-length-bounds -Wno-error=format-overflow= -Wno-error=format-truncation= -Wno-error=maybe-uninitialized
+export DEB_CXXFLAGS_PREPEND=${DEB_CFLAGS_PREPEND}
+endif
+
 CONF=debian/tmp/etc/corosync/corosync.conf
 CPPFLAGS = -UPCMK_TIME_EMERGENCY_CGT
 
@@ -17,6 +30,8 @@ CPPFLAGS = -UPCMK_TIME_EMERGENCY_CGT
 
 override_dh_autoreconf:
 	patch -p1 < debian/patches/cts-not-useful.patch
+	patch -p1 < debian/patches/Make-the-asciidoc-documentation-reproducible.patch
+	dh_autoreconf_clean
 	dh_autoreconf
 
 override_dh_auto_configure:

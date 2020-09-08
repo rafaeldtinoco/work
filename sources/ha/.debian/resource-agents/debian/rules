@@ -6,15 +6,26 @@ include /usr/share/dpkg/pkg-info.mk
 
 export DH_VERBOSE = 1
 export VERBOSE=1
+export VERSION=4.5.0
+
+DEB_BUILD_OPTIONS+=nocheck
+DEB_BUILD_OPTIONS+=nostrip
+DEB_BUILD_OPTIONS+=noudeb
+#DEB_BUILD_OPTIONS+=nodoc
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 %:
 	dh $@ --with python3
 
+override_dh_autoreconf:
+	echo $(VERSION) > .tarball-version
+	test -f .gitarchivever && rm .gitarchivever || true
+	test -f .version && rm .version || true
+	dh_autoreconf
+
 override_dh_auto_configure:
 	dh_testdir
-	echo $(DEB_VERSION_UPSTREAM_REVISION) > .tarball-version
 	[ -f configure ] || sh autogen.sh
 	if [ -e configure -a ! -x configure ]; then chmod u+x configure; fi
 	./configure \
@@ -43,7 +54,6 @@ override_dh_auto_configure:
 
 override_dh_auto_install:
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
-
 	# drbd-utils ships this itself
 	rm $(CURDIR)/debian/tmp/usr/share/cluster/drbd.metadata
 	rm $(CURDIR)/debian/tmp/usr/share/cluster/drbd.sh
@@ -74,3 +84,9 @@ override_dh_gencontrol:
 	) >> debian/resource-agents.substvars
 	rm -rf debian/resource-agents/usr/lib/ocf/lib/heartbeat/__pycache__
 	dh_gencontrol
+
+override_dh_auto_clean:
+	test -f .gitarchivever && rm .gitarchivever || true
+	test -f .version && rm .version || true
+	test -f .tarball-version && rm .tarball-version || true
+	dh_auto_clean

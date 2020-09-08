@@ -1,2 +1,2 @@
-Enable-PrivateTmp-in-the-systemd-service-files.patch
-Make-the-example-config-valid.patch
+#Enable-PrivateTmp-in-the-systemd-service-files.patch
+#Make-the-example-config-valid.patch

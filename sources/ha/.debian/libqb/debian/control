@@ -5,7 +5,7 @@ XSBC-Original-Maintainer: Debian HA Maintainers <debian-ha-maintainers@alioth-li
 Uploaders: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
 Build-Depends:
     check,
-    debhelper-compat (= 12),
+    debhelper-compat (= 11),
     doxygen,
     libglib2.0-dev,
     pkg-config,

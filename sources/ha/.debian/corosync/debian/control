@@ -9,14 +9,14 @@ Uploaders:
 Standards-Version: 4.4.1
 Build-Depends:
  augeas-tools,
- debhelper-compat (= 12),
+ debhelper-compat (= 11),
  dctrl-tools,
  groff,
  libdbus-1-dev,
  libknet-dev,
  libnozzle-dev,
 # protect backports from silent log loss (#898266):
- libqb-dev (>= 1.0.3),
+ libqb-dev,
  libreadline-dev,
  libsnmp-dev,
 # libstatgrab is Linux-only until #823899 and #823900 gets fixed:
@@ -25,7 +25,6 @@ Build-Depends:
  libxml2-dev,
  pkg-config,
  zlib1g-dev
-Build-Depends-Indep:
  doxygen,
  graphviz,
 Rules-Requires-Root: no

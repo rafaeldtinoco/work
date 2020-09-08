@@ -10,6 +10,10 @@ export VERSION=1.19
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
 
+DEB_BUILD_OPTIONS+=nocheck
+DEB_BUILD_OPTIONS+=nostrip
+DEB_BUILD_OPTIONS+=noudeb
+
 %:
 	dh $@
 

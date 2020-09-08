@@ -1,5 +1,8 @@
 #!/bin/bash -ex
 
+#PPA="ppa:ubuntu-ha/staging *_source.changes"
+PPA="ppa:ubuntu-ha/200831-staging *_source.changes"
+
 success=0
 
 NUMCPU=`cat /proc/cpuinfo | grep proce | wc -l`
@@ -7,8 +10,8 @@ export DEBFULLNAME="Rafael David Tinoco"
 export DEBEMAIL="rafaeldtinoco@ubuntu.com"
 export MYKEY="F7F10EE108D16BBC92F78212A93E0E0AD83C0D0F"
 
-export MY_DEB_BUILD_OPTIONS="nocheck nostrip noudeb nodebug"
-export MY_DEB_BUILD_PROFILES="nocheck nostrip noudeb nodebug"
+export MY_DEB_BUILD_OPTIONS="check nostrip noudeb nodebug"
+export MY_DEB_BUILD_PROFILES="check nostrip noudeb nodebug"
 
 export DEB_BUILD_OPTIONS="$MY_DEB_BUILD_OPTIONS parallel=$NUMCPU"
 export DEB_BUILD_PROFILES="$MY_DEB_BUILD_PROFILES"
@@ -16,9 +19,6 @@ export DEB_BUILD_PROFILES="$MY_DEB_BUILD_PROFILES"
 origdir=$(pwd)
 
 cleantree() {
-    # clean source tree
-
-    quilt pop -af || true
 
     [ -f debian/patches/debian-changes ] && {
         rm debian/patches/debian-changes
@@ -26,54 +26,54 @@ cleantree() {
         mv /tmp/$$series debian/patches/series
     } || true
 
-    dh clean
+    [ -f debian/changelog ] && {
+        dh_autoreconf_clean || true
+        dh_autoreconf || true
+        dh clean
+    } || true
+
     git clean -fd
     git reset --hard
 }
 
 cleanup() {
-    # make sure there are not leftovers
 
-    [ $success -eq 0 ] && return;
     [ $package == "" ] && return;
-
     cd $origdir; cd $package
 
-    [ -d ./debian ] && { rm -rf ./debian; ln -s ../.debian/$package/debian ./debian; }
+    [ -d ./debian ] && {
+        rm -rf ./debian;
+        ln -s ../.debian/$package/debian ./debian;
+    }
+
     [ -f debian/changelog.bkp ] && {
-        mv debian/changelog.bkp debian/changelog
-        cp debian/changelog debian/changelog.$(mysuite)
+        mv debian/changelog.bkp debian/changelog.$mysuite
     } || true
 
-    rm -f .mine || true
+    [ -f debian/changelog ] && rm debian/changelog
+    [ -f .mine ] && rm .mine
+
+    [ $already -eq 1 ] && return;
+
     cleantree
 
     cd $origdir
 }
 
-checkfirst() {
-    # check if this is the first build (to generate orig tar.gz)
-    [ ! -f .first ] && { extra=""; first=0; } || { extra="-sa"; first=1; }
-    [ -f .first ] && rm .first || true
-}
-
 checkbuilt() {
-    # check if git HEAD was already built
-
-    cat debian/changelog | grep -q $githash && {
+    cat debian/changelog.$mysuite | grep -q $githash && {
         echo "$package ($githash) already built"
         already=1
     } || already=0;
 }
 
 changelog() {
-    # change the debian/changelog file based on git HEAD and date
 
     [ $already -eq 1 ] && return;
     cd $origdir; cd $package
     [ ! -f .mine ] && { echo "something is wrong"; exit 1; }
 
-    cp debian/changelog.$(mysuite) debian/changelog
+    cp debian/changelog.$mysuite debian/changelog
     cp debian/changelog debian/changelog.bkp
     {
         echo "$package ($newversion) $mysuite; urgency=medium"
@@ -85,31 +85,29 @@ changelog() {
     } > debian/changelog
 
     cat debian/changelog.bkp >> debian/changelog
-    cp debian/changelog debian/changelog.$(mysuite)
+    cp debian/changelog debian/changelog.$mysuite
 }
 
 initial() {
-    # prepare needed info and env
 
     cd $origdir; cd $package
-    touch .mine
-
-    cleantree
 
     mysuite=$(lsb_release -c -s)
-    myver=$(rmadison -u ubuntu -a source -s $mysuite -S $package | cut -d'|' -f2 | sed 's: ::g')
+    myver=$(rmadison -u ubuntu -a source -s $mysuite,$mysuite-updates,$mysuite-proposed -S $package | tail -1 | cut -d'|' -f2 | sed 's: ::g')
     githash=$(git log --format=oneline -1 --abbrev | awk '{print $1}')
-    gitdesc=$(git log --format=reference -1)
+    gitdesc=$(git log --pretty='format:%C(auto)%h (%s, %ad)' -1)
     newversion=$myver+$(date -u +%y%m%d%H%M%S)
 
-    checkfirst
     checkbuilt
 
+    [ $already -eq 1 ] && { cd $origdir; return; }
+
+    cleantree
+    touch .mine
     cd $origdir
 }
 
 binarypkgs() {
-    # build binary packages
 
     [ $already -eq 1 ] && return;
     cd $origdir; cd $package
@@ -123,7 +121,6 @@ binarypkgs() {
 }
 
 sourcepkg() {
-    # build the source package
 
     [ $already -eq 1 ] && return;
     cd $origdir; cd $package
@@ -152,7 +149,25 @@ installpkgs() {
 
     cd $origdir
 
-    sudo dpkg -i *.deb
+    # dependencies for corosync & kronosnet
+    sudo dpkg -i *libqb*.deb || true
+    # dependencies for corosync
+    sudo dpkg -i *libnozzle*.deb || true
+    sudo dpkg -i *libknet*.deb || true
+    # dependencies for cluster-glue
+    sudo dpkg -i \
+        *libcfg*deb \
+        *libcmap*.deb \
+        *libcorosync*.deb \
+        *libcpg*deb \
+        *libquorum*deb || true
+    # dependencies for pacemaker
+    sudo dpkg -i cluster-glue*.deb \
+        *liblrm2*.deb \
+        *libpils2*.deb \
+        *libplumb2*.deb \
+        *libplumbgpl2*.deb \
+        *libstonith1*.deb || true
 }
 
 theend() {
@@ -160,7 +175,6 @@ theend() {
     [ $already -eq 1 ] && return;
     cd $origdir; cd $package
     [ ! -f .mine ] && { echo "something is wrong"; exit 1; }
-
     [ ! -f debian/changelog.bkp ] && { echo "where is changelog bkp"; exit 1; }
 
     # this makes changelog to keep history (so no duplicate upload is done)
@@ -173,7 +187,7 @@ theend() {
 uploadsrc() {
     [ $already -eq 1 ] && return;
 
-    dput ppa:ubuntu-ha/staging *_source.changes
+    dput $PPA *_source.changes
 }
 
 cleanall() {
@@ -192,12 +206,14 @@ do
     initial
     changelog
     sourcepkg
-    #binarypkgs
-    #installpkgs
+    binarypkgs
+    installpkgs
     theend
-    #[ $first -ne 1 ] && uploadsrc && cleanall || true
+    uploadsrc
+    cleanall
 done
 
 success=1
 exit 0
+
 

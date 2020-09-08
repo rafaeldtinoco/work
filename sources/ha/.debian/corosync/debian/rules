@@ -10,6 +10,11 @@ export VERSION=3.0.3
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
 
+# DEB_BUILD_OPTIONS+=nocheck
+# DEB_BUILD_OPTIONS+=nostrip
+# DEB_BUILD_OPTIONS+=noudeb
+# DEB_BUILD_OPTIONS+=nodoc
+
 CONF=debian/tmp/etc/corosync/corosync.conf
 
 ifneq ($(wildcard /usr/include/statgrab.h),)
@@ -34,7 +39,7 @@ override_dh_autoreconf:
 	echo $(VERSION) > .tarball-version
 	test -f .gitarchivever && rm .gitarchivever || true
 	test -f .version && rm .version || true
-	dh_autoreconf --as-needed
+	dh_autoreconf
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -53,18 +58,17 @@ override_dh_auto_configure:
 	    --enable-vqsim \
 	    --disable-static
 
-override_dh_auto_build-indep:
+override_dh_auto_build:
+	patch -p1 < debian/patches/Enable-PrivateTmp-in-the-systemd-service-files.patch
+	patch -p1 < debian/patches/Make-the-example-config-valid.patch
+	dh_auto_build
 	$(MAKE) -C man
 	$(MAKE) doxygen
 	find doc/api/html -name "*.md5" -print -delete
 
-override_dh_auto_test-indep:
-
-override_dh_auto_install-indep:
-	$(MAKE) -C man DESTDIR="$(CURDIR)/debian/tmp" install
-
-override_dh_auto_install-arch:
+override_dh_auto_install:
 	dh_auto_install
+	$(MAKE) -C man DESTDIR="$(CURDIR)/debian/tmp" install
 	mv -v $(CONF).example $(CONF)
 	rm -v debian/tmp/usr/lib/*/lib*.la
 	rm debian/tmp/usr/share/doc/corosync/LICENSE

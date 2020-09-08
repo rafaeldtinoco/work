@@ -10,7 +10,14 @@ export VERSION=2.0.1
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs
 
+DEB_BUILD_OPTIONS+=nocheck
+DEB_BUILD_OPTIONS+=nostrip
+DEB_BUILD_OPTIONS+=noudeb
+
 DEB_HOST_GNU_TYPE = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+
+export DEB_CFLAGS_PREPEND=-DQB_KILL_ATTRIBUTE_SECTION
+export DEB_CXXFLAGS_PREPEND=${DEB_CFLAGS_PREPEND}
 
 %:
 	dh $@

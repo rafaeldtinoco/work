@@ -6,3 +6,4 @@ ocft-configs.patch
 gitignore.patch
 reproducible.patch
 var-run.patch
+fix-permission.patch

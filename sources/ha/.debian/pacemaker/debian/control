@@ -10,7 +10,7 @@ Build-Depends:
  cluster-glue-dev,
 # debian/check_header_deps needs:
  dctrl-tools,
- debhelper-compat (= 12),
+ debhelper-compat (= 11),
  dh-exec,
  dh-python,
 # resource agent man pages are generated via:
