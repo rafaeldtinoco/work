@@ -61,6 +61,7 @@ ndctl git@github.com:pmem/ndctl.git
 net-tools https://git.code.sf.net/p/net-tools/code
 # nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
 nginx git@github.com:nginx/nginx.git
+nvme-cli git@github.com:linux-nvme/nvme-cli.git
 open-iscsi git@github.com:open-iscsi/open-iscsi.git
 open-isns git@github.com:open-iscsi/open-isns.git
 open-vm-tools git@github.com:vmware/open-vm-tools.git
