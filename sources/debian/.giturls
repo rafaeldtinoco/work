@@ -26,6 +26,7 @@ fence-virt https://salsa.debian.org/ha-team/fence-virt.git
 gfs2-utils https://salsa.debian.org/ha-team/gfs2-utils.git
 # grub-installer https://salsa.debian.org/installer-team/grub-installer.git
 # haproxy git@salsa.debian.org:haproxy-team/haproxy.git
+haproxy git@salsa.debian.org:haproxy-team/haproxy.git
 heartbeat https://salsa.debian.org/ha-team/heartbeat
 # initramfs-tools https://salsa.debian.org/kernel-team/initramfs-tools
 ipset https://salsa.debian.org/pkg-netfilter-team/pkg-ipset.git
@@ -57,7 +58,7 @@ resource-agents https://salsa.debian.org/ha-team/resource-agents
 # ruby-ferret.git https://salsa.debian.org/ruby-team/ruby-ferret.git
 # ruby-psych https://salsa.debian.org/ruby-team/ruby-psych.git
 # samba https://salsa.debian.org/samba-team/samba.git
-# sbd https://salsa.debian.org/ha-team/sbd.git
+sbd https://salsa.debian.org/ha-team/sbd.git
 sg3-utils https://salsa.debian.org/linux-blocks-team/sg3-utils.git
 # squid https://salsa.debian.org/squid-team/squid.git
 systemd https://salsa.debian.org/systemd-team/systemd.git

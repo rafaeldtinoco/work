@@ -6,7 +6,7 @@ automake http://git.savannah.gnu.org/r/automake.git/
 bareos git@github.com:bareos/bareos.git
 bcache-tools git@github.com:koverstreet/bcache-tools.git
 bind9 git@github.com:isc-projects/bind9.git
-binutils-gdb https://sourceware.org/git/binutils-gdb.git
+# binutils-gdb https://sourceware.org/git/binutils-gdb.git
 # bionic https://android.googlesource.com/platform/bionic/
 # cacti git@github.com:Cacti/cacti.git
 chrony https://git.tuxfamily.org/chrony/chrony.git
@@ -22,7 +22,7 @@ dpdk-stable http://dpdk.org/dpdk-stable
 ebtables http://git.netfilter.org/ebtables
 elfutils http://sourceware.org/git/elfutils.git
 exim git://git.exim.org/exim.git
-gcc http://gcc.gnu.org/git/gcc.git
+# gcc http://gcc.gnu.org/git/gcc.git
 git-remote-bzr git@github.com:felipec/git-remote-bzr.git
 glibc http://sourceware.org/git/glibc.git
 glib git@github.com:GNOME/glib.git
@@ -45,7 +45,7 @@ libslirp git@gitlab.freedesktop.org:slirp/libslirp.git
 libtool http://git.savannah.gnu.org/r/libtool.git/
 libvirt git@gitlab.com:libvirt/libvirt.git
 lighttpd1.4 git@github.com:lighttpd/lighttpd1.4.git
-llvm-project git@github.com:llvm/llvm-project.git
+# llvm-project git@github.com:llvm/llvm-project.git
 lm-sensors git@github.com:lm-sensors/lm-sensors.git
 ltp git@github.com:linux-test-project/ltp.git
 lvm2 http://sourceware.org/git/lvm2.git
@@ -54,7 +54,7 @@ lxc git@github.com:lxc/lxc.git
 memcached git@github.com:memcached/memcached.git
 monitoring-plugins git@github.com:monitoring-plugins/monitoring-plugins.git
 multipath http://git.opensvc.com/multipath-tools/.git
-mysql-server git@github.com:mysql/mysql-server.git
+# mysql-server git@github.com:mysql/mysql-server.git
 nagios-plugins git@github.com:nagios-plugins/nagios-plugins.git
 ndctl git@github.com:pmem/ndctl.git
 # net-snmp http://git.code.sf.net/p/net-snmp/code
@@ -71,8 +71,10 @@ python-configshell-fb git@github.com:open-iscsi/configshell-fb.git
 qemu git@github.com:qemu/qemu.git
 rdma-core git@github.com:linux-rdma/rdma-core.git
 rtslib-fb git@github.com:open-iscsi/rtslib-fb.git
+rsyslog git@github.com:rsyslog/rsyslog.git
 s390-tools git@github.com:ibm-s390-tools/s390-tools
-samba https://git.samba.org/samba.git
+# samba https://git.samba.org/samba.git
+sbd git@github.com:ClusterLabs/sbd.git
 sg3_utils git@github.com:hreinecke/sg3_utils
 SLOF git@github.com:qemu/SLOF.git
 spice git@gitlab.freedesktop.org:spice/spice.git
@@ -80,6 +82,7 @@ spice-gtk git@gitlab.freedesktop.org:spice/spice-gtk.git
 spice-protocol git@github.com:freedesktop/spice-protocol.git
 sqlite git@github.com:sqlite/sqlite.git
 squid git@github.com:squid-cache/squid
+sssd git@github.com:SSSD/sssd.git
 subiquity git@github.com:CanonicalLtd/subiquity.git
 systemd git@github.com:systemd/systemd.git
 systemtap http://sourceware.org/git/systemtap.git
@@ -91,4 +94,6 @@ urwid git@github.com:urwid/urwid.git
 util-linux http://git.kernel.org/pub/scm/utils/util-linux/util-linux.git
 uvtool git@github.com:basak/uvtool.git
 valgrind http://sourceware.org/git/valgrind.git
+watchdog https://git.code.sf.net/p/watchdog/code
 wmnd https://gitlab.com/wavexx/wmnd
+ocfs2-tools git@github.com:markfasheh/ocfs2-tools.git

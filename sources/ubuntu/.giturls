@@ -28,6 +28,7 @@ glibc
 # grub2
 # grub-installer
 # haproxy
+haproxy
 heartbeat
 # initramfs-tools
 # ipmctl
@@ -76,7 +77,9 @@ rdma-core
 resource-agents
 rsync
 # samba
+samba
 # sbd
+sbd
 sg3-utils
 # simplestreams
 # smartmontools
