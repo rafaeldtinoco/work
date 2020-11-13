@@ -33,6 +33,7 @@ httpd git@github.com:apache/httpd.git
 ipmctl git@github.com:intel/ipmctl.git
 iproute2 http://git.kernel.org/pub/scm/linux/kernel/git/shemminger/iproute2.git
 ipset http://git.netfilter.org/ipset
+iptables git://git.netfilter.org/iptables
 ipvsadm http://git.kernel.org/pub/scm/utils/kernel/ipvsadm/ipvsadm.git
 irqbalance git@github.com:Irqbalance/irqbalance.git
 kexec-tools http://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git
@@ -40,6 +41,8 @@ kmod https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git
 libfuse git@github.com:libfuse/libfuse.git
 libhugetlbfs git@github.com:libhugetlbfs/libhugetlbfs.git
 libisoburn https://dev.lovelyhq.com/libburnia/libisoburn.git
+libmnl git://git.netfilter.org/libmnl
+libnetfilter_acct git://git.netfilter.org/libnetfilter_acct
 libseccomp git@github.com:seccomp/libseccomp.git
 libslirp git@gitlab.freedesktop.org:slirp/libslirp.git
 libtool http://git.savannah.gnu.org/r/libtool.git/
@@ -59,9 +62,11 @@ nagios-plugins git@github.com:nagios-plugins/nagios-plugins.git
 ndctl git@github.com:pmem/ndctl.git
 # net-snmp http://git.code.sf.net/p/net-snmp/code
 net-tools https://git.code.sf.net/p/net-tools/code
+nfacct git://git.netfilter.org/nfacct
 # nfs-ganesha git@github.com:nfs-ganesha/nfs-ganesha.git
 nginx git@github.com:nginx/nginx.git
 nvme-cli git@github.com:linux-nvme/nvme-cli.git
+ocfs2-tools git@github.com:markfasheh/ocfs2-tools.git
 open-iscsi git@github.com:open-iscsi/open-iscsi.git
 open-isns git@github.com:open-iscsi/open-isns.git
 open-vm-tools git@github.com:vmware/open-vm-tools.git
@@ -70,8 +75,8 @@ perf-utils git@github.com:bboymimi/perf-utils.git
 python-configshell-fb git@github.com:open-iscsi/configshell-fb.git
 qemu git@github.com:qemu/qemu.git
 rdma-core git@github.com:linux-rdma/rdma-core.git
-rtslib-fb git@github.com:open-iscsi/rtslib-fb.git
 rsyslog git@github.com:rsyslog/rsyslog.git
+rtslib-fb git@github.com:open-iscsi/rtslib-fb.git
 s390-tools git@github.com:ibm-s390-tools/s390-tools
 # samba https://git.samba.org/samba.git
 sbd git@github.com:ClusterLabs/sbd.git
@@ -90,10 +95,11 @@ targetcli-fb git@github.com:open-iscsi/targetcli-fb.git
 tcmu-runner git@github.com:open-iscsi/tcmu-runner.git
 tgt git@github.com:fujita/tgt.git
 uftrace git@github.com:namhyung/uftrace.git
+ulogd2 git://git.netfilter.org/ulogd2
 urwid git@github.com:urwid/urwid.git
 util-linux http://git.kernel.org/pub/scm/utils/util-linux/util-linux.git
 uvtool git@github.com:basak/uvtool.git
 valgrind http://sourceware.org/git/valgrind.git
 watchdog https://git.code.sf.net/p/watchdog/code
 wmnd https://gitlab.com/wavexx/wmnd
-ocfs2-tools git@github.com:markfasheh/ocfs2-tools.git
+conntrack-tools git://git.netfilter.org/conntrack-tools

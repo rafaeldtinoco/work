@@ -24,11 +24,10 @@ fence-agents
 fence-virt
 gfs2-utils
 glibc
-# grub
-# grub2
-# grub-installer
+grub
+grub2
+grub-installer
 # haproxy
-haproxy
 heartbeat
 # initramfs-tools
 # ipmctl

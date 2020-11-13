@@ -10,3 +10,5 @@ ubuntu-seeds-ubuntu git+ssh://rafaeldtinoco@git.launchpad.net/~ubuntu-core-dev/u
 ubuntu-seeds-platform git+ssh://rafaeldtinoco@git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/platform
 ubuntu-seeds-core git+ssh://rafaeldtinoco@git.launchpad.net/~ubuntu-core-dev/ubuntu-seeds/+git/ubuntu-core
 ustriage git@github.com:powersj/ubuntu-server-triage.git
+ubuntu-support-tools https://git.launchpad.net/ubuntu-support-tools
+sup-eng-tools https://git.launchpad.net/sup-eng-tools
