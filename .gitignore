@@ -1,6 +1,3 @@
-# devel and technical are git branches
-devel*
-technical*
 # patch is a scratch directory
 patches*
 !.gitignore
